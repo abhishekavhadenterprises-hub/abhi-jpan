@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate, useSpring } from "framer-motion";
 import { ArrowUpRight, Award, Factory, Globe2, Users2, Cpu, ShieldCheck, Flame } from "lucide-react";
 
 interface CapabilityModule {
@@ -98,6 +98,27 @@ const stats = [
 
 export function AboutSnapshot() {
   const [activeModuleIndex, setActiveModuleIndex] = useState(0);
+  const textRef = useRef<HTMLHeadingElement>(null);
+  
+  // Expand the offset to make the animation last longer (slower wipe)
+  const { scrollYProgress } = useScroll({
+    target: textRef,
+    offset: ["start 95%", "end 30%"],
+  });
+
+  // Apply a fluid spring physics layer to smooth out choppy mouse-wheel scrolling
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Calculate the wipe percentage from 0 to 100 using the smoothed physics
+  const percentage = useTransform(smoothProgress, [0, 1], [0, 100]);
+  
+  // Exact United Carriers wipe effect (adapted for light theme)
+  // Revealed text is Black (#111111), wiping edge is JPan Blue (#2E5E99), unrevealed text is Light Grey (#CCCCCC)
+  const bgImage = useMotionTemplate`linear-gradient(to right, #111111 calc(${percentage}% - 12%), #2E5E99 ${percentage}%, #CCCCCC calc(${percentage}% + 5%))`;
 
   // Auto-cycle modules every 6 seconds
   useEffect(() => {
@@ -116,16 +137,31 @@ export function AboutSnapshot() {
       <div className="absolute bottom-1/4 left-0 w-[800px] h-[800px] bg-gradient-to-r from-[#2E5E99]/5 to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
       
       <div className="w-full">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="flex flex-col mb-16">
-          <h2 className="text-xs tracking-[0.3em] uppercase text-[#666] mb-4">Corporate Overview</h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-[#111] leading-[1.1] max-w-3xl">
-            Precision engineered <br />
-            <span className="text-[#666]">for global industry.</span>
-          </h3>
-          <p className="mt-8 text-[#666] max-w-xl text-sm sm:text-base leading-relaxed">
+        <div className="flex flex-col mb-24 max-w-[1400px] mx-auto">
+          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }} className="text-[10px] tracking-[0.3em] uppercase text-[#666] mb-8 font-semibold">
+            Corporate Overview
+          </motion.h2>
+          
+          {/* Scroll-scrub Heading (United Carriers Exact Left-to-Right Wipe) */}
+          <motion.h3 
+            ref={textRef} 
+            className="text-5xl md:text-6xl lg:text-[5.5rem] font-medium tracking-tighter leading-[1.05] max-w-5xl"
+            style={{ 
+              backgroundImage: bgImage,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              color: "transparent"
+            }}
+          >
+            PRECISION ENGINEERED <br />
+            FOR GLOBAL INDUSTRY.
+          </motion.h3>
+          
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mt-12 text-[#666] max-w-xl text-base sm:text-lg leading-relaxed font-light">
             Founded in 1998, J Pan Tubular Components Limited is more than just a manufacturer. We're a network of engineering experts passionate about bringing absolute precision to the world's most exacting automotive, refrigeration, and HVAC leaders.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
         
         {/* Dynamic Capability Showcase Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch mb-32">

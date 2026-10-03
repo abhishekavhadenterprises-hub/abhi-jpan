@@ -175,23 +175,20 @@ export function Navbar() {
 
   return (
     <nav
-      className={cn(
-        "fixed left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none transition-all duration-500 ease-out transform-gpu",
-        isScrolled ? "top-2.5 sm:top-3.5" : "top-4 sm:top-6"
-      )}
+      className="fixed left-0 right-0 top-0 z-50 flex justify-center pointer-events-none"
     >
       {/* Floating Glass Capsule with Optimized Glassmorphism & Scroll Shrink */}
       <div
         ref={navRef}
         className={cn(
-          "pointer-events-auto w-full transition-all duration-500 ease-out flex items-center justify-between transform-gpu will-change-transform",
+          "pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between transform-gpu will-change-[width,max-width,margin,border-radius]",
           // High-efficiency glassmorphism styling
-          "bg-white/80 dark:bg-[#0D2440]/80 backdrop-blur-xl border border-white/60 dark:border-white/15 shadow-[0_10px_35px_rgba(13,36,64,0.08),inset_0_1px_0_0_rgba(255,255,255,0.7)] dark:shadow-[0_14px_42px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.12)]",
-          // When at top (unscrolled): wider and taller size
-          // When scrolled: shrinks back to original compact size
+          "bg-white/90 dark:bg-[#0D2440]/90 backdrop-blur-xl border border-white/60 dark:border-white/15 shadow-[0_10px_35px_rgba(13,36,64,0.08),inset_0_1px_0_0_rgba(255,255,255,0.7)] dark:shadow-[0_14px_42px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.12)]",
+          // When at top (unscrolled): full width edge-to-edge, no rounding
+          // When scrolled: shrinks back to floating compact pill with margin
           isScrolled
-            ? "max-w-6xl xl:max-w-7xl h-14 sm:h-16 px-4 sm:px-6 rounded-xl sm:rounded-2xl"
-            : "max-w-[94%] xl:max-w-[1420px] 2xl:max-w-[1520px] h-16 sm:h-[72px] px-5 sm:px-8 rounded-2xl sm:rounded-3xl"
+            ? "w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-6xl xl:max-w-7xl h-14 sm:h-16 px-4 sm:px-6 rounded-xl sm:rounded-2xl mt-2.5 sm:mt-3.5 border-x border-t"
+            : "w-full max-w-full h-16 sm:h-[72px] px-5 sm:px-8 xl:px-12 rounded-none border-x-0 border-t-0 mt-0"
         )}
       >
         {/* Left: Official Brand Logo Mark */}

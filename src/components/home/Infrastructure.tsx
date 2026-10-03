@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Factory, ShieldCheck, Cpu, Flame, Layers } from "lucide-react";
 
+import GridMotion from "../ui/GridMotion";
+
 const pillars = [
   {
     id: "cnc",
@@ -64,15 +66,17 @@ export function Infrastructure() {
   const [activeTab, setActiveTab] = useState(0);
   const activePillar = pillars[activeTab];
 
+  // Dummy items for the background GridMotion
+  const gridItems = [
+    'CNC', 'BRAZING', 'TOLERANCE', 'HELIUM', 'TESTING', 'CAPACITY', 'VACUUM',
+    'OEM', 'TIER-1', 'BENDING', 'ROBOTIC', 'LASER', 'PRECISION', 'TUBULAR'
+  ];
+
   return (
     <section className="relative py-28 md:py-36 bg-[#FAFAFA] dark:bg-[#050505] text-[#111] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
-      {/* Ambient Glows */}
+      {/* Dynamic GridMotion Background */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[1200px] h-[1200px] rounded-full bg-gradient-to-tr from-[#2E5E99]/20 to-transparent blur-[200px] absolute right-[-20%] bottom-[-20%]"
-        />
+        <GridMotion items={gridItems} gradientColor="transparent" />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 w-full">

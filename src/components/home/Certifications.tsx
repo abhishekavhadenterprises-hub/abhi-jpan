@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import DriftWall from "@/components/ui/DriftWall";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export interface TestimonialCard {
   type: "review";
@@ -146,20 +146,27 @@ export function Certifications() {
   // We translate by -75% so that the last cards come into view but we don't scroll off-screen completely
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
   
-  // Opacity fade in for the header based on initial scroll
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  // Animate the text horizontally: Start from left (-40vw), move to center (0vw), stay, then exit right (100vw)
+  const rawTextX = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["-40vw", "0vw", "0vw", "100vw"]);
+  
+  // Add physics-based smoothness
+  const textX = useSpring(rawTextX, {
+    stiffness: 70,
+    damping: 20,
+    mass: 1.2
+  });
 
   return (
     <section
       id="awards-recognition"
       ref={targetRef}
-      className="relative h-[400vh] bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#111] dark:text-white"
+      className="relative h-[400vh] bg-transparent text-[#111] dark:text-white"
     >
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-b border-[#E5E5E5]/50 dark:border-[#222]/50">
         
-        {/* Section Header (Stays in view and fades out slightly) */}
+        {/* Section Header (Slides in, stays, slides out) */}
         <motion.div 
-          style={{ opacity: headerOpacity }}
+          style={{ x: textX }}
           className="max-w-[1400px] mx-auto px-6 md:px-12 relative w-full mb-12 text-center flex flex-col items-center pointer-events-none"
         >
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] mb-6 shadow-sm">
@@ -168,9 +175,8 @@ export function Certifications() {
               Audited Partner Evaluations
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
-            What partners <br />
-            <span className="text-[#666]">are saying.</span>
+          <h2 className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05] uppercase whitespace-nowrap">
+            What partners <span className="text-[#666]">are saying.</span>
           </h2>
         </motion.div>
 
