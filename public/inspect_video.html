@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inspect Video</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #fff; padding: 20px; }
+    .frame-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
+    .frame-card { background: #222; border-radius: 8px; padding: 10px; }
+    .frame-card img { width: 100%; border-radius: 4px; }
+    .timestamp { font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <h1>Video Frames Inspector</h1>
+  <video id="vid" src="/video_demo.mp4" crossorigin="anonymous" muted style="display:none;"></video>
+  <div id="frames" class="frame-grid"></div>
+
+  <script>
+    const video = document.getElementById('vid');
+    const container = document.getElementById('frames');
+
+    video.addEventListener('loadedmetadata', async () => {
+      const duration = video.duration;
+      console.log('Video duration:', duration);
+      const step = 0.5; // capture every 0.5s
+      for (let t = 0; t <= duration; t += step) {
+        await captureFrame(t);
+      }
+    });
+
+    function captureFrame(time) {
+      return new Promise((resolve) => {
+        video.currentTime = time;
+        video.onseeked = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = video.videoWidth / 2;
+          canvas.height = video.videoHeight / 2;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          const card = document.createElement('div');
+          card.className = 'frame-card';
+          const label = document.createElement('div');
+          label.className = 'timestamp';
+          label.innerText = `Time: ${time.toFixed(1)}s`;
+          const img = document.createElement('img');
+          img.src = canvas.toDataURL('image/jpeg', 0.8);
+          
+          card.appendChild(label);
+          card.appendChild(img);
+          container.appendChild(card);
+          resolve();
+        };
+      });
+    }
+  </script>
+</body>
+</html>
