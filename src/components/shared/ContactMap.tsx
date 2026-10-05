@@ -145,11 +145,11 @@ export const hubLocations: HubLocation[] = [
 ];
 
 export function ContactMap() {
-  const [activeIdx, setActiveIdx] = useState<number>(0);
-  const [isCardOpen, setIsCardOpen] = useState<boolean>(true);
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState<boolean>(false);
-  const activeHub = hubLocations[activeIdx] || hubLocations[0];
+  const activeHub = activeIdx !== null ? hubLocations[activeIdx] : null;
 
   useEffect(() => {
     setMounted(true);
@@ -158,12 +158,54 @@ export function ContactMap() {
   const isDarkTheme = mounted ? resolvedTheme === "dark" : false;
 
   const handleSelectHub = (index: number) => {
-    setActiveIdx(index);
-    setIsCardOpen(true);
+    if (activeIdx === index) {
+      // Toggle off
+      setActiveIdx(null);
+      setIsCardOpen(false);
+    } else {
+      setActiveIdx(index);
+      setIsCardOpen(true);
+    }
+  };
+  const handleBackgroundClick = () => {
+    if (isCardOpen) {
+      setIsCardOpen(false);
+      setActiveIdx(null);
+    }
   };
 
   return (
-    <section className="relative w-full min-h-[95vh] lg:min-h-[110vh] xl:min-h-[115vh] bg-white dark:bg-[#070b14] overflow-hidden font-heading selection:bg-[#2E5E99] selection:text-white z-20 text-[#0D2440] dark:text-white transition-colors duration-500 py-12 lg:py-0 flex flex-col justify-center select-none">
+    <section
+      onClick={handleBackgroundClick}
+      className="relative w-full min-h-[95vh] lg:min-h-[110vh] xl:min-h-[115vh] bg-white dark:bg-[#070b14] overflow-hidden font-heading selection:bg-[#2E5E99] selection:text-white z-20 text-[#0D2440] dark:text-white transition-colors duration-500 py-12 lg:py-0 flex flex-col justify-center select-none"
+    >
+
+      {/* Dynamic Background Marquee */}
+      <AnimatePresence mode="wait">
+        {isCardOpen && activeHub && (
+          <motion.div
+            key={activeHub.id + "-marquee"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none"
+          >
+            <motion.div
+              initial={{ x: "20%" }}
+              animate={{ x: "-50%" }}
+              transition={{
+                repeat: Infinity,
+                ease: "linear",
+                duration: 40,
+              }}
+              className="whitespace-nowrap text-[20vw] font-heading font-black italic uppercase tracking-tighter text-[#0D2440]/[0.04] dark:text-white/[0.02] select-none"
+            >
+              {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Interactive 3D Dotted WebGL Globe (Restored Large Dimension with Slow Motion) */}
       <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-[-12vw] xl:left-[-8vw] top-auto lg:top-[50%] lg:-translate-y-[50%] w-[92vw] h-[92vw] sm:w-[620px] sm:h-[620px] lg:w-[115vh] lg:h-[115vh] xl:w-[122vh] xl:h-[122vh] max-w-[1100px] max-h-[1100px] z-10 opacity-90 lg:opacity-85 pointer-events-auto my-6 lg:my-0">
@@ -187,7 +229,7 @@ export function ContactMap() {
       {/* Floating Tactical Detail Card */}
       <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[43%] xl:left-[45%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-full max-w-[480px] sm:max-w-[500px] px-4 sm:px-0 z-[50] pointer-events-none my-6 lg:my-0">
         <AnimatePresence mode="wait">
-          {isCardOpen && (
+          {isCardOpen && activeHub && (
             <motion.div
               key={activeHub.id}
               initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
@@ -196,7 +238,10 @@ export function ContactMap() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="pointer-events-auto w-full min-h-[225px] sm:min-h-[210px]"
             >
-              <div className="bg-white/95 dark:bg-[#0D2440]/95 rounded-3xl border border-[#7BA4D0]/35 backdrop-blur-xl p-5 sm:p-6 text-[#0D2440] dark:text-white transition-all">
+              <div
+                className="bg-white/95 dark:bg-[#0D2440]/95 rounded-3xl border border-[#7BA4D0]/35 backdrop-blur-xl p-5 sm:p-6 text-[#0D2440] dark:text-white transition-all"
+                onClick={(e) => e.stopPropagation()}
+              >
                 {/* Card Header */}
                 <div className="flex justify-between items-start mb-4">
                   <div>
@@ -209,7 +254,10 @@ export function ContactMap() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setIsCardOpen(false)}
+                    onClick={() => {
+                      setIsCardOpen(false);
+                      setActiveIdx(null);
+                    }}
                     className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E7F0FA] dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white dark:hover:bg-white/20 flex items-center justify-center transition-all cursor-pointer shrink-0 ml-2"
                     aria-label="Close hub details"
                   >
@@ -282,7 +330,10 @@ export function ContactMap() {
             return (
               <li
                 key={hub.id}
-                onClick={() => handleSelectHub(idx)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSelectHub(idx);
+                }}
                 className={cn(
                   "font-heading font-black italic uppercase tracking-tight cursor-pointer transition-all duration-300 select-none flex items-center gap-3",
                   "text-xl sm:text-2xl lg:text-[28px] xl:text-[34px] leading-none",

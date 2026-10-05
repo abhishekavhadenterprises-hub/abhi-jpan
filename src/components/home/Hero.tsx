@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -155,12 +156,12 @@ export function Hero() {
                   </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-[3.75rem] xl:text-[4.5rem] 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+                <ScrollWipeHeading as="h1" className="text-3xl sm:text-5xl md:text-5xl lg:text-[3.75rem] xl:text-[4.5rem] 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                   Precision in <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D2440] via-[#1E3A8A] to-[#2E5E99] dark:from-white dark:via-slate-200 dark:to-slate-400">
                     every bend.
                   </span>
-                </h1>
+                </ScrollWipeHeading>
               </motion.div>
 
               <motion.div
@@ -169,7 +170,7 @@ export function Hero() {
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
                 className="mt-4 sm:mt-5 max-w-2xl"
               >
-                <h2 className="text-lg sm:text-xl md:text-2xl font-serif italic text-[#2E5E99] dark:text-slate-600 dark:text-slate-300 tracking-wide mb-2 sm:mb-3">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-[#2E5E99] dark:text-slate-600 dark:text-slate-300 tracking-wide mb-2 sm:mb-3">
                   Under extreme pressure.
                 </h2>
                 <p className="text-xs sm:text-sm md:text-[15px] text-slate-700 dark:text-slate-200 font-medium leading-relaxed drop-shadow-[0_1px_4px_rgba(255,255,255,0.7)] dark:drop-shadow-none">
@@ -281,7 +282,7 @@ export function Hero() {
                 initial={{ x: 60, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: 60, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}
-                className="font-serif italic text-2xl sm:text-3xl text-slate-600 dark:text-slate-300/70 dark:text-white/20 tracking-wide select-none pt-4 lg:pt-3 text-right"
+                className="font-heading italic text-2xl sm:text-3xl text-slate-600 dark:text-slate-300/70 dark:text-white/20 tracking-wide select-none pt-4 lg:pt-3 text-right"
               >
                 precision engineering
               </motion.div>

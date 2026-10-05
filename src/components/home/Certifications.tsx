@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import DriftWall from "@/components/ui/DriftWall";
@@ -175,9 +176,9 @@ export function Certifications() {
               Audited Partner Evaluations
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05] uppercase whitespace-nowrap">
+          <ScrollWipeHeading as="h2" className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05] uppercase whitespace-nowrap">
             What partners <span className="text-[#666]">are saying.</span>
-          </h2>
+          </ScrollWipeHeading>
         </motion.div>
 
         {/* Horizontal Scrolling Track */}

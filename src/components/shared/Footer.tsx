@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionTemplate, useInView, useMotionValue, animate } from "framer-motion";
 
 export function Footer() {
   const containerRef = useRef<HTMLElement>(null);
@@ -15,22 +15,10 @@ export function Footer() {
     offset: ["start end", "end end"],
   });
 
-  // Track scroll for the text wipe animation (expanded offset for a slower, smoother scrub)
-  const { scrollYProgress: wipeProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 90%", "end 10%"],
-  });
-
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 50,
     damping: 20,
     mass: 1,
-    restDelta: 0.001,
-  });
-
-  const smoothWipe = useSpring(wipeProgress, {
-    stiffness: 80,
-    damping: 30,
     restDelta: 0.001,
   });
 
@@ -39,19 +27,30 @@ export function Footer() {
   const opacity = useTransform(smoothProgress, [0, 0.5, 1], [0, 0.5, 1]);
   const scale = useTransform(smoothProgress, [0, 1], [0.95, 1]);
 
+  // Text animation on section reach
+  const wipeProgress = useMotionValue(0);
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+
+  useEffect(() => {
+    if (isInView) {
+      // Increased duration for a slower, smoother text reveal
+      animate(wipeProgress, 1, { duration: 3.5, ease: "easeOut" });
+    }
+  }, [isInView, wipeProgress]);
+
   // Wipe percentage for CTA (goes to 120% so the gradient completes fully off-screen)
-  const ctaPercentage = useTransform(smoothWipe, [0, 1], [0, 120]);
-  
+  const ctaPercentage = useTransform(wipeProgress, [0, 1], [0, 120]);
+
   // Diagonal wipe for multi-line CTA text
   const ctaBgImage = useMotionTemplate`linear-gradient(135deg, #111111 calc(${ctaPercentage}% - 12%), #2E5E99 ${ctaPercentage}%, #CCCCCC calc(${ctaPercentage}% + 5%))`;
-  
+
   // Sequential wipe percentages for JPAN and TUBULAR
-  const jpanPercentage = useTransform(smoothWipe, [0, 0.5], [0, 120]);
-  const tubularPercentage = useTransform(smoothWipe, [0.4, 1], [0, 120]);
+  const jpanPercentage = useTransform(wipeProgress, [0, 0.5], [0, 120]);
+  const tubularPercentage = useTransform(wipeProgress, [0.4, 1], [0, 120]);
 
   // Horizontal wipe for JPAN (wipes to Black)
   const jpanBgImage = useMotionTemplate`linear-gradient(to right, #111111 calc(${jpanPercentage}% - 12%), #2E5E99 ${jpanPercentage}%, #EEEEEE calc(${jpanPercentage}% + 5%))`;
-  
+
   // Horizontal wipe for TUBULAR (wipes to Blue)
   const tubularBgImage = useMotionTemplate`linear-gradient(to right, #2E5E99 calc(${tubularPercentage}% - 12%), #2E5E99 ${tubularPercentage}%, #EEEEEE calc(${tubularPercentage}% + 5%))`;
 
@@ -74,7 +73,7 @@ export function Footer() {
         className="w-full relative z-10 will-change-transform px-6 md:px-12 pt-16 pb-6 max-w-[1600px] mx-auto flex flex-col justify-between min-h-[60vh]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
-          
+
           {/* CTA */}
           <div className="lg:col-span-8 flex flex-col items-start">
             <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 mb-6">
@@ -83,10 +82,10 @@ export function Footer() {
                 Let's Build The Future
               </span>
             </div>
-            
-            <motion.h2 
+
+            <motion.h2
               className="text-4xl md:text-5xl lg:text-[4.5rem] font-medium tracking-tighter leading-[1.05] mb-8"
-              style={{ 
+              style={{
                 backgroundImage: ctaBgImage,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -97,7 +96,7 @@ export function Footer() {
               READY TO ENGINEER <br />
               PRECISION?
             </motion.h2>
-            
+
             <a
               href="mailto:sales@jpantubular.com"
               className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#111] text-white font-semibold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-105"
@@ -156,8 +155,8 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="w-full flex justify-center items-center pointer-events-none select-none pb-2 gap-4 md:gap-6">
-            <motion.span 
+          <div className="w-full flex justify-center items-center pointer-events-none select-none pb-6 md:pb-8 gap-4 md:gap-6">
+            <motion.span
               className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap"
               style={{
                 backgroundImage: jpanBgImage,
@@ -169,7 +168,7 @@ export function Footer() {
             >
               JPAN
             </motion.span>
-            <motion.span 
+            <motion.span
               className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap"
               style={{
                 backgroundImage: tubularBgImage,

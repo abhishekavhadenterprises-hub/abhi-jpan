@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -84,10 +85,10 @@ export function Infrastructure() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 pb-8 border-b border-[#E5E5E5] dark:border-[#222]">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="max-w-3xl">
             <h2 className="text-xs tracking-[0.3em] uppercase text-[#666] mb-6">Manufacturing Infrastructure</h2>
-            <h3 className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
+            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
               Industrial scale, <br />
               <span className="text-[#666]">aerospace precision.</span>
-            </h3>
+            </ScrollWipeHeading>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} className="max-w-md lg:pb-4">
             <p className="text-[#666] dark:text-[#999] text-sm md:text-base leading-relaxed font-light">
@@ -154,9 +155,9 @@ export function Infrastructure() {
               <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[10px] tracking-[0.2em] text-white uppercase mb-6 font-medium backdrop-blur-md">
                 {activePillar.badge}
               </div>
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight mb-6 group-hover:translate-x-2 transition-transform duration-700">
+              <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight mb-6 group-hover:translate-x-2 transition-transform duration-700">
                 {activePillar.title}
-              </h3>
+              </ScrollWipeHeading>
               <p className="text-white/70 text-base md:text-lg font-light leading-relaxed mb-10 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
                 {activePillar.desc}
               </p>

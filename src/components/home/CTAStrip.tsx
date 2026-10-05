@@ -45,7 +45,7 @@ export function CTAStrip() {
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-heading font-black tracking-tighter leading-[0.95] text-[#0D2440] dark:text-white uppercase mb-6"
               >
                 Ready to scale <br />
-                <span className="font-serif italic font-light text-slate-500 dark:text-slate-400 tracking-tight">
+                <span className="font-heading italic font-light text-slate-500 dark:text-slate-400 tracking-tight">
                   precision manufacturing?
                 </span>
               </motion.h2>

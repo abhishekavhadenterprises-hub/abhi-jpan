@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, MouseEvent } from "react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate, useSpring, useTransform } from "framer-motion";
@@ -98,10 +99,9 @@ export function ProductShowcase() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 pb-8 border-b border-[#E5E5E5] dark:border-[#222]">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="max-w-3xl">
             <h2 className="text-xs tracking-[0.3em] uppercase text-[#666] mb-6">Product Catalogue & Specifications</h2>
-            <h3 className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
-              Precision alloy <br />
-              <span className="text-[#666]">manufacturing excellence.</span>
-            </h3>
+            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
+              Precision alloy manufacturing excellence.
+            </ScrollWipeHeading>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} className="max-w-md lg:pb-4">
             <p className="text-[#666] dark:text-[#999] text-sm md:text-base leading-relaxed font-light">
@@ -171,9 +171,9 @@ export function ProductShowcase() {
                     </span>
                   </div>
 
-                  <h3 className="text-4xl md:text-5xl font-light text-[#111] dark:text-white leading-[1.15] mb-6 tracking-tight">
+                  <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl font-light text-[#111] dark:text-white leading-[1.15] mb-6 tracking-tight">
                     {activeProduct.title}
-                  </h3>
+                  </ScrollWipeHeading>
 
                   <p className="text-[#666] dark:text-[#999] text-base font-light leading-relaxed mb-10 max-w-lg">
                     {activeProduct.description}

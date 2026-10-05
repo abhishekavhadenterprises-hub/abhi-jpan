@@ -60,14 +60,10 @@ export function CobeInteractiveGlobe({
     window.addEventListener("resize", onResize);
     onResize();
 
-    const cobeMarkers = markers.map((m, idx) => ({
+    const cobeMarkers = markers.map((m) => ({
       location: [m.lat, m.lng] as [number, number],
-      size: activeIndex === idx ? 0.04 : (m.size || 0.02),
-      color: (isDark
-        ? ([1, 1, 1] as [number, number, number])
-        : activeIndex === idx
-        ? ([1, 1, 1] as [number, number, number])
-        : accentColor)
+      size: m.size || 0.02,
+      color: (isDark ? [1, 1, 1] as [number, number, number] : accentColor)
     }));
 
     const globe = createGlobe(canvas, {
@@ -91,17 +87,24 @@ export function CobeInteractiveGlobe({
 
     let animationFrameId: number;
     let isVisible = true;
+    let timeSinceFocus = 0;
 
     const animate = () => {
       if (!isVisible) return;
-      if (!isDragging.current) {
-        // Continuous rotation at balanced speed
+      
+      // If we have an activeIndex, we pause the drift so it stays focused on the target.
+      // After it's been focused, we can resume drift or just hold it.
+      // Let's hold it on the target if activeIndex is set and not dragging.
+      if (!isDragging.current && activeIndex === null) {
+        // Continuous rotation only when no specific location is actively focused
         targetPhiRef.current += 0.0035;
       }
+      
       let diffPhi = targetPhiRef.current - phiRef.current;
       diffPhi = ((diffPhi + Math.PI) % (2 * Math.PI)) - Math.PI;
       phiRef.current += diffPhi * 0.05;
       thetaRef.current += (targetThetaRef.current - thetaRef.current) * 0.05;
+      
       globe.update({
         phi: phiRef.current,
         theta: thetaRef.current,
@@ -134,12 +137,24 @@ export function CobeInteractiveGlobe({
       globe.destroy();
       window.removeEventListener("resize", onResize);
     };
-  }, [markers, activeIndex, accentColor, isDark]);
+  }, [markers, accentColor, isDark]);
 
   return (
-    <div className={`relative w-full h-full flex items-center justify-center ${className}`}>
+    <div 
+      className={`relative w-full h-full flex items-center justify-center ${className}`}
+      style={{
+        transition: "transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        transform: activeIndex !== null ? "scale(1.15)" : "scale(1)",
+      }}
+    >
       <canvas
         ref={canvasRef}
+        style={{
+          width: "100%",
+          height: "100%",
+          contain: "layout paint size",
+          opacity: 1,
+        }}
         onPointerDown={(e) => {
           isDragging.current = true;
           pointerInteracting.current = e.clientX;
@@ -176,8 +191,7 @@ export function CobeInteractiveGlobe({
             targetPhiRef.current = dragStartPhi.current + delta * 0.003;
           }
         }}
-        className="w-full h-full cursor-grab active:cursor-grabbing transition-opacity duration-1000 opacity-100 touch-none"
-        style={{ width: "100%", height: "100%", contain: "layout paint size" }}
+        className="w-full h-full cursor-grab active:cursor-grabbing touch-none"
       />
       {/* Atmospheric Halo & Orbital Rings */}
       <div 

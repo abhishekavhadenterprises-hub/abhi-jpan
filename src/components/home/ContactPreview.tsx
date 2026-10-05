@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Link from "next/link";
 import { ArrowUpRight, Phone, Mail, Clock, MapPin } from "lucide-react";
 
@@ -66,12 +67,12 @@ export function ContactPreview() {
                 <span>09 // TECHNICAL DESK & GLOBAL SOURCING</span>
               </div>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight uppercase text-[#0D2440] dark:text-white leading-[1.02] mb-4">
+              <ScrollWipeHeading as="h2" className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight uppercase text-[#0D2440] dark:text-white leading-[1.02] mb-4">
                 Engineering <br />
-                <span className="font-serif italic font-light text-slate-600 dark:text-slate-300">
+                <span className="font-heading italic font-light text-slate-600 dark:text-slate-300">
                   support desk.
                 </span>
-              </h2>
+              </ScrollWipeHeading>
 
               <p className="text-slate-600 dark:text-slate-300/85 text-base font-light leading-relaxed mb-6">
                 Our application engineers review complex 3D CAD step files, suggest alloy optimizations, and supply prototype samples with full CMM inspection reports.

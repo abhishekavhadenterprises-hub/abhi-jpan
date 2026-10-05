@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate, useSpring } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import { ArrowUpRight, Award, Factory, Globe2, Users2, Cpu, ShieldCheck, Flame } from "lucide-react";
 
 interface CapabilityModule {
@@ -100,26 +101,6 @@ export function AboutSnapshot() {
   const [activeModuleIndex, setActiveModuleIndex] = useState(0);
   const textRef = useRef<HTMLHeadingElement>(null);
   
-  // Expand the offset to make the animation last longer (slower wipe)
-  const { scrollYProgress } = useScroll({
-    target: textRef,
-    offset: ["start 95%", "end 30%"],
-  });
-
-  // Apply a fluid spring physics layer to smooth out choppy mouse-wheel scrolling
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  // Calculate the wipe percentage from 0 to 100 using the smoothed physics
-  const percentage = useTransform(smoothProgress, [0, 1], [0, 100]);
-  
-  // Exact United Carriers wipe effect (adapted for light theme)
-  // Revealed text is Black (#111111), wiping edge is JPan Blue (#2E5E99), unrevealed text is Light Grey (#CCCCCC)
-  const bgImage = useMotionTemplate`linear-gradient(to right, #111111 calc(${percentage}% - 12%), #2E5E99 ${percentage}%, #CCCCCC calc(${percentage}% + 5%))`;
-
   // Auto-cycle modules every 6 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -143,20 +124,16 @@ export function AboutSnapshot() {
           </motion.h2>
           
           {/* Scroll-scrub Heading (United Carriers Exact Left-to-Right Wipe) */}
-          <motion.h3 
-            ref={textRef} 
+          <ScrollWipeHeading 
+            as="h3"
             className="text-5xl md:text-6xl lg:text-[5.5rem] font-medium tracking-tighter leading-[1.05] max-w-5xl"
-            style={{ 
-              backgroundImage: bgImage,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              color: "transparent"
-            }}
+            revealedColor="#111111"
+            wipingColor="#2E5E99"
+            unrevealedColor="#CCCCCC"
           >
             PRECISION ENGINEERED <br />
             FOR GLOBAL INDUSTRY.
-          </motion.h3>
+          </ScrollWipeHeading>
           
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mt-12 text-[#666] max-w-xl text-base sm:text-lg leading-relaxed font-light">
             Founded in 1998, J Pan Tubular Components Limited is more than just a manufacturer. We're a network of engineering experts passionate about bringing absolute precision to the world's most exacting automotive, refrigeration, and HVAC leaders.
@@ -205,7 +182,7 @@ export function AboutSnapshot() {
                 <div className="absolute bottom-0 left-0 right-0 z-10 p-10 lg:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                   <div>
                     <span className="block text-xs uppercase tracking-[0.2em] text-white/60 mb-3">{activeModule.specLabel}</span>
-                    <h3 className="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight max-w-md">{activeModule.headline}</h3>
+                    <ScrollWipeHeading as="h3" className="text-3xl md:text-4xl font-light text-white tracking-tight leading-tight max-w-md">{activeModule.headline}</ScrollWipeHeading>
                   </div>
                   <div className="text-left md:text-right p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl">
                     <span className="block text-4xl md:text-5xl font-light text-white tracking-tighter mb-1">{activeModule.specValue}</span>

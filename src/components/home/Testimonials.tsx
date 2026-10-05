@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useInView, animate, type Variants } from "framer-motion";
 import { Award, Compass, Factory, ShieldCheck, Quote } from "lucide-react";
 
+import { YoutubeBackground } from "@/components/shared/YoutubeBackground";
+
 function AnimatedCounter({ to }: { to: number }) {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
@@ -59,6 +61,8 @@ export function Testimonials() {
       ref={containerRef}
       className="relative py-28 md:py-36 bg-transparent text-[#0D2440] dark:text-white overflow-hidden border-b border-slate-200 dark:border-white/[0.08]"
     >
+      <YoutubeBackground videoId="MPW60Fci930" />
+      
       <div className="container-custom relative z-10 w-full">
         {/* Section Header */}
         <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.25em] text-slate-500 dark:text-slate-400 uppercase mb-8 pb-4 border-b border-slate-200 dark:border-white/[0.08]">
@@ -134,18 +138,18 @@ export function Testimonials() {
               </div>
               <h2
                 suppressHydrationWarning
-                className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-white tracking-tight leading-tight uppercase"
+                className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-[#111] dark:text-white tracking-tight leading-tight uppercase"
               >
                 &ldquo;Every manufacturing process must begin and end with the customer&apos;s exacting standard.&rdquo;
               </h2>
             </div>
 
             {/* Narrative Quote */}
-            <div className="pl-6 border-l-2 border-white/40 space-y-4">
-              <p className="text-slate-200 text-base sm:text-lg md:text-xl leading-relaxed font-light">
+            <div className="pl-6 border-l-2 border-[#E5E5E5] dark:border-white/40 space-y-4">
+              <p className="text-[#444] dark:text-slate-200 text-base sm:text-lg md:text-xl leading-relaxed font-light">
                 The evolution of global precision requirements has redefined what industrial partners demand. At J Pan, customer satisfaction is not a downstream checkpoint—it is the foundational constraint that governs our metallurgy, toolmaking, robotic bending, and zero-defect mass spectrometry testing.
               </p>
-              <p className="text-slate-600 dark:text-slate-300/80 text-sm sm:text-base leading-relaxed font-light">
+              <p className="text-[#666] dark:text-slate-300/80 text-sm sm:text-base leading-relaxed font-light">
                 From our beginnings as a precision startup to a pan-India network of 6 advanced facilities, our growth has been driven by a relentless focus on engineering integrity and exceeding OEM tolerances.
               </p>
             </div>
