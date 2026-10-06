@@ -3,6 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 export function YoutubeBackground({ videoId }: { videoId: string }) {
   const playerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
