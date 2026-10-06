@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Filter, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 const categories = ["All Products", "Chiller", "Copper Components", "Brass Components", "Steel Components"];
 
@@ -20,105 +21,120 @@ export function FilterBar({
   searchQuery, 
   onSearchChange 
 }: FilterBarProps) {
-  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Shrink the bar slightly when scrolling for a dynamic feel
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 500);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div id="catalog" className="sticky top-16 sm:top-20 z-20 bg-white/90 dark:bg-[#070b14]/90 border-y border-slate-200/80 dark:border-white/10 backdrop-blur-md transition-colors duration-300">
-      <div className="container-custom py-3.5 sm:py-4">
-        <div className="flex items-center justify-between gap-3 md:gap-6">
-          {/* Categories Navigation (Smooth Rounded Capsule Pills) */}
-          <div className="relative flex-1 min-w-0">
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-1 md:pb-0">
-              {categories.map((cat) => {
-                const isActive = activeCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => onCategoryChange(cat)}
-                    className={cn(
-                      "px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-heading font-semibold whitespace-nowrap transition-all duration-300 flex-shrink-0 cursor-pointer",
-                      isActive
-                        ? "bg-[#0D2440] dark:bg-[#2E5E99] text-white scale-[1.02]"
-                        : "bg-slate-100/70 dark:bg-white/[0.04] text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/[0.08]"
-                    )}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
-            {/* Scroll fade hint on mobile */}
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-[#070b14] pointer-events-none md:hidden" />
-          </div>
-
-          {/* Desktop Search & Industry Filter (Rounded Capsule Design) */}
-          <div className="hidden lg:flex items-center gap-3">
-            {/* Rounded Search Input Pill */}
-            <div className="relative group">
-              <input 
-                type="text" 
-                value={searchQuery}
-                onChange={(e) => onSearchChange(e.target.value)}
-                placeholder="Search components..."
-                className="bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-4 py-2 pr-10 text-xs sm:text-sm focus:outline-none focus:border-[#2E5E99] dark:focus:border-[#7BA4D0] transition-all w-60 rounded-full text-[#0D2440] dark:text-white placeholder:text-slate-400 font-sans"
-              />
-              {searchQuery ? (
-                <button
-                  onClick={() => onSearchChange("")}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0D2440] dark:text-white/60 dark:hover:text-white cursor-pointer"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              ) : (
-                <Search className="absolute right-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 group-focus-within:text-[#2E5E99] dark:group-focus-within:text-[#7BA4D0] pointer-events-none" />
-              )}
-            </div>
-            
-            {/* Rounded Industry Link Button */}
-            <Link 
-              href="/industries"
-              className="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-white/15 bg-white dark:bg-white/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] hover:bg-slate-50 dark:hover:bg-white/10 text-xs sm:text-sm font-heading font-semibold text-[#0D2440] dark:text-white transition-all duration-300 rounded-full group"
-            >
-              <Filter className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-110 transition-transform duration-300" />
-              <span>Industry</span>
-            </Link>
-          </div>
-
-          {/* Mobile Search Toggle */}
-          <button 
-            className="lg:hidden text-[#0D2440] dark:text-white p-1 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
-            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
-            aria-label="Toggle search"
-          >
-            {isMobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
-          </button>
+    <div id="catalog" className="sticky top-24 z-40 w-full flex justify-center px-4 sm:px-6 pointer-events-none pb-8 pt-4">
+      {/* Premium Floating Glass Island */}
+      <motion.div 
+        layout
+        className={cn(
+          "pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 p-2 rounded-full transition-all duration-500",
+          "bg-white/70 dark:bg-[#070b14]/60 backdrop-blur-2xl",
+          "border border-white/50 dark:border-white/10",
+          "shadow-[0_8px_32px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+          scrolled ? "py-1.5 px-2" : "py-2 px-2 sm:px-3"
+        )}
+      >
+        {/* Categories (Smooth Rounded Capsule Pills) */}
+        <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar max-w-[60vw] sm:max-w-none">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => onCategoryChange(cat)}
+                className={cn(
+                  "relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-heading font-medium whitespace-nowrap transition-colors duration-300 flex-shrink-0 outline-none",
+                  isActive
+                    ? "text-white"
+                    : "text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
+                )}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeFilterPill"
+                    className="absolute inset-0 bg-[#0D2440] dark:bg-[#2E5E99] rounded-full z-0"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Mobile Search Bar Expansion (Rounded) */}
-        {isMobileSearchOpen && (
-          <div className="lg:hidden mt-3 animate-in slide-in-from-top-2">
-            <div className="relative">
-              <input 
-                type="text" 
-                value={searchQuery}
-                onChange={(e) => onSearchChange(e.target.value)}
-                placeholder="Search components..."
-                className="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/15 px-4 py-2.5 pr-10 text-sm focus:outline-none focus:border-[#2E5E99] rounded-full text-[#0D2440] dark:text-white"
-              />
-              {searchQuery ? (
-                <button
-                  onClick={() => onSearchChange("")}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0D2440] dark:text-white/60 dark:hover:text-white"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              ) : (
-                <Search className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+        {/* Divider */}
+        <div className="w-[1px] h-8 bg-slate-200 dark:bg-white/10 hidden sm:block mx-1" />
+
+        {/* Search & Filter Section */}
+        <div className="flex items-center gap-2">
+          {/* Expanding Search Bar */}
+          <motion.div 
+            layout
+            className={cn(
+              "relative flex items-center bg-white/50 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 rounded-full transition-all duration-300 focus-within:border-[#2E5E99] dark:focus-within:border-[#7BA4D0]",
+              isSearchExpanded || searchQuery ? "w-48 sm:w-60" : "w-10 sm:w-12 bg-transparent border-transparent"
+            )}
+          >
+            <button 
+              onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+              className={cn(
+                "absolute left-0 top-0 bottom-0 flex items-center justify-center rounded-full transition-colors z-10",
+                isSearchExpanded || searchQuery ? "w-10 text-slate-400" : "w-full text-[#0D2440] dark:text-white hover:bg-black/5 dark:hover:bg-white/10"
               )}
-            </div>
-          </div>
-        )}
-      </div>
+            >
+              <Search className={cn("w-4 h-4", (isSearchExpanded || searchQuery) && "text-[#2E5E99] dark:text-[#7BA4D0]")} />
+            </button>
+            
+            <AnimatePresence>
+              {(isSearchExpanded || searchQuery) && (
+                <motion.input
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "100%" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  type="text" 
+                  value={searchQuery}
+                  onChange={(e) => onSearchChange(e.target.value)}
+                  placeholder="Search..."
+                  className="w-full bg-transparent pl-10 pr-10 py-2 sm:py-2.5 text-xs sm:text-sm focus:outline-none text-[#0D2440] dark:text-white placeholder:text-slate-400 font-sans"
+                  autoFocus
+                  onBlur={() => !searchQuery && setIsSearchExpanded(false)}
+                />
+              )}
+            </AnimatePresence>
+
+            {searchQuery && (
+              <button
+                onClick={() => {
+                  onSearchChange("");
+                  setIsSearchExpanded(false);
+                }}
+                className="absolute right-0 top-0 bottom-0 w-10 flex items-center justify-center text-slate-400 hover:text-[#0D2440] dark:hover:text-white z-10"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </motion.div>
+          
+          {/* Industry Link (Icon only on mobile) */}
+          <Link 
+            href="/industries"
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-slate-100 dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] text-[#0D2440] dark:text-white transition-all duration-300 rounded-full group shrink-0"
+          >
+            <Filter className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+            <span className="text-xs sm:text-sm font-heading font-semibold hidden sm:block">Industry</span>
+          </Link>
+        </div>
+      </motion.div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { PenTool, Box, RefreshCcw, FileCheck, ArrowRight, ShieldCheck, Cpu } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const features = [
   {
@@ -47,12 +48,13 @@ export function CustomManufacturing() {
               <span>Bespoke Engineering Capabilities</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight">
+            <ScrollWipeHeading 
+              as="h2" 
+              className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.05] tracking-tight"
+            >
               Need a Custom Engineered <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E5E99] via-[#4585d4] to-[#7BA4D0]">
-                Tubular Solution?
-              </span>
-            </h2>
+              <span className="font-serif italic text-[#2E5E99] dark:text-[#7BA4D0]">Tubular Solution?</span>
+            </ScrollWipeHeading>
 
             <p className="text-slate-600 dark:text-white/65 text-sm sm:text-base leading-relaxed max-w-xl font-sans font-normal">
               Beyond our standard catalog, we specialize in co-engineering mission-critical fluid, refrigerant, and thermal assemblies. Our engineering team works directly with your blueprints to ensure exact fit and zero-leakage reliability.

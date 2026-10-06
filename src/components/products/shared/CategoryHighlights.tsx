@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Layers, Box, Settings, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const mainCategories = [
   {
@@ -68,12 +69,13 @@ export function CategoryHighlights() {
               <Sparkles className="w-3.5 h-3.5" />
               <span>Core Metallurgy Disciplines</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight">
+            <ScrollWipeHeading 
+              as="h2" 
+              className="text-4xl sm:text-5xl md:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.05] tracking-tight"
+            >
               Primary Product <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E5E99] via-[#437ec4] to-[#7BA4D0]">
-                Engineering Families
-              </span>
-            </h2>
+              <span className="font-serif italic text-[#2E5E99] dark:text-[#7BA4D0]">Engineering Families</span>
+            </ScrollWipeHeading>
           </motion.div>
           
           <motion.div 

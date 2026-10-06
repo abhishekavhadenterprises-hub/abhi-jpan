@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export function CTAStrip() {
   return (
     <section className="relative py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#091A2E] text-[#0D2440] dark:text-white transition-colors duration-500 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
-      
+
       {/* Subtle Ambient Glow */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0">
         <motion.div
@@ -20,7 +20,7 @@ export function CTAStrip() {
 
       <div className="container-custom relative z-10 w-full">
         {/* Pure Architectural Glass Box Container */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative rounded-[2.5rem] bg-white dark:bg-slate-950/60 p-8 sm:p-14 md:p-16 overflow-hidden border border-slate-200 dark:border-white/[0.12] shadow-xl hover:shadow-2xl transition-shadow duration-500 backdrop-blur-2xl"
         >
@@ -32,7 +32,7 @@ export function CTAStrip() {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Left Column: Authoritative Editorial Heading & Subtext */}
             <div className="lg:col-span-7">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
                 className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.25em] text-[#2E5E99] dark:text-cyan-400 uppercase mb-5"
               >
@@ -40,7 +40,7 @@ export function CTAStrip() {
                 <span className="font-bold">08 // COLLABORATION & TOOLING FEASIBILITY</span>
               </motion.div>
 
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-heading font-black tracking-tighter leading-[0.95] text-[#0D2440] dark:text-white uppercase mb-6"
               >
@@ -50,7 +50,7 @@ export function CTAStrip() {
                 </span>
               </motion.h2>
 
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-base sm:text-lg text-slate-600 dark:text-slate-300 font-light leading-relaxed max-w-xl pl-6 border-l-2 border-[#2E5E99]/20 dark:border-white/10"
               >
@@ -60,7 +60,7 @@ export function CTAStrip() {
             </div>
 
             {/* Right Column: Pill Actions Suite */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }}
               className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col items-stretch gap-5 justify-center"
             >

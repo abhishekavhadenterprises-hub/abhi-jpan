@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
+    "@designcodeio/threeui": "^1.2.0",
     "@types/leaflet": "^1.9.21",
     "@types/three": "^0.186.0",
     "agentation": "^3.0.2",

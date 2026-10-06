@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ShieldCheck, Award, Globe, Activity } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 // Fast, energetic count-up counter component
 function AnimatedCounter({
@@ -183,12 +184,12 @@ export function CompanyOverview() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-4"
             >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight leading-[1.1] text-[#0D2440] dark:text-white">
+              <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight leading-[1.1] text-[#0D2440] dark:text-white">
                 Engineered for environments where <br />
                 <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
                   failure is not an option.
                 </span>
-              </h2>
+              </ScrollWipeHeading>
 
               <p className="text-base sm:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-2xl">
                 We combine decades of institutional metallurgy expertise with high-speed automated CNC bending,

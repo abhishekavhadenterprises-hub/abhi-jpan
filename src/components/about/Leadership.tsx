@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, Sparkles } from "lucide-react";
 import { Linkedin } from "@/components/shared/BrandIcons";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const leaders = [
   {
@@ -212,12 +213,12 @@ export function Leadership() {
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 md:mb-20"
         >
           <div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white max-w-2xl">
+            <ScrollWipeHeading as="h2" className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white max-w-2xl">
               Leadership driving <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
                 institutional excellence.
               </span>
-            </h2>
+            </ScrollWipeHeading>
           </div>
 
           <p className="text-base sm:text-lg text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed max-w-md">

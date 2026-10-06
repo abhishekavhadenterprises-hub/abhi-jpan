@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Maximize2, TrendingUp, Cpu, CheckCircle2, Factory, Sparkles, Activity } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 // High-precision RAF count-up component with exponential easing
 function AnimatedCounter({
@@ -126,12 +127,12 @@ export function AboutManufacturing() {
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl mb-16 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-6">
+          <ScrollWipeHeading as="h2" className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-6">
             High-throughput capacity, <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
               engineered for Tier-1 scale.
             </span>
-          </h2>
+          </ScrollWipeHeading>
 
           <p className="text-base sm:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-3xl">
             Our nationwide manufacturing footprint integrates automated high-speed cold drawing benches, multi-axis computerized

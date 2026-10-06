@@ -74,56 +74,77 @@ export function ProductShowcase() {
   const [activeTab, setActiveTab] = useState(0);
   const activeProduct = capabilities[activeTab];
   const Icon = activeProduct.icon;
-  
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   return (
-    <section className="relative py-28 md:py-36 bg-[#FAFAFA] dark:bg-[#0A0A0A] text-[#111] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
+    <section className="relative py-24 md:py-32 bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white transition-colors duration-700 overflow-hidden border-b border-[#111]/10 dark:border-white/10">
       {/* Ambient Glows */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
         <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[1000px] h-[1000px] rounded-full bg-gradient-to-tr from-[#2E5E99]/10 to-transparent blur-[150px] absolute -left-[20%] top-0"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[80vw] h-[80vw] max-w-[1200px] max-h-[1200px] rounded-full bg-gradient-to-tr from-[#2E5E99]/5 dark:from-[#2E5E99]/10 to-transparent blur-[120px] absolute -left-[10%] top-0 mix-blend-multiply dark:mix-blend-screen"
         />
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[800px] h-[800px] rounded-full bg-gradient-to-bl from-[#586854]/10 to-transparent blur-[150px] absolute right-0 bottom-0"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] rounded-full bg-gradient-to-bl from-purple-500/5 dark:from-purple-900/10 to-transparent blur-[150px] absolute right-0 bottom-0 mix-blend-multiply dark:mix-blend-screen"
         />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 w-full">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[85vh]">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 pb-8 border-b border-[#E5E5E5] dark:border-[#222]">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="max-w-3xl">
-            <h2 className="text-xs tracking-[0.3em] uppercase text-[#666] mb-6">Product Catalogue & Specifications</h2>
-            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
-              Precision alloy manufacturing excellence.
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 pb-12 border-b border-[#111]/5 dark:border-white/5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl"
+          >
+            <h2 className="text-xs tracking-[0.4em] font-bold uppercase text-[#2E5E99] dark:text-cyan-400 mb-6">
+              Product Catalogue & Specifications
+            </h2>
+            <ScrollWipeHeading as="h3" className="text-5xl md:text-6xl lg:text-[5.5rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
+              Precision alloy <br />
+              <span className="text-[#666] dark:text-[#888]">manufacturing excellence.</span>
             </ScrollWipeHeading>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} className="max-w-md lg:pb-4">
-            <p className="text-[#666] dark:text-[#999] text-sm md:text-base leading-relaxed font-light">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-lg lg:pb-4"
+          >
+            <p className="text-[#666] dark:text-[#999] text-base leading-relaxed font-light">
               Engineered from certified electrolytic copper, forged brass alloys, and surgical-grade stainless steel to satisfy the world's most stringent OEM tolerance benchmarks.
             </p>
           </motion.div>
         </div>
 
-        {/* Premium Tab Selector Bar */}
-        <div className="flex flex-wrap items-center gap-3 mb-16 p-2 rounded-[2rem] bg-white/50 dark:bg-black/50 backdrop-blur-2xl border border-[#E5E5E5] dark:border-[#222] w-fit shadow-sm relative z-20">
+        {/* Premium Tab Selector Bar with Layout Animation */}
+        <div className="flex flex-wrap items-center gap-2 mb-16 p-2 rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/40 dark:border-white/10 w-fit shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative z-20 mx-auto lg:mx-0">
           {capabilities.map((item, idx) => {
             const isActive = activeTab === idx;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-500 flex items-center gap-3 ${
-                  isActive
-                    ? "bg-[#111] dark:bg-white text-white dark:text-[#111] shadow-lg scale-105"
-                    : "text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white hover:bg-white dark:hover:bg-[#222]"
-                }`}
+                className={`relative px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest transition-colors duration-500 flex items-center gap-3 z-10 ${isActive
+                    ? "text-white dark:text-[#050505]"
+                    : "text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white"
+                  }`}
               >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeProductTab"
+                    className="absolute inset-0 bg-[#111] dark:bg-white rounded-full -z-10 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
                 <span className={`font-mono text-[9px] ${isActive ? 'opacity-80' : 'opacity-50'}`}>{item.roman} //</span>
                 <span>{item.name}</span>
               </button>
@@ -131,16 +152,16 @@ export function ProductShowcase() {
           })}
         </div>
 
-        {/* Active Product Detailed Dossier with React Bits Spotlight Effect */}
-        <div className="relative group/spotlight">
+        {/* Active Product Detailed Dossier */}
+        <div className="relative group/spotlight w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeProduct.id}
-              initial={{ opacity: 0, scale: 0.98, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.98, y: -20 }}
+              initial={{ opacity: 0, scale: 0.98, y: 30, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 0.98, y: -20, filter: "blur(10px)" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-0 items-stretch rounded-[3rem] bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] shadow-[0_20px_60px_rgba(0,0,0,0.05)] dark:shadow-2xl overflow-hidden group"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch rounded-[3rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-3xl border border-white/50 dark:border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.07)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.4)] overflow-hidden group"
               onMouseMove={(e: MouseEvent<HTMLDivElement>) => {
                 const { left, top } = e.currentTarget.getBoundingClientRect();
                 mouseX.set(e.clientX - left);
@@ -149,12 +170,12 @@ export function ProductShowcase() {
             >
               {/* React Bits Spotlight Overlay */}
               <motion.div
-                className="pointer-events-none absolute -inset-px rounded-[3rem] opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-100 z-50"
+                className="pointer-events-none absolute -inset-px rounded-[3rem] opacity-0 transition-opacity duration-500 group-hover/spotlight:opacity-100 z-50 mix-blend-overlay"
                 style={{
                   background: useMotionTemplate`
                     radial-gradient(
-                      650px circle at ${mouseX}px ${mouseY}px,
-                      rgba(46, 94, 153, 0.1),
+                      800px circle at ${mouseX}px ${mouseY}px,
+                      rgba(255, 255, 255, 0.15),
                       transparent 80%
                     )
                   `,
@@ -162,45 +183,53 @@ export function ProductShowcase() {
               />
 
               {/* Left Column: Technical Dossier */}
-              <div className="lg:col-span-6 flex flex-col justify-between p-10 lg:p-16 z-10 relative bg-white dark:bg-[#111]">
+              <div className="lg:col-span-6 flex flex-col justify-between p-10 lg:p-16 z-10 relative">
                 <div>
-                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#FAFAFA] dark:bg-[#000] border border-[#E5E5E5] dark:border-[#222] mb-8 shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] tracking-widest text-[#666] dark:text-[#999] uppercase font-medium">
+                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/50 dark:bg-black/50 border border-[#111]/5 dark:border-white/5 mb-10 shadow-sm backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                    <span className="text-[10px] tracking-widest text-[#555] dark:text-[#AAA] uppercase font-bold">
                       {activeProduct.eyebrowCategory}
                     </span>
                   </div>
 
-                  <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl font-light text-[#111] dark:text-white leading-[1.15] mb-6 tracking-tight">
+                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#111] dark:text-white leading-[1.1] mb-8 tracking-tight">
                     {activeProduct.title}
-                  </ScrollWipeHeading>
+                  </h3>
 
-                  <p className="text-[#666] dark:text-[#999] text-base font-light leading-relaxed mb-10 max-w-lg">
+                  <p className="text-[#555] dark:text-[#AAA] text-base lg:text-lg font-light leading-relaxed mb-12 max-w-xl">
                     {activeProduct.description}
                   </p>
 
                   {/* Key Spec Highlights */}
-                  <div className="space-y-4 pt-8 border-t border-[#E5E5E5] dark:border-[#222]">
+                  <div className="space-y-5 pt-10 border-t border-[#111]/10 dark:border-white/10">
                     {activeProduct.specDetails.map((spec, i) => (
-                      <div key={i} className="flex items-center gap-4 text-xs font-mono text-[#666] dark:text-[#999]">
-                        <Icon className="w-4 h-4 text-[#111] dark:text-white" />
-                        <span>{spec}</span>
-                      </div>
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + (i * 0.1), duration: 0.6 }}
+                        key={i}
+                        className="flex items-center gap-5 text-sm font-mono text-[#666] dark:text-[#999]"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-[#111]/5 dark:bg-white/5 flex items-center justify-center shrink-0">
+                          <Icon className="w-4 h-4 text-[#111] dark:text-white" />
+                        </div>
+                        <span className="tracking-wide">{spec}</span>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
 
                 {/* Bottom Metric & Action */}
-                <div className="flex flex-wrap items-end justify-between gap-8 pt-12 mt-12 border-t border-[#E5E5E5] dark:border-[#222]">
+                <div className="flex flex-wrap items-end justify-between gap-8 pt-12 mt-12 border-t border-[#111]/10 dark:border-white/10">
                   <div>
-                    <span className="block text-[10px] uppercase tracking-[0.2em] text-[#999] dark:text-[#666] mb-2 font-medium">
+                    <span className="block text-xs uppercase tracking-[0.25em] text-[#888] dark:text-[#777] mb-3 font-bold">
                       {activeProduct.metricLabel}
                     </span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-light tracking-tighter text-5xl md:text-6xl text-[#111] dark:text-white">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-light tracking-tighter text-6xl md:text-7xl text-[#111] dark:text-white">
                         {activeProduct.metricValue}
                       </span>
-                      <span className="text-xs text-[#999] font-medium tracking-widest uppercase">
+                      <span className="text-sm text-[#888] font-medium tracking-widest uppercase">
                         {activeProduct.metricSub}
                       </span>
                     </div>
@@ -208,34 +237,41 @@ export function ProductShowcase() {
 
                   <Link
                     href="/products"
-                    className="relative overflow-hidden group/btn px-8 py-4 rounded-full bg-[#FAFAFA] dark:bg-[#000] border border-[#E5E5E5] dark:border-[#222] hover:bg-[#111] dark:hover:bg-white text-[#111] dark:text-white hover:text-white dark:hover:text-[#111] font-semibold text-xs uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-3 shadow-sm hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] z-20"
+                    className="relative overflow-hidden group/btn px-10 py-5 rounded-full bg-[#111] dark:bg-white text-white dark:text-[#050505] font-bold text-xs uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-4 shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] hover:scale-105 z-20"
                   >
-                    {/* Magnetic / Swipe Effect on Hover from React Bits */}
-                    <span className="absolute inset-0 bg-[#2E5E99] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-in-out -z-10" />
-                    <span className="group-hover/btn:text-white transition-colors duration-500">View Specifications</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 group-hover/btn:text-white transition-all duration-500" />
+                    <span>View Specifications</span>
+                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </Link>
                 </div>
               </div>
 
               {/* Right Column: Premium Showcase Image */}
-              <div className="lg:col-span-6 relative min-h-[400px] lg:min-h-full bg-[#F5F5F5] dark:bg-[#050505] flex items-center justify-center p-12 overflow-hidden border-l border-[#E5E5E5] dark:border-[#222]">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#2E5E99]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-                
-                <div className="relative w-full h-full min-h-[400px]">
+              <div className="lg:col-span-6 relative min-h-[500px] lg:min-h-full bg-gradient-to-br from-[#F5F5F5] to-[#EAEAEA] dark:from-[#080808] dark:to-[#020202] flex items-center justify-center p-12 overflow-hidden border-l border-[#111]/5 dark:border-white/5">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.1)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+
+                <motion.div
+                  className="relative w-full h-full min-h-[400px] flex items-center justify-center"
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                >
                   <Image
                     src={activeProduct.image}
                     alt={activeProduct.name}
                     fill
-                    className="object-contain object-center drop-shadow-[0_30px_60px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)] group-hover:scale-105 group-hover:-rotate-1 transition-all duration-[1.5s] ease-out"
+                    className="object-contain object-center drop-shadow-[0_40px_80px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] group-hover:scale-110 group-hover:rotate-2 transition-all duration-[2s] ease-out"
                   />
-                </div>
+                </motion.div>
 
                 {/* Floating Engineering Badge */}
-                <div className="absolute bottom-8 right-8 flex items-center gap-3 px-6 py-3 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-[#E5E5E5] dark:border-[#333] shadow-[0_10px_30px_rgba(0,0,0,0.1)] z-20 hover:-translate-y-1 transition-transform duration-500">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                  <span className="font-mono text-[10px] tracking-widest text-[#111] dark:text-white font-semibold">CMM VERIFIED</span>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="absolute bottom-10 right-10 flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.1)] z-20 hover:-translate-y-2 transition-transform duration-500"
+                >
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
+                  <span className="font-mono text-[10px] tracking-widest text-[#111] dark:text-white font-bold">CMM VERIFIED</span>
+                </motion.div>
               </div>
             </motion.div>
           </AnimatePresence>

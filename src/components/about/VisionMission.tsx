@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Compass, Target, CheckCircle2, Sparkles } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const visionPoints = [
   {
@@ -185,12 +186,12 @@ export function VisionMission() {
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mb-14 md:mb-20"
         >
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4">
+          <ScrollWipeHeading as="h2" className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4">
             Purpose that guides <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
               every manufacturing cycle.
             </span>
-          </h2>
+          </ScrollWipeHeading>
 
           <p className="text-base sm:text-lg text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed">
             Our foundational vision and operational mandate directing institutional growth and precision engineering since 1998.

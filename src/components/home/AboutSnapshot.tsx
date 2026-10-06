@@ -100,7 +100,7 @@ const stats = [
 export function AboutSnapshot() {
   const [activeModuleIndex, setActiveModuleIndex] = useState(0);
   const textRef = useRef<HTMLHeadingElement>(null);
-  
+
   // Auto-cycle modules every 6 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -116,15 +116,15 @@ export function AboutSnapshot() {
       {/* Ambient background glow */}
       <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-l from-[#586854]/10 to-transparent blur-[100px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[800px] h-[800px] bg-gradient-to-r from-[#2E5E99]/5 to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
-      
+
       <div className="w-full">
         <div className="flex flex-col mb-24 max-w-[1400px] mx-auto">
           <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }} className="text-[10px] tracking-[0.3em] uppercase text-[#666] mb-8 font-semibold">
             Corporate Overview
           </motion.h2>
-          
+
           {/* Scroll-scrub Heading (United Carriers Exact Left-to-Right Wipe) */}
-          <ScrollWipeHeading 
+          <ScrollWipeHeading
             as="h3"
             className="text-5xl md:text-6xl lg:text-[5.5rem] font-medium tracking-tighter leading-[1.05] max-w-5xl"
             revealedColor="#111111"
@@ -134,15 +134,15 @@ export function AboutSnapshot() {
             PRECISION ENGINEERED <br />
             FOR GLOBAL INDUSTRY.
           </ScrollWipeHeading>
-          
+
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mt-12 text-[#666] max-w-xl text-base sm:text-lg leading-relaxed font-light">
             Founded in 1998, J Pan Tubular Components Limited is more than just a manufacturer. We're a network of engineering experts passionate about bringing absolute precision to the world's most exacting automotive, refrigeration, and HVAC leaders.
           </motion.p>
         </div>
-        
+
         {/* Dynamic Capability Showcase Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch mb-32">
-          
+
           <div className="lg:col-span-5 flex flex-col justify-center space-y-4 relative z-10">
             {capabilityModules.map((mod, idx) => {
               const isActive = activeModuleIndex === idx;
@@ -172,7 +172,7 @@ export function AboutSnapshot() {
               <motion.div key={activeModule.id} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.2, ease: "easeOut" }} className="absolute inset-0">
                 <Image src={activeModule.image} alt={activeModule.headline} fill className="object-cover transition-transform duration-[15s] group-hover:scale-110" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-black/20 to-transparent mix-blend-multiply" />
-                
+
                 <div className="absolute top-8 left-8 z-10">
                   <span className="text-[10px] tracking-[0.2em] text-white uppercase backdrop-blur-xl bg-white/10 border border-white/20 px-6 py-2.5 rounded-full shadow-lg flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" /> {activeModule.badge}
@@ -199,7 +199,7 @@ export function AboutSnapshot() {
           {stats.map((stat, idx) => {
             const StatIcon = stat.icon;
             return (
-              <motion.div 
+              <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: idx * 0.15 }}
                 className="relative overflow-hidden p-8 rounded-[2rem] bg-white border border-white/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-700 hover:-translate-y-2 group flex flex-col justify-between h-full min-h-[280px]"

@@ -107,11 +107,10 @@ export function Infrastructure() {
               <button
                 key={pillar.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-8 py-4 rounded-full transition-all duration-500 flex items-center gap-4 ${
-                  isActive
+                className={`relative px-8 py-4 rounded-full transition-all duration-500 flex items-center gap-4 ${isActive
                     ? "bg-[#111] dark:bg-white text-white dark:text-[#111] shadow-lg scale-105"
                     : "bg-transparent text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white hover:bg-white dark:hover:bg-[#222]"
-                }`}
+                  }`}
               >
                 <Icon className={`w-4 h-4 ${isActive ? "text-white dark:text-[#111]" : "text-[#999]"}`} />
                 <div className="text-left">
@@ -161,7 +160,7 @@ export function Infrastructure() {
               <p className="text-white/70 text-base md:text-lg font-light leading-relaxed mb-10 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
                 {activePillar.desc}
               </p>
-              
+
               <div className="flex flex-wrap items-center gap-6">
                 <Link
                   href="/about#infrastructure"

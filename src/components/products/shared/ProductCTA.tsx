@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, FileCheck, PhoneCall } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 export function ProductCTA() {
   const containerRef = useRef<HTMLElement>(null);
@@ -25,12 +26,15 @@ export function ProductCTA() {
         >
           <div className="max-w-3xl mx-auto space-y-4">
             {/* Crisp & Punchy Headline */}
-            <h2 className="text-2xl sm:text-4xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white">
+            <ScrollWipeHeading 
+              as="h2" 
+              className="text-4xl sm:text-5xl font-light tracking-tight text-[#0D2440] dark:text-white"
+            >
               Ready to engineer precision <br />
-              <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
+              <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-serif italic">
                 for your critical assemblies?
               </span>
-            </h2>
+            </ScrollWipeHeading>
 
             {/* Short 1-Line Subtext */}
             <p className="text-sm sm:text-base text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed">

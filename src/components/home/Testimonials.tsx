@@ -62,7 +62,7 @@ export function Testimonials() {
       className="relative py-28 md:py-36 bg-transparent text-[#0D2440] dark:text-white overflow-hidden border-b border-slate-200 dark:border-white/[0.08]"
     >
       <YoutubeBackground videoId="MPW60Fci930" />
-      
+
       <div className="container-custom relative z-10 w-full">
         {/* Section Header */}
         <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.25em] text-slate-500 dark:text-slate-400 uppercase mb-8 pb-4 border-b border-slate-200 dark:border-white/[0.08]">

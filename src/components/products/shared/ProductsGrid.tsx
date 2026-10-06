@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Layers } from "lucide-react";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/products/shared/ProductCard";
@@ -55,12 +55,21 @@ export function ProductsGrid({ selectedCategory, searchQuery = "" }: ProductsGri
       ) : (
         <div
           ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-2 pb-10 overflow-visible px-1"
+          className="overflow-visible px-1 pt-2 pb-10 relative"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product, idx) => (
-              <ProductCard key={product.id} product={product} idx={idx} />
-            ))}
+            <motion.div
+              key={selectedCategory + searchQuery}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+            >
+              {filteredProducts.map((product, idx) => (
+                <ProductCard key={product.id} product={product} idx={idx} />
+              ))}
+            </motion.div>
           </AnimatePresence>
         </div>
       )}

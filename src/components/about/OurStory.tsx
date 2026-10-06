@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Target, ShieldCheck, Cpu } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const storyCards = [
   {
@@ -32,76 +33,107 @@ const storyCards = [
   },
 ];
 
-// Snappy, high-impact 3D flip-out / fan-out animation variants
-const flipOutVariants: Variants[] = [
-  // Card 1: Flips and fans outward to the left
-  {
-    hidden: {
-      opacity: 0,
-      rotateY: 42,
-      rotateZ: -5,
-      x: 36,
-      y: 30,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      rotateY: 0,
-      rotateZ: 0,
-      x: 0,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.55,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  },
-  // Card 2: Flips forward from the center
-  {
-    hidden: {
-      opacity: 0,
-      rotateX: 35,
-      y: 40,
-      scale: 0.88,
-    },
-    visible: {
-      opacity: 1,
-      rotateX: 0,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.55,
-        delay: 0.12,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  },
-  // Card 3: Flips and fans outward to the right
-  {
-    hidden: {
-      opacity: 0,
-      rotateY: -42,
-      rotateZ: 5,
-      x: -36,
-      y: 30,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      rotateY: 0,
-      rotateZ: 0,
-      x: 0,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.55,
-        delay: 0.24,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  },
-];
+function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
+  const boundingRef = useRef<HTMLDivElement>(null);
+  
+  // 1. Hover Coordinates for Spotlight
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // 2. Coordinates for 3D Tilt (-0.5 to 0.5)
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 40 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 40 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!boundingRef.current) return;
+    const rect = boundingRef.current.getBoundingClientRect();
+    
+    // For Spotlight
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+    
+    // For Tilt
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const bgSpotlight = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(46, 94, 153, 0.08), transparent 80%)`;
+  const bgBorder = useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, rgba(46, 94, 153, 0.4), transparent 80%)`;
+
+  return (
+    <motion.div
+      ref={boundingRef}
+      variants={{
+        hidden: { opacity: 0, y: 40, scale: 0.95 },
+        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+      }}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative p-8 sm:p-10 rounded-[2rem] bg-white dark:bg-[#091524] border border-slate-200/60 dark:border-white/5 shadow-lg flex flex-col justify-between group cursor-crosshair overflow-visible transition-colors duration-500"
+    >
+      {/* 1. Dynamic Spotlight Background */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: bgSpotlight,
+        }}
+      />
+      
+      {/* 2. Dynamic Border Glow */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: bgBorder,
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          padding: "1px",
+        }}
+      />
+
+      <div style={{ transform: "translateZ(30px)" }} className="relative z-10">
+        {/* Top Row: Icon + Number */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/[0.02] text-[#2E5E99] dark:text-[#7BA4D0] border border-slate-200 dark:border-white/10 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white transition-all duration-500 shadow-sm">
+            <card.icon className="w-5 h-5" />
+          </div>
+          <span className="text-3xl font-mono font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
+            {card.num}
+          </span>
+        </div>
+
+        <div className="text-[10px] font-mono tracking-[0.2em] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-4">
+          {card.tag}
+        </div>
+
+        <h3 className="text-2xl sm:text-3xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white mb-4 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+          {card.title}
+        </h3>
+
+        <p className="text-sm sm:text-[15px] text-[#0D2440]/70 dark:text-white/60 font-medium leading-relaxed">
+          {card.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 export function OurStory() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -110,66 +142,45 @@ export function OurStory() {
     <section
       id="our-story"
       ref={sectionRef}
-      className="relative py-20 md:py-36 bg-white dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
+      className="relative py-24 md:py-36 bg-[#FAFAFA] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden perspective-[2000px]"
     >
-      <div className="container-custom relative z-10 w-full">
+      {/* Background Architectural Grid Lines */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]">
+        <div className="absolute left-1/4 top-0 bottom-0 w-px bg-black dark:bg-white" />
+        <div className="absolute left-2/4 top-0 bottom-0 w-px bg-black dark:bg-white" />
+        <div className="absolute left-3/4 top-0 bottom-0 w-px bg-black dark:bg-white" />
+      </div>
+
+      <div className="container-custom relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-6">
+          <ScrollWipeHeading as="h2" className="text-4xl sm:text-5xl lg:text-7xl font-heading font-black tracking-tight leading-[1.05] text-[#0D2440] dark:text-white mb-6">
             Precision that builds <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
               enduring global partnerships.
             </span>
-          </h2>
+          </ScrollWipeHeading>
 
-          <p className="text-base sm:text-lg text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#0D2440]/75 dark:text-white/75 font-medium leading-relaxed max-w-2xl mx-auto">
             From a 400 sq. ft. precision workshop to an institutional manufacturing powerhouse producing over 65,000 MT
             of mission-critical tubular assemblies annually.
           </p>
         </div>
 
-        {/* 3 Premium 3D Flip-Out Elevated Cards */}
+        {/* 3 Premium Godly Grid Cards */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 [perspective:1400px]"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.15 } }
+          }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
+          style={{ perspective: "1200px" }}
         >
           {storyCards.map((card, idx) => (
-            <motion.div
-              key={card.num}
-              variants={flipOutVariants[idx]}
-              whileHover={{
-                y: -6,
-                rotateY: idx === 0 ? -4 : idx === 2 ? 4 : 0,
-                transition: { duration: 0.2 },
-              }}
-              className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 transition-colors duration-300 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] flex flex-col justify-between group transform-gpu [transform-style:preserve-3d]"
-            >
-              <div>
-                {/* Top Row: Icon + Number */}
-                <div className="flex items-center justify-between mb-8">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] border border-[#7BA4D0]/30 dark:border-white/15 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                    <card.icon className="w-7 h-7" />
-                  </div>
-                  <span className="text-3xl font-heading font-black text-[#0D2440]/25 dark:text-white/20 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
-                    {card.num}
-                  </span>
-                </div>
-
-                <div className="text-[10px] font-sans font-bold tracking-widest text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-2">
-                  {card.tag}
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#0D2440] dark:text-white mb-4">
-                  {card.title}
-                </h3>
-
-                <p className="text-sm sm:text-base text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed">
-                  {card.description}
-                </p>
-              </div>
-            </motion.div>
+            <GodlySpotlightCard key={card.num} card={card} idx={idx} />
           ))}
         </motion.div>
       </div>

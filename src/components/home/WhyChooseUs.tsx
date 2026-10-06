@@ -3,9 +3,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Link from "next/link";
-import { motion, useInView, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, ShieldCheck, Activity, Zap, Gauge, Factory, CheckCircle2 } from "lucide-react";
-import MagicRings from "@/components/ui/MagicRings";
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const [count, setCount] = useState(0);
@@ -112,184 +111,161 @@ const features = [
 ];
 
 export function WhyChooseUs() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    let index = Math.round(latest * (features.length - 1));
-    index = Math.max(0, Math.min(features.length - 1, index));
-    if (index !== activeIndex) {
-      setActiveIndex(index);
-    }
-  });
-
   return (
     <section
       id="why-choose-us"
-      ref={containerRef}
-      className="relative h-[400vh] bg-[#FAFAFA] dark:bg-[#050505] text-[#111] dark:text-white transition-colors duration-500"
+      className="relative py-16 lg:py-20 bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white overflow-hidden transition-colors duration-700"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* MagicRings Premium Background */}
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-auto">
-          <MagicRings
-            color="#2E5E99"
-            colorTwo="#999999"
-            ringCount={7}
-            speed={0.8}
-            attenuation={15}
-            lineThickness={3}
-            baseRadius={0.4}
-            radiusStep={0.15}
-            scaleRate={0.05}
-            opacity={0.3}
-            blur={1}
-            noiseAmount={0.03}
-            rotation={0}
-            ringGap={1.2}
-            fadeIn={0.6}
-            fadeOut={0.7}
-            followMouse={true}
-            mouseInfluence={0.15}
-            hoverScale={1.05}
-            parallax={0.03}
-            clickBurst={true}
-          />
+      {/* Subtle Ambient Background Gradients */}
+      <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#2E5E99]/5 dark:from-[#2E5E99]/10 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-gradient-to-tl from-purple-500/5 dark:from-purple-900/10 to-transparent blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center">
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 pb-8 border-b border-[#111]/10 dark:border-white/10">
+          <div className="max-w-4xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-xs tracking-[0.4em] uppercase font-bold text-[#2E5E99] dark:text-cyan-400 mb-6"
+            >
+              Benchmarks & Telemetry
+            </motion.h2>
+            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[4.5rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
+              Performance <br />
+              <span className="text-[#666] dark:text-[#888]">proven at scale.</span>
+            </ScrollWipeHeading>
+          </div>
+          <div className="max-w-lg space-y-8">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-[#666] dark:text-[#999] text-base leading-relaxed font-light"
+            >
+              Engineered for mission-critical operating environments where zero-defect reliability
+              is non-negotiable. Continuously audited under ISO 9001 and IATF 16949 standards across six automated facilities.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <Link
+                href="/quality"
+                className="group/btn px-8 py-4 rounded-full bg-[#111] dark:bg-white text-white dark:text-[#050505] font-bold text-xs uppercase tracking-[0.2em] transition-all duration-500 inline-flex items-center gap-4 hover:shadow-[0_0_30px_rgba(46,94,153,0.3)] dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-105"
+              >
+                <span>Audit Specifications</span>
+                <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+              </Link>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 w-full h-full flex flex-col justify-center">
-          {/* Section Header */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 pb-8 border-b border-[#E5E5E5] dark:border-[#222]">
-            <div className="max-w-3xl">
-              <h2 className="text-xs tracking-[0.3em] uppercase text-[#666] mb-4">Benchmarks & Telemetry</h2>
-              <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
-                Performance <br />
-                <span className="text-[#666]">proven at scale.</span>
-              </ScrollWipeHeading>
-            </div>
-            <div className="max-w-md space-y-6">
-              <p className="text-[#666] dark:text-[#999] text-sm leading-relaxed font-light">
-                Engineered for mission-critical operating environments where zero-defect reliability
-                is non-negotiable. Continuously audited under ISO 9001 and IATF 16949 standards across six automated facilities.
-              </p>
-              <div>
-                <Link
-                  href="/quality"
-                  className="group/btn px-6 py-3 rounded-full bg-[#111] dark:bg-white text-white dark:text-[#111] font-semibold text-[10px] uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-3 shadow-lg hover:scale-105"
-                >
-                  <span>Audit Specifications</span>
-                  <ArrowUpRight className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
+        {/* Staircase Layout */}
+        <div className="relative w-full flex flex-col pb-8">
+          {features.map((feature, idx) => {
+            const Icon = feature.icon;
+            // Alternate left and right for animation
+            const fromLeft = idx % 2 === 0;
+            // Enhanced Staircase indent
+            const indentClass = [
+              "ml-0 lg:w-[70%]",
+              "ml-[5%] lg:ml-[10%] lg:w-[70%]",
+              "ml-[10%] lg:ml-[20%] lg:w-[70%]",
+              "ml-[15%] lg:ml-[30%] lg:w-[70%]"
+            ][idx];
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left: Interactive Title List */}
-            <div className="lg:col-span-5 flex flex-col justify-center gap-8 py-10 relative">
-              {/* Background Track Line */}
-              <div className="absolute left-[2px] top-0 bottom-0 w-[1px] bg-black/10 dark:bg-white/10" />
-
-              {features.map((feature, idx) => {
-                const isActive = activeIndex === idx;
-                return (
-                  <div 
-                    key={feature.id}
-                    className={`relative transition-all duration-700 ease-out py-2 pl-12 group`}
-                  >
-                    {/* Active Track Line */}
-                    <div 
-                      className={`absolute left-[1px] top-0 bottom-0 w-[3px] bg-[#111] dark:bg-white transition-all duration-700 ease-[0.16,1,0.3,1] origin-top rounded-full ${isActive ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}`} 
-                    />
-
-                    <div className={`transition-all duration-700 ease-[0.16,1,0.3,1] ${isActive ? "opacity-100 translate-x-4 blur-0" : "opacity-30 translate-x-0 blur-[1px]"}`}>
-                      <div className="flex items-center gap-4 mb-3">
-                        <span className={`text-[10px] uppercase tracking-[0.2em] font-bold ${isActive ? feature.color : "text-[#666]"}`}>
-                          {feature.num}
-                        </span>
-                        <div className={`h-[1px] transition-all duration-1000 ${isActive ? "w-8 bg-black/20 dark:bg-white/20" : "w-0 bg-transparent"}`} />
-                        <span className={`text-[9px] uppercase tracking-[0.2em] font-semibold ${isActive ? "text-[#111] dark:text-white" : "text-[#666]"}`}>
-                          {feature.tag}
-                        </span>
-                      </div>
-                      <h4 className={`text-3xl md:text-4xl lg:text-[2.5rem] font-light tracking-tight leading-tight transition-colors duration-700 ${isActive ? "text-[#111] dark:text-white" : "text-[#999] dark:text-[#555]"}`}>
-                        {feature.title}
-                      </h4>
-                    </div>
+            return (
+              <motion.div
+                key={feature.id}
+                initial={{ opacity: 0, x: fromLeft ? "-50vw" : "50vw", y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className={`relative ${indentClass} mb-8 z-10`}
+              >
+                {/* Premium Animated Connecting SVG Line */}
+                {idx < features.length - 1 && (
+                  <div className="hidden lg:block absolute left-[4rem] -bottom-16 w-32 h-20 -z-10">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                      <motion.path
+                        d="M 10,0 L 10,70 Q 10,90 30,90 L 100,90"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeDasharray="4 6"
+                        className="text-[#111]/20 dark:text-white/20"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true, margin: "-20%" }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                      />
+                    </svg>
                   </div>
-                );
-              })}
-            </div>
+                )}
 
-            {/* Right: Dynamic Bento Card Reveal */}
-            <div className="lg:col-span-7 relative h-[450px]">
-              <AnimatePresence mode="wait">
-                {features.map((feature, idx) => {
-                  if (idx !== activeIndex) return null;
-                  const Icon = feature.icon;
-                  return (
-                    <motion.div
-                      key={feature.id}
-                      initial={{ opacity: 0, y: 80, scale: 0.9, rotateX: 15, filter: "blur(10px)" }}
-                      animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)" }}
-                      exit={{ opacity: 0, scale: 0.75, y: -20, rotateX: -5, filter: "blur(10px)" }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute inset-0 w-full h-full p-10 rounded-[2.5rem] bg-white/80 dark:bg-[#0A0A0A]/80 backdrop-blur-xl border border-[#E5E5E5] dark:border-[#222] flex flex-col justify-between overflow-hidden group shadow-[0_20px_40px_rgba(0,0,0,0.05)]"
-                    >
-                      <div className={`absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl ${feature.glow} to-transparent blur-[100px] opacity-100 transition-opacity duration-1000 pointer-events-none mix-blend-multiply dark:mix-blend-screen`} />
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="group relative"
+                >
+                  {/* Glowing Border Hover Effect */}
+                  <div className={`absolute -inset-0.5 rounded-[2.5rem] bg-gradient-to-r ${feature.glow} opacity-0 group-hover:opacity-100 blur-md transition duration-700 pointer-events-none`} />
 
-                      <div>
-                        <div className="flex items-center justify-between gap-4 mb-8">
-                          <div className="flex items-center gap-4">
-                            <div className={`w-14 h-14 rounded-2xl bg-[#FAFAFA] dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] flex items-center justify-center ${feature.color} ${feature.bgHover} group-hover:text-white transition-all duration-700 shadow-sm`}>
-                              <Icon className="w-6 h-6" />
-                            </div>
-                            {feature.subTag && (
-                              <span className="inline-block px-3 py-1 rounded-full bg-[#FAFAFA] dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] text-[9px] text-[#666] uppercase tracking-widest font-semibold">
-                                {feature.subTag}
-                              </span>
-                            )}
-                          </div>
+                  <div className="relative p-8 md:p-10 rounded-[2.5rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.03)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] transition-all duration-700 overflow-hidden">
+
+                    {/* Internal Gradient Glow */}
+                    <div className={`absolute -top-32 -right-32 w-[400px] h-[400px] bg-gradient-to-bl ${feature.glow} to-transparent blur-[80px] opacity-20 group-hover:opacity-60 transition-opacity duration-1000 pointer-events-none mix-blend-multiply dark:mix-blend-screen`} />
+
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-8 relative z-10">
+
+                      {/* Icon Box */}
+                      <motion.div
+                        whileHover={{ rotate: 5, scale: 1.1 }}
+                        className={`shrink-0 w-20 h-20 rounded-[1.5rem] bg-white dark:bg-[#151515] border border-black/5 dark:border-white/10 flex items-center justify-center ${feature.color} ${feature.bgHover} group-hover:text-white transition-colors duration-500 shadow-lg`}
+                      >
+                        <Icon className="w-10 h-10" />
+                      </motion.div>
+
+                      {/* Content */}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-4 mb-3">
+                          <span className={`text-sm uppercase tracking-widest font-black ${feature.color}`}>
+                            {feature.num}
+                          </span>
+                          <span className="w-8 h-[1px] bg-black/10 dark:bg-white/10" />
+                          <span className="text-xs uppercase tracking-widest font-bold text-[#666] dark:text-[#888]">
+                            {feature.tag}
+                          </span>
                         </div>
-
-                        <div className={`${feature.valClass} font-light tracking-tighter text-[#111] dark:text-white mb-6 group-hover:scale-[1.02] transition-transform duration-700 origin-left`}>
-                          {feature.val}
-                        </div>
-                        <p className="text-sm md:text-base text-[#666] dark:text-[#999] font-light leading-relaxed max-w-xl">
+                        <h4 className="text-2xl md:text-3xl font-medium tracking-tight text-[#111] dark:text-white mb-3 group-hover:translate-x-2 transition-transform duration-500">
+                          {feature.title}
+                        </h4>
+                        <p className="text-sm md:text-base text-[#555] dark:text-[#AAA] leading-relaxed max-w-lg font-light">
                           {feature.desc}
                         </p>
                       </div>
 
-                      {(feature.footer1 || feature.footer2) && (
-                        <div className="pt-8 border-t border-[#E5E5E5] dark:border-[#222] flex flex-wrap items-center gap-4 text-[10px] font-semibold uppercase tracking-widest text-[#666]">
-                          {feature.footer1 && (
-                            <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAFAFA] dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222]">
-                              {feature.id === 'capacity' && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
-                              {feature.footer1}
-                            </span>
-                          )}
-                          {feature.footer2 && (
-                            <span className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAFAFA] dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222]">
-                              {feature.footer2}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-          </div>
+                      {/* Value Display */}
+                      <div className="shrink-0 pt-6 md:pt-0 pl-0 md:pl-8 md:border-l border-black/5 dark:border-white/10">
+                        <motion.div
+                          className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter text-[#111] dark:text-white group-hover:scale-105 transition-transform origin-left md:origin-right duration-700"
+                        >
+                          {feature.val}
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-

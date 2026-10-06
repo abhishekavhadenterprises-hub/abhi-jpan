@@ -1,49 +1,153 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export function ProductsHero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Premium Parallax Math
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Staggered Text Animation Variants
+  const sentence = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const letter = {
+    hidden: { opacity: 0, y: 50, rotateX: -45 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const titleText = "Precision Engineered.";
+  const subtitleText = "Tubular Solutions.";
+
   return (
-    <section className="relative h-[78vh] min-h-[530px] max-h-[800px] w-full flex flex-col justify-end bg-[#071321] overflow-hidden">
-      {/* Background Image: Full-Bleed Craftsmanship Showroom & Manufacturing Perspective */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/products-hero-craftsmanship.jpg"
-          alt="J Pan Precision Products & Engineering"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center brightness-100 contrast-100"
-        />
-        {/* Subtle cinematic gradient overlays ensuring flawless visibility and legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 via-40% to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
-      </div>
+    <section 
+      ref={containerRef}
+      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-20"
+    >
+      {/* Dynamic Cinematic Inset Frame */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95, borderRadius: "100px" }}
+        animate={{ opacity: 1, scale: 1, borderRadius: "40px" }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute inset-x-4 sm:inset-x-8 top-8 bottom-8 z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+      >
+        <motion.div 
+          style={{ y: imageY, scale: imageScale }}
+          className="absolute inset-0 w-full h-full origin-center"
+        >
+          <Image
+            src="/images/products-hero-craftsmanship.jpg"
+            alt="J Pan Precision Products & Engineering"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center brightness-90 dark:brightness-[0.35] saturate-[0.85] contrast-[1.1]"
+          />
+        </motion.div>
+        
+        {/* Gradients for typography legibility and depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-[#0D2440]/30 to-transparent mix-blend-multiply dark:mix-blend-normal" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
+        
+        {/* Subtle glowing edges */}
+        <div className="absolute inset-0 border border-white/20 dark:border-white/10 rounded-[40px] pointer-events-none mix-blend-overlay" />
+      </motion.div>
 
-      {/* Bottom Content Shelf */}
-      <div className="container-custom relative z-10 w-full pb-10 sm:pb-12 md:pb-14 pt-28 sm:pt-32">
-        <div className="max-w-2xl space-y-3 sm:space-y-4">
-          
-          {/* Underlined Kicker matching reference */}
-          <div className="inline-block border-b-2 border-white pb-0.5">
-            <span className="text-xl sm:text-2xl md:text-3xl font-heading font-medium text-white tracking-tight">
-              J-Pan Precision
-            </span>
-          </div>
+      {/* Centered Hero Content Lockup */}
+      <motion.div 
+        style={{ y: textY, opacity: textOpacity }}
+        className="container-custom relative z-10 w-full flex flex-col items-center text-center justify-center h-full px-4"
+      >
+        {/* Floating Glassmorphic Badge */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-8 md:mb-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7BA4D0] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7BA4D0]"></span>
+          </span>
+          <span className="text-xs sm:text-sm font-sans font-bold text-white uppercase tracking-[0.3em]">
+            The Catalog
+          </span>
+        </motion.div>
 
-          {/* Display Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-normal text-white tracking-tight leading-[1.06]">
-            World-Class Tubular Solutions.
+        {/* Staggered 3D Typography Reveal */}
+        <motion.div
+          variants={sentence}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col items-center justify-center space-y-2 md:space-y-4"
+          style={{ perspective: "1000px" }}
+        >
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-black text-white tracking-tighter leading-[0.9]">
+            {titleText.split("").map((char, index) => (
+              <motion.span key={char + "-" + index} variants={letter} className="inline-block">
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </h1>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[0.9] pr-4">
+            {subtitleText.split("").map((char, index) => (
+              <motion.span key={char + "-" + index} variants={letter} className="inline-block">
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </h2>
+        </motion.div>
 
-          {/* Subtitle Paragraph */}
-          <p className="text-sm sm:text-base md:text-lg text-white/85 font-normal leading-relaxed max-w-xl">
-            Zero-defect brass, copper, and steel components engineered with sub-micron precision for automotive, HVAC, and industrial leaders worldwide.
-          </p>
+        {/* Subtitle with fade up */}
+        <motion.p 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 sm:mt-12 text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto"
+        >
+          Zero-defect brass, copper, and steel components engineered with sub-micron precision for automotive, HVAC, and industrial leaders worldwide.
+        </motion.p>
+      </motion.div>
 
+      {/* Animated Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.8 }}
+        className="absolute bottom-16 z-20 flex flex-col items-center gap-4"
+      >
+        <span className="text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.4em]">Scroll to Explore</span>
+        <div className="w-[1px] h-12 bg-white/20 overflow-hidden relative">
+          <motion.div 
+            animate={{ y: ["-100%", "200%"] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+            className="w-full h-1/2 bg-white absolute top-0 left-0"
+          />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
