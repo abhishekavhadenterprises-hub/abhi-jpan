@@ -159,7 +159,7 @@ export function KineticBrandJPan() {
                 >
                   {/* Front Face (Deep Navy on White Background, like Planux) */}
                   <span
-                    className="relative block font-heading font-black tracking-tight text-[clamp(3rem,7.5vw,5.75rem)] leading-none select-none text-[#0D2440]"
+                    className="relative block font-heading font-black tracking-tight text-[clamp(3rem,7.5vw,5.75rem)] leading-none select-none text-[#0D2440] px-2"
                     style={{
                       backfaceVisibility: "hidden",
                     }}
@@ -170,7 +170,7 @@ export function KineticBrandJPan() {
                   {/* Back Face (Reads correctly forward so it never looks inverted during 360° spin) */}
                   <span
                     aria-hidden="true"
-                    className="absolute font-heading font-black tracking-tight text-[clamp(3rem,7.5vw,5.75rem)] leading-none select-none pointer-events-none text-[#0D2440]"
+                    className="absolute font-heading font-black tracking-tight text-[clamp(3rem,7.5vw,5.75rem)] leading-none select-none pointer-events-none text-[#0D2440] px-2"
                     style={{
                       transform: "rotateY(180deg)",
                       backfaceVisibility: "hidden",

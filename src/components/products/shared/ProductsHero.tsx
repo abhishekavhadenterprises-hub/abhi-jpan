@@ -48,11 +48,32 @@ export function ProductsHero() {
       className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-20"
     >
       {/* Dynamic Cinematic Inset Frame */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95, borderRadius: "100px" }}
-        animate={{ opacity: 1, scale: 1, borderRadius: "40px" }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute inset-x-4 sm:inset-x-8 top-8 bottom-8 z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+      <motion.div
+        initial={{ 
+          opacity: 0, 
+          scale: 0.95, 
+          borderRadius: "100px",
+          top: "2rem",
+          bottom: "2rem",
+          left: "2rem",
+          right: "2rem"
+        }}
+        whileInView={{ 
+          opacity: 1, 
+          scale: 1, 
+          borderRadius: "0px",
+          top: "0px",
+          bottom: "0px",
+          left: "0px",
+          right: "0px"
+        }}
+        viewport={{ once: true }}
+        transition={{ 
+          opacity: { duration: 1 },
+          scale: { duration: 1 },
+          default: { duration: 4, delay: 2, ease: [0.16, 1, 0.3, 1] } 
+        }}
+        className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
       >
         <motion.div 
           style={{ y: imageY, scale: imageScale }}
@@ -73,7 +94,13 @@ export function ProductsHero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
         
         {/* Subtle glowing edges */}
-        <div className="absolute inset-0 border border-white/20 dark:border-white/10 rounded-[40px] pointer-events-none mix-blend-overlay" />
+        <motion.div 
+          initial={{ borderRadius: "100px" }}
+          whileInView={{ borderRadius: "0px" }}
+          viewport={{ once: true }}
+          transition={{ duration: 4, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 border border-white/20 dark:border-white/10 pointer-events-none mix-blend-overlay" 
+        />
       </motion.div>
 
       {/* Centered Hero Content Lockup */}
@@ -84,7 +111,8 @@ export function ProductsHero() {
         {/* Floating Glassmorphic Badge */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 md:mb-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
         >
@@ -101,30 +129,32 @@ export function ProductsHero() {
         <motion.div
           variants={sentence}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="flex flex-col items-center justify-center space-y-2 md:space-y-4"
           style={{ perspective: "1000px" }}
         >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-black text-white tracking-tighter leading-[0.9]">
+          <motion.h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-black text-white tracking-tighter leading-[0.9]">
             {titleText.split("").map((char, index) => (
               <motion.span key={char + "-" + index} variants={letter} className="inline-block">
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
-          </h1>
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[0.9] pr-4">
+          </motion.h1>
+          <motion.h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[0.9] pr-4">
             {subtitleText.split("").map((char, index) => (
               <motion.span key={char + "-" + index} variants={letter} className="inline-block">
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
-          </h2>
+          </motion.h2>
         </motion.div>
 
         {/* Subtitle with fade up */}
         <motion.p 
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 sm:mt-12 text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto"
         >
@@ -135,7 +165,8 @@ export function ProductsHero() {
       {/* Animated Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 1, delay: 1.8 }}
         className="absolute bottom-16 z-20 flex flex-col items-center gap-4"
       >

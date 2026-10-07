@@ -55,7 +55,7 @@ export function ContactPreview() {
   return (
     <section
       id="contact-preview"
-      className="relative py-28 md:py-36 bg-transparent text-[#0D2440] dark:text-white overflow-hidden"
+      className="relative py-8 md:py-10 flex flex-col justify-center bg-transparent text-[#0D2440] dark:text-white overflow-hidden border-t border-[#E5E5E5] dark:border-[#222]"
     >
       <div className="container-custom relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -63,7 +63,7 @@ export function ContactPreview() {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div>
               <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.25em] text-slate-500 dark:text-slate-400 uppercase mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-cyan-400 animate-pulse shadow-[0_0_6px_#2E5E99] dark:shadow-[0_0_6px_#38bdf8]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] animate-pulse shadow-[0_0_6px_#2E5E99]" />
                 <span>09 // TECHNICAL DESK & GLOBAL SOURCING</span>
               </div>
 
@@ -81,7 +81,7 @@ export function ContactPreview() {
               <div className="pt-4 border-t border-slate-200 dark:border-white/[0.08]">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white hover:bg-slate-100 text-slate-950 font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-xl"
+                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#2E5E99] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-[0_10px_30px_rgba(46,94,153,0.3)] hover:scale-105 hover:shadow-[0_10px_40px_rgba(46,94,153,0.4)]"
                 >
                   <span>Connect With Our Engineers</span>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -100,24 +100,28 @@ export function ContactPreview() {
                   href={card.href}
                   target={card.isExternal ? "_blank" : undefined}
                   rel={card.isExternal ? "noopener noreferrer" : undefined}
-                  className="group relative p-6 rounded-2xl bg-slate-950/50 backdrop-blur-xl border border-slate-200 dark:border-white/[0.08] hover:border-white/30 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 shadow-lg"
+                  className="group relative p-6 md:p-8 rounded-[2rem] bg-white/60 dark:bg-black/40 backdrop-blur-2xl border border-black/5 dark:border-white/5 hover:border-[#2E5E99]/30 transition-all duration-500 flex flex-col justify-between hover:-translate-y-2 shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(46,94,153,0.15)] overflow-hidden"
                 >
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#2E5E99] dark:text-cyan-400 font-medium">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#2E5E99]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="flex items-center justify-between gap-2 mb-6 relative z-10">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#2E5E99] font-bold">
                       {card.status}
                     </span>
-                    <Icon className="w-4 h-4 text-slate-500 dark:text-slate-400 group-hover:text-white transition-colors" />
+                    <div className="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-sm flex items-center justify-center group-hover:bg-[#2E5E99] transition-colors duration-500">
+                      <Icon className="w-4 h-4 text-[#111] dark:text-white group-hover:text-white transition-colors duration-500" />
+                    </div>
                   </div>
 
-                  <div className="font-heading font-bold text-lg sm:text-xl text-white group-hover:text-slate-100 transition-colors mb-2 truncate">
+                  <div className="font-heading font-black text-xl md:text-2xl text-[#111] dark:text-white group-hover:text-[#2E5E99] transition-colors duration-500 mb-4 truncate relative z-10">
                     {card.displayValue}
                   </div>
 
-                  <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <div className="pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between relative z-10">
+                    <span className="font-mono text-[9px] text-[#666] dark:text-[#999] uppercase tracking-widest font-semibold">
                       {card.caption}
                     </span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    <ArrowUpRight className="w-4 h-4 text-[#999] group-hover:text-[#2E5E99] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" />
                   </div>
                 </a>
               );

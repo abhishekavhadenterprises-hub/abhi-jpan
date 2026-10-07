@@ -62,13 +62,13 @@ const features = [
     tag: "MICRON PRECISION",
     subTag: "",
     title: "CNC Cold Bending",
-    val: <>±0.01<span className="text-amber-500 font-sans text-3xl md:text-4xl ml-1 font-semibold">mm</span></>,
+    val: <>±0.01<span className="text-[#2E5E99] font-sans text-3xl md:text-4xl ml-1 font-semibold">mm</span></>,
     valRaw: "0.01",
     desc: "Automated multi-plane mandrel bending cells ensuring zero tube-wall collapse and laser-verified dimensional repeatability.",
     icon: Zap,
-    color: "text-amber-500",
-    bgHover: "group-hover:bg-amber-500",
-    glow: "from-amber-500/10",
+    color: "text-[#2E5E99]",
+    bgHover: "group-hover:bg-[#2E5E99]",
+    glow: "from-[#2E5E99]/10",
     footer1: "",
     footer2: "",
     num: "02",
@@ -79,13 +79,13 @@ const features = [
     tag: "ZERO LEAK INTEGRITY",
     subTag: "",
     title: "Mass Spectrometry",
-    val: <>&lt; 10⁻⁸<span className="text-emerald-600 font-sans text-2xl md:text-3xl ml-2 font-semibold tracking-wider">mbar·l/s</span></>,
+    val: <>&lt; 10⁻⁸<span className="text-[#2E5E99] font-sans text-2xl md:text-3xl ml-2 font-semibold tracking-wider">mbar·l/s</span></>,
     valRaw: "10-8",
     desc: "100% production vacuum chamber helium testing ensures complete hermetic seal integrity exceeding international standards.",
     icon: Gauge,
-    color: "text-emerald-600",
-    bgHover: "group-hover:bg-emerald-500",
-    glow: "from-emerald-500/10",
+    color: "text-[#2E5E99]",
+    bgHover: "group-hover:bg-[#2E5E99]",
+    glow: "from-[#2E5E99]/10",
     footer1: "",
     footer2: "",
     num: "03",
@@ -100,9 +100,9 @@ const features = [
     valRaw: "6",
     desc: "6 integrated manufacturing hubs across Greater Noida, Pune, Sanand, Neemrana, and Bengaluru, supporting JIT deliveries along primary industrial corridors.",
     icon: Factory,
-    color: "text-purple-600",
-    bgHover: "group-hover:bg-purple-600",
-    glow: "from-purple-500/10",
+    color: "text-[#2E5E99]",
+    bgHover: "group-hover:bg-[#2E5E99]",
+    glow: "from-[#2E5E99]/10",
     footer1: "50,000+ M² Combined Capacity",
     footer2: "ISO 9001 & IATF 16949 Certified",
     num: "04",
@@ -114,7 +114,7 @@ export function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
-      className="relative py-16 lg:py-20 bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white overflow-hidden transition-colors duration-700"
+      className="relative py-8 min-h-[90svh] flex flex-col justify-center bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white overflow-hidden transition-colors duration-700"
     >
       {/* Subtle Ambient Background Gradients */}
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#2E5E99]/5 dark:from-[#2E5E99]/10 to-transparent pointer-events-none" />
@@ -122,7 +122,7 @@ export function WhyChooseUs() {
 
       <div className="w-full max-w-[1920px] mx-auto px-6 md:px-16 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 pb-8 border-b border-[#111]/10 dark:border-white/10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#111]/10 dark:border-white/10">
           <div className="max-w-4xl">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -132,18 +132,18 @@ export function WhyChooseUs() {
             >
               Benchmarks & Telemetry
             </motion.h2>
-            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[4.5rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
+            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[3.5rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
               Performance <br />
               <span className="text-[#666] dark:text-[#888]">proven at scale.</span>
             </ScrollWipeHeading>
           </div>
-          <div className="max-w-lg space-y-8">
+          <div className="max-w-lg space-y-4">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-[#666] dark:text-[#999] text-base leading-relaxed font-light"
+              className="text-[#666] dark:text-[#999] text-sm leading-relaxed font-light"
             >
               Engineered for mission-critical operating environments where zero-defect reliability
               is non-negotiable. Continuously audited under ISO 9001 and IATF 16949 standards across six automated facilities.
@@ -186,11 +186,11 @@ export function WhyChooseUs() {
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className={`relative ${indentClass} mb-8 z-10`}
+                className={`relative ${indentClass} mb-3 z-10`}
               >
                 {/* Premium Animated Connecting SVG Line */}
                 {idx < features.length - 1 && (
-                  <div className="hidden lg:block absolute left-[4rem] -bottom-16 w-32 h-20 -z-10">
+                  <div className="hidden lg:block absolute left-[3rem] -bottom-6 w-24 h-12 -z-10">
                     <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                       <motion.path
                         d="M 10,0 L 10,70 Q 10,90 30,90 L 100,90"
@@ -216,7 +216,7 @@ export function WhyChooseUs() {
                   {/* Glowing Border Hover Effect */}
                   <div className={`absolute -inset-0.5 rounded-[2.5rem] bg-gradient-to-r ${feature.glow} opacity-0 group-hover:opacity-100 blur-md transition duration-700 pointer-events-none`} />
 
-                  <div className="relative p-8 md:p-10 rounded-[2.5rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.03)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] transition-all duration-700 overflow-hidden">
+                  <div className="relative p-4 md:p-6 rounded-[1.5rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.03)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] transition-all duration-700 overflow-hidden">
 
                     {/* Internal Gradient Glow */}
                     <div className={`absolute -top-32 -right-32 w-[400px] h-[400px] bg-gradient-to-bl ${feature.glow} to-transparent blur-[80px] opacity-20 group-hover:opacity-60 transition-opacity duration-1000 pointer-events-none mix-blend-multiply dark:mix-blend-screen`} />
@@ -226,14 +226,14 @@ export function WhyChooseUs() {
                       {/* Icon Box */}
                       <motion.div
                         whileHover={{ rotate: 5, scale: 1.1 }}
-                        className={`shrink-0 w-20 h-20 rounded-[1.5rem] bg-white dark:bg-[#151515] border border-black/5 dark:border-white/10 flex items-center justify-center ${feature.color} ${feature.bgHover} group-hover:text-white transition-colors duration-500 shadow-lg`}
+                        className={`shrink-0 w-14 h-14 rounded-[1rem] bg-white dark:bg-[#151515] border border-black/5 dark:border-white/10 flex items-center justify-center ${feature.color} ${feature.bgHover} group-hover:text-white transition-colors duration-500 shadow-md`}
                       >
-                        <Icon className="w-10 h-10" />
+                        <Icon className="w-6 h-6" />
                       </motion.div>
 
                       {/* Content */}
                       <div className="flex-1">
-                        <div className="flex items-center gap-4 mb-3">
+                        <div className="flex items-center gap-4 mb-2">
                           <span className={`text-sm uppercase tracking-widest font-black ${feature.color}`}>
                             {feature.num}
                           </span>
@@ -242,18 +242,18 @@ export function WhyChooseUs() {
                             {feature.tag}
                           </span>
                         </div>
-                        <h4 className="text-2xl md:text-3xl font-medium tracking-tight text-[#111] dark:text-white mb-3 group-hover:translate-x-2 transition-transform duration-500">
+                        <h4 className="text-xl md:text-2xl font-medium tracking-tight text-[#111] dark:text-white mb-1 group-hover:translate-x-2 transition-transform duration-500">
                           {feature.title}
                         </h4>
-                        <p className="text-sm md:text-base text-[#555] dark:text-[#AAA] leading-relaxed max-w-lg font-light">
+                        <p className="text-xs md:text-sm text-[#555] dark:text-[#AAA] leading-snug max-w-lg font-light">
                           {feature.desc}
                         </p>
                       </div>
 
                       {/* Value Display */}
-                      <div className="shrink-0 pt-6 md:pt-0 pl-0 md:pl-8 md:border-l border-black/5 dark:border-white/10">
+                      <div className="shrink-0 pt-4 md:pt-0 pl-0 md:pl-6 md:border-l border-black/5 dark:border-white/10">
                         <motion.div
-                          className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter text-[#111] dark:text-white group-hover:scale-105 transition-transform origin-left md:origin-right duration-700"
+                          className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tighter text-[#111] dark:text-white group-hover:scale-105 transition-transform origin-left md:origin-right duration-700"
                         >
                           {feature.val}
                         </motion.div>

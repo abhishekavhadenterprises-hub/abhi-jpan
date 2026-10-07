@@ -79,7 +79,7 @@ export function ProductShowcase() {
   const mouseY = useMotionValue(0);
 
   return (
-    <section className="relative py-24 md:py-32 bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white transition-colors duration-700 overflow-hidden border-b border-[#111]/10 dark:border-white/10">
+    <section className="relative py-12 md:py-16 bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white transition-colors duration-700 overflow-hidden border-b border-[#111]/10 dark:border-white/10">
       {/* Ambient Glows */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
         <motion.div
@@ -94,9 +94,9 @@ export function ProductShowcase() {
         />
       </div>
 
-      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[85vh]">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[80svh]">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 pb-12 border-b border-[#111]/5 dark:border-white/5">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#111]/5 dark:border-white/5">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ export function ProductShowcase() {
             <h2 className="text-xs tracking-[0.4em] font-bold uppercase text-[#2E5E99] dark:text-cyan-400 mb-6">
               Product Catalogue & Specifications
             </h2>
-            <ScrollWipeHeading as="h3" className="text-5xl md:text-6xl lg:text-[5.5rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
+            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
               Precision alloy <br />
               <span className="text-[#666] dark:text-[#888]">manufacturing excellence.</span>
             </ScrollWipeHeading>
@@ -126,14 +126,14 @@ export function ProductShowcase() {
         </div>
 
         {/* Premium Tab Selector Bar with Layout Animation */}
-        <div className="flex flex-wrap items-center gap-2 mb-16 p-2 rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/40 dark:border-white/10 w-fit shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative z-20 mx-auto lg:mx-0">
+        <div className="flex flex-wrap items-center gap-2 mb-6 p-1.5 rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/40 dark:border-white/10 w-fit shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative z-20 mx-auto lg:mx-0">
           {capabilities.map((item, idx) => {
             const isActive = activeTab === idx;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest transition-colors duration-500 flex items-center gap-3 z-10 ${isActive
+                className={`relative px-5 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest transition-colors duration-500 flex items-center gap-2 z-10 ${isActive
                     ? "text-white dark:text-[#050505]"
                     : "text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white"
                   }`}
@@ -141,7 +141,7 @@ export function ProductShowcase() {
                 {isActive && (
                   <motion.div
                     layoutId="activeProductTab"
-                    className="absolute inset-0 bg-[#111] dark:bg-white rounded-full -z-10 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                    className="absolute inset-0 bg-[#2E5E99] rounded-full -z-10 shadow-[0_0_20px_rgba(46,94,153,0.4)]"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
@@ -183,25 +183,25 @@ export function ProductShowcase() {
               />
 
               {/* Left Column: Technical Dossier */}
-              <div className="lg:col-span-6 flex flex-col justify-between p-10 lg:p-16 z-10 relative">
+              <div className="lg:col-span-6 flex flex-col justify-between p-6 lg:p-8 z-10 relative">
                 <div>
-                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/50 dark:bg-black/50 border border-[#111]/5 dark:border-white/5 mb-10 shadow-sm backdrop-blur-md">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/50 dark:bg-black/50 border border-[#111]/5 dark:border-white/5 mb-6 shadow-sm backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] animate-pulse shadow-[0_0_10px_rgba(46,94,153,0.5)]" />
                     <span className="text-[10px] tracking-widest text-[#555] dark:text-[#AAA] uppercase font-bold">
                       {activeProduct.eyebrowCategory}
                     </span>
                   </div>
 
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#111] dark:text-white leading-[1.1] mb-8 tracking-tight">
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#111] dark:text-white leading-[1.1] mb-4 tracking-tight">
                     {activeProduct.title}
                   </h3>
 
-                  <p className="text-[#555] dark:text-[#AAA] text-base lg:text-lg font-light leading-relaxed mb-12 max-w-xl">
+                  <p className="text-[#555] dark:text-[#AAA] text-sm lg:text-base font-light leading-relaxed mb-6 max-w-xl">
                     {activeProduct.description}
                   </p>
 
                   {/* Key Spec Highlights */}
-                  <div className="space-y-5 pt-10 border-t border-[#111]/10 dark:border-white/10">
+                  <div className="space-y-3 pt-6 border-t border-[#111]/10 dark:border-white/10">
                     {activeProduct.specDetails.map((spec, i) => (
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -210,23 +210,23 @@ export function ProductShowcase() {
                         key={i}
                         className="flex items-center gap-5 text-sm font-mono text-[#666] dark:text-[#999]"
                       >
-                        <div className="w-8 h-8 rounded-full bg-[#111]/5 dark:bg-white/5 flex items-center justify-center shrink-0">
-                          <Icon className="w-4 h-4 text-[#111] dark:text-white" />
+                        <div className="w-6 h-6 rounded-full bg-[#111]/5 dark:bg-white/5 flex items-center justify-center shrink-0">
+                          <Icon className="w-3 h-3 text-[#111] dark:text-white" />
                         </div>
-                        <span className="tracking-wide">{spec}</span>
+                        <span className="tracking-wide text-xs">{spec}</span>
                       </motion.div>
                     ))}
                   </div>
                 </div>
 
                 {/* Bottom Metric & Action */}
-                <div className="flex flex-wrap items-end justify-between gap-8 pt-12 mt-12 border-t border-[#111]/10 dark:border-white/10">
+                <div className="flex flex-wrap items-end justify-between gap-6 pt-6 mt-6 border-t border-[#111]/10 dark:border-white/10">
                   <div>
-                    <span className="block text-xs uppercase tracking-[0.25em] text-[#888] dark:text-[#777] mb-3 font-bold">
+                    <span className="block text-[10px] uppercase tracking-[0.25em] text-[#888] dark:text-[#777] mb-2 font-bold">
                       {activeProduct.metricLabel}
                     </span>
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-light tracking-tighter text-6xl md:text-7xl text-[#111] dark:text-white">
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-light tracking-tighter text-4xl md:text-5xl text-[#111] dark:text-white">
                         {activeProduct.metricValue}
                       </span>
                       <span className="text-sm text-[#888] font-medium tracking-widest uppercase">
@@ -237,7 +237,7 @@ export function ProductShowcase() {
 
                   <Link
                     href="/products"
-                    className="relative overflow-hidden group/btn px-10 py-5 rounded-full bg-[#111] dark:bg-white text-white dark:text-[#050505] font-bold text-xs uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-4 shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.2)] hover:scale-105 z-20"
+                    className="relative overflow-hidden group/btn px-6 py-3 rounded-full bg-[#2E5E99] text-white font-bold text-[10px] uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-3 shadow-md hover:shadow-[0_10px_20px_rgba(46,94,153,0.3)] hover:scale-105 z-20"
                   >
                     <span>View Specifications</span>
                     <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
@@ -246,12 +246,12 @@ export function ProductShowcase() {
               </div>
 
               {/* Right Column: Premium Showcase Image */}
-              <div className="lg:col-span-6 relative min-h-[500px] lg:min-h-full bg-gradient-to-br from-[#F5F5F5] to-[#EAEAEA] dark:from-[#080808] dark:to-[#020202] flex items-center justify-center p-12 overflow-hidden border-l border-[#111]/5 dark:border-white/5">
+              <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full bg-gradient-to-br from-[#F5F5F5] to-[#EAEAEA] dark:from-[#080808] dark:to-[#020202] flex items-center justify-center p-6 overflow-hidden border-l border-[#111]/5 dark:border-white/5">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.1)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
                 <motion.div
-                  className="relative w-full h-full min-h-[400px] flex items-center justify-center"
-                  animate={{ y: [0, -15, 0] }}
+                  className="relative w-full h-full min-h-[250px] flex items-center justify-center"
+                  animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <Image
@@ -267,10 +267,10 @@ export function ProductShowcase() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="absolute bottom-10 right-10 flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.1)] z-20 hover:-translate-y-2 transition-transform duration-500"
+                  className="absolute bottom-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_10px_20px_rgba(0,0,0,0.1)] z-20 hover:-translate-y-1 transition-transform duration-500"
                 >
-                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
-                  <span className="font-mono text-[10px] tracking-widest text-[#111] dark:text-white font-bold">CMM VERIFIED</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                  <span className="font-mono text-[9px] tracking-widest text-[#111] dark:text-white font-bold">CMM VERIFIED</span>
                 </motion.div>
               </div>
             </motion.div>

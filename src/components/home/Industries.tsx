@@ -73,15 +73,19 @@ const Card = ({ ind, i, scrollYProgress }: { ind: typeof industries[0], i: numbe
   return (
     <motion.div
       style={{ x, y, scale, rotateZ, rotateY, rotateX, opacity }}
-      className={`absolute w-[340px] h-[240px] md:w-[600px] md:h-[400px] lg:w-[700px] lg:h-[460px] rounded-[2rem] ${ind.color} backdrop-blur-[40px] border border-black/5 dark:border-white/10 ${ind.shadow} flex flex-col items-center justify-center p-8 origin-center overflow-hidden group`}
+      className={`absolute w-[340px] h-[240px] md:w-[600px] md:h-[400px] lg:w-[700px] lg:h-[460px] rounded-[2rem] ${ind.color} backdrop-blur-[40px] border border-black/5 dark:border-white/10 ${ind.shadow} flex flex-col items-center justify-center p-8 origin-center overflow-hidden group text-center`}
     >
       {/* Apple-style glossy sheen */}
       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 group-hover:translate-x-full -translate-x-full transition-all duration-[1.5s] ease-in-out pointer-events-none z-10" />
 
-      <Icon className={`w-24 h-24 md:w-32 md:h-32 ${ind.iconColor} mb-8 transition-transform duration-700 group-hover:scale-110 relative z-20`} />
-
-      <div className="px-6 py-2.5 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 backdrop-blur-md transition-colors duration-500 group-hover:bg-black/10 dark:group-hover:bg-white/20 relative z-20">
-        <span className="text-xs uppercase tracking-[0.2em] font-semibold text-black dark:text-white">{ind.tag}</span>
+      <div className="relative z-20 max-w-xl mx-auto px-4">
+        <h4 className="text-3xl md:text-5xl font-heading font-medium text-[#111] dark:text-white tracking-tight mb-6 uppercase">
+          {ind.title}
+        </h4>
+        <div className="w-12 h-[2px] bg-[#111] dark:bg-white mb-6 opacity-20 mx-auto"></div>
+        <p className="text-sm md:text-lg text-[#666] dark:text-[#999] leading-relaxed font-light">
+          {ind.description}
+        </p>
       </div>
     </motion.div>
   );
@@ -183,15 +187,6 @@ export function Industries() {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="flex flex-col items-center"
             >
-              <span className="text-[10px] uppercase tracking-widest text-[#999] font-medium mb-4">Application</span>
-              <h4 className="text-2xl md:text-3xl font-heading font-medium text-[#111] dark:text-white tracking-tight mb-5 leading-none uppercase text-center">
-                {industries[activeIndex].title}
-              </h4>
-              <div className="w-8 h-[1px] bg-[#111] dark:bg-white mb-6 opacity-20"></div>
-              <p className="text-sm text-[#666] dark:text-[#999] leading-relaxed mb-8 text-center font-light">
-                {industries[activeIndex].description}
-              </p>
-
               <Link
                 href="/products"
                 className="inline-flex items-center gap-3 p-1.5 pl-5 rounded-full bg-transparent border border-[#E5E5E5] dark:border-[#333] hover:bg-[#111] hover:text-white transition-all duration-500 w-max"

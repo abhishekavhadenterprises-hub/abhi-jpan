@@ -96,8 +96,10 @@ export function CobeInteractiveGlobe({
       // After it's been focused, we can resume drift or just hold it.
       // Let's hold it on the target if activeIndex is set and not dragging.
       if (!isDragging.current && activeIndex === null) {
-        // Continuous rotation only when no specific location is actively focused
-        targetPhiRef.current += 0.0035;
+        // Gentle oscillation around India when no specific location is actively focused
+        const time = Date.now() / 1000;
+        targetPhiRef.current = defaultPhi + Math.sin(time * 0.3) * 0.2;
+        targetThetaRef.current = defaultTheta + Math.cos(time * 0.2) * 0.1;
       }
       
       let diffPhi = targetPhiRef.current - phiRef.current;

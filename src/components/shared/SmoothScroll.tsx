@@ -6,15 +6,15 @@ import "lenis/dist/lenis.css";
 
 export function SmoothScroll() {
   useEffect(() => {
-    // Increased scroll intensity: with half wheel rotation, page covers twice the distance
+    // Smooth, buttery scrolling configuration
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.5,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 2.2, // Doubled intensity: half scroll covers an entire section
-      touchMultiplier: 2.0,
+      wheelMultiplier: 1.0, // Standard smooth scrolling instead of aggressive jumping
+      touchMultiplier: 1.5,
       infinite: false,
     });
 

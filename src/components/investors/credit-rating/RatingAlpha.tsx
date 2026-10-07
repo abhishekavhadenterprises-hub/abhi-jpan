@@ -22,7 +22,7 @@ export function RatingAlpha() {
             {/* Left Column: Rating Alpha */}
             <div className="lg:col-span-5 p-8 sm:p-12 md:p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-[#7BA4D0]/25">
               <div className="mb-8">
-                <div className="text-7xl sm:text-8xl md:text-9xl font-heading font-black text-[#0D2440] dark:text-white leading-none tracking-tighter mb-4">
+                <div className="text-7xl sm:text-8xl md:text-9xl font-heading font-black text-[#0D2440] dark:text-white leading-none tracking-tighter mb-4 pr-2">
                   A<span className="text-[#2E5E99] dark:text-[#7BA4D0]">+</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">

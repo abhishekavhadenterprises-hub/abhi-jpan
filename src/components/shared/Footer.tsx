@@ -169,7 +169,7 @@ export function Footer() {
               JPAN
             </motion.span>
             <motion.span
-              className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap"
+              className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap pr-4"
               style={{
                 backgroundImage: tubularBgImage,
                 WebkitBackgroundClip: "text",

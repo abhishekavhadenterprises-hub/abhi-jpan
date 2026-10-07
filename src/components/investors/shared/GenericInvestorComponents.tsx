@@ -32,7 +32,13 @@ export function GenericInvestorHero({
   if (variant === "bottom") {
     return (
       <section className="relative h-[80vh] min-h-[540px] max-h-[820px] w-full flex flex-col justify-end overflow-hidden bg-[#071321]">
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, borderRadius: "100px", top: "2rem", bottom: "2rem", left: "2rem", right: "2rem" }}
+          whileInView={{ opacity: 1, scale: 1, borderRadius: "0px", top: "0px", bottom: "0px", left: "0px", right: "0px" }}
+          viewport={{ once: true }}
+          transition={{ opacity: { duration: 1 }, scale: { duration: 1 }, default: { duration: 4, delay: 1, ease: [0.16, 1, 0.3, 1] } }}
+          className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+        >
           <Image
             src={image}
             alt={title}
@@ -43,7 +49,7 @@ export function GenericInvestorHero({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 via-40% to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
-        </div>
+        </motion.div>
         <div className="container-custom relative z-10 w-full pb-12 sm:pb-16 pt-32 sm:pt-36">
           <div className="max-w-2xl space-y-4">
             <div className="w-36 h-[2px] bg-white/30 relative overflow-hidden">
@@ -74,7 +80,13 @@ export function GenericInvestorHero({
   if (variant === "centered") {
     return (
       <section className="relative h-[80vh] min-h-[540px] max-h-[820px] pt-32 sm:pt-36 pb-12 sm:pb-16 flex items-center justify-center overflow-hidden bg-[#071321]">
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, borderRadius: "100px", top: "2rem", bottom: "2rem", left: "2rem", right: "2rem" }}
+          whileInView={{ opacity: 1, scale: 1, borderRadius: "0px", top: "0px", bottom: "0px", left: "0px", right: "0px" }}
+          viewport={{ once: true }}
+          transition={{ opacity: { duration: 1 }, scale: { duration: 1 }, default: { duration: 4, delay: 1, ease: [0.16, 1, 0.3, 1] } }}
+          className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+        >
           <Image
             src={image}
             alt={title}
@@ -85,7 +97,7 @@ export function GenericInvestorHero({
           />
           <div className="absolute inset-0 bg-black/40 pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#071321]/60 via-transparent to-black/25 pointer-events-none" />
-        </div>
+        </motion.div>
         <div className="container-custom relative z-10 text-white w-full">
           <div className="max-w-4xl mx-auto flex flex-col items-center text-center space-y-5">
             <motion.h1
@@ -131,7 +143,13 @@ export function GenericInvestorHero({
   if (variant === "ledger") {
     return (
       <section className="relative h-[80vh] min-h-[540px] max-h-[820px] pt-32 sm:pt-36 pb-12 sm:pb-16 flex items-center overflow-hidden bg-[#071321]">
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, borderRadius: "100px", top: "2rem", bottom: "2rem", left: "2rem", right: "2rem" }}
+          whileInView={{ opacity: 1, scale: 1, borderRadius: "0px", top: "0px", bottom: "0px", left: "0px", right: "0px" }}
+          viewport={{ once: true }}
+          transition={{ opacity: { duration: 1 }, scale: { duration: 1 }, default: { duration: 4, delay: 1, ease: [0.16, 1, 0.3, 1] } }}
+          className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+        >
           <Image
             src={image}
             alt={title}
@@ -142,7 +160,7 @@ export function GenericInvestorHero({
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#071321]/60 via-transparent to-black/20 pointer-events-none" />
-        </div>
+        </motion.div>
         <div className="container-custom relative z-10 text-white w-full">
           <div className="max-w-3xl space-y-4">
             <span className="text-[#7BA4D0] font-heading text-xs uppercase tracking-[0.2em] font-semibold block">
@@ -175,7 +193,13 @@ export function GenericInvestorHero({
   if (variant === "editorial") {
     return (
       <section className="relative h-[80vh] min-h-[540px] max-h-[820px] pt-32 sm:pt-36 pb-12 sm:pb-16 flex items-center overflow-hidden bg-[#071321]">
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, borderRadius: "100px", top: "2rem", bottom: "2rem", left: "2rem", right: "2rem" }}
+          whileInView={{ opacity: 1, scale: 1, borderRadius: "0px", top: "0px", bottom: "0px", left: "0px", right: "0px" }}
+          viewport={{ once: true }}
+          transition={{ opacity: { duration: 1 }, scale: { duration: 1 }, default: { duration: 4, delay: 1, ease: [0.16, 1, 0.3, 1] } }}
+          className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+        >
           <Image
             src={image}
             alt={title}
@@ -186,7 +210,7 @@ export function GenericInvestorHero({
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#071321]/60 via-transparent to-black/20 pointer-events-none" />
-        </div>
+        </motion.div>
         <div className="container-custom relative z-10 text-white w-full">
           <div className="max-w-3xl space-y-4 sm:space-y-5">
             <span className="text-[#7BA4D0] text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-2">
@@ -218,7 +242,13 @@ export function GenericInvestorHero({
   return (
     <section className="relative h-[80vh] min-h-[540px] max-h-[820px] pt-32 sm:pt-36 pb-12 sm:pb-16 flex items-center overflow-hidden bg-[#071321]">
       {/* Immersive Crystal-Clear Background Layer */}
-      <div className="absolute inset-0 z-0">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, borderRadius: "100px", top: "2rem", bottom: "2rem", left: "2rem", right: "2rem" }}
+        whileInView={{ opacity: 1, scale: 1, borderRadius: "0px", top: "0px", bottom: "0px", left: "0px", right: "0px" }}
+        viewport={{ once: true }}
+        transition={{ opacity: { duration: 1 }, scale: { duration: 1 }, default: { duration: 4, delay: 1, ease: [0.16, 1, 0.3, 1] } }}
+        className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+      >
         <Image
           src={image} 
           alt={title}
@@ -230,7 +260,7 @@ export function GenericInvestorHero({
         {/* Soft, crystal-clear gradient scrims ensuring flawless visibility and legibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#071321]/60 via-transparent to-black/20 pointer-events-none" />
-      </div>
+      </motion.div>
 
       <div className="container-custom relative z-10 text-white w-full">
         <div className="max-w-3xl space-y-4 sm:space-y-5">

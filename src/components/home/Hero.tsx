@@ -216,38 +216,6 @@ export function Hero() {
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
                 className="w-full lg:w-auto"
               >
-                <SpotlightCard
-                  className="w-full lg:w-auto p-5 sm:p-6 rounded-2xl bg-white/90 dark:bg-slate-900/85 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 shadow-[0_20px_50px_rgba(13,36,64,0.06)] dark:shadow-2xl group transition-all duration-300 hover:shadow-2xl hover:border-[#2E5E99]/50"
-                  spotlightColor="rgba(46, 94, 153, 0.28)"
-                  zoomOnHover
-                >
-                  <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#2E5E99] font-bold mb-3 pb-2 border-b border-slate-100 dark:border-white/10 flex items-center justify-between">
-                    <span>INDUSTRIAL SECTORS</span>
-                    <span className="text-[9px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-slate-500 dark:text-slate-400 group-hover:bg-[#2E5E99]/10 group-hover:text-[#2E5E99] transition-colors">
-                      TIER-1 AUDITED
-                    </span>
-                  </div>
-                  <div className="flex flex-col space-y-2.5 font-mono text-xs tracking-wider text-slate-600 dark:text-slate-600 dark:text-slate-300">
-                    <div className="flex items-center justify-between gap-8 p-1.5 rounded-lg hover:bg-slate-50/90 dark:hover:bg-white/5 transition-all duration-200 cursor-default group/item hover:translate-x-1.5">
-                      <span className="text-slate-500 dark:text-slate-400 group-hover/item:text-[#2E5E99] font-bold transition-colors">01 //</span>
-                      <span className="font-semibold text-slate-700 dark:text-slate-200 group-hover/item:text-[#0D2440] dark:group-hover/item:text-white group-hover/item:scale-105 transition-all duration-200 origin-right inline-block">
-                        HVAC Systems
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between gap-8 p-1.5 rounded-lg hover:bg-slate-50/90 dark:hover:bg-white/5 transition-all duration-200 cursor-default group/item hover:translate-x-1.5">
-                      <span className="text-slate-500 dark:text-slate-400 group-hover/item:text-[#2E5E99] font-bold transition-colors">02 //</span>
-                      <span className="font-semibold text-slate-700 dark:text-slate-200 group-hover/item:text-[#0D2440] dark:group-hover/item:text-white group-hover/item:scale-105 transition-all duration-200 origin-right inline-block">
-                        Automotive OEM
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between gap-8 p-1.5 rounded-lg hover:bg-slate-50/90 dark:hover:bg-white/5 transition-all duration-200 cursor-default group/item hover:translate-x-1.5">
-                      <span className="text-slate-500 dark:text-slate-400 group-hover/item:text-[#2E5E99] font-bold transition-colors">03 //</span>
-                      <span className="font-semibold text-slate-700 dark:text-slate-200 group-hover/item:text-[#0D2440] dark:group-hover/item:text-white group-hover/item:scale-105 transition-all duration-200 origin-right inline-block">
-                        Industrial Piping
-                      </span>
-                    </div>
-                  </div>
-                </SpotlightCard>
 
                 {/* Interactive Facility Aerial Showcase Card */}
                 <div

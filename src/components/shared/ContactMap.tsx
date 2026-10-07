@@ -199,7 +199,7 @@ export function ContactMap() {
                 ease: "linear",
                 duration: 40,
               }}
-              className="whitespace-nowrap text-[20vw] font-heading font-black italic uppercase tracking-tighter text-[#0D2440]/[0.04] dark:text-white/[0.02] select-none"
+              className="whitespace-nowrap text-[20vw] font-heading font-black italic uppercase tracking-tighter text-[#0D2440]/[0.04] dark:text-white/[0.02] select-none pr-8"
             >
               {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title}
             </motion.div>
@@ -368,3 +368,4 @@ export function ContactMap() {
 }
 
 export default ContactMap;
+
