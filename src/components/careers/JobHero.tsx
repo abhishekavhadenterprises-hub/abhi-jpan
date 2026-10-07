@@ -3,14 +3,14 @@
 import React from "react";
 import { PremiumHero } from "@/components/ui/PremiumHero";
 
-export function JobHero() {
+export function JobHero({ job }: { job: any }) {
   return (
     <PremiumHero 
-      title="{job.title}"
+      title={job.title}
       subtitle=""
       description=""
       imageSrc="/images/job-detail-hero.png"
-      badgeText="{job.location}"
+      badgeText={job.location}
     />
   );
 }
