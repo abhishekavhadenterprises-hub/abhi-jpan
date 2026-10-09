@@ -173,14 +173,21 @@ export function GenericInvestorHero({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 max-w-4xl"
+          className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 max-w-5xl mx-auto w-full"
           style={{ perspective: "1000px" }}
         >
-          <motion.h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-heading font-black text-white tracking-tight leading-[1.02]">
-            {title.split("").map((char, index) => (
-              <motion.span key={char + "-" + index} variants={letter} className="inline-block">
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
+          <motion.h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-heading font-black text-white tracking-tight leading-[1.08] text-balance text-center [word-break:keep-all] [overflow-wrap:normal]">
+            {title.split(" ").map((word, wordIndex, wordsArr) => (
+              <span key={word + "-" + wordIndex} className="inline-block whitespace-nowrap">
+                {word.split("").map((char, charIndex) => (
+                  <motion.span key={char + "-" + charIndex} variants={letter} className="inline-block">
+                    {char}
+                  </motion.span>
+                ))}
+                {wordIndex < wordsArr.length - 1 && (
+                  <span className="inline-block">&nbsp;</span>
+                )}
+              </span>
             ))}
           </motion.h1>
         </motion.div>
