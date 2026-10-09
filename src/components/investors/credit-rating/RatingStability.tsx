@@ -2,24 +2,29 @@
 
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, TrendingUp, ShieldAlert } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ShieldCheck, TrendingUp, ShieldAlert, ArrowUpRight } from "lucide-react";
 
 const stabilityMetrics = [
   {
+    num: "01",
     icon: ShieldCheck,
     title: "Capital Stability",
-    description: "Robust capital structure with a focus on long-term debt sustainability and liquidity management."
+    description: "Robust capital structure with a focus on long-term debt sustainability and liquidity management.",
+    badge: "Solvency Benchmark"
   },
   {
+    num: "02",
     icon: TrendingUp,
     title: "Growth Performance",
-    description: "Consistent revenue trajectories supported by precision tubing demand and operational excellence."
+    description: "Consistent revenue trajectories supported by precision tubing demand and operational excellence.",
+    badge: "Operating Trajectory"
   },
   {
+    num: "03",
     icon: ShieldAlert,
     title: "Risk Mitigation",
-    description: "Institutional framework for identifying and neutralizing fiscal and operational risks."
+    description: "Institutional framework for identifying and neutralizing fiscal and operational risks.",
+    badge: "Governance Pillar"
   }
 ];
 
@@ -39,36 +44,50 @@ export function RatingStability() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-black border-b border-[#7BA4D0]/20 overflow-hidden relative">
-      {/* Background Soft Glow */}
+    <section className="py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
+      {/* Background Radial Dots */}
+      <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mb-12 md:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-tight mb-6">
-            Strength Through <br />
-            <span className="text-[#2E5E99] dark:text-[#7BA4D0] italic font-medium inline-block pr-1 pb-1">
-              Strategic Discipline
-            </span>
-          </h2>
-          <p className="text-[#0D2440]/70 dark:text-white/70 text-base sm:text-lg leading-relaxed font-normal">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 md:mb-18 gap-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
+              Institutional Strengths
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
+              Strength Through <br />
+              <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
+                Strategic Discipline
+              </span>
+            </h2>
+          </motion.div>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[#0D2440]/70 dark:text-white/65 text-sm sm:text-base leading-relaxed font-normal max-w-md"
+          >
             Our creditworthiness is underpinned by a rigid commitment to 
             financial discipline, ensuring that J Pan Tubular Components Limited remains a 
             resilient and growth-oriented entity in the industrial sector.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
-        {/* Stability Cards */}
+        {/* Asymmetric Bento Metric Grid */}
         <div className="flex flex-col justify-between w-full">
           <div 
             ref={cardsRef}
             onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-4 pb-4 md:pt-4 md:pb-4 px-1 md:px-0 gap-6 md:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-6 md:gap-7 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {stabilityMetrics.map((metric, idx) => (
               <motion.div 
@@ -77,46 +96,61 @@ export function RatingStability() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 p-7 sm:p-9 rounded-3xl hover:border-[#2E5E99]/50 hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between"
+                className="group relative bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-8 sm:p-9 rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
               >
-                <div>
-                  <div className="w-13 h-13 rounded-2xl bg-[#EBF3FC] dark:bg-[#0D2440]/50 border border-[#7BA4D0]/20 flex items-center justify-center mb-6 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-110 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0">
-                    <metric.icon className="w-6 h-6" />
+                {/* Giant Numeric Watermark */}
+                <div className="absolute top-4 right-6 text-6xl sm:text-7xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
+                  {metric.num}
+                </div>
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="w-14 h-14 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                      <metric.icon className="w-7 h-7" />
+                    </div>
+                    <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25">
+                      {metric.badge}
+                    </span>
                   </div>
-                  <h4 className="text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-3 group-hover:text-[#2E5E99] transition-colors">
+
+                  <h4 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-3 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
                     {metric.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal">
                     {metric.description}
                   </p>
                 </div>
                 
-                <div className="mt-8 pt-6 border-t border-[#7BA4D0]/20 flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-[#0D2440]/60 dark:text-white/60 uppercase tracking-wider">
+                <div className="relative z-10 mt-10 pt-5 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                  <span className="text-[11px] font-heading font-black text-[#0D2440]/65 dark:text-white/60 uppercase tracking-widest">
                     Verified Metric
                   </span>
-                  <div className="w-2 h-2 rounded-full bg-[#7BA4D0]/40 group-hover:bg-[#2E5E99] transition-colors" />
+                  <div className="w-7 h-7 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-5 z-10">
+          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
             {stabilityMetrics.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {
                   setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  if (cardsRef.current) {
+                    cardsRef.current.scrollTo({
+                      left: i * cardsRef.current.clientWidth,
+                      behavior: "smooth"
+                    });
                   }
                 }}
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-7 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/30"
-                )}
-                aria-label={`Go to metric card ${i + 1}`}
+                className={`h-1.5 transition-all duration-300 rounded-full ${
+                  activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>

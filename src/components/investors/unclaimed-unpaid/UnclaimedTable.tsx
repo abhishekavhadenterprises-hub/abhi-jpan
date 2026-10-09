@@ -162,15 +162,15 @@ export function UnclaimedTable() {
                           <span className="text-xs font-bold text-[#0D2440] dark:text-white tracking-wide whitespace-nowrap">{row.name}</span>
                        </div>
                     </td>
-                    <td className="px-6 py-5 text-xs font-mono text-muted-foreground tracking-wider whitespace-nowrap">{row.folio}</td>
+                    <td className="px-6 py-5 text-xs font-heading font-semibold text-muted-foreground tracking-wider whitespace-nowrap">{row.folio}</td>
                     <td className="px-6 py-5">
                        <div className="flex items-center gap-2">
                           <Receipt className="w-4 h-4 text-[#2E5E99]" />
                           <span className="text-xs text-muted-foreground whitespace-nowrap">{row.type}</span>
                        </div>
                     </td>
-                    <td className="px-6 py-5 text-xs font-bold text-[#0D2440] dark:text-white tracking-tight text-right whitespace-nowrap">{row.amount}</td>
-                    <td className="px-6 py-5 text-xs text-muted-foreground whitespace-nowrap">{row.year}</td>
+                    <td className="px-6 py-5 text-xs font-heading font-black text-[#0D2440] dark:text-white tracking-tight text-right whitespace-nowrap">{row.amount}</td>
+                    <td className="px-6 py-5 text-xs font-heading font-bold text-muted-foreground whitespace-nowrap">{row.year}</td>
                     <td className="px-6 py-5 whitespace-nowrap">
                        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border flex items-center gap-1.5 w-max ${
                           row.status === 'Unclaimed' 

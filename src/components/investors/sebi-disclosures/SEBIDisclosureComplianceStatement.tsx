@@ -2,8 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Scale, FileText, CheckCircle2, ScrollText } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ShieldCheck, Scale, FileText, ScrollText } from "lucide-react";
 
 const complianceCards = [
   {
@@ -44,8 +43,8 @@ export function SEBIDisclosureComplianceStatement() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-black border-t border-[#7BA4D0]/20 overflow-hidden relative">
-      {/* Soft Background Accents */}
+    <section className="py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
+      <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -58,9 +57,14 @@ export function SEBIDisclosureComplianceStatement() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-6 leading-tight tracking-tight">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
+              Regulatory Assurance
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-6 leading-[1.12] tracking-tight">
               Verified <br />
-              <span className="text-[#2E5E99] dark:text-[#7BA4D0] inline-block pr-1 pb-1">
+              <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
                 Regulatory Integrity
               </span>
             </h2>
@@ -68,86 +72,81 @@ export function SEBIDisclosureComplianceStatement() {
             <p className="text-[#0D2440]/70 dark:text-white/70 text-base sm:text-lg mb-8 leading-relaxed font-normal">
               Our disclosure policy is governed by strict adherence to the 
               SEBI (Listing Obligations and Disclosure Requirements) 
-              Regulations, 2015. We maintain a systematic framework for 
-              materiality assessment and timely statutory reporting.
+              Regulations, ensuring all shareholders receive equal, timely, 
+              and authentic access to material corporate information.
             </p>
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 p-4.5 bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 rounded-2xl hover:border-[#2E5E99]/40 transition-all duration-300">
-                <div className="w-9 h-9 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-5 h-5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                </div>
-                <span className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
-                  Certified Materiality Policy
-                </span>
-              </div>
-              <div className="flex items-center gap-4 p-4.5 bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 rounded-2xl hover:border-[#2E5E99]/40 transition-all duration-300">
-                <div className="w-9 h-9 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-5 h-5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                </div>
-                <span className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
-                  Internal Statutory Audit Loop
-                </span>
+
+            <div className="p-5 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center gap-4">
+              <ShieldCheck className="w-8 h-8 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
+              <div>
+                <h4 className="text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider mb-0.5">
+                  100% LODR Aligned
+                </h4>
+                <p className="text-xs text-[#0D2440]/60 dark:text-white/60 font-medium">
+                  Continuous audit trails verified by Secretarial Auditors.
+                </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Cards Side */}
-          <div className="lg:col-span-7 relative w-full">
-            <div className="flex flex-col justify-between w-full">
-              <div 
-                ref={cardsRef}
-                onScroll={handleMobileScroll}
-                className="flex flex-row md:grid md:grid-cols-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-4 pb-8 md:pt-4 md:pb-8 px-1 md:px-0 gap-5 md:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-              >
-                {complianceCards.map((card, idx) => {
-                  const Icon = card.icon;
-                  return (
-                    <motion.div
-                      key={card.title}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                      className={cn(
-                        "p-7 sm:p-8 bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 rounded-3xl transition-all duration-300 group w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center",
-                        "hover:border-[#2E5E99]/60 hover:bg-[#F1F6FB]",
-                        idx % 2 === 1 ? "md:translate-y-6" : ""
-                      )}
-                    >
-                      <div className="w-14 h-14 rounded-2xl bg-[#EBF3FC] dark:bg-[#0D2440]/50 border border-[#7BA4D0]/20 flex items-center justify-center mb-6 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-110 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                        <Icon className="w-7 h-7" />
-                      </div>
-                      <h4 className="text-sm font-bold text-[#0D2440] dark:text-white uppercase tracking-wider mb-3">
-                        {card.title}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed font-normal">
-                        {card.description}
-                      </p>
-                    </motion.div>
-                  );
-                })}
-              </div>
+          {/* 4 Compliance Standards Grid */}
+          <div className="lg:col-span-7 flex flex-col justify-between w-full">
+            <div 
+              ref={cardsRef}
+              onScroll={handleMobileScroll}
+              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pt-2 pb-4 sm:py-0 px-1 sm:px-0 gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            >
+              {complianceCards.map((card, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="group bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-7 rounded-3xl hover:-translate-y-1 transition-all duration-300 w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-sm hover:shadow-lg shadow-[#2E5E99]/5 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shadow-xs">
+                      <card.icon className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-base font-heading font-black text-[#0D2440] dark:text-white mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+                      {card.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal">
+                      {card.description}
+                    </p>
+                  </div>
 
-              {/* Mobile Pagination Indicator Dots */}
-              <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
-                {complianceCards.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (cardsRef.current && cardsRef.current.children[i]) {
-                        cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                      }
-                    }}
-                    className={cn(
-                      "h-2 rounded-full transition-all duration-300",
-                      activeIndex === i ? "w-7 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/30"
-                    )}
-                    aria-label={`Go to compliance card ${i + 1}`}
-                  />
-                ))}
-              </div>
+                  <div className="mt-6 pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                    <span className="text-[10px] font-heading font-black text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest">
+                      Mandatory Clause
+                    </span>
+                    <div className="w-2 h-2 rounded-full bg-[#7BA4D0]/40 group-hover:bg-[#2E5E99] transition-colors" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Mobile Pagination Indicator Dots */}
+            <div className="flex sm:hidden items-center justify-center gap-2 mt-6 z-10">
+              {complianceCards.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setActiveIndex(i);
+                    if (cardsRef.current) {
+                      cardsRef.current.scrollTo({
+                        left: i * cardsRef.current.clientWidth,
+                        behavior: "smooth"
+                      });
+                    }
+                  }}
+                  className={`h-1.5 transition-all duration-300 rounded-full ${
+                    activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
+                  }`}
+                  aria-label={`Go to compliance card ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
 

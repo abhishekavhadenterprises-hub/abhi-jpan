@@ -1,18 +1,19 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { FileText, ArrowRight, ShieldCheck } from "lucide-react";
+import { FileText, ArrowRight, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 const highlightedDocs = [
   {
+    num: "01",
     title: "Shareholders Agreement (SHA)",
     type: "Agreement",
     date: "Aug 15, 2024",
     description: "Primary governance framework defining the relationship, board representation, and voting rights between key institutional stakeholders."
   },
   {
+    num: "02",
     title: "Technology Transfer Contract",
     type: "Contract",
     date: "Nov 02, 2024",
@@ -36,13 +37,13 @@ export function MaterialHighlights() {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-white dark:bg-black border-b border-[#7BA4D0]/20 relative overflow-hidden">
-      {/* Background Soft Glows */}
+    <section className="py-20 md:py-28 bg-white dark:bg-[#071321] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
+      <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -50,92 +51,108 @@ export function MaterialHighlights() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-tight">
-              Key Material{" "}
-              <span className="text-[#2E5E99] dark:text-[#7BA4D0] italic font-medium inline-block pr-1 pb-1">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
+              Material Disclosures
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
+              Key Material <br />
+              <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
                 Contracts
               </span>
             </h2>
           </motion.div>
 
-          <div className="text-xs font-bold text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest">
-            SEBI LODR Regulation 30 Mandate
-          </div>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[#0D2440]/70 dark:text-white/65 text-sm sm:text-base leading-relaxed font-normal max-w-md"
+          >
+            Significant agreements and governance contracts defining shareholder alignment, 
+            technology transfer, and long-term operating commitments.
+          </motion.p>
         </div>
 
-        {/* 2 Cards */}
+        {/* 2-Card Asymmetric Bento Grid */}
         <div className="flex flex-col justify-between w-full">
           <div 
             ref={cardsRef}
             onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-6 md:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            className="flex flex-row md:grid md:grid-cols-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-6 md:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {highlightedDocs.map((doc, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 p-7 sm:p-9 rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center"
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-8 sm:p-10 rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
               >
-                <div className="relative z-10 space-y-5">
-                  <div className="flex items-center justify-between">
-                    <div className="w-13 h-13 rounded-2xl bg-[#EBF3FC] dark:bg-[#0D2440]/50 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-110 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0">
-                      <FileText className="w-6 h-6" />
+                {/* Giant Numeric Watermark */}
+                <div className="absolute top-4 right-6 text-6xl sm:text-7xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
+                  {doc.num}
+                </div>
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="w-14 h-14 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                      <FileText className="w-7 h-7" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25">
+                        {doc.type}
+                      </span>
+                      <span className="text-xs font-heading font-bold text-[#0D2440]/60 dark:text-white/60">
+                        {doc.date}
+                      </span>
                     </div>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#0D2440] dark:text-white leading-snug group-hover:text-[#2E5E99] transition-colors">
+                  <h4 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-3 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
                     {doc.title}
-                  </h3>
-                  
-                  <p className="text-[#0D2440]/70 dark:text-white/70 text-sm sm:text-base leading-relaxed font-normal">
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal">
                     {doc.description}
                   </p>
                 </div>
-
-                {/* Action Footer */}
-                <div className="relative z-10 flex items-center justify-between pt-6 mt-6 border-t border-[#7BA4D0]/20 text-xs font-bold text-[#0D2440]/60 dark:text-white/60">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
-                    <span className="text-xs font-semibold uppercase tracking-wider">Dated: {doc.date}</span>
+                
+                <div className="relative z-10 mt-10 pt-5 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                  <span className="text-[11px] font-heading font-black text-[#0D2440]/65 dark:text-white/60 uppercase tracking-widest">
+                    Board Approved Contract
+                  </span>
+                  <div className="w-7 h-7 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>
-                  <a 
-                    href="/sample-report.pdf" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider hover:text-[#2E5E99] dark:hover:text-[#7BA4D0] transition-colors group/btn"
-                  >
-                    <span>Inspect Document</span>
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform text-[#2E5E99] dark:text-[#7BA4D0]" />
-                  </a>
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-5 z-10">
+          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
             {highlightedDocs.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {
                   setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  if (cardsRef.current) {
+                    cardsRef.current.scrollTo({
+                      left: i * cardsRef.current.clientWidth,
+                      behavior: "smooth"
+                    });
                   }
                 }}
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-7 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/30"
-                )}
-                aria-label={`Go to contract card ${i + 1}`}
+                className={`h-1.5 transition-all duration-300 rounded-full ${
+                  activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
