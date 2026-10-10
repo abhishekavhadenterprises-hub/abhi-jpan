@@ -1,14 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { ArrowRight, Calendar, Clock, User, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Calendar, Clock, User } from "lucide-react";
 
 interface BlogFeaturedProps {
   onReadMore: (article: any) => void;
 }
 
 export function BlogFeatured({ onReadMore }: BlogFeaturedProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+
   const featuredArticle = {
     title: "The Evolution of Automated Brazing in HVAC-R Systems",
     date: "Nov 12, 2025",
@@ -25,23 +33,38 @@ export function BlogFeatured({ onReadMore }: BlogFeaturedProps) {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-[#070b14] border-b border-slate-200/70 dark:border-white/5 transition-colors">
+    <section ref={containerRef} className="py-14 md:py-20 bg-white dark:bg-[#070b14] border-b border-slate-200/70 dark:border-white/5 transition-colors">
       <div className="container-custom">
-        <div className="group relative flex flex-col lg:flex-row bg-white dark:bg-[#0c1527] rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/50 transition-all duration-300">
-          {/* Image Side: 100% Clear, No Dark Dimmer */}
-          <div className="w-full lg:w-3/5 aspect-video lg:aspect-auto relative overflow-hidden bg-slate-100 dark:bg-slate-900 min-h-[320px] lg:min-h-[440px]">
-            <Image
-              src="/images/quality-hero.png"
-              alt="The Future of Automated Brazing in HVAC"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              priority
-            />
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="group relative flex flex-col lg:flex-row bg-white dark:bg-[#0c1527] rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/50 shadow-sm hover:shadow-2xl transition-all duration-500"
+        >
+          {/* Image Side with Parallax */}
+          <div className="w-full lg:w-3/5 aspect-video lg:aspect-auto relative overflow-hidden bg-slate-100 dark:bg-slate-900 min-h-[320px] lg:min-h-[460px]">
+            <motion.div style={{ y: imageY }} className="absolute inset-[-10%] w-[120%] h-[120%]">
+              <Image
+                src="/images/quality-hero.png"
+                alt="The Future of Automated Brazing in HVAC"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                priority
+              />
+            </motion.div>
           </div>
 
           {/* Content Side */}
           <div className="w-full lg:w-2/5 p-8 sm:p-12 lg:p-14 flex flex-col justify-center">
-            <div className="flex flex-wrap items-center gap-5 mb-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            {/* Category Squircle Badge */}
+            <div className="mb-4">
+              <span className="inline-block px-3 py-1 rounded-lg bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-semibold uppercase tracking-wider">
+                {featuredArticle.category} Spotlight
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-5 mb-5 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                 Nov 12, 2025
@@ -69,14 +92,14 @@ export function BlogFeatured({ onReadMore }: BlogFeaturedProps) {
             <div>
               <button 
                 onClick={() => onReadMore(featuredArticle)}
-                className="inline-flex items-center gap-3 px-6 py-3 bg-[#0D2440] hover:bg-[#1A365D] dark:bg-white dark:hover:bg-slate-100 text-white dark:text-[#0D2440] font-semibold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group/btn cursor-pointer"
+                className="inline-flex items-center gap-3 px-6 py-3.5 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[#0D2440]/15 group/btn cursor-pointer"
               >
                 <span>Continue Reading</span>
                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const related = [
@@ -65,11 +66,11 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-slate-50/70 dark:bg-black/30 border-t border-slate-200/70 dark:border-white/5 transition-colors">
+    <section className="py-16 md:py-24 bg-slate-50/70 dark:bg-[#070b14]/60 border-t border-slate-200/70 dark:border-white/5 transition-colors">
       <div className="container-custom">
         <div className="flex items-center justify-between mb-8 md:mb-12">
           <div className="flex items-center gap-3">
-            <div className="w-1.5 h-6 rounded-full bg-[#2E5E99]" />
+            <div className="w-1.5 h-6 rounded-sm bg-[#2E5E99]" />
             <h2 className="text-xl sm:text-2xl font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
               You May Also <span className="text-[#2E5E99] dark:text-[#7BA4D0]">Like</span>
             </h2>
@@ -89,8 +90,12 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
             className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-6 lg:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {related.map((art, idx) => (
-              <div 
-                key={idx} 
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 onClick={() => onReadMore && onReadMore({
                   title: art.title,
                   date: art.date,
@@ -100,7 +105,7 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
                   image: art.image,
                   content: art.content
                 })}
-                className="group relative bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 transition-all duration-300 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between hover:-translate-y-1"
+                className="group relative bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between hover:-translate-y-1"
               >
                 <div>
                   <div className="aspect-video relative overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-900">
@@ -110,7 +115,12 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="inline-block px-3 py-1 rounded-lg bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-[11px] font-semibold uppercase tracking-wider text-[#0D2440] dark:text-white shadow-sm">
+                        {art.category}
+                      </span>
                     </div>
+                  </div>
                   <div className="p-6 sm:p-7">
                     <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2.5">
                       <Clock className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
@@ -128,12 +138,12 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-4 z-10">
+          <div className="flex md:hidden items-center justify-center gap-1.5 mt-4 z-10">
             {related.map((_, i) => (
               <button
                 key={i}
@@ -144,8 +154,8 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
                   }
                 }}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#2E5E99]" : "w-1.5 bg-slate-300 dark:bg-white/20"
+                  "h-1.5 rounded-sm transition-all duration-300",
+                  activeIndex === i ? "w-6 bg-[#2E5E99] dark:bg-[#7BA4D0]" : "w-2 bg-slate-300 dark:bg-white/20"
                 )}
                 aria-label={`Go to related article card ${i + 1}`}
               />

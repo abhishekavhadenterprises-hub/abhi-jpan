@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useRef } from "react";
-import { Users, CheckCircle, Search, ArrowRight, UserPlus, Sparkles } from "lucide-react";
+import { Users, CheckCircle, Search, ArrowRight, UserPlus } from "lucide-react";
 import { motion, useScroll, useSpring, useTransform, useInView, Variants } from "framer-motion";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const steps = [
   {
@@ -24,9 +25,9 @@ const steps = [
 
 export function CareersRoadmap() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-80px" });
 
-  // Journey Timeline scroll-responsive animation
+  // Journey Timeline scroll-responsive animation (Previous smooth fill)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 65%", "end 40%"],
@@ -53,7 +54,7 @@ export function CareersRoadmap() {
   return (
     <section 
       ref={containerRef}
-      className="py-20 md:py-32 bg-white dark:bg-[#070b14] border-b border-slate-200/70 dark:border-white/5 relative overflow-hidden"
+      className="py-24 md:py-32 bg-white dark:bg-[#070b14] border-b border-slate-200/70 dark:border-white/5 relative overflow-hidden"
     >
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[radial-gradient(#2E5E99_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none" />
@@ -66,12 +67,20 @@ export function CareersRoadmap() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mb-16 md:mb-24"
         >
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.12] mb-6 tracking-tight overflow-visible">
-            <span className="inline-block">Your Journey to</span> <br />
-            <span className="inline-block pt-1 pb-2.5 pr-4 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light">
+          <div className="mb-6 overflow-visible">
+            <ScrollWipeHeading
+              as="h2"
+              className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
+              revealedColor="currentColor"
+              wipingColor="#2E5E99"
+              unrevealedColor="rgba(148, 163, 184, 0.4)"
+            >
+              Your Journey to
+            </ScrollWipeHeading>
+            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-5xl lg:text-6xl font-heading tracking-tight">
               Professional Legacy
-            </span>
-          </h2>
+            </div>
+          </div>
           
           <p className="text-slate-600 dark:text-slate-300 font-normal text-base sm:text-lg leading-relaxed max-w-2xl">
             Our high-precision hiring process ensures that we identify and 
@@ -80,16 +89,16 @@ export function CareersRoadmap() {
           </p>
         </motion.div>
 
-        {/* Roadmap Timeline with Scroll-Responsive Journey Path */}
+        {/* Roadmap Timeline with Previous Smooth Scroll-Responsive Journey Path */}
         <div className="relative mb-20 md:mb-28">
-          {/* Connecting Line (Desktop Horizontal) */}
-          <div className="absolute top-12 left-12 right-12 h-[3px] bg-slate-200/80 dark:bg-white/10 hidden lg:block rounded-full" />
+          {/* Connecting Line Track (Desktop Horizontal) */}
+          <div className="absolute top-12 left-16 right-16 h-[3px] bg-slate-200/80 dark:bg-white/10 hidden lg:block rounded-full" />
           <motion.div 
-            className="absolute top-12 left-12 h-[3px] bg-gradient-to-r from-[#2E5E99] via-[#4F86C6] to-[#7BA4D0] hidden lg:block rounded-full origin-left" 
-            style={{ width: lineWidth, maxWidth: "calc(100% - 96px)" }}
+            className="absolute top-12 left-16 h-[3px] bg-gradient-to-r from-[#2E5E99] via-[#4F86C6] to-[#7BA4D0] hidden lg:block rounded-full origin-left" 
+            style={{ width: lineWidth, maxWidth: "calc(100% - 128px)" }}
           />
           
-          {/* Connecting Line (Mobile Vertical) */}
+          {/* Connecting Line Track (Mobile Vertical) */}
           <div className="absolute top-8 bottom-8 left-12 w-[3px] bg-slate-200/80 dark:bg-white/10 lg:hidden rounded-full -translate-x-1/2" />
           <motion.div 
             className="absolute top-8 left-12 w-[3px] bg-gradient-to-b from-[#2E5E99] via-[#4F86C6] to-[#7BA4D0] lg:hidden rounded-full origin-top -translate-x-1/2" 
@@ -106,9 +115,9 @@ export function CareersRoadmap() {
                 transition={{ delay: idx * 0.15, duration: 0.7 }}
                 className="relative flex flex-row lg:flex-col items-center lg:items-center gap-6 lg:gap-0 lg:text-center group"
               >
-                {/* Step Circle Node */}
-                <div className="w-24 h-24 shrink-0 bg-white dark:bg-[#0c1527] border-2 border-slate-200/90 dark:border-white/15 rounded-full flex items-center justify-center relative mb-0 lg:mb-8 transition-all duration-300 z-10 group-hover:-translate-y-1.5 group-hover:border-[#2E5E99] cursor-default">
-                   {/* Badge Index */}
+                {/* Step Node */}
+                <div className="w-24 h-24 shrink-0 bg-white dark:bg-[#0c1527] border-2 border-slate-200/90 dark:border-white/15 rounded-full flex items-center justify-center relative mb-0 lg:mb-8 transition-all duration-300 z-10 group-hover:-translate-y-1.5 group-hover:border-[#2E5E99] dark:group-hover:border-[#7BA4D0] group-hover:shadow-[0_10px_25px_rgba(46,94,153,0.15)] cursor-default shadow-sm">
+                   {/* Step Number Index */}
                    <div className="absolute -top-1 -right-1 w-8 h-8 bg-[#0D2440] dark:bg-white text-white dark:text-[#0D2440] flex items-center justify-center rounded-full font-heading font-bold text-xs group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-300">
                       0{idx + 1}
                    </div>
@@ -128,20 +137,24 @@ export function CareersRoadmap() {
           </div>
         </div>
 
-        {/* Bottom CTA Banner (Redesigned from bg-charcoal to Light Luxury Card) */}
+        {/* Bottom CTA Banner (Clean Luxury Card) */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative p-8 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0a182a] dark:via-[#0d223c] dark:to-[#091524] border border-[#7BA4D0]/35 dark:border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 overflow-hidden group"
+          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="relative p-8 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0a182a] dark:via-[#0d223c] dark:to-[#091524] border border-[#7BA4D0]/35 dark:border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 overflow-hidden group shadow-sm"
         >
            <div className="relative z-10 flex items-center gap-5">
               <div className="w-14 h-14 rounded-2xl bg-[#2E5E99]/10 dark:bg-white/10 border border-[#2E5E99]/20 dark:border-white/15 flex items-center justify-center shrink-0 text-[#2E5E99] dark:text-[#7BA4D0]">
                  <UserPlus className="w-7 h-7" strokeWidth={1.75} />
               </div>
               <div>
-                 <h5 className="text-sm font-bold text-[#0D2440] dark:text-white uppercase tracking-wider mb-1">Onboarding Support</h5>
-                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed">Dedicated assistance for international candidates.</p>
+                 <h5 className="text-sm font-bold text-[#0D2440] dark:text-white uppercase tracking-wider mb-1">
+                   Onboarding Support
+                 </h5>
+                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
+                   Dedicated assistance for international candidates.
+                 </p>
               </div>
            </div>
            
@@ -154,7 +167,7 @@ export function CareersRoadmap() {
                  window.location.href = "/careers#openings";
                }
              }}
-             className="relative z-10 px-7 py-3.5 bg-[#0D2440] hover:bg-[#1A365D] dark:bg-white dark:hover:bg-slate-100 text-white dark:text-[#0D2440] text-xs font-bold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-3 shrink-0 cursor-pointer group/btn"
+             className="relative z-10 px-7 py-3.5 bg-[#0D2440] hover:bg-[#1A365D] dark:bg-white dark:hover:bg-slate-100 text-white dark:text-[#0D2440] text-xs font-bold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-3 shrink-0 cursor-pointer group/btn shadow-sm"
            >
              <span>Career FAQs</span>
              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" strokeWidth={2} />

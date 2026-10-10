@@ -258,7 +258,7 @@ export function ContactMap() {
                       setIsCardOpen(false);
                       setActiveIdx(null);
                     }}
-                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E7F0FA] dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white dark:hover:bg-white/20 flex items-center justify-center transition-all cursor-pointer shrink-0 ml-2"
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#E7F0FA] dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white dark:hover:bg-white/20 flex items-center justify-center transition-all cursor-pointer shrink-0 ml-2"
                     aria-label="Close hub details"
                   >
                     <X className="w-4 h-4 text-[#0D2440] dark:text-white" />
@@ -300,7 +300,7 @@ export function ContactMap() {
                         href={`https://maps.google.com/?q=${encodeURIComponent(activeHub.title + " " + activeHub.address)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0D2440] hover:bg-[#2E5E99] text-white flex items-center justify-center hover:scale-105 transition-all cursor-pointer group/btn"
+                        className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#0D2440] hover:bg-[#2E5E99] text-white flex items-center justify-center hover:scale-105 transition-all cursor-pointer group/btn shadow-md"
                         title="Open in Google Maps"
                       >
                         <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -344,7 +344,7 @@ export function ContactMap() {
               >
                 <span>{hub.city}</span>
                 {isActive && (
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] shrink-0 animate-pulse" />
+                  <span className="w-2.5 h-2.5 rounded-sm bg-[#2E5E99] shrink-0 animate-pulse" />
                 )}
               </li>
             );
@@ -355,11 +355,11 @@ export function ContactMap() {
       {/* Bottom-Left Legend */}
       <div className="relative lg:absolute bottom-4 lg:bottom-7 left-6 lg:left-10 z-[40] text-[10px] sm:text-[11px] text-[#0D2440] dark:text-white flex flex-row lg:flex-col flex-wrap gap-4 lg:gap-2.5 font-bold uppercase tracking-[0.25em] px-6 lg:px-0 mt-8 lg:mt-0 select-none">
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] mr-2.5" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#2E5E99] mr-2.5" />
           <span>Strategic Hub</span>
         </div>
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#7BA4D0] mr-2.5 border border-[#2E5E99]/20" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#7BA4D0] mr-2.5 border border-[#2E5E99]/20" />
           <span>Precision Unit</span>
         </div>
       </div>

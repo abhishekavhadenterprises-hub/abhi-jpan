@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Calendar, Clock, SearchX } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const articles = [
@@ -136,7 +137,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
       <div className="container-custom">
         {filteredArticles.length === 0 ? (
           <div className="text-center py-16 px-4 max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-5 text-[#2E5E99] dark:text-[#7BA4D0]">
+            <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-5 text-[#2E5E99] dark:text-[#7BA4D0]">
               <SearchX className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2">
@@ -148,72 +149,85 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
           </div>
         ) : (
           <div className="flex flex-col justify-between w-full">
-            <div 
+            <motion.div 
+              layout
               ref={cardsRef}
               onScroll={handleMobileScroll}
               className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-6 lg:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
             >
-              {filteredArticles.map((article) => (
-                <div 
-                  key={article.id}
-                  onClick={() => onReadMore({
-                    title: article.title,
-                    date: article.date,
-                    time: article.time,
-                    category: article.category,
-                    author: "Engineering Division",
-                    image: article.image,
-                    content: article.content
-                  })}
-                  className="group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 transition-all duration-300 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1"
-                >
-                  <div>
-                    {/* Image with 100% Clarity */}
-                    <div className="relative aspect-[16/10] overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-900">
-                      <Image
-                        src={article.image}
-                        alt={article.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6 sm:p-8 flex-grow flex flex-col">
-                      <div className="flex items-center gap-4 sm:gap-6 mb-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                          {article.date}
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                          {article.time} Read
+              <AnimatePresence mode="popLayout">
+                {filteredArticles.map((article, idx) => (
+                  <motion.div 
+                    layout
+                    key={article.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.45, delay: idx * 0.05 }}
+                    onClick={() => onReadMore({
+                      title: article.title,
+                      date: article.date,
+                      time: article.time,
+                      category: article.category,
+                      author: "Engineering Division",
+                      image: article.image,
+                      content: article.content
+                    })}
+                    className="group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1"
+                  >
+                    <div>
+                      {/* Image with Category Squircle Overlay */}
+                      <div className="relative aspect-[16/10] overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-900">
+                        <Image
+                          src={article.image}
+                          alt={article.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4 z-10">
+                          <span className="inline-block px-3 py-1 rounded-lg bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-[11px] font-semibold uppercase tracking-wider text-[#0D2440] dark:text-white shadow-sm">
+                            {article.category}
+                          </span>
                         </div>
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-3.5 leading-[1.25] tracking-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
-                        {article.title}
-                      </h3>
-                      
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-6 flex-grow">
-                        {article.desc}
-                      </p>
-                    </div>
-                  </div>
+                      {/* Content */}
+                      <div className="p-6 sm:p-8 flex-grow flex flex-col">
+                        <div className="flex items-center gap-4 sm:gap-6 mb-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                          <div className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                            {article.date}
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                            {article.time} Read
+                          </div>
+                        </div>
 
-                  <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
-                    <div className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-[#0D2440] dark:group-hover:text-white transition-colors self-start border-b border-[#2E5E99]/25 pb-1">
-                      <span>Read Full Article</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-3.5 leading-[1.25] tracking-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+                          {article.title}
+                        </h3>
+                        
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-6 flex-grow">
+                          {article.desc}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+
+                    <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
+                      <div className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-[#0D2440] dark:group-hover:text-white transition-colors self-start border-b border-[#2E5E99]/25 pb-1">
+                        <span>Read Full Article</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
 
             {/* Mobile Pagination Indicator Dots */}
             {filteredArticles.length > 1 && (
-              <div className="flex md:hidden items-center justify-center gap-2 mt-4 z-10">
+              <div className="flex md:hidden items-center justify-center gap-1.5 mt-4 z-10">
                 {filteredArticles.map((_, i) => (
                   <button
                     key={i}
@@ -224,8 +238,8 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                       }
                     }}
                     className={cn(
-                      "h-1.5 rounded-full transition-all duration-300",
-                      activeIndex === i ? "w-6 bg-[#2E5E99]" : "w-1.5 bg-slate-300 dark:bg-white/20"
+                      "h-1.5 rounded-sm transition-all duration-300",
+                      activeIndex === i ? "w-6 bg-[#2E5E99] dark:bg-[#7BA4D0]" : "w-2 bg-slate-300 dark:bg-white/20"
                     )}
                     aria-label={`Go to article card ${i + 1}`}
                   />

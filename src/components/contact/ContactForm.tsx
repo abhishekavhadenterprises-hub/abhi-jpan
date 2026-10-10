@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Send, User, Mail, Phone, MessageSquare, ShieldCheck, CheckCircle2, ChevronDown, Lock } from "lucide-react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const subjectOptions = [
   { value: "dividend", label: "Dividend Inquiry" },
@@ -70,8 +71,6 @@ export function ContactForm({
       {/* Anchor for Digital Inquiry scrolling */}
       <div id="digital-inquiry" className="absolute -top-24" />
 
-      {/* Ambient background glows */}
-
       <div className="container-custom relative z-10">
         <AnimatePresence mode="wait">
           {isSubmitted ? (
@@ -82,8 +81,7 @@ export function ContactForm({
               animate="visible"
               className="flex items-center justify-center min-h-[460px] py-12"
             >
-              <div className="max-w-xl w-full mx-auto text-center p-10 md:p-14 rounded-3xl bg-white dark:bg-[#0c1527]/90 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 relative overflow-hidden">
-                
+              <div className="max-w-xl w-full mx-auto text-center p-10 md:p-14 rounded-3xl bg-white dark:bg-[#0c1527]/90 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl relative overflow-hidden">
                 <div className="w-20 h-20 bg-emerald-500/10 dark:bg-emerald-500/15 flex items-center justify-center rounded-2xl mx-auto mb-8 border border-emerald-500/25 relative">
                   <div className="absolute inset-0 border border-emerald-500/40 rounded-2xl animate-ping opacity-25" />
                   <CheckCircle2 className="w-10 h-10 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
@@ -102,7 +100,7 @@ export function ContactForm({
                 
                 <button 
                   onClick={() => setIsSubmitted(false)}
-                  className="px-8 py-4 bg-gradient-to-r from-[#0D2440] to-[#2E5E99] hover:from-[#112f54] hover:to-[#3b72b8] text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  className="px-8 py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[#0D2440]/15 cursor-pointer"
                 >
                   Send Another Inquiry
                 </button>
@@ -119,19 +117,27 @@ export function ContactForm({
             >
               {/* Left Column: Heading & Assurances */}
               <div className="lg:col-span-5 lg:sticky lg:top-28">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-6 leading-[1.22] tracking-tight overflow-visible">
-                  <span className="inline-block">{mainTitle}</span> <br />
-                  <span className="inline-block pt-1 pb-2.5 pr-4 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] font-light italic">
-                    {highlightedTitle}
-                  </span>
-                </h2>
+                <div className="mb-6 overflow-visible">
+                  <ScrollWipeHeading
+                    as="h2"
+                    className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] tracking-tight block"
+                    revealedColor="currentColor"
+                    wipingColor="#2E5E99"
+                    unrevealedColor="rgba(148, 163, 184, 0.4)"
+                  >
+                    <span>{mainTitle}</span> <br />
+                    <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">
+                      {highlightedTitle}
+                    </span>
+                  </ScrollWipeHeading>
+                </div>
 
                 <p className="text-slate-600 dark:text-slate-300 font-normal text-base md:text-lg mb-8 leading-relaxed max-w-lg">
                   {description}
                 </p>
                 
                 {/* Privacy Assured Card */}
-                <div className="p-6 md:p-7 bg-white/90 dark:bg-white/[0.03] backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-2xl relative overflow-hidden group shadow-blue-950/[0.02]">
+                <div className="p-6 md:p-7 bg-white/90 dark:bg-white/[0.03] backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-2xl relative overflow-hidden group shadow-sm">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#2E5E99]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   <div className="flex items-center gap-3.5 mb-3.5 relative z-10">
                     <div className="w-9 h-9 rounded-xl bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/10 border border-[#2E5E99]/20 dark:border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -144,10 +150,10 @@ export function ContactForm({
                       </p>
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed relative z-10">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed relative z-10 font-normal">
                     Your contact information is handled in accordance with our 
                     Privacy Policy and used solely for addressing your 
-                    investor-related queries.
+                    technical and stakeholder queries.
                   </p>
                 </div>
               </div>
@@ -156,7 +162,7 @@ export function ContactForm({
               <div className="lg:col-span-7">
                 <form 
                   onSubmit={handleSubmit} 
-                  className="bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl p-7 sm:p-10 md:p-12 border border-slate-200/90 dark:border-white/10 rounded-3xl relative overflow-hidden space-y-6"
+                  className="bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl p-7 sm:p-10 md:p-12 border border-slate-200/90 dark:border-white/10 rounded-3xl relative overflow-hidden space-y-6 shadow-xl"
                 >
                   {/* Subtle top brand hairline */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2E5E99] to-transparent opacity-75" />
@@ -240,7 +246,7 @@ export function ContactForm({
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: -6, scale: 0.98 }}
                               transition={{ duration: 0.15, ease: "easeOut" }}
-                              className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-[#0d172b]/95 backdrop-blur-xl border border-slate-200 dark:border-white/15 rounded-2xl overflow-hidden z-50 p-1.5"
+                              className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-[#0d172b]/95 backdrop-blur-xl border border-slate-200 dark:border-white/15 rounded-2xl overflow-hidden z-50 p-1.5 shadow-2xl"
                             >
                               {subjectOptions.map(opt => (
                                 <button
@@ -250,7 +256,7 @@ export function ContactForm({
                                     setSelectedSubject(opt.value);
                                     setIsDropdownOpen(false);
                                   }}
-                                  className={`w-full text-left px-4 py-3 text-xs rounded-xl font-medium transition-colors flex items-center justify-between ${
+                                  className={`w-full text-left px-4 py-3 text-xs rounded-xl font-medium transition-colors flex items-center justify-between cursor-pointer ${
                                     selectedSubject === opt.value
                                       ? "bg-[#2E5E99]/10 text-[#2E5E99] dark:text-[#7BA4D0] font-bold"
                                       : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.05]"
@@ -258,7 +264,7 @@ export function ContactForm({
                                 >
                                   <span>{opt.label}</span>
                                   {selectedSubject === opt.value && (
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
+                                    <span className="w-1.5 h-1.5 rounded-sm bg-[#2E5E99] dark:bg-[#7BA4D0]" />
                                   )}
                                 </button>
                               ))}
@@ -283,7 +289,7 @@ export function ContactForm({
                   {/* Submit Button */}
                   <button 
                     type="submit"
-                    className="w-full py-4.5 bg-gradient-to-r from-[#0D2440] via-[#1A365D] to-[#2E5E99] hover:from-[#112F55] hover:to-[#386fb3] text-white font-semibold text-xs uppercase tracking-[0.25em] rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 group/btn relative overflow-hidden z-10 cursor-pointer"
+                    className="w-full py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white font-semibold text-xs uppercase tracking-[0.25em] rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 group/btn relative overflow-hidden z-10 cursor-pointer shadow-lg shadow-[#0D2440]/15"
                   >
                     <span className="relative z-10 flex items-center gap-3">
                       Send Inquiry

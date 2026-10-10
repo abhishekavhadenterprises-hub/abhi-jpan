@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const eventsData = [
   {
@@ -270,12 +271,20 @@ export function EventPhotos() {
     <section className="py-16 md:py-24 bg-white dark:bg-black transition-colors">
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-4 leading-[1.22] overflow-visible">
-            Event{" "}
-            <span className="font-serif italic font-normal text-[#2E5E99] inline-block pt-1 pb-2 pr-2">
-              Photos
-            </span>
-          </h2>
+          <div className="mb-4 overflow-visible">
+            <ScrollWipeHeading
+              as="h2"
+              className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+              revealedColor="currentColor"
+              wipingColor="#2E5E99"
+              unrevealedColor="rgba(148, 163, 184, 0.4)"
+            >
+              Exhibition & Event
+            </ScrollWipeHeading>
+            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+              Visual Archives
+            </div>
+          </div>
           <p className="text-[#0D2440]/70 dark:text-silver/70 text-sm sm:text-base leading-relaxed">
             Glimpses from our recent exhibitions, training sessions, and corporate milestones.
           </p>
@@ -291,7 +300,7 @@ export function EventPhotos() {
             {eventsData.map((item) => (
               <div 
                 key={item.id} 
-                className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-charcoal/40 transition-all duration-500 border border-[#7BA4D0]/25 hover:border-[#7BA4D0]/60 w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between"
+                className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/30 transition-all duration-500 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5"
                 onClick={() => openLightbox(item)}
               >
                 <div className="aspect-square relative overflow-hidden shrink-0 bg-slate-100 dark:bg-[#0D2440]">
@@ -304,14 +313,14 @@ export function EventPhotos() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-12 h-12 rounded-full bg-white/90 dark:bg-charcoal/90 text-[#0D2440] dark:text-white flex items-center justify-center backdrop-blur-md">
+                    <div className="w-12 h-12 rounded-2xl bg-white/90 dark:bg-[#0D2440]/90 text-[#0D2440] dark:text-white flex items-center justify-center backdrop-blur-md shadow-md border border-[#7BA4D0]/30">
                       <Maximize2 className="w-5 h-5" />
                     </div>
                   </div>
                 </div>
-                <div className="p-4 bg-white dark:bg-charcoal/80 border-t border-[#7BA4D0]/20 group-hover:border-[#7BA4D0]/40 transition-colors flex-grow flex flex-col justify-center">
+                <div className="p-4 bg-white dark:bg-[#0D2440]/40 border-t border-[#7BA4D0]/20 group-hover:border-[#2E5E99]/40 transition-colors flex-grow flex flex-col justify-center">
                   <h3 className="text-sm sm:text-base font-heading font-bold text-[#0D2440] dark:text-white text-center truncate">{item.title}</h3>
-                  <p className="text-xs font-semibold text-[#2E5E99] text-center mt-1">{item.images.length} Photos</p>
+                  <p className="text-xs font-heading font-semibold text-[#2E5E99] dark:text-[#7BA4D0] text-center mt-1">{item.images.length} Photos</p>
                 </div>
               </div>
             ))}
@@ -329,8 +338,8 @@ export function EventPhotos() {
                   }
                 }}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440]" : "w-1.5 bg-[#7BA4D0]/40"
+                  "h-1.5 rounded-sm transition-all duration-300",
+                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
                 )}
                 aria-label={`Go to event gallery card ${i + 1}`}
               />
@@ -348,15 +357,15 @@ export function EventPhotos() {
             <div className="flex items-center gap-6">
               <button 
                 onClick={closeLightbox}
-                className="group flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-gold text-white hover:text-charcoal rounded-full border border-white/10 hover:border-gold transition-all duration-300"
+                className="group flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-[#2E5E99] text-white rounded-xl border border-white/10 hover:border-[#2E5E99] transition-all duration-300"
               >
                 <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                <span className="text-xs font-bold uppercase tracking-widest">Back to Events</span>
+                <span className="text-xs font-heading font-bold uppercase tracking-widest">Back to Events</span>
               </button>
               <div className="hidden md:block w-px h-8 bg-white/20" />
               <div>
-                 <h3 className="text-xl font-bold text-white leading-none">{selectedEvent.title}</h3>
-                 <p className="text-gold text-xs font-medium mt-1.5 uppercase tracking-widest">
+                 <h3 className="text-xl font-heading font-bold text-white leading-none">{selectedEvent.title}</h3>
+                 <p className="text-[#7BA4D0] text-xs font-medium mt-1.5 uppercase tracking-widest">
                    Image {currentImageIndex + 1} of {selectedEvent.images.length}
                  </p>
               </div>
@@ -364,7 +373,7 @@ export function EventPhotos() {
             
             <button 
               onClick={closeLightbox}
-              className="p-2.5 bg-white/5 hover:bg-gold text-white hover:text-charcoal rounded-full border border-white/10 hover:border-gold transition-all duration-300"
+              className="p-2.5 bg-white/5 hover:bg-[#2E5E99] text-white rounded-xl border border-white/10 hover:border-[#2E5E99] transition-all duration-300"
               aria-label="Close gallery"
             >
               <X className="w-5 h-5" />
@@ -375,7 +384,7 @@ export function EventPhotos() {
           <div className="relative flex-1 min-h-0 flex items-center justify-center w-full p-4 md:p-8">
             <button 
               onClick={prevImage}
-              className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-gold hover:scale-110 text-white hover:text-charcoal rounded-full transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-gold"
+              className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-[#2E5E99] hover:scale-105 text-white rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-8 h-8" />
@@ -383,7 +392,7 @@ export function EventPhotos() {
 
             <button 
               onClick={nextImage}
-              className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-gold hover:scale-110 text-white hover:text-charcoal rounded-full transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-gold"
+              className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-[#2E5E99] hover:scale-105 text-white rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
               aria-label="Next image"
             >
               <ChevronRight className="w-8 h-8" />

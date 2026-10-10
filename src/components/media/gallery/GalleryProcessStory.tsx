@@ -2,7 +2,9 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const steps = [
   { step: "01", title: "Raw Material Inspection", image: "/images/industry-industrial.png" },
@@ -28,14 +30,22 @@ export function GalleryProcessStory() {
       <div className="container-custom">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 md:mb-16">
           <div className="lg:max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] overflow-visible">
-              Behind the{" "}
-              <span className="font-serif italic font-normal text-[#2E5E99] inline-block pt-1 pb-2 pr-2">
-                Process
-              </span>
-            </h2>
+            <div className="mb-2 overflow-visible">
+              <ScrollWipeHeading
+                as="h2"
+                className="text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
+                revealedColor="currentColor"
+                wipingColor="#2E5E99"
+                unrevealedColor="rgba(148, 163, 184, 0.4)"
+              >
+                Behind the{" "}
+                <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">
+                  Process
+                </span>
+              </ScrollWipeHeading>
+            </div>
           </div>
-          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg lg:max-w-md leading-relaxed">
+          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg lg:max-w-md leading-relaxed font-normal">
             Transparency in every step. See how our components evolve from 
             raw materials to finished precision engineering parts.
           </p>
@@ -47,8 +57,15 @@ export function GalleryProcessStory() {
           className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar pb-4 sm:pb-0"
         >
           {steps.map((s, idx) => (
-            <div key={idx} className="group relative w-full sm:w-auto shrink-0 sm:shrink snap-center">
-              <div className="aspect-[4/5] relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/25 bg-[#F8FAFC] dark:bg-charcoal/40 transition-all duration-500 mb-4">
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative w-full sm:w-auto shrink-0 sm:shrink snap-center"
+            >
+              <div className="aspect-[4/5] relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 bg-slate-50 dark:bg-[#070b14] transition-all duration-500 mb-4 shadow-sm group-hover:shadow-xl">
                 <Image
                   src={s.image}
                   alt={s.title}
@@ -57,33 +74,33 @@ export function GalleryProcessStory() {
                   className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 
-                {/* Floating Step Number Capsule */}
+                {/* Floating Step Number Squircle */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3.5 py-1.5 rounded-full bg-white/95 dark:bg-charcoal/90 backdrop-blur-md border border-white/60 dark:border-white/10 text-xs font-bold text-[#0D2440] dark:text-white">
+                  <span className="px-3.5 py-1.5 rounded-xl bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-xs font-bold text-[#0D2440] dark:text-white shadow-sm">
                     Step {s.step}
                   </span>
                 </div>
 
                 {/* Soft Bottom Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               
-              <h4 className="text-base sm:text-lg font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] transition-colors duration-300">
+              <h4 className="text-base sm:text-lg font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
                 {s.title}
               </h4>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Dot Indicators for Mobile Scroll */}
         {steps.length > 1 && (
-          <div className="flex justify-center gap-2 mt-6 sm:hidden">
+          <div className="flex justify-center gap-1.5 mt-6 sm:hidden">
             {steps.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  activeIndex === index ? "bg-[#0D2440] w-6" : "bg-[#7BA4D0]/40"
+                  "h-1.5 rounded-sm transition-all duration-300",
+                  activeIndex === index ? "bg-[#0D2440] dark:bg-[#7BA4D0] w-6" : "bg-[#7BA4D0]/30 dark:bg-white/20 w-2"
                 )}
                 onClick={() => {
                   if (scrollContainerRef.current) {

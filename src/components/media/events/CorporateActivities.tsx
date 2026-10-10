@@ -2,9 +2,10 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { Users, GraduationCap, Heart, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const activities = [
   {
@@ -31,8 +32,27 @@ const activities = [
 ];
 
 export function CorporateActivities() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // Scroll Parallax Hooks
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 26,
+    restDelta: 0.001
+  });
+
+  const cardFloat0 = useTransform(smoothProgress, [0, 1], [-16, 16]);
+  const cardFloat1 = useTransform(smoothProgress, [0, 1], [0, 0]);
+  const cardFloat2 = useTransform(smoothProgress, [0, 1], [16, -16]);
+  const cardFloats = [cardFloat0, cardFloat1, cardFloat2];
 
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
@@ -49,7 +69,7 @@ export function CorporateActivities() {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 } 
+      transition: { staggerChildren: 0.14, delayChildren: 0.1 } 
     }
   };
 
@@ -59,57 +79,60 @@ export function CorporateActivities() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-black relative overflow-hidden transition-colors">
+    <section 
+      ref={containerRef}
+      className="py-16 md:py-24 bg-white dark:bg-black relative overflow-hidden transition-colors border-t border-[#7BA4D0]/15"
+    >
       <div className="container-custom relative z-10">
         
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-2xl"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] overflow-visible">
-              Corporate{" "}
-              <span className="font-serif italic font-normal text-[#2E5E99] inline-block pt-1 pb-2 pr-2">
-                Activities
-              </span>
-            </h2>
-          </motion.div>
+          <div className="max-w-2xl">
+            <div className="mb-2 overflow-visible">
+              <ScrollWipeHeading
+                as="h2"
+                className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+                revealedColor="currentColor"
+                wipingColor="#2E5E99"
+                unrevealedColor="rgba(148, 163, 184, 0.4)"
+              >
+                Corporate Culture &
+              </ScrollWipeHeading>
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+                Team Engagement
+              </div>
+            </div>
+          </div>
           
-          <motion.p 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-[#0D2440]/70 dark:text-silver/70 text-sm sm:text-base max-w-md font-normal leading-relaxed"
-          >
+          <p className="text-[#0D2440]/70 dark:text-silver/70 text-sm sm:text-base max-w-md font-normal leading-relaxed">
             Beyond engineering, we are committed to workforce empowerment, social responsibility, and a vibrant manufacturing culture.
-          </motion.p>
+          </p>
         </div>
 
-        {/* Corporate Activity Cards: Single visible card at a time with horizontal scroll on mobile (< md), 3-column grid on desktop (>= md) */}
+        {/* Corporate Activity Cards: 3-Column Grid on Desktop */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
             ref={cardsRef}
             onScroll={handleMobileScroll}
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            animate={isInView ? "visible" : "hidden"}
             className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-6 lg:gap-8 no-scrollbar w-full"
           >
             {activities.map((act, idx) => (
               <motion.div 
+                key={idx}
                 variants={itemVariants}
-                key={idx} 
-                className="group bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 rounded-2xl sm:rounded-3xl p-6 sm:p-7 overflow-hidden hover:border-[#2E5E99]/60 hover:bg-[#F1F6FB] transition-all duration-500 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center"
+                style={{ y: cardFloats[idx] }}
+                whileHover={{ 
+                  y: -7, 
+                  transition: { type: "spring", stiffness: 350, damping: 25 } 
+                }}
+                className="group bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl p-6 sm:p-7 overflow-hidden transition-colors duration-300 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Image Side - Compact 16:10 Ratio */}
                 <div className="space-y-5">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl sm:rounded-2xl border border-[#7BA4D0]/20 dark:border-white/10 shrink-0 bg-slate-100 dark:bg-[#0D2440]">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-[#7BA4D0]/20 dark:border-white/10 shrink-0 bg-slate-100 dark:bg-[#0D2440]">
                     <Image
                       src={act.image}
                       alt={act.title}
@@ -117,10 +140,14 @@ export function CorporateActivities() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
+                    {/* Squircle Category Tag */}
+                    <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md border border-[#7BA4D0]/25 text-[10px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider shadow-sm">
+                      {act.category}
                     </div>
+                  </div>
 
                   <div className="space-y-2.5">
-                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
                       {act.title}
                     </h3>
                     <p className="text-[#0D2440]/75 dark:text-silver/80 text-xs sm:text-sm leading-relaxed font-normal">
@@ -131,14 +158,18 @@ export function CorporateActivities() {
 
                 {/* Footer Marker */}
                 <div className="pt-4 mt-5 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs font-semibold text-[#0D2440]/70 dark:text-silver/70 group-hover:text-[#2E5E99] transition-colors">
-                  <span className="uppercase tracking-wider text-[10px]">Culture Initiative</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#2E5E99] group-hover:translate-x-1 transition-transform" />
+                  <span className="uppercase tracking-wider text-[10px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0]">
+                    Culture Initiative
+                  </span>
+                  <div className="w-7 h-7 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Mobile Pagination Indicator Dots */}
+          {/* Mobile Pagination Indicator Dots - Squircle */}
           <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
             {activities.map((_, i) => (
               <button
@@ -150,8 +181,8 @@ export function CorporateActivities() {
                   }
                 }}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440]" : "w-1.5 bg-[#7BA4D0]/40"
+                  "h-1.5 rounded-sm transition-all duration-300",
+                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
                 )}
                 aria-label={`Go to corporate activity card ${i + 1}`}
               />

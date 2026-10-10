@@ -3,7 +3,9 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Play, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const videos = [
   {
@@ -36,17 +38,22 @@ export function GalleryVideo() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-white dark:bg-black transition-colors">
+    <section className="py-20 md:py-28 bg-[#F8FAFC]/50 dark:bg-[#070b14]/50 border-y border-[#7BA4D0]/15 dark:border-[#2E5E99]/20 transition-colors">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-4 leading-[1.22] overflow-visible">
-            In{" "}
-            <span className="font-serif italic font-normal text-[#2E5E99] inline-block pt-1 pb-2 pr-2">
-              Action
-            </span>
-          </h2>
-          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg leading-relaxed">
+          <div className="mb-4 overflow-visible">
+            <ScrollWipeHeading
+              as="h2"
+              className="text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
+              revealedColor="currentColor"
+              wipingColor="#2E5E99"
+              unrevealedColor="rgba(148, 163, 184, 0.4)"
+            >
+              In <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">Action</span>
+            </ScrollWipeHeading>
+          </div>
+          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg leading-relaxed font-normal">
             Experience our manufacturing precision through immersive video 
             walkthroughs and process showcases.
           </p>
@@ -58,10 +65,14 @@ export function GalleryVideo() {
           onScroll={handleScroll}
           className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 no-scrollbar pb-4 md:pb-0"
         >
-          {videos.map((v) => (
-            <div 
+          {videos.map((v, idx) => (
+            <motion.div 
               key={v.id}
-              className="group relative aspect-video w-full md:w-auto shrink-0 md:shrink snap-center rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-[#F8FAFC] dark:bg-charcoal/50 border border-[#7BA4D0]/25 transition-all duration-500"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative aspect-video w-full md:w-auto shrink-0 md:shrink snap-center rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-slate-900 border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 shadow-lg hover:shadow-2xl transition-all duration-500"
               onClick={() => setActiveVideo(v.url)}
             >
               <Image
@@ -69,15 +80,15 @@ export function GalleryVideo() {
                 alt={v.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-85"
               />
               
               {/* Soft Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/85 via-transparent to-black/20 group-hover:opacity-90 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-black/20 to-black/20 group-hover:opacity-85 transition-opacity duration-300" />
               
               {/* Play Button Capsule */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 text-[#0D2440] dark:bg-[#7BA4D0] dark:text-[#0D2440] flex items-center justify-center backdrop-blur-md group-hover:scale-110 group-hover:bg-[#0D2440] group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-[#0D2440] transition-all duration-300">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-white/90 text-[#0D2440] dark:bg-[#2E5E99] dark:text-white flex items-center justify-center backdrop-blur-md shadow-xl group-hover:scale-110 group-hover:bg-[#0D2440] group-hover:text-white dark:group-hover:bg-[#7BA4D0] dark:group-hover:text-[#0D2440] transition-all duration-300">
                   <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
                 </div>
               </div>
@@ -88,27 +99,27 @@ export function GalleryVideo() {
                   <h3 className="text-white font-heading font-bold text-xl sm:text-2xl mb-1">
                     {v.title}
                   </h3>
-                  <p className="text-silver/80 text-xs sm:text-sm">
+                  <p className="text-silver/80 text-xs sm:text-sm font-normal">
                     JPAN Precision Facility Tour
                   </p>
                 </div>
-                <span className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-white/20 text-white backdrop-blur-md border border-white/30 shrink-0">
+                <span className="px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wider uppercase bg-white/20 text-white backdrop-blur-md border border-white/30 shrink-0">
                   {v.duration} Min
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Dot Indicators for Mobile Scroll */}
         {videos.length > 1 && (
-          <div className="flex justify-center gap-2 mt-6 md:hidden">
+          <div className="flex justify-center gap-1.5 mt-6 md:hidden">
             {videos.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  activeIndex === index ? "bg-[#0D2440] w-6" : "bg-[#7BA4D0]/40"
+                  "h-1.5 rounded-sm transition-all duration-300",
+                  activeIndex === index ? "bg-[#0D2440] dark:bg-[#7BA4D0] w-6" : "bg-[#7BA4D0]/30 dark:bg-white/20 w-2"
                 )}
                 onClick={() => {
                   if (scrollContainerRef.current) {
@@ -128,19 +139,19 @@ export function GalleryVideo() {
       {/* Video Modal */}
       {activeVideo && (
         <div 
-          className="fixed inset-0 z-[100] bg-[#0D2440]/95 backdrop-blur-2xl flex items-center justify-center p-4 md:p-10 animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] bg-[#0D2440]/90 dark:bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300"
           onClick={() => setActiveVideo(null)}
         >
           <button 
-            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-[110]"
+            className="absolute top-6 right-6 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all duration-200 z-[110]"
             onClick={() => setActiveVideo(null)}
             aria-label="Close video"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
           
           <div 
-            className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden border border-white/20"
+            className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
