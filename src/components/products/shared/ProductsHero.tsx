@@ -1,200 +1,316 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+
+// 12 Flagship J-Pan Products for the 3D Inspection Stream
+const inspectionProducts = [
+  {
+    id: 114,
+    name: "Copper Distributor (24 Holes)",
+    category: "Copper Components",
+    material: "Pure Deoxidized Copper",
+    spec: "±0.005mm Tolerance",
+    image: "/products/Copper Distributor - 24 Holes.png",
+  },
+  {
+    id: 104,
+    name: "Brass Distributor (Coated)",
+    category: "Brass Components",
+    material: "High-Tensile Brass",
+    spec: "Balanced Dispensing",
+    image: "/products/Brass Distributors.png",
+  },
+  {
+    id: 139,
+    name: "Refnet Joint (Y-Joint)",
+    category: "Copper Components",
+    material: "High-Purity Copper",
+    spec: "Optimal Flow Routing",
+    image: "/products/Refnet or Y Joint-1.png",
+  },
+  {
+    id: 100,
+    name: "5A Distributor",
+    category: "Copper Components",
+    material: "Refrigerant Grade Cu",
+    spec: "Equal Pressure Chamber",
+    image: "/products/5A-Distributor.png",
+  },
+  {
+    id: 108,
+    name: "Capillary Tube Assembly",
+    category: "Copper Components",
+    material: "Precision Bended Cu",
+    spec: "3D CNC Formed",
+    image: "/products/CAPILLARY TUBE ASSEMBLY.png",
+  },
+  {
+    id: 143,
+    name: "SS Thermal Assembly 1",
+    category: "Stainless Steel",
+    material: "Grade 304 Stainless",
+    spec: "Helium Leak Tested",
+    image: "/products/SS Assembly 1.png",
+  },
+  {
+    id: 105,
+    name: "Brazing Ring",
+    category: "Copper Components",
+    material: "Silver-Copper Alloy",
+    spec: "Zero Slag Purity",
+    image: "/products/Brazing Ring.png",
+  },
+  {
+    id: 106,
+    name: "Bus Bar",
+    category: "Copper Components",
+    material: "ETP Electrical Copper",
+    spec: "100% Conductivity",
+    image: "/products/Bus Bar.png",
+  },
+  {
+    id: 121,
+    name: "Flare Nuts",
+    category: "Brass Components",
+    material: "Forged Brass CW617N",
+    spec: "ISO Metric Threaded",
+    image: "/products/Flare Nuts.png",
+  },
+  {
+    id: 113,
+    name: "Condenser Inlet Loop",
+    category: "Copper Components",
+    material: "Automotive Grade Copper",
+    spec: "Zero-Defect Formed",
+    image: "/products/Condenser Inlet.png",
+  },
+  {
+    id: 144,
+    name: "SS Dual Assembly",
+    category: "Stainless Steel",
+    material: "Automotive Grade SS",
+    spec: "High Vibration Duty",
+    image: "/products/SS Assembly 2.png",
+  },
+  {
+    id: 140,
+    name: "Return Bend & Sensor Holder",
+    category: "Copper Components",
+    material: "Seamless Copper Tubing",
+    spec: "OEM Verified Fit",
+    image: "/products/Return Bend and Sensor Holder.png",
+  },
+];
 
 export function ProductsHero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  const [virtualIndex, setVirtualIndex] = useState(0);
+  const [stepX, setStepX] = useState(145);
+  const totalProducts = inspectionProducts.length;
 
-  // Premium Parallax Math
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // Responsive step spacing
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setStepX(100);
+      } else if (window.innerWidth < 1024) {
+        setStepX(125);
+      } else {
+        setStepX(145);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  // Staggered Text Animation Variants
-  const sentence = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
-    },
+  // Automatic transition: Slides advance smoothly every 3 seconds (3000ms)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVirtualIndex((prev) => prev + 1);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Smooth scroll handler to the catalog filter bar
+  const scrollToCatalog = (category?: string) => {
+    if (category) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("category", category);
+      window.history.pushState({}, "", url);
+      window.dispatchEvent(new Event("popstate"));
+    }
+    const filterElement =
+      document.querySelector("input[placeholder*='Search']") ||
+      document.querySelector("main");
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   };
 
-  const letter = {
-    hidden: { opacity: 0, y: 50, rotateX: -45 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
-  const titleText = "Precision Engineered.";
-  const subtitleText = "Tubular Solutions.";
+  // Generate virtual window of visible cards around the current index
+  // Range from -4 to +4 (9 visible fanned cards)
+  const visibleCards = [];
+  for (let offset = -4; offset <= 4; offset++) {
+    const k = virtualIndex + offset;
+    const productIndex = ((k % totalProducts) + totalProducts) % totalProducts;
+    visibleCards.push({
+      key: k,
+      product: inspectionProducts[productIndex],
+      offset: offset,
+    });
+  }
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-20"
-    >
-      {/* Dynamic Cinematic Inset Frame */}
-      <motion.div
-        initial={{ 
-          opacity: 0, 
-          scale: 0.95, 
-          borderRadius: "100px",
-          top: "2rem",
-          bottom: "2rem",
-          left: "2rem",
-          right: "2rem"
-        }}
-        whileInView={{ 
-          opacity: 1, 
-          scale: 1, 
-          borderRadius: "0px",
-          top: "0px",
-          bottom: "0px",
-          left: "0px",
-          right: "0px"
-        }}
-        viewport={{ once: true }}
-        transition={{ 
-          opacity: { duration: 1 },
-          scale: { duration: 1 },
-          default: { duration: 4, delay: 2, ease: [0.16, 1, 0.3, 1] } 
-        }}
-        className="absolute z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
-      >
-        <motion.div 
-          style={{ y: imageY, scale: imageScale }}
-          className="absolute inset-0 w-full h-full origin-center"
-        >
-          <Image
-            src="/images/products-hero-craftsmanship.jpg"
-            alt="J Pan Precision Products & Engineering"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center brightness-90 dark:brightness-[0.35] saturate-[0.85] contrast-[1.1]"
-          />
-        </motion.div>
-        
-        {/* Gradients for typography legibility and depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-[#0D2440]/30 to-transparent mix-blend-multiply dark:mix-blend-normal" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
-        
-        {/* Subtle glowing edges */}
-        <motion.div 
-          initial={{ borderRadius: "100px" }}
-          whileInView={{ borderRadius: "0px" }}
-          viewport={{ once: true }}
-          transition={{ duration: 4, delay: 2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 border border-white/20 dark:border-white/10 pointer-events-none mix-blend-overlay" 
-        />
-      </motion.div>
+    <section className="relative w-full flex flex-col justify-start overflow-hidden pt-28 pb-12 md:pt-36 md:pb-16 bg-gradient-to-b from-[#EEF4FB] via-[#F8FAFC] to-white dark:from-[#060D17] dark:via-[#081220] dark:to-[#050B14] transition-colors duration-500">
+      {/* Background Architectural Grid Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(#2E5E99_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.05] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[380px] bg-[#7BA4D0]/15 dark:bg-[#2E5E99]/15 blur-[130px] rounded-full pointer-events-none" />
 
-      {/* Centered Hero Content Lockup */}
-      <motion.div 
-        style={{ y: textY, opacity: textOpacity }}
-        className="container-custom relative z-10 w-full flex flex-col items-center text-center justify-center h-full px-4"
-      >
-        {/* Floating Glassmorphic Badge */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 md:mb-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
+      {/* 
+        ========================================================================
+        TOP HEADING: Positioned at the very top as requested
+        ========================================================================
+      */}
+      <div className="container-custom relative z-10 w-full max-w-4xl mx-auto text-center mb-8 sm:mb-12 px-4">
+        <ScrollWipeHeading
+          as="h1"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.08] tracking-tight block"
+          revealedColor="currentColor"
+          wipingColor="#2E5E99"
+          unrevealedColor="rgba(148, 163, 184, 0.4)"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7BA4D0] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7BA4D0]"></span>
+          <span>Precision Engineered.</span> <br />
+          <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">
+            Tubular Solutions.
           </span>
-          <span className="text-xs sm:text-sm font-sans font-bold text-white uppercase tracking-[0.3em]">
-            The Catalog
-          </span>
-        </motion.div>
+        </ScrollWipeHeading>
+      </div>
 
-        {/* Staggered 3D Typography Reveal */}
-        <motion.div
-          variants={sentence}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-col items-center justify-center space-y-2 md:space-y-4 max-w-5xl mx-auto w-full"
-          style={{ perspective: "1000px" }}
+      {/* 
+        ========================================================================
+        FAVORITE 3D FANNED CAROUSEL DESIGN (Flicker-Free Virtual Window Architecture)
+        - Horizontal fanned arc with 3D inward tilt
+        - Directional smooth translation: no card ever flips or teleports
+        - Automatically changes every 3 seconds
+        - Zero unneeded UI elements
+        ========================================================================
+      */}
+      <div className="relative w-full max-w-7xl mx-auto overflow-hidden py-4 select-none">
+        <div
+          className="relative w-full h-[390px] sm:h-[430px] md:h-[460px] flex items-center justify-center [perspective:1200px]"
+          style={{ transformStyle: "preserve-3d" }}
         >
-          <motion.h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-heading font-black text-white tracking-tight leading-[1.05] text-balance text-center [word-break:keep-all] [overflow-wrap:normal]">
-            {titleText.split(" ").map((word, wordIndex, wordsArr) => (
-              <span key={word + "-" + wordIndex} className="inline-block whitespace-nowrap">
-                {word.split("").map((char, charIndex) => (
-                  <motion.span key={char + "-" + charIndex} variants={letter} className="inline-block">
-                    {char}
-                  </motion.span>
-                ))}
-                {wordIndex < wordsArr.length - 1 && (
-                  <span className="inline-block">&nbsp;</span>
+          {visibleCards.map(({ key, product, offset }) => {
+            const absOffset = Math.abs(offset);
+
+            // 3D coverflow geometry
+            const xPos = offset * stepX;
+            const rotateY =
+              offset === 0
+                ? 0
+                : offset < 0
+                ? Math.min(22 + (absOffset - 1) * 9, 44)
+                : -Math.min(22 + (absOffset - 1) * 9, 44);
+            const zPos = offset === 0 ? 50 : -absOffset * 48;
+            const scale = offset === 0 ? 1.05 : Math.max(0.74, 1 - absOffset * 0.08);
+            const zIndex = 40 - absOffset * 6;
+            const opacity =
+              absOffset >= 4
+                ? 0.25
+                : absOffset === 3
+                ? 0.72
+                : absOffset === 2
+                ? 0.92
+                : 1;
+
+            const isCenter = offset === 0;
+
+            return (
+              <motion.div
+                key={key}
+                onClick={() => {
+                  if (isCenter) {
+                    scrollToCatalog(product.category);
+                  } else {
+                    setVirtualIndex((prev) => prev + offset);
+                  }
+                }}
+                animate={{
+                  x: xPos,
+                  z: zPos,
+                  rotateY: rotateY,
+                  scale: scale,
+                  opacity: opacity,
+                }}
+                transition={{
+                  duration: 0.65,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                style={{
+                  zIndex: zIndex,
+                  transformStyle: "preserve-3d",
+                }}
+                className={`absolute w-[220px] sm:w-[250px] md:w-[270px] h-[310px] sm:h-[350px] md:h-[380px] rounded-[28px] sm:rounded-[32px] p-5 sm:p-6 flex flex-col justify-between cursor-pointer transition-shadow duration-300 ${
+                  isCenter
+                    ? "bg-white dark:bg-[#0e1a2d] border-2 border-[#2E5E99]/40 dark:border-[#7BA4D0]/40 shadow-2xl shadow-[#2E5E99]/20"
+                    : "bg-white/95 dark:bg-[#0c1527]/95 border border-slate-200/90 dark:border-white/10 shadow-lg shadow-[#0D2440]/8 hover:brightness-105"
+                }`}
+              >
+                {/* Subtle Ambient Light Glow on Active Center Card */}
+                {isCenter && (
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#EBF3FC]/60 via-transparent to-transparent rounded-[28px] sm:rounded-[32px] pointer-events-none" />
                 )}
-              </span>
-            ))}
-          </motion.h1>
-          {subtitleText && (
-            <motion.h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[1.05] text-balance text-center pr-2 [word-break:keep-all] [overflow-wrap:normal]">
-              {subtitleText.split(" ").map((word, wordIndex, wordsArr) => (
-                <span key={word + "-" + wordIndex} className="inline-block whitespace-nowrap">
-                  {word.split("").map((char, charIndex) => (
-                    <motion.span key={char + "-" + charIndex} variants={letter} className="inline-block">
-                      {char}
-                    </motion.span>
-                  ))}
-                  {wordIndex < wordsArr.length - 1 && (
-                    <span className="inline-block">&nbsp;</span>
-                  )}
-                </span>
-              ))}
-            </motion.h2>
-          )}
-        </motion.div>
 
-        {/* Subtitle with fade up */}
-        <motion.p 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 sm:mt-12 text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto"
-        >
-          Zero-defect brass, copper, and steel components engineered with sub-micron precision for automotive, HVAC, and industrial leaders worldwide.
-        </motion.p>
-      </motion.div>
+                {/* Card Top: Clean Category Badge (No Part Codes) */}
+                <div className="relative z-10 flex items-center justify-between">
+                  <span
+                    className={`px-3 py-1 rounded-lg text-[10px] font-sans font-bold uppercase tracking-wider ${
+                      isCenter
+                        ? "bg-[#2E5E99] text-white shadow-sm"
+                        : "bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0]"
+                    }`}
+                  >
+                    {product.category.replace(" Components", "")}
+                  </span>
+                </div>
 
-      {/* Animated Scroll Indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, delay: 1.8 }}
-        className="absolute bottom-16 z-20 flex flex-col items-center gap-4"
-      >
-        <span className="text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.4em]">Scroll to Explore</span>
-        <div className="w-[1px] h-12 bg-white/20 overflow-hidden relative">
-          <motion.div 
-            animate={{ y: ["-100%", "200%"] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-            className="w-full h-1/2 bg-white absolute top-0 left-0"
-          />
+                {/* Card Center: Crystal Clear Transparent Product Cutout Image */}
+                <div className="relative z-10 w-full h-[150px] sm:h-[180px] md:h-[200px] my-auto flex items-center justify-center p-2">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 240px, 270px"
+                    priority={isCenter}
+                    className={`object-contain p-2 transition-transform duration-500 drop-shadow-md ${
+                      isCenter ? "scale-105 drop-shadow-xl" : ""
+                    }`}
+                  />
+                </div>
+
+                {/* Card Bottom: Product Title & Engineering Specification */}
+                <div className="relative z-10 pt-2.5 border-t border-slate-100 dark:border-white/10">
+                  <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white leading-tight line-clamp-1">
+                    {product.name}
+                  </h4>
+                  <div className="flex items-center justify-between mt-1 text-[11px] text-slate-500 dark:text-silver/70">
+                    <span className="truncate max-w-[170px]">{product.spec}</span>
+                    <ArrowRight
+                      className={`w-3.5 h-3.5 text-[#2E5E99] transition-transform ${
+                        isCenter ? "translate-x-0.5 opacity-100" : "opacity-40"
+                      }`}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

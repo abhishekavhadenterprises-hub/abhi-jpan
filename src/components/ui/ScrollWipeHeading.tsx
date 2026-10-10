@@ -16,7 +16,7 @@ export function ScrollWipeHeading({
   as: Component = "h2",
   children,
   className = "",
-  revealedColor = "#111111", // JPan Black
+  revealedColor = "currentColor", // Respects Tailwind text color (e.g. text-white, text-[#0D2440])
   wipingColor = "#2E5E99", // JPan Blue
   unrevealedColor = "rgba(156, 163, 175, 0.4)", // Muted grey/transparent
 }: ScrollWipeHeadingProps) {

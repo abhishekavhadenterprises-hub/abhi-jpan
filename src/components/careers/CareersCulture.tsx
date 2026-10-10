@@ -63,6 +63,7 @@ export function CareersCulture() {
 
   return (
     <section 
+      id="culture"
       ref={containerRef}
       className="py-24 md:py-32 bg-slate-50/60 dark:bg-black overflow-hidden relative border-b border-slate-200/70 dark:border-white/5"
     >

@@ -154,7 +154,13 @@ export function Infrastructure() {
               <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[10px] tracking-[0.2em] text-white uppercase mb-4 font-medium backdrop-blur-md">
                 {activePillar.badge}
               </div>
-              <ScrollWipeHeading as="h3" className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight mb-3 group-hover:translate-x-2 transition-transform duration-700">
+              <ScrollWipeHeading
+                as="h3"
+                revealedColor="#FFFFFF"
+                wipingColor="#93C5FD"
+                unrevealedColor="rgba(255, 255, 255, 0.45)"
+                className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight mb-3 group-hover:translate-x-2 transition-transform duration-700"
+              >
                 {activePillar.title}
               </ScrollWipeHeading>
               <p className="text-white/70 text-sm md:text-base font-light leading-relaxed mb-6 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">

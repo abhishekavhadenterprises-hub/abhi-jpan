@@ -182,7 +182,15 @@ export function AboutSnapshot() {
                 <div className="absolute bottom-0 left-0 right-0 z-10 p-6 lg:p-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                   <div>
                     <span className="block text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">{activeModule.specLabel}</span>
-                    <ScrollWipeHeading as="h3" className="text-2xl md:text-3xl font-light text-white tracking-tight leading-tight max-w-sm">{activeModule.headline}</ScrollWipeHeading>
+                    <ScrollWipeHeading
+                      as="h3"
+                      revealedColor="#FFFFFF"
+                      wipingColor="#93C5FD"
+                      unrevealedColor="rgba(255, 255, 255, 0.45)"
+                      className="text-2xl md:text-3xl font-light text-white tracking-tight leading-tight max-w-sm"
+                    >
+                      {activeModule.headline}
+                    </ScrollWipeHeading>
                   </div>
                   <div className="text-left md:text-right p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
                     <span className="block text-3xl md:text-4xl font-light text-white tracking-tighter mb-1">{activeModule.specValue}</span>

@@ -149,13 +149,6 @@ export function Hero() {
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -60, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               >
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/10 border border-slate-200/90 dark:border-white/15 mb-3 sm:mb-4 backdrop-blur-md shadow-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] shadow-[0_0_6px_#2E5E99]" />
-                  <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#0D2440] dark:text-slate-200 font-bold">
-                    PRECISION TUBULAR ENGINEERING
-                  </span>
-                </div>
-
                 <ScrollWipeHeading as="h1" className="text-3xl sm:text-5xl md:text-5xl lg:text-[3.75rem] xl:text-[4.5rem] 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                   Precision in <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D2440] via-[#1E3A8A] to-[#2E5E99] dark:from-white dark:via-slate-200 dark:to-slate-400">
@@ -209,41 +202,7 @@ export function Hero() {
             </div>
 
             {/* Right Column: Industrial Sector Dossier & Reference Watermark */}
-            <div className="lg:col-span-4 flex flex-col justify-between items-start lg:items-end self-stretch pt-2 lg:pt-0">
-              <motion.div
-                initial={{ x: 60, opacity: 0 }}
-                animate={isRevealed ? { x: 0, opacity: 1 } : { x: 60, opacity: 0 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-                className="w-full lg:w-auto"
-              >
-
-                {/* Interactive Facility Aerial Showcase Card */}
-                <div
-                  onMouseEnter={triggerAerialReveal}
-                  onClick={triggerAerialReveal}
-                  className="group/facility relative mt-3 w-full p-2 rounded-2xl bg-white/90 dark:bg-slate-900/85 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer"
-                >
-                  <div className="relative w-full h-24 sm:h-28 rounded-xl overflow-hidden">
-                    <Image
-                      src="/images/jpan-facility-aerial.jpg"
-                      alt="J Pan Greater Noida Manufacturing Plant"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 380px"
-                      className="object-cover object-center transition-transform duration-700 ease-out group-hover/facility:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/85 via-[#0D2440]/25 to-transparent transition-opacity duration-300 group-hover/facility:opacity-70" />
-                    <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-white font-mono text-[10px]">
-                      <span className="font-bold flex items-center gap-1.5 drop-shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-                        PLANT VI // GREATER NOIDA
-                      </span>
-                      <span className="text-[9px] uppercase tracking-wider text-white/95 bg-white/20 group-hover/facility:bg-white/35 px-2 py-0.5 rounded-full backdrop-blur-md transition-colors">
-                        Hover to inspect
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+            <div className="lg:col-span-4 flex flex-col justify-end items-start lg:items-end self-stretch pt-2 lg:pt-0">
 
               {/* Reference Script Watermark: precision engineering */}
               <motion.div

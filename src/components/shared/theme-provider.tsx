@@ -17,6 +17,19 @@ if (typeof window !== "undefined") {
     }
     origConsoleError(...args);
   };
+
+  // Ensure default is always Light Mode for any visitor opening the web
+  try {
+    const isDefaultApplied = sessionStorage.getItem("jpan_light_mode_default_applied");
+    if (!isDefaultApplied) {
+      localStorage.setItem("theme", "light");
+      sessionStorage.setItem("jpan_light_mode_default_applied", "true");
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
+  } catch {
+    // ignore
+  }
 } else {
   // Also filter on server side during SSR
   const origConsoleError = console.error;
