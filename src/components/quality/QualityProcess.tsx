@@ -59,15 +59,6 @@ export function QualityProcess() {
 
   const timelineScale = useTransform(smoothProgress, [0, 1], [0, 1]);
 
-  // Differential vertical scroll floating offsets for each of the 5 cards
-  const cardFloat0 = useTransform(smoothProgress, [0, 1], [-16, 16]);
-  const cardFloat1 = useTransform(smoothProgress, [0, 1], [10, -10]);
-  const cardFloat2 = useTransform(smoothProgress, [0, 1], [-20, 20]);
-  const cardFloat3 = useTransform(smoothProgress, [0, 1], [12, -12]);
-  const cardFloat4 = useTransform(smoothProgress, [0, 1], [-14, 14]);
-
-  const cardFloats = [cardFloat0, cardFloat1, cardFloat2, cardFloat3, cardFloat4];
-
   // Dynamic node activation pulse as timeline progresses across thresholds
   const nodeScale0 = useTransform(smoothProgress, [0, 0.15, 0.3], [1, 1.15, 1]);
   const nodeScale1 = useTransform(smoothProgress, [0.15, 0.35, 0.5], [1, 1.15, 1]);
@@ -150,7 +141,7 @@ export function QualityProcess() {
             className="absolute top-[5rem] left-[10%] w-[80%] h-1 bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99] rounded-sm hidden lg:block origin-left"
           />
 
-          {/* Process Stepper Cards with Scroll Parallax & Node Scrub */}
+          {/* Process Stepper Cards with Level Alignment, Slide-Up Reveal & Active Timeline */}
           <div className="flex flex-col justify-between w-full">
             <motion.div 
               ref={cardsRef}
@@ -164,24 +155,23 @@ export function QualityProcess() {
                 <motion.div 
                   key={idx} 
                   variants={itemVariants}
-                  style={{ y: cardFloats[idx] }}
                   whileHover={{ 
                     y: -6, 
-                    transition: { type: "spring", stiffness: 350, damping: 25 } 
+                    transition: { duration: 0.25, ease: "easeOut" } 
                   }}
-                  className="group flex flex-col items-center text-center p-5 sm:p-6 bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center transition-colors duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 cursor-default"
+                  className="group relative flex flex-col items-center text-center p-5 sm:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 cursor-default h-full"
                 >
                   {/* Journey Node with Scroll Threshold Activation */}
                   <div className="relative mb-4 sm:mb-5">
                     <motion.div 
                       style={{ scale: nodeScales[idx] }}
-                      className="w-16 h-16 sm:w-16 sm:h-16 bg-[#EBF3FC] dark:bg-[#0D2440] border-2 border-[#7BA4D0]/40 group-hover:border-[#2E5E99] rounded-2xl flex items-center justify-center transition-colors duration-300 group-hover:bg-[#2E5E99] overflow-hidden relative z-10 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs"
+                      className="w-16 h-16 sm:w-16 sm:h-16 bg-[#EBF3FC] dark:bg-[#0D2440] border-2 border-[#7BA4D0]/40 group-hover:border-[#2E5E99] rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-[#2E5E99] overflow-hidden relative z-10 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs"
                     >
                       <step.icon className="w-7 h-7 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
                     </motion.div>
                     
                     {/* Step Number Squircle Badge */}
-                    <div className="absolute -top-2 -right-2 w-6.5 h-6.5 bg-[#0D2440] dark:bg-white text-white dark:text-[#0D2440] font-bold text-xs flex items-center justify-center rounded-lg border-2 border-white dark:border-black group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-500 z-20 shadow-xs">
+                    <div className="absolute -top-2 -right-2 w-7 h-7 bg-[#0D2440] dark:bg-white text-white dark:text-[#0D2440] font-heading font-black text-xs flex items-center justify-center rounded-lg border-2 border-white dark:border-black group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-500 z-20 shadow-xs">
                       {step.step}
                     </div>
                   </div>

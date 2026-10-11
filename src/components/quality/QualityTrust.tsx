@@ -45,21 +45,6 @@ export function QualityTrust() {
     offset: ["start end", "end start"],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    restDelta: 0.001,
-  });
-
-  const pillarFloat0 = useTransform(smoothProgress, [0, 1], [-18, 18]);
-  const pillarFloat1 = useTransform(smoothProgress, [0, 1], [14, -14]);
-  const pillarFloat2 = useTransform(smoothProgress, [0, 1], [-18, 18]);
-  const pillarFloat3 = useTransform(smoothProgress, [0, 1], [14, -14]);
-
-  const pillarFloats = [pillarFloat0, pillarFloat1, pillarFloat2, pillarFloat3];
-  const watermarkY = useTransform(smoothProgress, [0, 1], [-22, 22]);
-  const shieldFloatY = useTransform(smoothProgress, [0, 1], [-8, 8]);
-
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
     const container = cardsRef.current;
@@ -113,7 +98,7 @@ export function QualityTrust() {
           </motion.div>
         </div>
 
-        {/* Monumental Institutional Trust Pillars with Horizon Parallax Scrub */}
+        {/* Monumental Institutional Trust Pillars: Level 4-Column Bento Grid with Scale-In Reveal */}
         <div className="flex flex-col justify-between w-full">
           <div 
             ref={cardsRef}
@@ -123,51 +108,38 @@ export function QualityTrust() {
             {pillars.map((p, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, scale: 0.98, y: 25 }}
-                animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.98, y: 25 }}
+                initial={{ opacity: 0, scale: 0.94, y: 20 }}
+                animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.94, y: 20 }}
                 transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                style={{ y: pillarFloats[idx] }}
-                className="group relative w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center"
+                whileHover={{ 
+                  y: -6, 
+                  transition: { duration: 0.25, ease: "easeOut" } 
+                }}
+                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl p-7 sm:p-8 transition-all duration-300 overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
-                <motion.div 
-                  whileHover={{ 
-                    y: -8, 
-                    transition: { type: "spring", stiffness: 350, damping: 25 } 
-                  }}
-                  className="relative h-full bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl p-7 sm:p-8 transition-colors duration-300 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
-                >
-                  {/* Giant Numeric Watermark with Scroll Scrub */}
-                  <motion.div 
-                    style={{ y: watermarkY }}
-                    className="absolute top-4 right-6 text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500 select-none pointer-events-none"
-                  >
-                    {p.index}
-                  </motion.div>
+                {/* Icon Box */}
+                <div className="w-14 h-14 mb-6 sm:mb-8 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] relative z-10 shrink-0 shadow-xs">
+                  <p.icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
+                </div>
 
-                  {/* Icon Box */}
-                  <div className="w-14 h-14 mb-6 sm:mb-8 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] relative z-10 shrink-0 shadow-xs">
-                    <p.icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
-                  </div>
+                <div className="space-y-2.5 relative z-10 flex-grow mb-6">
+                  <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white leading-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                    {p.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">
+                    {p.desc}
+                  </p>
+                </div>
 
-                  <div className="space-y-2.5 relative z-10 flex-grow mb-6">
-                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white leading-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
-                      {p.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">
-                      {p.desc}
-                    </p>
+                {/* Card Footer Marker */}
+                <div className="pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10">
+                  <span className="uppercase tracking-wider text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0]">
+                    Institutional Trust
+                  </span>
+                  <div className="w-7 h-7 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
+                    <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
                   </div>
-
-                  {/* Card Footer Marker */}
-                  <div className="pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs font-semibold relative z-10">
-                    <span className="uppercase tracking-wider text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0]">
-                      Institutional Trust
-                    </span>
-                    <div className="w-7 h-7 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
-                      <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
-                    </div>
-                  </div>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -203,7 +175,7 @@ export function QualityTrust() {
           <div className="bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/35 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
             <div className="flex items-center gap-4 sm:gap-6">
               <motion.div 
-                style={{ y: shieldFloatY }}
+                whileHover={{ scale: 1.05 }}
                 className="w-14 h-14 shrink-0 bg-white dark:bg-[#0D2440] rounded-2xl flex items-center justify-center border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs"
               >
                 <ShieldCheck className="w-7 h-7" strokeWidth={1.75} />

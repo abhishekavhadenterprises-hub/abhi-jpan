@@ -43,23 +43,6 @@ export function QualityCertifications() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Scroll Parallax Hooks for Column Alternation & Watermark Depth
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    restDelta: 0.001,
-  });
-
-  // Alternating column vertical floating offsets
-  const colYEven = useTransform(smoothProgress, [0, 1], [-16, 16]);
-  const colYOdd = useTransform(smoothProgress, [0, 1], [16, -16]);
-  const watermarkY = useTransform(smoothProgress, [0, 1], [-20, 20]);
-
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
     const container = cardsRef.current;
@@ -76,16 +59,18 @@ export function QualityCertifications() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
+        delayChildren: 0.15,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 35 },
+    hidden: { opacity: 0, y: 28, scale: 0.96 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
@@ -123,7 +108,7 @@ export function QualityCertifications() {
           </motion.p>
         </div>
 
-        {/* 4-Column Accreditation Emblem Plaques with Alternating Scroll Parallax */}
+        {/* 4-Column Accreditation Bento Grid with Clean Level Alignment */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
             ref={cardsRef}
@@ -133,29 +118,32 @@ export function QualityCertifications() {
             animate={isInView ? "visible" : "hidden"}
             className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 px-1 md:px-0 gap-5 lg:gap-6 md:overflow-visible no-scrollbar w-full"
           >
-            {certifications.map((cert, idx) => (
+            {certifications.map((cert) => (
               <motion.div 
                 key={cert.index}
                 variants={itemVariants}
-                style={{ y: idx % 2 === 0 ? colYEven : colYOdd }}
                 whileHover={{ 
-                  y: -7, 
-                  transition: { type: "spring", stiffness: 350, damping: 25 } 
+                  y: -6, 
+                  transition: { duration: 0.25, ease: "easeOut" } 
                 }}
-                className="group relative bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-7 sm:p-8 rounded-3xl transition-colors duration-300 shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default"
+                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-7 sm:p-8 rounded-3xl transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default h-full"
               >
-                {/* Giant Numeric Watermark with Scroll Depth Scrub */}
-                <motion.div 
-                  style={{ y: watermarkY }}
-                  className="absolute top-4 right-6 text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500 select-none pointer-events-none"
+                {/* Corner Accent Reveal (#24) */}
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden pointer-events-none">
+                  <div className="absolute top-0 right-0 w-10 h-10 bg-gradient-to-bl from-[#2E5E99]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-bl-3xl" />
+                </div>
+
+                {/* Giant Numeric Watermark */}
+                <div 
+                  className="absolute top-4 right-6 text-7xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500 select-none pointer-events-none"
                 >
                   {cert.index}
-                </motion.div>
+                </div>
 
                 <div className="relative z-10 mb-8">
                   {/* Top Row: Icon Pod + Squircle Tag Badge */}
                   <div className="flex items-center justify-between mb-7">
-                    <div className="w-13 h-13 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                    <div className="w-13 h-13 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:-translate-y-1 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
                       <cert.icon className="w-6 h-6" strokeWidth={1.75} />
                     </div>
                     <span className="text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider px-3 py-1 rounded-xl bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25">
@@ -173,7 +161,7 @@ export function QualityCertifications() {
                 </div>
 
                 {/* Card Footer Marker */}
-                <div className="pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs font-semibold relative z-10">
+                <div className="pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10">
                   <span className="uppercase tracking-wider text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0]">
                     Verified Standard
                   </span>

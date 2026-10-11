@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { Microscope, Zap, FileText, CheckCircle2 } from "lucide-react";
-import { motion, useInView, useScroll, useTransform, useSpring, Variants } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
@@ -31,27 +31,6 @@ export function TestingFacilities() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Dual-Opposing Parallax Hooks
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    restDelta: 0.001
-  });
-
-  // Photo glides downward while facility cards counter-float upward
-  const imageParallaxY = useTransform(smoothProgress, [0, 1], [-35, 35]);
-  const cardFloat0 = useTransform(smoothProgress, [0, 1], [22, -22]);
-  const cardFloat1 = useTransform(smoothProgress, [0, 1], [6, -6]);
-  const cardFloat2 = useTransform(smoothProgress, [0, 1], [-18, 18]);
-  const telemetryFloatY = useTransform(smoothProgress, [0, 1], [10, -10]);
-
-  const facilityFloats = [cardFloat0, cardFloat1, cardFloat2];
-
   const handleMobileScroll = () => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
@@ -68,13 +47,14 @@ export function TestingFacilities() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, x: -25 },
+    hidden: { opacity: 0, x: -32 },
     visible: {
       opacity: 1,
       x: 0,
@@ -130,21 +110,28 @@ export function TestingFacilities() {
                 {facilities.map((f, idx) => (
                   <motion.div 
                     key={idx} 
-                    variants={itemVariants}
-                    style={{ y: facilityFloats[idx] }}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ 
-                      x: 10, 
-                      transition: { type: "spring", stiffness: 350, damping: 25 } 
+                      y: -6, 
+                      transition: { duration: 0.25, ease: "easeOut" } 
                     }}
-                    className="group flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] hover:bg-[#F1F6FB] dark:hover:bg-[#0D2440]/60 transition-colors duration-300 w-full min-w-full md:min-w-0 shrink-0 snap-center shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/6 cursor-default rounded-3xl"
+                    className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 w-full min-w-full md:min-w-0 rounded-3xl shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/6 overflow-hidden shrink-0 snap-center cursor-default"
                   >
                     <div className="w-14 h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl shrink-0 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] transition-all duration-300 shadow-xs">
                       <f.icon className="w-7 h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
                     </div>
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-1.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
-                        {f.name}
-                      </h3>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                          {f.name}
+                        </h3>
+                        <span className="text-xs font-mono font-bold text-[#2E5E99]/60 dark:text-[#7BA4D0]/60">
+                          0{idx + 1}
+                        </span>
+                      </div>
                       <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">
                         {f.desc}
                       </p>
@@ -182,8 +169,7 @@ export function TestingFacilities() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-1 lg:order-2 relative group"
           >
-            <motion.div 
-              style={{ y: imageParallaxY }}
+            <div 
               className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-[#7BA4D0]/30 dark:border-white/15 bg-white dark:bg-[#0D2440] shadow-xl shadow-[#2E5E99]/5"
             >
               <Image
@@ -193,9 +179,8 @@ export function TestingFacilities() {
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               
-              {/* Luxury Floating Telemetry Plaque with Parallax Drift */}
-              <motion.div 
-                style={{ y: telemetryFloatY }}
+              {/* Luxury Floating Telemetry Plaque */}
+              <div 
                 className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md border border-[#7BA4D0]/30 flex items-center justify-between shadow-lg"
               >
                 <div className="flex items-center gap-3">
@@ -210,8 +195,8 @@ export function TestingFacilities() {
                 <span className="text-[10px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider bg-[#EBF3FC] dark:bg-[#0D2440]/60 px-3 py-1.5 rounded-xl border border-[#7BA4D0]/30">
                   Active
                 </span>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </motion.div>
 
         </div>

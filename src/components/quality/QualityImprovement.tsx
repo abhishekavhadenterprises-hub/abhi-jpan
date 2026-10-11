@@ -51,12 +51,6 @@ export function QualityImprovement() {
     restDelta: 0.001,
   });
 
-  const kaizenFloat0 = useTransform(smoothProgress, [0, 1], [-16, 16]);
-  const kaizenFloat1 = useTransform(smoothProgress, [0, 1], [14, -14]);
-  const kaizenFloat2 = useTransform(smoothProgress, [0, 1], [-18, 18]);
-  const kaizenFloat3 = useTransform(smoothProgress, [0, 1], [16, -16]);
-
-  const kaizenFloats = [kaizenFloat0, kaizenFloat1, kaizenFloat2, kaizenFloat3];
   const notchScaleX = useTransform(smoothProgress, [0, 0.75], [0.25, 1.0]);
 
   const handleMobileScroll = () => {
@@ -75,16 +69,18 @@ export function QualityImprovement() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
+        delayChildren: 0.15,
       },
     },
   };
 
+  // Slide-In Right (#8)
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 35 },
+    hidden: { opacity: 0, x: 28 },
     visible: {
       opacity: 1,
-      y: 0,
+      x: 0,
       transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
@@ -121,7 +117,7 @@ export function QualityImprovement() {
           </motion.p>
         </div>
 
-        {/* Engineering Kaizen Deck with Horizontal Notch Scrub & Parallax Momentum */}
+        {/* Engineering Kaizen Deck: Level 4-Column Bento Grid with Slide-In Right Reveal */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
             ref={cardsRef}
@@ -134,22 +130,22 @@ export function QualityImprovement() {
             {initiatives.map((item, idx) => (
               <motion.div 
                 key={idx} 
-                variants={itemVariants}
-                style={{ y: kaizenFloats[idx] }}
+                initial={{ opacity: 0, x: 25, y: 15 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ 
-                  y: -8, 
-                  transition: { type: "spring", stiffness: 350, damping: 25 } 
+                  y: -6, 
+                  transition: { duration: 0.25, ease: "easeOut" } 
                 }}
-                className="group relative bg-white dark:bg-[#0D2440]/30 p-7 sm:p-8 rounded-3xl border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-colors duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl p-7 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default h-full"
               >
-                {/* Top Notch Indicator Accent with Dynamic Scroll Expansion */}
-                <motion.div 
-                  style={{ scaleX: notchScaleX, transformOrigin: "left" }}
-                  className="absolute top-0 left-0 right-0 h-1 bg-[#E7F0FA] dark:bg-white/10 group-hover:bg-[#2E5E99] dark:group-hover:bg-[#7BA4D0] transition-colors duration-500" 
-                />
-                
-                <div>
-                  <div className="w-14 h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl mb-6 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
+                {/* Background Tint / Gradient on Hover (#21 Background Tint Transition) */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#2E5E99]/10 via-[#7BA4D0]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />
+
+                <div className="relative z-10 mb-6">
+                  {/* Icon Pod with Icon Shift (#20) & Scale-In */}
+                  <div className="w-14 h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl mb-6 group-hover:bg-[#2E5E99] group-hover:text-white group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
                     <item.icon className="w-7 h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
                   </div>
                   
@@ -161,17 +157,14 @@ export function QualityImprovement() {
                   </p>
                 </div>
 
-                {/* Footer Action Micro-Interactive Arrow with Spring Physics */}
-                <div className="mt-6 pt-4 border-t border-[#7BA4D0]/15 flex items-center justify-between">
+                {/* Footer Action Arrow with Arrow Nudge (#18) */}
+                <div className="pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between relative z-10">
                   <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#2E5E99] dark:text-[#7BA4D0]">
-                    Kaizen Practice {item.index}
+                    Kaizen Practice
                   </span>
-                  <motion.div 
-                    whileHover={{ x: 3, transition: { type: "spring", stiffness: 400, damping: 20 } }}
-                    className="w-7 h-7 rounded-xl bg-[#E7F0FA] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300"
-                  >
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-300" strokeWidth={2} />
-                  </motion.div>
+                  <div className="w-7 h-7 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={2} />
+                  </div>
                 </div>
               </motion.div>
             ))}

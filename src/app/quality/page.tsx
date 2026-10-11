@@ -7,6 +7,7 @@ import { QualityCompliance } from "@/components/quality/QualityCompliance";
 import { QualityImprovement } from "@/components/quality/QualityImprovement";
 import { QualityTrust } from "@/components/quality/QualityTrust";
 import { Achievements } from "@/components/quality/Achievements";
+import { QualityCTA } from "@/components/quality/QualityCTA";
 
 export const metadata = {
   title: "Certifications & Quality | J Pan Tubular Components Limited",
@@ -25,6 +26,7 @@ export default function QualityPage() {
       <QualityCompliance />
       <QualityImprovement />
       <QualityTrust />
+      <QualityCTA />
     </main>
   );
 }

@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { ShieldCheck, Target, Users, CheckCircle2 } from "lucide-react";
-import { motion, useInView, useScroll, useTransform, useSpring, Variants } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
@@ -12,25 +12,7 @@ export function QualityCommitment() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Scroll Parallax Hooks for Multi-Layered Depth
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    restDelta: 0.001,
-  });
-
-  // Differential vertical offsets for the 3 slabs
-  const slabY0 = useTransform(smoothProgress, [0, 1], [-22, 22]);
-  const slabY1 = useTransform(smoothProgress, [0, 1], [-6, 6]);
-  const slabY2 = useTransform(smoothProgress, [0, 1], [18, -18]);
-  const quoteY = useTransform(smoothProgress, [0, 1], [14, -14]);
-
-  const slabOffsets = [slabY0, slabY1, slabY2];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -125,18 +107,17 @@ export function QualityCommitment() {
             </div>
 
             {/* Quote block with subtle scroll counter-float on desktop */}
-            <motion.div 
-              style={{ y: quoteY }}
+            <div 
               className="flex items-start sm:items-center gap-4 p-5 sm:p-6 border-l-4 border-[#2E5E99] bg-[#EBF3FC]/80 dark:bg-[#0D2440]/40 rounded-r-2xl border border-[#7BA4D0]/20 shadow-xs"
             >
               <CheckCircle2 className="w-6 h-6 text-[#2E5E99] shrink-0" />
               <p className="text-xs sm:text-sm font-semibold text-[#0D2440] dark:text-white leading-relaxed">
                 Continuously upgrading testing protocols to ensure every part delivered contributes to long-term reliability.
               </p>
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Feature Slabs: Monolithic Architectural Stack with Differential Scroll Parallax & Spring Hover */}
+          {/* Feature Slabs: Clean Bento Stack with Staggered Reveal Animation & Subtle Spring Lift */}
           <div className="flex flex-col justify-between w-full">
             <motion.div 
               ref={cardsRef}
@@ -144,30 +125,34 @@ export function QualityCommitment() {
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="flex flex-row md:flex-col overflow-x-auto snap-x snap-mandatory py-2 px-1 gap-4 md:space-y-5 md:gap-0 no-scrollbar w-full"
+              className="flex flex-row md:flex-col overflow-x-auto snap-x snap-mandatory py-2 px-1 gap-4 md:space-y-4 md:gap-0 no-scrollbar w-full"
             >
               {features.map((feature, idx) => (
                 <motion.div 
                   key={idx}
-                  variants={itemVariants}
-                  style={{ y: slabOffsets[idx] }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{ 
-                    x: 10, 
-                    transition: { type: "spring", stiffness: 350, damping: 25 } 
+                    y: -6,
+                    transition: { duration: 0.25, ease: "easeOut" } 
                   }}
-                  className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 sm:p-7 bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-colors duration-300 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default"
+                  className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 sm:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default"
                 >
-                  {/* Subtle top hairline gradient accent */}
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#2E5E99]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
                   <div className="w-14 h-14 shrink-0 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
                     <feature.icon className="w-6 h-6" strokeWidth={1.75} />
                   </div>
                   
                   <div className="relative z-10 flex-1">
-                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-1.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
-                      {feature.title}
-                    </h3>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <span className="text-xs font-mono font-bold text-[#2E5E99]/60 dark:text-[#7BA4D0]/60 uppercase tracking-widest">
+                        0{idx + 1}
+                      </span>
+                    </div>
                     <p className="text-[#0D2440]/75 dark:text-silver/80 leading-relaxed text-xs sm:text-sm font-normal">
                       {feature.desc}
                     </p>

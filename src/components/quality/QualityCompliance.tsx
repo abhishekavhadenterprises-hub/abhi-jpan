@@ -48,25 +48,20 @@ export function QualityCompliance() {
     restDelta: 0.001,
   });
 
-  const bentoY0 = useTransform(smoothProgress, [0, 1], [-14, 14]);
-  const bentoY1 = useTransform(smoothProgress, [0, 1], [14, -14]);
-  const bentoY2 = useTransform(smoothProgress, [0, 1], [-16, 16]);
-  const bentoY3 = useTransform(smoothProgress, [0, 1], [16, -16]);
-
-  const bentoOffsets = [bentoY0, bentoY1, bentoY2, bentoY3];
-
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.14,
+        staggerChildren: 0.12,
+        delayChildren: 0.15,
       },
     },
   };
 
+  // Fade-Down Reveal (#5)
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -122,7 +117,7 @@ export function QualityCompliance() {
             </p>
           </motion.div>
 
-          {/* Compliance Cards: 2x2 Bento Matrix with Counter-Parallax Scrub */}
+          {/* Compliance Cards: Level 2x2 Bento Matrix with Fade-Down Reveal */}
           <div className="w-full lg:w-2/3 flex flex-col justify-between">
             <motion.div 
               ref={cardsRef}
@@ -136,36 +131,40 @@ export function QualityCompliance() {
                 <motion.div 
                   key={idx} 
                   variants={itemVariants}
-                  style={{ y: bentoOffsets[idx] }}
                   whileHover={{ 
                     y: -6, 
-                    transition: { type: "spring", stiffness: 350, damping: 25 } 
+                    transition: { duration: 0.25, ease: "easeOut" } 
                   }}
                   className={cn(
-                    "group relative p-7 sm:p-8 bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl transition-colors duration-300 overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
-                    s.pointer && "border-[#2E5E99]/40 bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC] to-[#EBF3FC]/60 dark:from-[#0D2440]/30 dark:to-[#0D2440]/60"
+                    "group relative p-7 sm:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl transition-all duration-300 overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
+                    s.pointer && "border-[#2E5E99]/40 bg-gradient-to-b from-white/90 via-[#F8FAFC] to-[#EBF3FC]/80 dark:from-[#091A2E]/90 dark:to-[#0D2440]/80"
                   )}
                 >
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-14 h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center mb-6 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
-                      <s.icon className="w-7 h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
-                    </div>
-                    
-                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
-                      {s.title}
-                    </h3>
-                    
-                    <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal flex-grow mb-3">
-                      {s.desc}
-                    </p>
-
-                    {s.pointer && (
-                      <div className="mt-4 pt-3.5 border-t border-[#7BA4D0]/20 flex items-start gap-2.5 text-xs font-semibold text-[#2E5E99] dark:text-[#7BA4D0] bg-[#E7F0FA]/60 dark:bg-[#0D2440]/80 p-3 rounded-2xl border border-[#7BA4D0]/25 shadow-xs">
-                        <Sun className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5 animate-pulse" />
-                        <span className="leading-snug">{s.pointer}</span>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="w-14 h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                          <s.icon className="w-7 h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
+                        </div>
+                        <span className="text-xs font-mono font-bold text-[#2E5E99]/60 dark:text-[#7BA4D0]/60">
+                          0{idx + 1}
+                        </span>
                       </div>
-                    )}
-                  </div>
+                      
+                      <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                        {s.title}
+                      </h3>
+                      
+                      <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal flex-grow mb-3">
+                        {s.desc}
+                      </p>
+
+                      {s.pointer && (
+                        <div className="mt-4 pt-3.5 border-t border-[#7BA4D0]/20 flex items-start gap-2.5 text-xs font-semibold text-[#2E5E99] dark:text-[#7BA4D0] bg-[#E7F0FA]/80 dark:bg-[#0D2440]/80 p-3 rounded-2xl border border-[#7BA4D0]/25 shadow-xs">
+                          <Sun className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5 animate-pulse" />
+                          <span className="leading-snug">{s.pointer}</span>
+                        </div>
+                      )}
+                    </div>
                 </motion.div>
               ))}
             </motion.div>
