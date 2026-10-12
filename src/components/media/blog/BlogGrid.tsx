@@ -133,18 +133,18 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
   });
 
   return (
-    <section className="pt-6 pb-16 md:pt-10 md:pb-24 bg-white dark:bg-[#070b14] transition-colors">
+    <section className="pt-4 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-24 bg-white dark:bg-[#070b14] transition-colors">
       <div className="container-custom">
         {filteredArticles.length === 0 ? (
-          <div className="text-center py-16 px-4 max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-5 text-[#2E5E99] dark:text-[#7BA4D0]">
-              <SearchX className="w-8 h-8" />
+          <div className="text-center py-12 sm:py-16 px-4 max-w-md mx-auto">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center mx-auto mb-4 sm:mb-5 text-[#2E5E99] dark:text-[#7BA4D0]">
+              <SearchX className="w-6 h-6 sm:w-8 sm:h-8" />
             </div>
-            <h3 className="text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2">
+            <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2">
               No articles found
             </h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              We couldn't find any technical insights matching "{searchQuery}". Try searching for another topic or selecting a category.
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              We couldn&apos;t find any technical insights matching &ldquo;{searchQuery}&rdquo;. Try searching for another topic or selecting a category.
             </p>
           </div>
         ) : (
@@ -153,7 +153,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
               layout
               ref={cardsRef}
               onScroll={handleMobileScroll}
-              className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-6 lg:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+              className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 lg:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
             >
               <AnimatePresence mode="popLayout">
                 {filteredArticles.map((article, idx) => (
@@ -173,7 +173,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                       image: article.image,
                       content: article.content
                     })}
-                    className="group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1"
+                    className="group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1"
                   >
                     <div>
                       {/* Image with Category Squircle Overlay */}
@@ -184,16 +184,16 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                           fill
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
-                        <div className="absolute top-4 left-4 z-10">
-                          <span className="inline-block px-3 py-1 rounded-lg bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-[11px] font-semibold uppercase tracking-wider text-[#0D2440] dark:text-white shadow-sm">
+                        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
+                          <span className="inline-block px-2.5 sm:px-3 py-1 rounded-md sm:rounded-lg bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-[#0D2440] dark:text-white shadow-sm">
                             {article.category}
                           </span>
                         </div>
                       </div>
 
                       {/* Content */}
-                      <div className="p-6 sm:p-8 flex-grow flex flex-col">
-                        <div className="flex items-center gap-4 sm:gap-6 mb-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                      <div className="p-5 sm:p-7 md:p-8 flex-grow flex flex-col">
+                        <div className="flex items-center gap-3 sm:gap-6 mb-3 sm:mb-4 text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                           <div className="flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
                             {article.date}
@@ -204,17 +204,17 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                           </div>
                         </div>
 
-                        <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-3.5 leading-[1.25] tracking-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+                        <h3 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2.5 sm:mb-3.5 leading-[1.25] tracking-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
                           {article.title}
                         </h3>
                         
-                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-6 flex-grow">
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed mb-4 sm:mb-6 flex-grow">
                           {article.desc}
                         </p>
                       </div>
                     </div>
 
-                    <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
+                    <div className="px-5 sm:px-7 md:px-8 pb-5 sm:pb-7 md:pb-8 pt-0">
                       <div className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-[#0D2440] dark:group-hover:text-white transition-colors self-start border-b border-[#2E5E99]/25 pb-1">
                         <span>Read Full Article</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

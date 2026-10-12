@@ -22,37 +22,37 @@ export function EventDetailModal({ event, onClose }: EventDetailModalProps) {
   if (!event) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-8 animate-in fade-in duration-300">
       <div 
         className="absolute inset-0 bg-[#0D2440]/80 dark:bg-black/90 backdrop-blur-md"
         onClick={onClose}
       />
       
-      <div className="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-[#070b14] border border-[#7BA4D0]/30 dark:border-[#2E5E99]/30 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in zoom-in-95 duration-400">
+      <div className="relative w-full max-w-5xl max-h-[92vh] bg-white dark:bg-[#070b14] border border-[#7BA4D0]/30 dark:border-[#2E5E99]/30 rounded-2xl md:rounded-3xl shadow-2xl overflow-y-auto md:overflow-hidden flex flex-col md:flex-row animate-in zoom-in-95 duration-400">
         <button 
-          className="absolute top-5 right-5 w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white text-slate-700 dark:text-silver flex items-center justify-center transition-all duration-200 z-20"
+          className="absolute top-3 right-3 sm:top-5 sm:right-5 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white text-slate-700 dark:text-silver flex items-center justify-center transition-all duration-200 z-20"
           onClick={onClose}
           aria-label="Close modal"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
         {/* Content Side */}
-        <div className="w-full md:w-1/2 p-6 md:p-10 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-100 dark:border-white/10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-semibold uppercase tracking-wider mb-5">
+        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-10 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-100 dark:border-white/10">
+          <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-lg bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-5">
             Event Spotlight
           </div>
           
-          <h2 className="text-2xl md:text-3xl font-heading font-bold text-[#0D2440] dark:text-white mb-5 leading-tight">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-[#0D2440] dark:text-white mb-3 sm:mb-5 leading-tight pr-8 sm:pr-0">
             {event.title}
           </h2>
 
-          <div className="space-y-3 mb-8">
-            <div className="flex items-center gap-3 text-slate-600 dark:text-silver/90 text-sm">
+          <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+            <div className="flex items-center gap-2.5 sm:gap-3 text-slate-600 dark:text-silver/90 text-xs sm:text-sm">
               <Calendar className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
               <span className="font-medium">{event.date}</span>
             </div>
-            <div className="flex items-center gap-3 text-slate-600 dark:text-silver/90 text-sm">
+            <div className="flex items-center gap-2.5 sm:gap-3 text-slate-600 dark:text-silver/90 text-xs sm:text-sm">
               <MapPin className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
               <span className="font-medium">{event.location}</span>
             </div>

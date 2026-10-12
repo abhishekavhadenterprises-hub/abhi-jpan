@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export function ShareholdingNote() {
   return (
-    <section className="py-20 md:py-28 bg-white dark:bg-black relative overflow-hidden">
+    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black relative overflow-hidden">
       <div className="container-custom">
         <div className="max-w-6xl mx-auto">
           <motion.div 
@@ -14,18 +14,18 @@ export function ShareholdingNote() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 p-8 sm:p-12 md:p-16 rounded-3xl relative overflow-hidden"
+            className="bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 p-5 sm:p-10 md:p-14 lg:p-16 rounded-2xl sm:rounded-3xl relative overflow-hidden"
           >
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div className="lg:col-span-7">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-[#0D2440] dark:text-white mb-6 leading-tight tracking-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-tight tracking-tight">
                   Regulatory Compliance <br />
                   <span className="italic bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] bg-clip-text text-transparent inline-block pb-1 pr-1">
                     & Integrity Standards
                   </span>
                 </h3>
                 
-                <p className="text-muted-foreground text-sm sm:text-base mb-8 leading-relaxed">
+                <p className="text-muted-foreground text-xs sm:text-sm md:text-base mb-6 sm:mb-8 leading-relaxed">
                   J Pan Tubular Components Limited maintains absolute adherence to SEBI (Listing Obligations 
                   and Disclosure Requirements) Regulations, 2015. Our shareholding 
                   patterns are filed with the National Stock Exchange (NSE) and 
@@ -33,8 +33,8 @@ export function ShareholdingNote() {
                   following the end of each fiscal quarter.
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white dark:bg-charcoal border border-[#7BA4D0]/20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-5">
+                  <div className="flex items-start gap-3 sm:gap-3.5 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-charcoal border border-[#7BA4D0]/20">
                     <CheckCircle2 className="w-5 h-5 text-[#2E5E99] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider mb-1">
@@ -46,7 +46,7 @@ export function ShareholdingNote() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white dark:bg-charcoal border border-[#7BA4D0]/20">
+                  <div className="flex items-start gap-3 sm:gap-3.5 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-charcoal border border-[#7BA4D0]/20">
                     <CheckCircle2 className="w-5 h-5 text-[#2E5E99] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider mb-1">
@@ -61,9 +61,9 @@ export function ShareholdingNote() {
               </div>
 
               <div className="lg:col-span-5">
-                <div className="p-8 rounded-2xl bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0D2440]/40 dark:to-charcoal/50 border border-[#7BA4D0]/35">
-                  <div className="flex items-center gap-3.5 mb-6">
-                    <div className="w-11 h-11 bg-white dark:bg-charcoal rounded-xl flex items-center justify-center border border-[#7BA4D0]/30">
+                <div className="p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0D2440]/40 dark:to-charcoal/50 border border-[#7BA4D0]/35">
+                  <div className="flex items-center gap-3 sm:gap-3.5 mb-4 sm:mb-6">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white dark:bg-charcoal rounded-xl flex items-center justify-center border border-[#7BA4D0]/30">
                       <Scale className="w-6 h-6 text-[#2E5E99]" />
                     </div>
                     <h4 className="text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-widest">
@@ -71,20 +71,20 @@ export function ShareholdingNote() {
                     </h4>
                   </div>
                   
-                  <ul className="space-y-4">
-                    <li className="flex gap-3.5 items-start p-3 rounded-xl bg-white/70 dark:bg-charcoal/70 border border-[#7BA4D0]/20">
+                  <ul className="space-y-3 sm:space-y-4">
+                    <li className="flex gap-3 sm:gap-3.5 items-start p-3 rounded-xl bg-white/70 dark:bg-charcoal/70 border border-[#7BA4D0]/20">
                       <span className="text-[#2E5E99] font-bold text-xs mt-0.5 shrink-0">/01</span>
                       <p className="text-xs text-muted-foreground leading-relaxed">
                         Zero promoter pledge policy ensuring stable ownership without encumbrance risks.
                       </p>
                     </li>
-                    <li className="flex gap-3.5 items-start p-3 rounded-xl bg-white/70 dark:bg-charcoal/70 border border-[#7BA4D0]/20">
+                    <li className="flex gap-3 sm:gap-3.5 items-start p-3 rounded-xl bg-white/70 dark:bg-charcoal/70 border border-[#7BA4D0]/20">
                       <span className="text-[#2E5E99] font-bold text-xs mt-0.5 shrink-0">/02</span>
                       <p className="text-xs text-muted-foreground leading-relaxed">
                         Transparent disclosure of SBO (Significant Beneficial Ownership) as per MCA guidelines.
                       </p>
                     </li>
-                    <li className="flex gap-3.5 items-start p-3 rounded-xl bg-white/70 dark:bg-charcoal/70 border border-[#7BA4D0]/20">
+                    <li className="flex gap-3 sm:gap-3.5 items-start p-3 rounded-xl bg-white/70 dark:bg-charcoal/70 border border-[#7BA4D0]/20">
                       <span className="text-[#2E5E99] font-bold text-xs mt-0.5 shrink-0">/03</span>
                       <p className="text-xs text-muted-foreground leading-relaxed">
                         Periodic verification of shareholder data by statutory auditors for precision.

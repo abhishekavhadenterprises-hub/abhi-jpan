@@ -33,7 +33,7 @@ export function PoliciesFilter() {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`shrink-0 flex items-center gap-2.5 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border ${
+                    className={`shrink-0 flex items-center gap-2.5 px-4 sm:px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border min-h-[40px] cursor-pointer ${
                       activeCategory === cat.id
                         ? "bg-[#0D2440] text-white border-[#0D2440] "
                         : "bg-[#F8FAFC] dark:bg-charcoal/40 text-muted-foreground border-[#7BA4D0]/25 hover:border-[#2E5E99]/50"
@@ -52,9 +52,9 @@ export function PoliciesFilter() {
             <input
               type="text"
               placeholder="Search Policy Repository..."
-              className="w-full bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/30 rounded-2xl py-2.5 pl-11 pr-4 text-xs text-[#0D2440] dark:text-white placeholder:text-muted-foreground focus:outline-none focus:border-[#2E5E99] transition-all"
+              className="w-full bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl py-2.5 pl-11 pr-4 text-xs text-[#0D2440] dark:text-white placeholder:text-muted-foreground focus:outline-none focus:border-[#2E5E99] transition-all min-h-[42px]"
             />
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
           </div>
         </div>
       </div>

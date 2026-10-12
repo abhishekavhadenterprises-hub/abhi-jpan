@@ -353,49 +353,50 @@ export function EventPhotos() {
         <div className="fixed inset-0 z-[9999] flex flex-col bg-[#050505] overflow-hidden animate-in fade-in duration-300">
           
           {/* Top Header Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black/50 backdrop-blur-md shrink-0">
-            <div className="flex items-center gap-6">
+          <div className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-4 border-b border-white/10 bg-black/50 backdrop-blur-md shrink-0">
+            <div className="flex items-center gap-3 sm:gap-6 min-w-0">
               <button 
                 onClick={closeLightbox}
-                className="group flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-[#2E5E99] text-white rounded-xl border border-white/10 hover:border-[#2E5E99] transition-all duration-300"
+                className="group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-white/5 hover:bg-[#2E5E99] text-white rounded-lg sm:rounded-xl border border-white/10 hover:border-[#2E5E99] transition-all duration-300 shrink-0"
               >
-                <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                <span className="text-xs font-heading font-bold uppercase tracking-widest">Back to Events</span>
+                <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:-translate-x-1" />
+                <span className="text-[10px] sm:text-xs font-heading font-bold uppercase tracking-wider sm:tracking-widest hidden xs:inline">Back</span>
+                <span className="text-[10px] sm:text-xs font-heading font-bold uppercase tracking-wider sm:tracking-widest hidden sm:inline"> to Events</span>
               </button>
               <div className="hidden md:block w-px h-8 bg-white/20" />
-              <div>
-                 <h3 className="text-xl font-heading font-bold text-white leading-none">{selectedEvent.title}</h3>
-                 <p className="text-[#7BA4D0] text-xs font-medium mt-1.5 uppercase tracking-widest">
-                   Image {currentImageIndex + 1} of {selectedEvent.images.length}
+              <div className="min-w-0">
+                 <h3 className="text-sm sm:text-lg md:text-xl font-heading font-bold text-white leading-tight truncate">{selectedEvent.title}</h3>
+                 <p className="text-[#7BA4D0] text-[10px] sm:text-xs font-medium mt-0.5 sm:mt-1.5 uppercase tracking-wider sm:tracking-widest">
+                   {currentImageIndex + 1} / {selectedEvent.images.length}
                  </p>
               </div>
             </div>
             
             <button 
               onClick={closeLightbox}
-              className="p-2.5 bg-white/5 hover:bg-[#2E5E99] text-white rounded-xl border border-white/10 hover:border-[#2E5E99] transition-all duration-300"
+              className="p-1.5 sm:p-2.5 bg-white/5 hover:bg-[#2E5E99] text-white rounded-lg sm:rounded-xl border border-white/10 hover:border-[#2E5E99] transition-all duration-300 shrink-0 ml-2"
               aria-label="Close gallery"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
 
           {/* Main Content Area */}
-          <div className="relative flex-1 min-h-0 flex items-center justify-center w-full p-4 md:p-8">
+          <div className="relative flex-1 min-h-0 flex items-center justify-center w-full p-2 sm:p-4 md:p-8">
             <button 
               onClick={prevImage}
-              className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-[#2E5E99] hover:scale-105 text-white rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3.5 md:p-4 bg-black/40 sm:bg-white/5 hover:bg-[#2E5E99] text-white rounded-lg sm:rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
               aria-label="Previous image"
             >
-              <ChevronLeft className="w-8 h-8" />
+              <ChevronLeft className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
 
             <button 
               onClick={nextImage}
-              className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-[#2E5E99] hover:scale-105 text-white rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-2 sm:p-3.5 md:p-4 bg-black/40 sm:bg-white/5 hover:bg-[#2E5E99] text-white rounded-lg sm:rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
               aria-label="Next image"
             >
-              <ChevronRight className="w-8 h-8" />
+              <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
 
             <div className="relative w-full h-full max-w-5xl max-h-full animate-in zoom-in-95 duration-300">

@@ -21,7 +21,7 @@ export function PoliciesDetailModal({ policy, isOpen, onClose }: PoliciesDetailM
   if (!isOpen || !policy) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 md:p-8">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-charcoal/90 backdrop-blur-md animate-in fade-in duration-300"
@@ -29,39 +29,39 @@ export function PoliciesDetailModal({ policy, isOpen, onClose }: PoliciesDetailM
       />
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-6xl h-full max-h-[90vh] bg-white dark:bg-charcoal rounded-sm overflow-hidden flex flex-col animate-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-6xl h-full max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-[#0A192F] rounded-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 shadow-2xl border border-border">
         
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-border bg-silver/5">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-gold/10 flex items-center justify-center rounded-sm">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border bg-silver/5">
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0 pr-2">
+            <div className="w-10 h-10 bg-[#2E5E99]/10 text-[#2E5E99] flex items-center justify-center rounded-xl shrink-0">
               <FileText className="w-5 h-5 text-gold" />
             </div>
-            <div>
-              <h3 className="font-heading font-bold text-lg text-charcoal dark:text-white leading-tight">
+            <div className="min-w-0">
+              <h3 className="font-heading font-bold text-base sm:text-lg text-charcoal dark:text-white leading-tight truncate">
                 {policy.title}
               </h3>
-              <div className="flex items-center gap-3 mt-1">
-                <span className="text-[9px] font-bold text-gold uppercase tracking-widest">{policy.category}</span>
+              <div className="flex items-center gap-2 sm:gap-3 mt-1">
+                <span className="text-[9px] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest">{policy.category}</span>
                 <div className="w-1 h-1 bg-border rounded-full" />
-                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest truncate">
                   Official Disclosure
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button className="p-2.5 text-muted-foreground hover:text-gold hover:bg-silver/10 rounded-sm transition-all">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            <button className="p-2 sm:p-2.5 text-muted-foreground hover:text-[#2E5E99] hover:bg-silver/10 rounded-lg transition-all min-w-[36px] min-h-[36px] flex items-center justify-center">
               <Share2 className="w-4 h-4" />
             </button>
-            <button className="p-2.5 text-muted-foreground hover:text-gold hover:bg-silver/10 rounded-sm transition-all">
+            <button className="hidden sm:flex p-2.5 text-muted-foreground hover:text-[#2E5E99] hover:bg-silver/10 rounded-lg transition-all min-w-[36px] min-h-[36px] items-center justify-center">
               <Printer className="w-4 h-4" />
             </button>
-            <div className="w-px h-6 bg-border mx-2" />
+            <div className="hidden sm:block w-px h-6 bg-border mx-1" />
             <button 
               onClick={onClose}
-              className="p-2.5 bg-charcoal text-white hover:bg-gold hover:text-charcoal rounded-sm transition-all"
+              className="p-2 sm:p-2.5 bg-charcoal text-white hover:bg-[#2E5E99] rounded-lg transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
             >
               <X className="w-4 h-4" />
             </button>
@@ -69,7 +69,7 @@ export function PoliciesDetailModal({ policy, isOpen, onClose }: PoliciesDetailM
         </div>
 
         {/* Body */}
-        <div className="flex-grow overflow-hidden flex flex-col lg:flex-row">
+        <div className="flex-grow overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row">
           {/* PDF Viewer Placeholder */}
           <div className="flex-grow bg-silver/10 relative group overflow-hidden border-r border-border">
             <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">

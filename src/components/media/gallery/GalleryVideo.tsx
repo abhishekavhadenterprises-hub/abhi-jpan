@@ -38,14 +38,14 @@ export function GalleryVideo() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-[#F8FAFC]/50 dark:bg-[#070b14]/50 border-y border-[#7BA4D0]/15 dark:border-[#2E5E99]/20 transition-colors">
+    <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC]/50 dark:bg-[#070b14]/50 border-y border-[#7BA4D0]/15 dark:border-[#2E5E99]/20 transition-colors">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 md:mb-16">
-          <div className="mb-4 overflow-visible">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 md:mb-16">
+          <div className="mb-3 sm:mb-4 overflow-visible">
             <ScrollWipeHeading
               as="h2"
-              className="text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
+              className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
@@ -53,7 +53,7 @@ export function GalleryVideo() {
               In <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">Action</span>
             </ScrollWipeHeading>
           </div>
-          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg leading-relaxed font-normal">
+          <p className="text-[#0D2440]/70 dark:text-silver/70 text-sm sm:text-base md:text-lg leading-relaxed font-normal">
             Experience our manufacturing precision through immersive video 
             walkthroughs and process showcases.
           </p>
@@ -63,7 +63,7 @@ export function GalleryVideo() {
         <div 
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 no-scrollbar pb-4 md:pb-0"
+          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 no-scrollbar pb-4 md:pb-0"
         >
           {videos.map((v, idx) => (
             <motion.div 
@@ -88,22 +88,22 @@ export function GalleryVideo() {
               
               {/* Play Button Capsule */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-white/90 text-[#0D2440] dark:bg-[#2E5E99] dark:text-white flex items-center justify-center backdrop-blur-md shadow-xl group-hover:scale-110 group-hover:bg-[#0D2440] group-hover:text-white dark:group-hover:bg-[#7BA4D0] dark:group-hover:text-[#0D2440] transition-all duration-300">
-                  <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl md:rounded-3xl bg-white/90 text-[#0D2440] dark:bg-[#2E5E99] dark:text-white flex items-center justify-center backdrop-blur-md shadow-xl group-hover:scale-110 group-hover:bg-[#0D2440] group-hover:text-white dark:group-hover:bg-[#7BA4D0] dark:group-hover:text-[#0D2440] transition-all duration-300">
+                  <Play className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 fill-current ml-1" />
                 </div>
               </div>
 
               {/* Info Overlay */}
-              <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 flex items-end justify-between gap-4">
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8 flex items-end justify-between gap-3 sm:gap-4">
                 <div>
-                  <h3 className="text-white font-heading font-bold text-xl sm:text-2xl mb-1">
+                  <h3 className="text-white font-heading font-bold text-lg sm:text-xl md:text-2xl mb-1">
                     {v.title}
                   </h3>
                   <p className="text-silver/80 text-xs sm:text-sm font-normal">
                     JPAN Precision Facility Tour
                   </p>
                 </div>
-                <span className="px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wider uppercase bg-white/20 text-white backdrop-blur-md border border-white/30 shrink-0">
+                <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold tracking-wider uppercase bg-white/20 text-white backdrop-blur-md border border-white/30 shrink-0">
                   {v.duration} Min
                 </span>
               </div>
@@ -139,11 +139,11 @@ export function GalleryVideo() {
       {/* Video Modal */}
       {activeVideo && (
         <div 
-          className="fixed inset-0 z-[100] bg-[#0D2440]/90 dark:bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] bg-[#0D2440]/90 dark:bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6 md:p-8 animate-in fade-in duration-300"
           onClick={() => setActiveVideo(null)}
         >
           <button 
-            className="absolute top-6 right-6 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all duration-200 z-[110]"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-white/10 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all duration-200 z-[110]"
             onClick={() => setActiveVideo(null)}
             aria-label="Close video"
           >

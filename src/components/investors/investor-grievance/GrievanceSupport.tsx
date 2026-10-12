@@ -34,12 +34,12 @@ export function GrievanceSupport() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
+    <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 md:mb-16 gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 md:mb-16 gap-6 sm:gap-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,11 +47,11 @@ export function GrievanceSupport() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-3 sm:mb-4 w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
               Support Infrastructure
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
               Direct <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
                 Investor Support
@@ -66,11 +66,11 @@ export function GrievanceSupport() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex items-center"
           >
-            <div className="px-6 py-3.5 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center gap-3.5 shadow-xs">
-              <div className="w-8 h-8 rounded-xl bg-[#E7F0FA] dark:bg-[#071321] flex items-center justify-center border border-[#7BA4D0]/30 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0]">
+            <div className="px-4 sm:px-6 py-2.5 sm:py-3.5 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-3.5 shadow-xs">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-[#071321] flex items-center justify-center border border-[#7BA4D0]/30 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0]">
                 <ShieldCheck className="w-4 h-4" />
               </div>
-              <span className="text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
+              <span className="text-[11px] sm:text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
                 Nodal Officer Verified
               </span>
             </div>
@@ -86,97 +86,97 @@ export function GrievanceSupport() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {/* Nodal Officer - Hero Card */}
-            <motion.div variants={cardVariants} className="bg-gradient-to-br from-[#E7F0FA] via-[#F2F7FD] to-[#E7F0FA] dark:from-[#0D2440] dark:via-[#102D50] dark:to-[#0D2440] border border-[#7BA4D0]/40 p-8 rounded-3xl group hover:border-[#2E5E99] transition-all duration-300 relative overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
+            <motion.div variants={cardVariants} className="bg-gradient-to-br from-[#E7F0FA] via-[#F2F7FD] to-[#E7F0FA] dark:from-[#0D2440] dark:via-[#102D50] dark:to-[#0D2440] border border-[#7BA4D0]/40 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] transition-all duration-300 relative overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
               <div>
-                <div className="w-13 h-13 bg-white dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <User className="w-6 h-6" />
+                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-white dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
+                  <User className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
                   Nodal Officer
                 </h4>
-                <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                   Sunil Mehra
                 </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-6 font-normal">
+                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
                   Chief Financial Officer & Nodal Officer for Grievances
                 </p>
               </div>
               
-              <div className="pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
-                <Link href="/contact" className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider group/btn hover:text-[#2E5E99] transition-colors">
-                  View Profile
+              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider group/btn hover:text-[#2E5E99] transition-colors min-h-[36px]">
+                  <span>View Profile</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                 </Link>
               </div>
             </motion.div>
 
             {/* Email Support */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-8 rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
+            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
               <div>
-                <div className="w-13 h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <Mail className="w-6 h-6" />
+                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
                   Email Channel
                 </h4>
-                <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                   Grievance Desk
                 </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-6 font-normal">
+                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
                   Dedicated digital channel for concern submission
                 </p>
               </div>
-              <div className="pt-4 border-t border-[#7BA4D0]/20">
-                <a href="mailto:enquiry@jpantubular.com" className="text-xs font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline block break-all">
+              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20">
+                <a href="mailto:enquiry@jpantubular.com" className="text-xs font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline block break-all min-h-[36px] flex items-center">
                   enquiry@jpantubular.com
                 </a>
               </div>
             </motion.div>
 
             {/* Phone Support */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-8 rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
+            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
               <div>
-                <div className="w-13 h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <Phone className="w-6 h-6" />
+                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
                   Voice Channel
                 </h4>
-                <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                   Support Helpline
                 </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-6 font-normal">
+                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
                   Monday to Friday (10:00 AM – 6:00 PM IST)
                 </p>
               </div>
-              <div className="pt-4 border-t border-[#7BA4D0]/20">
-                <p className="text-xs font-heading font-bold text-[#0D2440] dark:text-white">
+              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20">
+                <p className="text-xs font-heading font-bold text-[#0D2440] dark:text-white min-h-[36px] flex items-center">
                   +91-120-2560586
                 </p>
               </div>
             </motion.div>
 
             {/* Office Address */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-8 rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
+            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
               <div>
-                <div className="w-13 h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-2xl mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <MapPin className="w-6 h-6" />
+                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
                   Physical Desk
                 </h4>
-                <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                   Registered Office
                 </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-6 font-normal">
+                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
                   Nodal Officer Reception, Greater Noida
                 </p>
               </div>
-              <div className="pt-4 border-t border-[#7BA4D0]/20">
-                <p className="text-xs font-heading font-bold text-[#0D2440] dark:text-white">
+              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20">
+                <p className="text-xs font-heading font-bold text-[#0D2440] dark:text-white min-h-[36px] flex items-center">
                   Greater Noida, UP 201306, India
                 </p>
               </div>
@@ -184,7 +184,7 @@ export function GrievanceSupport() {
           </motion.div>
 
           {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
+          <div className="flex md:hidden items-center justify-center gap-2 mt-5 sm:mt-6 z-10">
             {[0, 1, 2, 3].map((i) => (
               <button
                 key={i}

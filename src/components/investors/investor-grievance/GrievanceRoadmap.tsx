@@ -51,13 +51,13 @@ export function GrievanceRoadmap() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-white dark:bg-[#071321] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
+    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-[#071321] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 md:mb-18 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-14 md:mb-18 gap-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -65,11 +65,11 @@ export function GrievanceRoadmap() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-3 sm:mb-4 w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
               SLA Resolution Standard
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
               Grievance Redressal <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
                 Process Roadmap
@@ -82,7 +82,7 @@ export function GrievanceRoadmap() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[#0D2440]/70 dark:text-white/65 text-sm sm:text-base leading-relaxed font-normal max-w-md"
+            className="text-[#0D2440]/70 dark:text-white/65 text-xs sm:text-base leading-relaxed font-normal max-w-md"
           >
             A systematic four-stage protocol committed to acknowledging, investigating, 
             and resolving investor queries with complete audit traceability.
@@ -98,7 +98,7 @@ export function GrievanceRoadmap() {
             <div 
               ref={cardsRef}
               onScroll={handleMobileScroll}
-              className="flex flex-row lg:grid lg:grid-cols-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pt-2 pb-4 lg:py-0 px-1 lg:px-0 gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+              className="flex flex-row lg:grid lg:grid-cols-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pt-2 pb-4 lg:py-0 px-1 lg:px-0 gap-4 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
             >
               {steps.map((item, idx) => (
                 <motion.div
@@ -107,32 +107,32 @@ export function GrievanceRoadmap() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-7 sm:p-8 rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full sm:min-w-[320px] lg:min-w-0 lg:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
+                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full sm:min-w-[300px] lg:min-w-0 lg:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
                 >
                   {/* Giant Step Numeric Watermark */}
-                  <div className="absolute top-4 right-6 text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
+                  <div className="absolute top-3 sm:top-4 right-4 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
                     {item.id}
                   </div>
 
                   <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <div className="w-13 h-13 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
-                        <item.icon className="w-6 h-6" />
+                    <div className="flex items-center justify-between mb-5 sm:mb-8">
+                      <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                       </div>
-                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25">
+                      <span className="text-[9px] sm:text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25">
                         {item.duration}
                       </span>
                     </div>
 
-                    <h4 className="text-xl font-heading font-black text-[#0D2440] dark:text-white mb-3 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+                    <h4 className="text-lg sm:text-xl font-heading font-black text-[#0D2440] dark:text-white mb-2 sm:mb-3 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
                       {item.title}
                     </h4>
-                    <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal mb-8">
+                    <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal mb-6 sm:mb-8">
                       {item.description}
                     </p>
                   </div>
 
-                  <div className="relative z-10 pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                  <div className="relative z-10 pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
                     <span className="text-[10px] font-heading font-black text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest">
                       Audit Logged
                     </span>
@@ -143,7 +143,7 @@ export function GrievanceRoadmap() {
             </div>
 
             {/* Mobile Pagination Indicator Dots */}
-            <div className="flex lg:hidden items-center justify-center gap-2 mt-6 z-10">
+            <div className="flex lg:hidden items-center justify-center gap-2 mt-5 sm:mt-6 z-10">
               {steps.map((_, i) => (
                 <button
                   key={i}

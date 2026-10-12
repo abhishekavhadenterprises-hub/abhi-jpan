@@ -6,7 +6,7 @@ import { ShieldCheck, Info } from "lucide-react";
 
 export function MaterialCompliance() {
   return (
-    <section className="py-14 md:py-20 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
+    <section className="py-10 sm:py-14 md:py-20 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
@@ -15,7 +15,7 @@ export function MaterialCompliance() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="rounded-3xl bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-8 sm:p-10 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 transition-all"
+          className="rounded-2xl sm:rounded-3xl bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-8 md:p-10 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 transition-all"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 items-center">
             

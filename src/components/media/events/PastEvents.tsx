@@ -90,29 +90,29 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
   return (
     <section 
       ref={containerRef}
-      className="py-16 md:py-24 bg-white dark:bg-black relative overflow-hidden transition-colors border-t border-[#7BA4D0]/15"
+      className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black relative overflow-hidden transition-colors border-t border-[#7BA4D0]/15"
     >
       <div className="container-custom relative z-10">
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12 lg:mb-16">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 lg:mb-16">
           <div className="lg:max-w-2xl">
             <div className="mb-2 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+                className="text-2xl sm:text-3xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 Past
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-5xl font-heading tracking-tight">
                 Global Participation
               </div>
             </div>
           </div>
           
-          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg lg:max-w-md font-normal leading-relaxed">
-            A track record of excellence across the world's leading industrial 
+          <p className="text-[#0D2440]/70 dark:text-silver/70 text-sm sm:text-base md:text-lg lg:max-w-md font-normal leading-relaxed">
+            A track record of excellence across the world&apos;s leading industrial 
             and technical exhibitions.
           </p>
         </div>
@@ -125,7 +125,7 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-6 lg:gap-8 no-scrollbar w-full"
+            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-4 sm:gap-6 lg:gap-8 no-scrollbar w-full"
           >
             {pastEvents.map((event, idx) => (
               <motion.div 
@@ -136,7 +136,7 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
                   y: -7, 
                   transition: { type: "spring", stiffness: 350, damping: 25 } 
                 }}
-                className="group flex flex-col bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl overflow-hidden transition-colors duration-300 h-full relative w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className="group flex flex-col bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl overflow-hidden transition-colors duration-300 h-full relative w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Image Container - Crisp, Vibrant Frame */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-[#0D2440]">
@@ -148,24 +148,24 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   {/* Subtle Top-Right Date Tag */}
-                  <div className="absolute top-3 right-3 z-10 px-3 py-1 rounded-xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md border border-[#7BA4D0]/25 text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] shadow-sm">
+                  <div className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 z-10 px-2.5 sm:px-3 py-1 rounded-lg sm:rounded-xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md border border-[#7BA4D0]/25 text-[10px] sm:text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] shadow-sm">
                     {event.date}
                   </div>
                 </div>
 
                 {/* Info Container */}
-                <div className="p-6 sm:p-7 flex-grow flex flex-col justify-between">
+                <div className="p-5 sm:p-6 md:p-7 flex-grow flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-1.5 mb-2.5 text-xs font-heading font-semibold text-[#0D2440]/65 dark:text-silver/70">
+                    <div className="flex items-center gap-1.5 mb-2 text-xs font-heading font-semibold text-[#0D2440]/65 dark:text-silver/70">
                       <MapPin className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
-                      <span>{event.location}</span>
+                      <span className="truncate">{event.location}</span>
                     </div>
                     
-                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
+                    <h3 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
                       {event.title}
                     </h3>
                     
-                    <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed mb-6 font-normal">
+                    <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed mb-5 font-normal">
                       {event.desc}
                     </p>
                   </div>

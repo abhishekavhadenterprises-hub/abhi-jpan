@@ -78,22 +78,22 @@ export function UpcomingEvents() {
   return (
     <section 
       ref={containerRef}
-      className="py-16 md:py-24 bg-white dark:bg-black transition-colors relative overflow-hidden"
+      className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black transition-colors relative overflow-hidden"
     >
       <div className="container-custom relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 mb-12 md:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
           <div className="max-w-2xl">
             <div className="mb-2 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+                className="text-2xl sm:text-3xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 Upcoming
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-5xl font-heading tracking-tight">
                 Global Engagements
               </div>
             </div>
@@ -103,7 +103,7 @@ export function UpcomingEvents() {
             href="/contact"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-[#2E5E99]/20 group self-start md:self-auto cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-[#2E5E99]/20 group self-start md:self-auto cursor-pointer"
           >
             <span>Schedule a Meeting</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -118,7 +118,7 @@ export function UpcomingEvents() {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row lg:grid lg:grid-cols-2 overflow-x-auto lg:overflow-visible snap-x snap-mandatory py-2 px-1 gap-6 lg:gap-8 no-scrollbar w-full"
+            className="flex flex-row lg:grid lg:grid-cols-2 overflow-x-auto lg:overflow-visible snap-x snap-mandatory py-2 px-1 gap-4 sm:gap-6 lg:gap-8 no-scrollbar w-full"
           >
             {upcomingEvents.map((event, idx) => (
               <motion.div 
@@ -129,19 +129,19 @@ export function UpcomingEvents() {
                   y: -6, 
                   transition: { type: "spring", stiffness: 350, damping: 25 } 
                 }}
-                className="group flex flex-col md:flex-row bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl overflow-hidden transition-colors duration-300 w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className="group flex flex-col md:flex-row bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl overflow-hidden transition-colors duration-300 w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Monolithic Date Vault */}
-                <div className="w-full md:w-44 bg-[#EBF3FC] dark:bg-[#0D2440] p-6 sm:p-8 flex flex-col items-center justify-center text-[#0D2440] dark:text-white shrink-0 border-b md:border-b-0 md:border-r border-[#7BA4D0]/30 relative overflow-hidden">
-                  <div className="w-12 h-12 rounded-2xl bg-[#2E5E99]/10 dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-3 group-hover:scale-105 transition-transform duration-300">
-                    <Calendar className="w-6 h-6" strokeWidth={1.75} />
+                <div className="w-full md:w-44 bg-[#EBF3FC] dark:bg-[#0D2440] p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-[#0D2440] dark:text-white shrink-0 border-b md:border-b-0 md:border-r border-[#7BA4D0]/30 relative overflow-hidden">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#2E5E99]/10 dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-2 sm:mb-3 group-hover:scale-105 transition-transform duration-300">
+                    <Calendar className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
                   </div>
-                  <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#2E5E99] dark:text-slate-300">Starts</span>
-                  <span className="text-2xl sm:text-3xl font-heading font-black text-[#0D2440] dark:text-white my-0.5">{event.date.split(' ')[1]}</span>
-                  <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#2E5E99] dark:text-[#7BA4D0]">{event.date.split(' ')[0]}</span>
+                  <span className="text-[9px] sm:text-[10px] font-heading font-bold uppercase tracking-wider text-[#2E5E99] dark:text-slate-300">Starts</span>
+                  <span className="text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#0D2440] dark:text-white my-0.5">{event.date.split(' ')[1]}</span>
+                  <span className="text-[10px] sm:text-xs font-heading font-bold uppercase tracking-widest text-[#2E5E99] dark:text-[#7BA4D0]">{event.date.split(' ')[0]}</span>
 
                   {event.booth && (
-                    <div className="mt-4 px-3 py-1 rounded-xl bg-white dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/15 text-[10px] font-heading font-bold text-[#2E5E99] dark:text-slate-200 uppercase tracking-wider text-center shadow-xs">
+                    <div className="mt-2 sm:mt-4 px-2.5 sm:px-3 py-1 rounded-lg sm:rounded-xl bg-white dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/15 text-[9px] sm:text-[10px] font-heading font-bold text-[#2E5E99] dark:text-slate-200 uppercase tracking-wider text-center shadow-xs">
                       {event.booth}
                     </div>
                   )}

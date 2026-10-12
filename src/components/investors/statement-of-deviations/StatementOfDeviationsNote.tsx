@@ -43,11 +43,11 @@ export function StatementOfDeviationsNote() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
+    <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
           
           {/* Header Side */}
           <motion.div 
@@ -57,19 +57,19 @@ export function StatementOfDeviationsNote() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4 w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
               Regulatory Oversight
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-6 leading-[1.12] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-[1.12] tracking-tight">
               Regulatory <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
                 Adherence Note
               </span>
             </h2>
             
-            <p className="text-[#0D2440]/70 dark:text-white/70 text-base sm:text-lg mb-8 leading-relaxed font-normal">
+            <p className="text-[#0D2440]/70 dark:text-white/70 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed font-normal">
               J Pan Tubular Components Limited maintains absolute transparency in fund utilization. 
               Our Statement of Deviations is prepared in accordance with 
               Regulation 32 of SEBI (LODR) Regulations, 2015, ensuring 
@@ -77,14 +77,14 @@ export function StatementOfDeviationsNote() {
               technical precision.
             </p>
             
-            <div className="space-y-3.5">
-              <div className="flex items-center gap-3.5 p-4 bg-white dark:bg-[#0D2440]/40 border border-[#7BA4D0]/30 rounded-2xl shadow-xs">
+            <div className="space-y-3 sm:space-y-3.5">
+              <div className="flex items-center gap-3 sm:gap-3.5 p-3.5 sm:p-4 bg-white dark:bg-[#0D2440]/40 border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl shadow-xs">
                 <CheckCircle2 className="w-5 h-5 text-[#2E5E99] shrink-0" />
                 <span className="text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
                   Certified Fund Utilization
                 </span>
               </div>
-              <div className="flex items-center gap-3.5 p-4 bg-white dark:bg-[#0D2440]/40 border border-[#7BA4D0]/30 rounded-2xl shadow-xs">
+              <div className="flex items-center gap-3 sm:gap-3.5 p-3.5 sm:p-4 bg-white dark:bg-[#0D2440]/40 border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl shadow-xs">
                 <AlertCircle className="w-5 h-5 text-[#2E5E99] shrink-0" />
                 <span className="text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
                   Materiality Disclosure Protocol
@@ -98,7 +98,7 @@ export function StatementOfDeviationsNote() {
             <div 
               ref={cardsRef}
               onScroll={handleMobileScroll}
-              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pt-2 pb-4 sm:py-0 px-1 sm:px-0 gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pt-2 pb-4 sm:py-0 px-1 sm:px-0 gap-4 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
             >
               {deviationCards.map((card, idx) => (
                 <motion.div 
@@ -107,13 +107,13 @@ export function StatementOfDeviationsNote() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="group bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-7 rounded-3xl hover:-translate-y-1 transition-all duration-300 w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-sm hover:shadow-lg shadow-[#2E5E99]/5 flex flex-col justify-between"
+                  className="group bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-sm hover:shadow-lg shadow-[#2E5E99]/5 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shadow-xs">
-                      <card.icon className="w-6 h-6" />
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mb-4 sm:mb-5 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shadow-xs">
+                      <card.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <h4 className="text-sm font-heading font-black text-[#0D2440] dark:text-white uppercase tracking-wider mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+                    <h4 className="text-sm font-heading font-black text-[#0D2440] dark:text-white uppercase tracking-wider mb-1.5 sm:mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
                       {card.title}
                     </h4>
                     <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal">
@@ -121,7 +121,7 @@ export function StatementOfDeviationsNote() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                  <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
                     <span className="text-[10px] font-heading font-black text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest">
                       SEBI LODR
                     </span>
@@ -132,7 +132,7 @@ export function StatementOfDeviationsNote() {
             </div>
 
             {/* Mobile Pagination Indicator Dots */}
-            <div className="flex sm:hidden items-center justify-center gap-2 mt-6 z-10">
+            <div className="flex sm:hidden items-center justify-center gap-2 mt-5 sm:mt-6 z-10">
               {deviationCards.map((_, i) => (
                 <button
                   key={i}

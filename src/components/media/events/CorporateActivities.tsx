@@ -81,24 +81,24 @@ export function CorporateActivities() {
   return (
     <section 
       ref={containerRef}
-      className="py-16 md:py-24 bg-white dark:bg-black relative overflow-hidden transition-colors border-t border-[#7BA4D0]/15"
+      className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black relative overflow-hidden transition-colors border-t border-[#7BA4D0]/15"
     >
       <div className="container-custom relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 md:mb-16">
           <div className="max-w-2xl">
             <div className="mb-2 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+                className="text-2xl sm:text-3xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 Corporate Culture &
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-5xl font-heading tracking-tight">
                 Team Engagement
               </div>
             </div>
@@ -117,7 +117,7 @@ export function CorporateActivities() {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-6 lg:gap-8 no-scrollbar w-full"
+            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-4 sm:gap-6 lg:gap-8 no-scrollbar w-full"
           >
             {activities.map((act, idx) => (
               <motion.div 
@@ -128,7 +128,7 @@ export function CorporateActivities() {
                   y: -7, 
                   transition: { type: "spring", stiffness: 350, damping: 25 } 
                 }}
-                className="group bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl p-6 sm:p-7 overflow-hidden transition-colors duration-300 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className="group bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 overflow-hidden transition-colors duration-300 flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Image Side - Compact 16:10 Ratio */}
                 <div className="space-y-5">

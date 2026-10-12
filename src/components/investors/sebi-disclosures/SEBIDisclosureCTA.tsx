@@ -21,51 +21,51 @@ export function SEBIDisclosureCTA() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-white dark:bg-[#071321] overflow-hidden relative transition-colors">
+    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-[#071321] overflow-hidden relative transition-colors">
       <div className="container-custom">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="rounded-3xl sm:rounded-[40px] bg-gradient-to-br from-[#0D2440] via-[#102D50] to-[#163B66] text-white border border-[#7BA4D0]/30 p-8 sm:p-12 md:p-16 lg:p-20 relative overflow-hidden shadow-2xl shadow-[#2E5E99]/15"
+          className="rounded-2xl sm:rounded-3xl md:rounded-[40px] bg-gradient-to-br from-[#0D2440] via-[#102D50] to-[#163B66] text-white border border-[#7BA4D0]/30 p-5 sm:p-10 md:p-14 lg:p-20 relative overflow-hidden shadow-2xl shadow-[#2E5E99]/15"
         >
           {/* Subtle Ambient Radial Glows */}
-          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-[#2E5E99]/25 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-[350px] h-[350px] bg-[#7BA4D0]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-72 sm:w-[450px] h-72 sm:h-[450px] bg-[#2E5E99]/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-60 sm:w-[350px] h-60 sm:h-[350px] bg-[#7BA4D0]/20 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
             
             {/* Left Column */}
-            <div className="lg:col-span-6 space-y-6">
+            <div className="lg:col-span-6 space-y-5 sm:space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-heading font-black uppercase tracking-[0.2em]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7BA4D0]" />
                 Secretarial Assistance
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-white leading-[1.12] tracking-tight">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-white leading-[1.15] tracking-tight">
                 Connect with our <br />
                 <span className="text-[#7BA4D0]">
                   Compliance Desk
                 </span>
               </h2>
 
-              <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
+              <p className="text-white/75 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal mb-6 sm:mb-8">
                 For specific queries regarding our statutory filings, 
                 regulatory compliance framework, or SEBI (LODR) 
                 adherence, please contact our dedicated compliance team.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center pt-2">
+              <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-stretch sm:items-center pt-2">
                 <Link
                   href="/contact"
-                  className="px-8 py-4 bg-white text-[#0D2440] hover:bg-[#E7F0FA] font-heading font-bold text-xs uppercase tracking-[0.18em] rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 hover:-translate-y-0.5 group whitespace-nowrap shadow-lg"
+                  className="px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] bg-white text-[#0D2440] hover:bg-[#E7F0FA] font-heading font-bold text-xs uppercase tracking-[0.18em] rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 hover:-translate-y-0.5 group whitespace-nowrap shadow-lg"
                 >
                   Submit Regulatory Query
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
-                <div className="flex items-center justify-center gap-3 px-6 py-4 bg-white/10 border border-white/15 rounded-2xl text-white">
+                <div className="flex items-center justify-center gap-3 px-5 sm:px-6 py-3.5 sm:py-4 min-h-[44px] bg-white/10 border border-white/15 rounded-2xl text-white">
                   <Scale className="w-5 h-5 text-[#7BA4D0] shrink-0" />
                   <span className="text-xs font-heading font-bold uppercase tracking-wider">Statutory Transparency</span>
                 </div>
@@ -121,7 +121,7 @@ export function SEBIDisclosureCTA() {
               </div>
 
               {/* Mobile Pagination Indicator Dots */}
-              <div className="flex sm:hidden items-center justify-center gap-2 mt-4 z-10">
+              <div className="flex sm:hidden items-center justify-center gap-1.5 mt-4 z-10">
                 {[0, 1, 2].map((i) => (
                   <button
                     key={i}
@@ -134,11 +134,15 @@ export function SEBIDisclosureCTA() {
                         });
                       }
                     }}
-                    className={`h-1.5 transition-all duration-300 rounded-full ${
-                      activeIndex === i ? "w-8 bg-white" : "w-2 bg-white/30"
-                    }`}
+                    className="p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center focus:outline-none"
                     aria-label={`Go to slide ${i + 1}`}
-                  />
+                  >
+                    <span
+                      className={`h-1.5 transition-all duration-300 rounded-full block ${
+                        activeIndex === i ? "w-8 bg-white" : "w-2 bg-white/30"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>

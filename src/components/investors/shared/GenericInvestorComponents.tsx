@@ -85,7 +85,7 @@ export function GenericInvestorHero({
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[85vh] sm:min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-20 bg-[#071321]"
+      className="relative min-h-[75vh] sm:min-h-[85vh] md:min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-24 sm:pt-32 pb-14 sm:pb-20 bg-[#071321]"
     >
       {/* Dynamic Cinematic Inset Frame */}
       <motion.div
@@ -155,13 +155,13 @@ export function GenericInvestorHero({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-6 md:mb-8 inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 rounded-full bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/20 shadow-md"
+            className="mb-4 sm:mb-6 md:mb-8 inline-flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/20 shadow-md"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7BA4D0] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7BA4D0]" />
             </span>
-            <span className="text-[10px] sm:text-xs font-heading font-black text-white uppercase tracking-[0.25em]">
+            <span className="text-[9px] sm:text-[10px] md:text-xs font-heading font-black text-white uppercase tracking-[0.25em]">
               {displayBadge}
             </span>
           </motion.div>
@@ -176,7 +176,7 @@ export function GenericInvestorHero({
           className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 max-w-5xl mx-auto w-full"
           style={{ perspective: "1000px" }}
         >
-          <motion.h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-heading font-black text-white tracking-tight leading-[1.08] text-balance text-center [word-break:keep-all] [overflow-wrap:normal]">
+          <motion.h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[4.25rem] xl:text-[4.75rem] font-heading font-black text-white tracking-tight leading-[1.1] sm:leading-[1.08] text-balance text-center [word-break:keep-all] [overflow-wrap:normal]">
             {title.split(" ").map((word, wordIndex, wordsArr) => (
               <span key={word + "-" + wordIndex} className="inline-block whitespace-nowrap">
                 {word.split("").map((char, charIndex) => (
@@ -198,7 +198,7 @@ export function GenericInvestorHero({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-white/85 font-normal leading-relaxed max-w-2xl mx-auto"
+          className="mt-4 sm:mt-6 md:mt-8 text-xs sm:text-base md:text-lg text-white/85 font-normal leading-relaxed max-w-2xl mx-auto px-2"
         >
           {subtitle}
         </motion.p>
@@ -298,18 +298,18 @@ function GenericInvestorFilterInner() {
   };
 
   return (
-    <section className="relative z-30 bg-gradient-to-b from-white to-[#F8FAFC] dark:from-[#071321] dark:to-[#0A1A2E] border-y border-[#7BA4D0]/15 py-4 transition-colors">
+    <section className="relative z-30 bg-gradient-to-b from-white to-[#F8FAFC] dark:from-[#071321] dark:to-[#0A1A2E] border-y border-[#7BA4D0]/15 py-3 sm:py-4 transition-colors">
       <div className="container-custom">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
           
           {/* Status Label */}
-          <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[10px] sm:text-xs font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider">
             <ShieldCheck className="w-4 h-4 text-emerald-500" />
             <span>Audited Statutory Disclosures</span>
           </div>
 
           {/* Action Cluster: Search + Sort + View */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-2.5">
             {/* Search Input */}
             <div className="relative flex-grow sm:flex-grow-0 sm:w-64 w-full">
               <input
@@ -409,7 +409,7 @@ function GenericDocumentModal({
   const downloadLink = item.downloadUrl || item.link || "/sample-report.pdf";
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-8">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-[#0D2440]/80 dark:bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
@@ -417,15 +417,15 @@ function GenericDocumentModal({
       />
       
       {/* Modal Dialog */}
-      <div className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl md:rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 max-h-[85vh]">
+      <div className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl md:rounded-3xl flex flex-col md:flex-row overflow-y-auto md:overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 max-h-[92vh] sm:max-h-[85vh]">
         
         {/* Left Sidebar Metadata */}
-        <div className="w-full md:w-80 p-6 md:p-8 bg-[#F8FAFC] dark:bg-black/30 border-b md:border-b-0 md:border-r border-[#7BA4D0]/20 flex flex-col justify-between">
+        <div className="w-full md:w-80 p-4 sm:p-6 md:p-8 bg-[#F8FAFC] dark:bg-black/30 border-b md:border-b-0 md:border-r border-[#7BA4D0]/20 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
               <div className="flex items-center gap-2">
                 <div className="h-0.5 w-6 bg-[#2E5E99]" />
-                <span className="text-[#2E5E99] font-heading font-black uppercase tracking-widest text-[10px]">
+                <span className="text-[#2E5E99] font-heading font-black uppercase tracking-widest text-[9px] sm:text-[10px]">
                   Investor Filing
                 </span>
               </div>
@@ -438,19 +438,19 @@ function GenericDocumentModal({
               </button>
             </div>
 
-            <div className="mb-6">
-              <span className="text-3xl sm:text-4xl font-heading font-black text-[#0D2440] dark:text-white mb-2 block tracking-tight">
+            <div className="mb-4 sm:mb-6">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white mb-1.5 sm:mb-2 block tracking-tight">
                 {displayDate}
               </span>
-              <h2 className="text-base font-heading font-semibold text-[#0D2440]/85 dark:text-white/85 leading-snug">
+              <h2 className="text-sm sm:text-base font-heading font-semibold text-[#0D2440]/85 dark:text-white/85 leading-snug">
                 {displayTitle}
               </h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                <p className="text-[11px] font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
+                <p className="text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
                   Audited & Verified
                 </p>
               </div>
@@ -460,7 +460,7 @@ function GenericDocumentModal({
             </div>
           </div>
 
-          <div className="pt-8 space-y-3">
+          <div className="pt-6 sm:pt-8 space-y-2.5 sm:space-y-3">
             <a 
               href={downloadLink}
               download
@@ -484,22 +484,22 @@ function GenericDocumentModal({
         </div>
 
         {/* Right Preview Panel */}
-        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col items-center justify-center p-8 sm:p-12 text-center relative overflow-hidden">
+        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col items-center justify-center p-5 sm:p-8 md:p-12 text-center relative overflow-hidden">
           <div className="relative z-10 max-w-md">
-            <div className="w-20 h-20 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md text-[#2E5E99] dark:text-[#7BA4D0]">
-              <FileText className="w-10 h-10" />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-md text-[#2E5E99] dark:text-[#7BA4D0]">
+              <FileText className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
-            <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-3">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2 sm:mb-3">
               Official Disclosure Document
             </h3>
-            <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed mb-8">
+            <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed mb-6 sm:mb-8">
               Full statutory accounts, governance disclosures, audit verifications, and notes to statements for {displayDate}.
             </p>
             <a 
               href={downloadLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#2E5E99] hover:bg-[#0D2440] text-white text-xs font-heading font-bold transition-all shadow-md"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#2E5E99] hover:bg-[#0D2440] text-white text-xs font-heading font-bold transition-all shadow-md"
             >
               Open in Full Viewer <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -589,19 +589,19 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
   const gridItems = isDefaultView ? sortedData.slice(1) : sortedData;
 
   return (
-    <section className="py-12 md:py-20 bg-white dark:bg-[#071321] transition-colors relative">
+    <section className="py-10 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#071321] transition-colors relative">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-8 border-b border-[#7BA4D0]/15 mb-10 gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 sm:pb-8 border-b border-[#7BA4D0]/15 mb-8 sm:mb-10 gap-3 sm:gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.25em]">
+              <span className="text-[10px] sm:text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.25em]">
                 Disclosure Archive
               </span>
-              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[#0D2440] dark:text-white font-heading font-bold">
+              <span className="text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[#0D2440] dark:text-white font-heading font-bold">
                 {sortedData.length} {sortedData.length === 1 ? "Record" : "Records"}
               </span>
             </div>
@@ -610,9 +610,9 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-end sm:self-auto text-xs font-semibold text-[#0D2440]/70 dark:text-white/70">
+          <div className="flex items-center gap-2 self-start sm:self-auto text-xs font-semibold text-[#0D2440]/70 dark:text-white/70">
             <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span className="font-heading font-bold text-[11px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            <span className="font-heading font-bold text-[10px] sm:text-[11px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
               Audit Verified
             </span>
           </div>
@@ -623,7 +623,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-20 px-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
+            className="text-center py-16 sm:py-20 px-6 rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
           >
             <div className="w-16 h-16 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto mb-5 text-[#2E5E99]">
               <FileSpreadsheet className="w-8 h-8" />
@@ -645,7 +645,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
 
         {/* VIEW MODE 1: EDITORIAL BENTO GRID */}
         {viewMode === "grid" && sortedData.length > 0 && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             
             {/* FLAGSHIP SPOTLIGHT CARD (Light Blue Container with White Tactile Document) */}
             {flagshipItem && (
@@ -653,48 +653,48 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="relative overflow-hidden rounded-3xl bg-[#E7F0FA] dark:bg-[#0D2440] text-[#0D2440] dark:text-white border border-[#7BA4D0]/40 dark:border-[#7BA4D0]/30 shadow-xl shadow-[#2E5E99]/8 p-8 sm:p-12 group transition-all"
+                className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#E7F0FA] dark:bg-[#0D2440] text-[#0D2440] dark:text-white border border-[#7BA4D0]/40 dark:border-[#7BA4D0]/30 shadow-xl shadow-[#2E5E99]/8 p-5 sm:p-8 md:p-10 lg:p-12 group transition-all"
               >
                 <div className="absolute top-0 right-0 w-96 h-96 bg-[#7BA4D0]/20 dark:bg-[#2E5E99]/25 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#2E5E99]/15 rounded-full blur-3xl pointer-events-none" />
 
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
                   
                   {/* Left Column Information */}
-                  <div className="lg:col-span-7 space-y-6">
+                  <div className="lg:col-span-7 space-y-4 sm:space-y-6">
                     <div className="flex flex-wrap items-center gap-3">
                       <span className="text-xs font-heading font-bold text-[#0D2440]/65 dark:text-white/65 tracking-wider">
                         Cycle {flagshipItem.date}
                       </span>
                     </div>
 
-                    <div className="space-y-2">
-                      <h3 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white leading-tight">
+                    <div className="space-y-1.5 sm:space-y-2">
+                      <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white leading-tight">
                         {flagshipItem.particulars}
                       </h3>
-                      <p className="text-2xl sm:text-3xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
+                      <p className="text-xl sm:text-2xl lg:text-3xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
                         {flagshipItem.date}
                       </p>
                     </div>
 
-                    <p className="text-sm sm:text-base text-[#0D2440]/80 dark:text-white/80 max-w-xl leading-relaxed">
+                    <p className="text-xs sm:text-sm md:text-base text-[#0D2440]/80 dark:text-white/80 max-w-xl leading-relaxed">
                       Official statutory archive filed under regulatory corporate governance guidelines for complete transparency and compliance.
                     </p>
 
-                    <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                      <div className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-1 sm:pt-2">
+                      <div className="px-3 sm:px-3.5 py-1.5 rounded-lg sm:rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-[11px] sm:text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
                         Format: <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-heading font-bold">Official PDF</span>
                       </div>
-                      <div className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
+                      <div className="px-3 sm:px-3.5 py-1.5 rounded-lg sm:rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-[11px] sm:text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
                         Status: <span className="text-emerald-700 dark:text-emerald-400 font-heading font-bold">Audited & Published</span>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 pt-4">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
                       <a
                         href={flagshipItem.link}
                         download
-                        className="px-6 sm:px-8 py-3.5 rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98]"
+                        className="w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <Download className="w-4 h-4 text-white group-hover/btn:translate-y-0.5 transition-transform" />
                         Download Official PDF
@@ -702,7 +702,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
 
                       <button
                         onClick={() => handleOpenModal(flagshipItem)}
-                        className="px-6 py-3.5 rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                        className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                         Document Preview
@@ -714,9 +714,9 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                   <div className="lg:col-span-5 flex justify-center lg:justify-end">
                     <div 
                       onClick={() => handleOpenModal(flagshipItem)}
-                      className="cursor-pointer relative w-full max-w-sm aspect-[4/5] rounded-2xl bg-white text-[#0D2440] border border-[#7BA4D0]/35 p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:border-[#2E5E99] group-hover:shadow-2xl"
+                      className="cursor-pointer relative w-full max-w-sm aspect-[4/5] rounded-2xl sm:rounded-3xl bg-white text-[#0D2440] border border-[#7BA4D0]/35 p-5 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:border-[#2E5E99] group-hover:shadow-2xl"
                     >
-                      <div className="flex items-center justify-between pb-4 border-b border-[#7BA4D0]/20">
+                      <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#7BA4D0]/20">
                         <div className="flex items-center gap-2.5">
                           <div className="w-8 h-8 rounded-lg bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99]">
                             <FileText className="w-4 h-4" />
@@ -732,11 +732,11 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                         </div>
                       </div>
 
-                      <div className="my-auto text-center space-y-2 py-6">
-                        <div className="w-16 h-16 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto text-[#2E5E99] shadow-xs">
-                          <ShieldCheck className="w-8 h-8" />
+                      <div className="my-auto text-center space-y-2 py-4 sm:py-6">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto text-[#2E5E99] shadow-xs">
+                          <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
                         </div>
-                        <p className="text-2xl sm:text-3xl font-heading font-black text-[#0D2440] tracking-tight pt-2">
+                        <p className="text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#0D2440] tracking-tight pt-1.5 sm:pt-2">
                           {flagshipItem.date}
                         </p>
                         <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-[#0D2440]/55">
@@ -744,8 +744,8 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs text-[#0D2440]/80">
-                        <span className="font-heading font-bold text-xs">Click to Inspect</span>
+                      <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs text-[#0D2440]/80">
+                        <span className="font-heading font-bold text-[11px] sm:text-xs">Click to Inspect</span>
                         <div className="w-7 h-7 rounded-full bg-[#E7F0FA] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
                           <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
@@ -758,7 +758,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
             )}
 
             {/* Archival Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {gridItems.map((item, idx) => (
                 <motion.div
                   key={item.id}
@@ -766,24 +766,24 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
+                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
                 >
-                  <div className="absolute top-5 right-6 text-5xl sm:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
+                  <div className="absolute top-4 sm:top-5 right-5 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
                     0{String(item.id).padStart(1, '0')}
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                        <FileText className="w-5 h-5" />
+                    <div className="flex items-center justify-between mb-4 sm:mb-5">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                        <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-xs font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[11px] sm:text-xs font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
                         {item.date}
                       </span>
                     </div>
 
-                    <div className="space-y-2 mb-6">
-                      <h4 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
+                    <div className="space-y-1.5 sm:space-y-2 mb-5 sm:mb-6">
+                      <h4 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
                         {item.particulars}
                       </h4>
                       <div className="flex items-center gap-2 text-xs text-[#0D2440]/60 dark:text-white/60">
@@ -793,10 +793,10 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                     </div>
                   </div>
 
-                  <div className="pt-5 border-t border-[#7BA4D0]/15 flex items-center justify-between gap-3">
+                  <div className="pt-4 sm:pt-5 border-t border-[#7BA4D0]/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 sm:gap-3">
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center gap-1.5"
+                      className="px-3 sm:px-3.5 py-2 rounded-lg sm:rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center justify-center gap-1.5 flex-1 sm:flex-initial"
                     >
                       <Eye className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
                       Preview
@@ -805,7 +805,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                     <a
                       href={item.link}
                       download
-                      className="px-4 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center gap-2 shadow-xs group/btn"
+                      className="px-3.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-2 shadow-xs group/btn flex-1 sm:flex-initial"
                     >
                       <Download className="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
                       Download PDF
@@ -829,12 +829,12 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#0D2440]/80 text-[11px] font-heading font-bold text-[#0D2440]/70 dark:text-white/70 uppercase tracking-wider">
-                    <th className="py-4 px-6">Fiscal Date</th>
-                    <th className="py-4 px-6">Document Particulars</th>
-                    <th className="py-4 px-6 hidden sm:table-cell">Classification</th>
-                    <th className="py-4 px-6 hidden md:table-cell">Status</th>
-                    <th className="py-4 px-6 text-right">Actions</th>
+                  <tr className="border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#0D2440]/80 text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440]/70 dark:text-white/70 uppercase tracking-wider">
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6">Fiscal Date</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6">Document Particulars</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 hidden sm:table-cell">Classification</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 hidden md:table-cell">Status</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#7BA4D0]/15 text-xs text-[#0D2440] dark:text-white">
@@ -843,38 +843,38 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                       key={item.id}
                       className="hover:bg-[#F1F6FB] dark:hover:bg-white/5 transition-colors group"
                     >
-                      <td className="py-4 px-6 font-heading font-black text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 font-heading font-black text-xs sm:text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide whitespace-nowrap">
                         {item.date}
                       </td>
 
-                      <td className="py-4 px-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0">
-                            <FileText className="w-4 h-4" />
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6">
+                        <div className="flex items-center gap-2.5 sm:gap-3">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0">
+                            <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </div>
                           <div>
-                            <span className="font-heading font-semibold text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block">
+                            <span className="font-heading font-semibold text-xs sm:text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block leading-snug">
                               {item.particulars}
                             </span>
-                            <span className="text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 sm:hidden">
+                            <span className="text-[10px] sm:text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 sm:hidden">
                               Audited · Official PDF
                             </span>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-4 px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
                         Statutory Filing
                       </td>
 
-                      <td className="py-4 px-6 hidden md:table-cell">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 hidden md:table-cell">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-heading text-[10px] font-bold uppercase tracking-wider">
-                          <CheckCircle2 className="w-3 dot-3" />
+                          <CheckCircle2 className="w-3 h-3" />
                           Audited
                         </div>
                       </td>
 
-                      <td className="py-4 px-6 text-right">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => handleOpenModal(item)}
@@ -1007,19 +1007,19 @@ function GenericInvestorListingInner({
   const gridItems = isDefaultView ? sortedItems.slice(1) : sortedItems;
 
   return (
-    <section className="py-12 md:py-20 bg-white dark:bg-[#071321] transition-colors relative">
+    <section className="py-10 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#071321] transition-colors relative">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-8 border-b border-[#7BA4D0]/15 mb-10 gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 sm:pb-8 border-b border-[#7BA4D0]/15 mb-8 sm:mb-10 gap-3 sm:gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.25em]">
+              <span className="text-[10px] sm:text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.25em]">
                 {sectionTitle}
               </span>
-              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[#0D2440] dark:text-white font-heading font-bold">
+              <span className="text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[#0D2440] dark:text-white font-heading font-bold">
                 {sortedItems.length} {sortedItems.length === 1 ? "Record" : "Records"}
               </span>
             </div>
@@ -1028,9 +1028,9 @@ function GenericInvestorListingInner({
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-end sm:self-auto text-xs font-semibold text-[#0D2440]/70 dark:text-white/70">
+          <div className="flex items-center gap-2 self-start sm:self-auto text-xs font-semibold text-[#0D2440]/70 dark:text-white/70">
             <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span className="font-heading font-bold text-[11px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            <span className="font-heading font-bold text-[10px] sm:text-[11px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
               Audit Verified
             </span>
           </div>
@@ -1041,7 +1041,7 @@ function GenericInvestorListingInner({
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-20 px-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
+            className="text-center py-16 sm:py-20 px-6 rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
           >
             <div className="w-16 h-16 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto mb-5 text-[#2E5E99]">
               <FileSpreadsheet className="w-8 h-8" />
@@ -1063,7 +1063,7 @@ function GenericInvestorListingInner({
 
         {/* VIEW MODE 1: EDITORIAL BENTO GRID */}
         {viewMode === "grid" && sortedItems.length > 0 && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             
             {/* FLAGSHIP SPOTLIGHT CARD (Light Blue Container with White Tactile Document) */}
             {flagshipItem && (
@@ -1071,48 +1071,48 @@ function GenericInvestorListingInner({
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="relative overflow-hidden rounded-3xl bg-[#E7F0FA] dark:bg-[#0D2440] text-[#0D2440] dark:text-white border border-[#7BA4D0]/40 dark:border-[#7BA4D0]/30 shadow-xl shadow-[#2E5E99]/8 p-8 sm:p-12 group transition-all"
+                className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#E7F0FA] dark:bg-[#0D2440] text-[#0D2440] dark:text-white border border-[#7BA4D0]/40 dark:border-[#7BA4D0]/30 shadow-xl shadow-[#2E5E99]/8 p-5 sm:p-8 md:p-10 lg:p-12 group transition-all"
               >
                 <div className="absolute top-0 right-0 w-96 h-96 bg-[#7BA4D0]/20 dark:bg-[#2E5E99]/25 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#2E5E99]/15 rounded-full blur-3xl pointer-events-none" />
 
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
                   
                   {/* Left Column Information */}
-                  <div className="lg:col-span-7 space-y-6">
+                  <div className="lg:col-span-7 space-y-4 sm:space-y-6">
                     <div className="flex flex-wrap items-center gap-3">
                       <span className="text-xs font-heading font-bold text-[#0D2440]/65 dark:text-white/65 tracking-wider">
                         {flagshipItem.period || flagshipItem.date || resultsPeriod}
                       </span>
                     </div>
 
-                    <div className="space-y-2">
-                      <h3 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white leading-tight">
+                    <div className="space-y-1.5 sm:space-y-2">
+                      <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white leading-tight">
                         {flagshipItem.title}
                       </h3>
-                      <p className="text-2xl sm:text-3xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
+                      <p className="text-xl sm:text-2xl lg:text-3xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
                         {flagshipItem.period || flagshipItem.date}
                       </p>
                     </div>
 
-                    <p className="text-sm sm:text-base text-[#0D2440]/80 dark:text-white/80 max-w-xl leading-relaxed">
+                    <p className="text-xs sm:text-sm md:text-base text-[#0D2440]/80 dark:text-white/80 max-w-xl leading-relaxed">
                       Official corporate disclosure document filed under statutory capital market requirements for institutional and retail stakeholders.
                     </p>
 
-                    <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                      <div className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-1 sm:pt-2">
+                      <div className="px-3 sm:px-3.5 py-1.5 rounded-lg sm:rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-[11px] sm:text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
                         Classification: <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-heading font-bold">{flagshipItem.type || category}</span>
                       </div>
-                      <div className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
+                      <div className="px-3 sm:px-3.5 py-1.5 rounded-lg sm:rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-[11px] sm:text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
                         Status: <span className="text-emerald-700 dark:text-emerald-400 font-heading font-bold">{flagshipItem.status || "Audited & Published"}</span>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 pt-4">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
                       <a
                         href={flagshipItem.downloadUrl || flagshipItem.link || "/sample-report.pdf"}
                         download
-                        className="px-6 sm:px-8 py-3.5 rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98]"
+                        className="w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <Download className="w-4 h-4 text-white group-hover/btn:translate-y-0.5 transition-transform" />
                         Download Official File
@@ -1120,7 +1120,7 @@ function GenericInvestorListingInner({
 
                       <button
                         onClick={() => handleOpenModal(flagshipItem)}
-                        className="px-6 py-3.5 rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                        className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                         Document Preview
@@ -1132,9 +1132,9 @@ function GenericInvestorListingInner({
                   <div className="lg:col-span-5 flex justify-center lg:justify-end">
                     <div 
                       onClick={() => handleOpenModal(flagshipItem)}
-                      className="cursor-pointer relative w-full max-w-sm aspect-[4/5] rounded-2xl bg-white text-[#0D2440] border border-[#7BA4D0]/35 p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:border-[#2E5E99] group-hover:shadow-2xl"
+                      className="cursor-pointer relative w-full max-w-sm aspect-[4/5] rounded-2xl sm:rounded-3xl bg-white text-[#0D2440] border border-[#7BA4D0]/35 p-5 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:border-[#2E5E99] group-hover:shadow-2xl"
                     >
-                      <div className="flex items-center justify-between pb-4 border-b border-[#7BA4D0]/20">
+                      <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#7BA4D0]/20">
                         <div className="flex items-center gap-2.5">
                           <div className="w-8 h-8 rounded-lg bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99]">
                             <FileText className="w-4 h-4" />
@@ -1150,11 +1150,11 @@ function GenericInvestorListingInner({
                         </div>
                       </div>
 
-                      <div className="my-auto text-center space-y-2 py-6">
-                        <div className="w-16 h-16 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto text-[#2E5E99] shadow-xs">
-                          <ShieldCheck className="w-8 h-8" />
+                      <div className="my-auto text-center space-y-2 py-4 sm:py-6">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto text-[#2E5E99] shadow-xs">
+                          <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
                         </div>
-                        <p className="text-2xl sm:text-3xl font-heading font-black text-[#0D2440] tracking-tight pt-2">
+                        <p className="text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#0D2440] tracking-tight pt-1.5 sm:pt-2">
                           {flagshipItem.period || flagshipItem.date}
                         </p>
                         <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-[#0D2440]/55">
@@ -1162,8 +1162,8 @@ function GenericInvestorListingInner({
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs text-[#0D2440]/80">
-                        <span className="font-heading font-bold text-xs">Click to Inspect</span>
+                      <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between text-xs text-[#0D2440]/80">
+                        <span className="font-heading font-bold text-[11px] sm:text-xs">Click to Inspect</span>
                         <div className="w-7 h-7 rounded-full bg-[#E7F0FA] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
                           <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
@@ -1176,7 +1176,7 @@ function GenericInvestorListingInner({
             )}
 
             {/* Archival Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {gridItems.map((item, idx) => (
                 <motion.div
                   key={item.id}
@@ -1184,24 +1184,24 @@ function GenericInvestorListingInner({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
+                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
                 >
-                  <div className="absolute top-5 right-6 text-5xl sm:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
+                  <div className="absolute top-4 sm:top-5 right-5 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
                     0{String(item.id).padStart(1, '0')}
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                        <FileText className="w-5 h-5" />
+                    <div className="flex items-center justify-between mb-4 sm:mb-5">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                        <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-xs font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[11px] sm:text-xs font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
                         {item.period || item.date}
                       </span>
                     </div>
 
-                    <div className="space-y-2 mb-6">
-                      <h4 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
+                    <div className="space-y-1.5 sm:space-y-2 mb-5 sm:mb-6">
+                      <h4 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
                         {item.title}
                       </h4>
                       <div className="flex items-center gap-2 text-xs text-[#0D2440]/60 dark:text-white/60">
@@ -1211,10 +1211,10 @@ function GenericInvestorListingInner({
                     </div>
                   </div>
 
-                  <div className="pt-5 border-t border-[#7BA4D0]/15 flex items-center justify-between gap-3">
+                  <div className="pt-4 sm:pt-5 border-t border-[#7BA4D0]/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 sm:gap-3">
                     <button
                       onClick={() => handleOpenModal(item)}
-                      className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center gap-1.5"
+                      className="px-3 sm:px-3.5 py-2 rounded-lg sm:rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center justify-center gap-1.5 flex-1 sm:flex-initial"
                     >
                       <Eye className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
                       Preview
@@ -1223,7 +1223,7 @@ function GenericInvestorListingInner({
                     <a
                       href={item.downloadUrl || item.link || "/sample-report.pdf"}
                       download
-                      className="px-4 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center gap-2 shadow-xs group/btn"
+                      className="px-3.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-2 shadow-xs group/btn flex-1 sm:flex-initial"
                     >
                       <Download className="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
                       Download
@@ -1247,12 +1247,12 @@ function GenericInvestorListingInner({
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#0D2440]/80 text-[11px] font-heading font-bold text-[#0D2440]/70 dark:text-white/70 uppercase tracking-wider">
-                    <th className="py-4 px-6">Period / Date</th>
-                    <th className="py-4 px-6">Document Title</th>
-                    <th className="py-4 px-6 hidden sm:table-cell">Classification</th>
-                    <th className="py-4 px-6 hidden md:table-cell">Status</th>
-                    <th className="py-4 px-6 text-right">Actions</th>
+                  <tr className="border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#0D2440]/80 text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440]/70 dark:text-white/70 uppercase tracking-wider">
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6">Period / Date</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6">Document Title</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 hidden sm:table-cell">Classification</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 hidden md:table-cell">Status</th>
+                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#7BA4D0]/15 text-xs text-[#0D2440] dark:text-white">
@@ -1261,38 +1261,38 @@ function GenericInvestorListingInner({
                       key={item.id}
                       className="hover:bg-[#F1F6FB] dark:hover:bg-white/5 transition-colors group"
                     >
-                      <td className="py-4 px-6 font-heading font-black text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 font-heading font-black text-xs sm:text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide whitespace-nowrap">
                         {item.period || item.date}
                       </td>
 
-                      <td className="py-4 px-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0">
-                            <FileText className="w-4 h-4" />
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6">
+                        <div className="flex items-center gap-2.5 sm:gap-3">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0">
+                            <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </div>
                           <div>
-                            <span className="font-heading font-semibold text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block">
+                            <span className="font-heading font-semibold text-xs sm:text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block leading-snug">
                               {item.title}
                             </span>
-                            <span className="text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 sm:hidden">
+                            <span className="text-[10px] sm:text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 sm:hidden">
                               {item.type || category}
                             </span>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-4 px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
                         {item.type || category}
                       </td>
 
-                      <td className="py-4 px-6 hidden md:table-cell">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 hidden md:table-cell">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-heading text-[10px] font-bold uppercase tracking-wider">
                           <CheckCircle2 className="w-3 h-3" />
                           {item.status || "Published"}
                         </div>
                       </td>
 
-                      <td className="py-4 px-6 text-right">
+                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => handleOpenModal(item)}

@@ -27,7 +27,7 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
   const downloadLink = report.link || "/sample-report.pdf";
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-8">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-[#0D2440]/80 dark:bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
@@ -35,14 +35,14 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
       />
       
       {/* Modal Content */}
-      <div className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl md:rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 max-h-[85vh]">
+      <div className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl md:rounded-3xl flex flex-col md:flex-row overflow-y-auto md:overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 max-h-[92vh] sm:max-h-[85vh]">
         {/* Sidebar: Metadata */}
-        <div className="w-full md:w-80 p-6 md:p-8 bg-[#F8FAFC] dark:bg-black/30 border-b md:border-b-0 md:border-r border-[#7BA4D0]/20 flex flex-col justify-between">
+        <div className="w-full md:w-80 p-4 sm:p-6 md:p-8 bg-[#F8FAFC] dark:bg-black/30 border-b md:border-b-0 md:border-r border-[#7BA4D0]/20 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
               <div className="flex items-center gap-2">
                 <div className="h-0.5 w-6 bg-[#2E5E99]" />
-                <span className="text-[#2E5E99] font-bold uppercase tracking-widest text-[10px]">Fiscal Publication</span>
+                <span className="text-[#2E5E99] font-bold uppercase tracking-widest text-[9px] sm:text-[10px]">Fiscal Publication</span>
               </div>
               <button 
                 onClick={onClose}
@@ -53,19 +53,19 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
               </button>
             </div>
 
-            <div className="mb-6">
-              <span className="text-3xl sm:text-4xl font-heading font-black text-[#0D2440] dark:text-white mb-2 block tracking-tight">
+            <div className="mb-4 sm:mb-6">
+              <span className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white mb-1.5 sm:mb-2 block tracking-tight">
                 {displayYear}
               </span>
-              <h2 className="text-base font-heading font-semibold text-[#0D2440]/80 dark:text-white/80 leading-snug">
+              <h2 className="text-sm sm:text-base font-heading font-semibold text-[#0D2440]/80 dark:text-white/80 leading-snug">
                 {displayTitle}
               </h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                <p className="text-[11px] font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Audited & Verified</p>
+                <p className="text-[10px] sm:text-[11px] font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Audited & Verified</p>
               </div>
               <p className="text-xs text-[#0D2440]/60 dark:text-white/60 leading-relaxed">
                 Official statutory filing containing audited financial statements, director reports, and governance disclosures for {displayYear}.
@@ -73,7 +73,7 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
             </div>
           </div>
 
-          <div className="pt-8 space-y-3">
+          <div className="pt-6 sm:pt-8 space-y-2.5 sm:space-y-3">
             <a 
               href={downloadLink}
               download
@@ -97,15 +97,15 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
         </div>
 
         {/* Main Content: PDF Preview Panel */}
-        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col items-center justify-center p-8 sm:p-12 text-center relative overflow-hidden">
+        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col items-center justify-center p-5 sm:p-8 md:p-12 text-center relative overflow-hidden">
           <div className="relative z-10 max-w-md">
-            <div className="w-20 h-20 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md text-[#2E5E99] dark:text-[#7BA4D0]">
-              <FileText className="w-10 h-10" />
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-md text-[#2E5E99] dark:text-[#7BA4D0]">
+              <FileText className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
-            <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#0D2440] dark:text-white mb-3">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-[#0D2440] dark:text-white mb-2 sm:mb-3">
               Official Disclosure Document
             </h3>
-            <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed mb-8">
+            <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed mb-6 sm:mb-8">
               Full statutory accounts, governance disclosures, audit verifications, and notes to financial statements for the fiscal cycle {displayYear}.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -113,7 +113,7 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
                 href={downloadLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#2E5E99] hover:bg-[#0D2440] text-white text-xs font-semibold transition-all shadow-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#2E5E99] hover:bg-[#0D2440] text-white text-xs font-semibold transition-all shadow-md"
               >
                 Open in Full Viewer <ExternalLink className="w-3.5 h-3.5" />
               </a>

@@ -34,7 +34,7 @@ export function MaterialDetailModal({ isOpen, onClose, documentData }: MaterialD
   if (!isOpen || !documentData) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 md:p-8">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-charcoal/95 backdrop-blur-md animate-in fade-in duration-500"
@@ -42,58 +42,63 @@ export function MaterialDetailModal({ isOpen, onClose, documentData }: MaterialD
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-7xl h-full bg-white dark:bg-charcoal rounded-sm flex flex-col overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-700">
+      <div className="relative w-full max-w-7xl h-[92vh] max-h-[900px] bg-white dark:bg-[#0A192F] rounded-2xl flex flex-col overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-8 duration-700 shadow-2xl border border-border">
         
         {/* Header */}
-        <div className="px-8 py-6 border-b border-border flex items-center justify-between bg-white dark:bg-charcoal sticky top-0 z-10">
-          <div className="flex items-center gap-6">
-            <div className="w-12 h-12 bg-gold/10 flex items-center justify-center rounded-sm border border-gold/20">
-              <FileText className="w-6 h-6 text-gold" />
+        <div className="px-4 sm:px-8 py-4 sm:py-5 border-b border-border flex items-center justify-between bg-white dark:bg-[#0A192F] sticky top-0 z-10">
+          <div className="flex items-center gap-3 sm:gap-6 min-w-0 pr-2">
+            <div className="w-10 sm:w-12 h-10 sm:h-12 bg-[#2E5E99]/10 flex items-center justify-center rounded-xl border border-[#2E5E99]/20 shrink-0">
+              <FileText className="w-5 sm:w-6 h-5 sm:h-6 text-[#2E5E99] dark:text-[#7BA4D0]" />
             </div>
-            <div>
-              <div className="flex items-center gap-3 mb-1">
-                <h2 className="text-xl font-heading font-bold text-charcoal dark:text-white leading-none">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 sm:gap-3 mb-1">
+                <h2 className="text-sm sm:text-lg md:text-xl font-heading font-bold text-charcoal dark:text-white leading-tight truncate">
                   {documentData.title}
                 </h2>
-                <span className="px-2 py-0.5 bg-silver/10 text-[8px] font-bold text-muted-foreground uppercase tracking-widest rounded-sm border border-border">
+                <span className="hidden sm:inline-block px-2 py-0.5 bg-silver/10 text-[8px] font-bold text-muted-foreground uppercase tracking-widest rounded-sm border border-border shrink-0">
                    {documentData.ref}
                 </span>
               </div>
-              <div className="flex items-center gap-4 text-[9px] text-muted-foreground font-bold uppercase tracking-widest">
-                <span className="flex items-center gap-1.5"><Calendar className="w-3 h-3" /> {documentData.date}</span>
-                <span className="flex items-center gap-1.5"><Bookmark className="w-3 h-3" /> Material {documentData.type}</span>
-                <span className="text-gold">{documentData.fiscal}</span>
+              <div className="flex items-center gap-2 sm:gap-4 text-[9px] text-muted-foreground font-bold uppercase tracking-widest truncate">
+                <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-[#2E5E99] dark:text-[#7BA4D0]" /> {documentData.date}</span>
+                <span className="hidden sm:flex items-center gap-1.5"><Bookmark className="w-3 h-3 text-[#2E5E99] dark:text-[#7BA4D0]" /> Material {documentData.type}</span>
+                <span className="text-[#2E5E99] dark:text-[#7BA4D0]">{documentData.fiscal}</span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-             <div className="hidden md:flex items-center gap-1 bg-silver/5 border border-border rounded-sm p-1 mr-4">
-                <button className="p-2 hover:bg-white dark:hover:bg-black/20 rounded-sm transition-all"><ZoomOut className="w-4 h-4 text-muted-foreground" /></button>
-                <button className="p-2 hover:bg-white dark:hover:bg-black/20 rounded-sm transition-all"><ZoomIn className="w-4 h-4 text-muted-foreground" /></button>
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+             <div className="hidden md:flex items-center gap-1 bg-silver/5 border border-border rounded-lg p-1 mr-2">
+                <button className="p-1.5 hover:bg-white dark:hover:bg-black/20 rounded-md transition-all"><ZoomOut className="w-4 h-4 text-muted-foreground" /></button>
+                <button className="p-1.5 hover:bg-white dark:hover:bg-black/20 rounded-md transition-all"><ZoomIn className="w-4 h-4 text-muted-foreground" /></button>
              </div>
-             <button className="p-3 bg-silver/5 hover:bg-silver/10 border border-border rounded-sm transition-all group" title="Print">
-                <Printer className="w-4 h-4 text-muted-foreground group-hover:text-gold" />
+             <button className="hidden sm:flex p-2.5 bg-silver/5 hover:bg-silver/10 border border-border rounded-xl transition-all group min-w-[36px] min-h-[36px] items-center justify-center" title="Print">
+                <Printer className="w-4 h-4 text-muted-foreground group-hover:text-[#2E5E99]" />
              </button>
-             <button className="p-3 bg-gold text-charcoal rounded-sm hover:bg-white transition-all font-bold text-[9px] uppercase tracking-widest flex items-center gap-2">
+             <a 
+               href="/sample-report.pdf"
+               download
+               className="p-2 sm:px-4 sm:py-2.5 bg-[#0D2440] hover:bg-[#2E5E99] text-white rounded-xl transition-all font-bold text-[9px] uppercase tracking-widest flex items-center justify-center gap-2 min-h-[36px]"
+             >
                 <Download className="w-4 h-4" />
-                Download PDF
-             </button>
-             <div className="w-px h-8 bg-border mx-2" />
+                <span className="hidden sm:inline">Download PDF</span>
+             </a>
+             <div className="hidden sm:block w-px h-6 bg-border mx-1" />
              <button 
                onClick={onClose}
-               className="p-3 bg-charcoal dark:bg-white/5 text-white hover:bg-red-500 hover:text-white transition-all rounded-sm"
+               className="p-2 sm:p-2.5 bg-charcoal dark:bg-white/10 text-white hover:bg-red-500 hover:text-white transition-all rounded-xl min-w-[36px] min-h-[36px] flex items-center justify-center"
+               aria-label="Close dialog"
              >
-               <X className="w-5 h-5" />
+               <X className="w-4 sm:w-5 h-4 sm:h-5" />
              </button>
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow flex flex-col lg:flex-row overflow-hidden">
+        <div className="flex-grow flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
           
           {/* Main Viewer (PDF Placeholder) */}
-          <div className="flex-grow bg-silver/10 dark:bg-black/40 overflow-y-auto p-8 md:p-12 scrollbar-thin">
+          <div className="flex-grow bg-silver/10 dark:bg-black/40 overflow-y-auto p-4 sm:p-8 md:p-12 scrollbar-thin">
              <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
                 {/* PDF Aesthetic Mockup */}
                 <div className="bg-white dark:bg-charcoal rounded-sm p-12 md:p-20 min-h-[1200px] border border-border relative overflow-hidden">

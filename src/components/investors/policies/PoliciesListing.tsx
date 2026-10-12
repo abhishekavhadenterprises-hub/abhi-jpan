@@ -110,19 +110,19 @@ function PoliciesListingInner() {
 
   return (
     <>
-      <section className="py-12 md:py-20 bg-white dark:bg-[#071321] transition-colors relative">
+      <section className="py-8 sm:py-16 md:py-20 bg-white dark:bg-[#071321] transition-colors relative">
         <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
         <div className="container-custom relative z-10">
           
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-8 border-b border-[#7BA4D0]/15 mb-10 gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 sm:pb-8 border-b border-[#7BA4D0]/15 mb-6 sm:mb-10 gap-3 sm:gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.25em]">
+                <span className="text-[10px] sm:text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.25em]">
                   Governance Framework
                 </span>
-                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[#0D2440] dark:text-white font-heading font-bold">
+                <span className="text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[#0D2440] dark:text-white font-heading font-bold">
                   {sortedPolicies.length} Policies
                 </span>
               </div>
@@ -131,9 +131,9 @@ function PoliciesListingInner() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 self-end sm:self-auto text-xs font-semibold text-[#0D2440]/70 dark:text-white/70">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              <span className="font-heading font-bold text-[11px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            <div className="flex items-center gap-2 self-start sm:self-auto text-xs font-semibold text-[#0D2440]/70 dark:text-white/70">
+              <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
+              <span className="font-heading font-bold text-[10px] sm:text-[11px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                 Statutory Verified
               </span>
             </div>
@@ -144,12 +144,12 @@ function PoliciesListingInner() {
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center py-20 px-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
+              className="text-center py-12 sm:py-20 px-4 sm:px-6 rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
             >
-              <div className="w-16 h-16 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto mb-5 text-[#2E5E99]">
-                <FileSpreadsheet className="w-8 h-8" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto mb-4 sm:mb-5 text-[#2E5E99]">
+                <FileSpreadsheet className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
-              <h3 className="text-xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
+              <h3 className="text-lg sm:text-xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                 No Policies Found
               </h3>
               <p className="text-xs text-[#0D2440]/60 dark:text-white/60 mb-6 leading-relaxed">
@@ -157,7 +157,7 @@ function PoliciesListingInner() {
               </p>
               <button
                 onClick={clearFilters}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold transition-all shadow-md"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold transition-all shadow-md min-h-[40px] cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Reset Search
               </button>
@@ -166,7 +166,7 @@ function PoliciesListingInner() {
 
           {/* VIEW MODE 1: EDITORIAL BENTO GRID */}
           {viewMode === "grid" && sortedPolicies.length > 0 && (
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               
               {/* FLAGSHIP SPOTLIGHT CARD (Light Blue Container with White Tactile Document) */}
               {flagshipPolicy && (
@@ -174,59 +174,59 @@ function PoliciesListingInner() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative overflow-hidden rounded-3xl bg-[#E7F0FA] dark:bg-[#0D2440] text-[#0D2440] dark:text-white border border-[#7BA4D0]/40 dark:border-[#7BA4D0]/30 shadow-xl shadow-[#2E5E99]/8 p-8 sm:p-12 group transition-all"
+                  className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#E7F0FA] dark:bg-[#0D2440] text-[#0D2440] dark:text-white border border-[#7BA4D0]/40 dark:border-[#7BA4D0]/30 shadow-xl shadow-[#2E5E99]/8 p-5 sm:p-8 md:p-12 group transition-all"
                 >
                   <div className="absolute top-0 right-0 w-96 h-96 bg-[#7BA4D0]/20 dark:bg-[#2E5E99]/25 rounded-full blur-3xl pointer-events-none" />
                   <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#2E5E99]/15 rounded-full blur-3xl pointer-events-none" />
 
-                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
                     
                     {/* Left Column Information */}
-                    <div className="lg:col-span-7 space-y-6">
+                    <div className="lg:col-span-7 space-y-4 sm:space-y-6">
                       <div className="flex flex-wrap items-center gap-3">
                         <span className="text-xs font-heading font-bold text-[#0D2440]/65 dark:text-white/65 tracking-wider">
                           Updated {flagshipPolicy.lastUpdated} · {flagshipPolicy.category}
                         </span>
                       </div>
 
-                      <div className="space-y-2">
-                        <h3 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white leading-tight">
+                      <div className="space-y-1 sm:space-y-2">
+                        <h3 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white leading-tight">
                           {flagshipPolicy.title}
                         </h3>
-                        <p className="text-xl sm:text-2xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
+                        <p className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
                           {flagshipPolicy.category} Charter
                         </p>
                       </div>
 
-                      <p className="text-sm sm:text-base text-[#0D2440]/80 dark:text-white/80 max-w-xl leading-relaxed">
+                      <p className="text-xs sm:text-sm md:text-base text-[#0D2440]/80 dark:text-white/80 max-w-xl leading-relaxed">
                         {flagshipPolicy.description}
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                        <div className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
+                      <div className="flex flex-wrap items-center gap-2 pt-1 sm:pt-2">
+                        <div className="px-3 sm:px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
                           Classification: <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-heading font-bold">{flagshipPolicy.category}</span>
                         </div>
-                        <div className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
+                        <div className="px-3 sm:px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/30 dark:border-white/10 text-xs font-heading font-medium text-[#0D2440] dark:text-white/90 shadow-2xs">
                           Access: <span className="text-emerald-700 dark:text-emerald-400 font-heading font-bold">{flagshipPolicy.access}</span>
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-4 pt-4">
+                      <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
                         <a
                           href="/sample-report.pdf"
                           download
-                          className="px-6 sm:px-8 py-3.5 rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98]"
+                          className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98] min-h-[44px]"
                         >
-                          <Download className="w-4 h-4 text-white group-hover/btn:translate-y-0.5 transition-transform" />
-                          Download Policy PDF
+                          <Download className="w-4 h-4 text-white group-hover/btn:translate-y-0.5 transition-transform shrink-0" />
+                          <span>Download Policy PDF</span>
                         </a>
 
                         <button
                           onClick={() => handleView(flagshipPolicy)}
-                          className="px-6 py-3.5 rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                          className="w-full sm:w-auto px-6 py-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] min-h-[44px]"
                         >
-                          <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                          Document Preview
+                          <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
+                          <span>Document Preview</span>
                         </button>
                       </div>
                     </div>

@@ -26,14 +26,14 @@ export function GalleryProcessStory() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-white dark:bg-black transition-colors overflow-hidden">
+    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black transition-colors overflow-hidden">
       <div className="container-custom">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 md:mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-14 md:mb-16">
           <div className="lg:max-w-2xl">
             <div className="mb-2 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
+                className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
@@ -45,7 +45,7 @@ export function GalleryProcessStory() {
               </ScrollWipeHeading>
             </div>
           </div>
-          <p className="text-[#0D2440]/70 dark:text-silver/70 text-base md:text-lg lg:max-w-md leading-relaxed font-normal">
+          <p className="text-[#0D2440]/70 dark:text-silver/70 text-sm sm:text-base md:text-lg lg:max-w-md leading-relaxed font-normal">
             Transparency in every step. See how our components evolve from 
             raw materials to finished precision engineering parts.
           </p>
@@ -54,7 +54,7 @@ export function GalleryProcessStory() {
         <div 
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar pb-4 sm:pb-0"
+          className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 no-scrollbar pb-4 sm:pb-0"
         >
           {steps.map((s, idx) => (
             <motion.div 
@@ -65,7 +65,7 @@ export function GalleryProcessStory() {
               transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="group relative w-full sm:w-auto shrink-0 sm:shrink snap-center"
             >
-              <div className="aspect-[4/5] relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 bg-slate-50 dark:bg-[#070b14] transition-all duration-500 mb-4 shadow-sm group-hover:shadow-xl">
+              <div className="aspect-[4/5] relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 bg-slate-50 dark:bg-[#070b14] transition-all duration-500 mb-3 sm:mb-4 shadow-sm group-hover:shadow-xl">
                 <Image
                   src={s.image}
                   alt={s.title}
@@ -75,8 +75,8 @@ export function GalleryProcessStory() {
                 />
                 
                 {/* Floating Step Number Squircle */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3.5 py-1.5 rounded-xl bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-xs font-bold text-[#0D2440] dark:text-white shadow-sm">
+                <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
+                  <span className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-white/95 dark:bg-[#0D2440]/90 backdrop-blur-md border border-white/60 dark:border-[#2E5E99]/40 text-[11px] sm:text-xs font-bold text-[#0D2440] dark:text-white shadow-sm">
                     Step {s.step}
                   </span>
                 </div>
@@ -85,7 +85,7 @@ export function GalleryProcessStory() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               
-              <h4 className="text-base sm:text-lg font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+              <h4 className="text-sm sm:text-base md:text-lg font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
                 {s.title}
               </h4>
             </motion.div>

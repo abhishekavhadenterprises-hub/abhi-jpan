@@ -33,9 +33,9 @@ const metrics = [
 
 export function InvestorPresentationHighlights() {
   return (
-    <section className="py-20 md:py-28 bg-white dark:bg-black overflow-hidden relative">
+    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black overflow-hidden relative">
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -43,18 +43,18 @@ export function InvestorPresentationHighlights() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-1"
           >
-            <h2 className="text-3xl font-heading font-bold text-[#0D2440] dark:text-white mb-6 leading-tight tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-tight tracking-tight">
               Strategic <br />
               <span className="italic bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] bg-clip-text text-transparent inline-block pb-1 pr-1">
                 Benchmarks
               </span>
             </h2>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-8">
+            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">
               Key performance indicators reflecting J Pan Tubular Components Limited's operational 
               resilience and market-leading expansion strategies.
             </p>
-            <div className="p-5 bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 rounded-2xl flex items-center gap-4">
-              <div className="w-11 h-11 bg-white dark:bg-charcoal flex items-center justify-center rounded-xl border border-[#7BA4D0]/30 text-[#2E5E99] shrink-0">
+            <div className="p-4 sm:p-5 bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 rounded-xl sm:rounded-2xl flex items-center gap-3.5 sm:gap-4">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white dark:bg-charcoal flex items-center justify-center rounded-lg sm:rounded-xl border border-[#7BA4D0]/30 text-[#2E5E99] shrink-0">
                 <Zap className="w-5 h-5" />
               </div>
               <div>
@@ -64,7 +64,7 @@ export function InvestorPresentationHighlights() {
             </div>
           </motion.div>
 
-          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 relative">
             {metrics.map((metric, idx) => (
               <motion.div 
                 key={metric.id}
@@ -72,17 +72,17 @@ export function InvestorPresentationHighlights() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 hover:border-[#2E5E99]/50 p-8 rounded-3xl hover:-translate-y-1.5 transition-all duration-300 group"
+                className="bg-[#F8FAFC] dark:bg-charcoal/40 border border-[#7BA4D0]/25 hover:border-[#2E5E99]/50 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 group"
               >
-                <div className="flex items-center justify-between mb-8">
-                  <div className="w-13 h-13 p-3 bg-white dark:bg-charcoal border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center group-hover:bg-[#0D2440] group-hover:text-white group-hover:border-[#0D2440] transition-colors">
-                    <metric.icon className="w-6 h-6 text-[#2E5E99] group-hover:text-white transition-colors" />
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 p-2.5 sm:p-3 bg-white dark:bg-charcoal border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:bg-[#0D2440] group-hover:text-white group-hover:border-[#0D2440] transition-colors">
+                    <metric.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E5E99] group-hover:text-white transition-colors" />
                   </div>
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-[#2E5E99] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-hover:text-[#2E5E99] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
                 
-                <div className="mb-6">
-                  <span className="text-4xl font-heading font-bold text-[#0D2440] dark:text-white block mb-2 tracking-tight">
+                <div className="mb-4 sm:mb-6">
+                  <span className="text-3xl sm:text-4xl font-heading font-bold text-[#0D2440] dark:text-white block mb-2 tracking-tight">
                     {metric.value}
                   </span>
                   <span className="text-[10px] font-bold text-[#2E5E99] uppercase tracking-[0.18em] bg-[#EBF3FC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 px-2.5 py-1 rounded-full inline-block">
@@ -90,7 +90,7 @@ export function InvestorPresentationHighlights() {
                   </span>
                 </div>
 
-                <h4 className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-widest mb-3">
+                <h4 className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-widest mb-2 sm:mb-3">
                   {metric.label}
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">

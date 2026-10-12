@@ -48,13 +48,13 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
   };
 
   return (
-    <section className="py-10 md:py-16 bg-white dark:bg-black transition-colors">
+    <section className="pt-2 pb-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-black transition-colors">
       <div className="container-custom">
         <motion.div 
           layout
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 no-scrollbar pb-4 md:pb-0"
+          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 no-scrollbar pb-4 md:pb-0"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, idx) => (
@@ -77,18 +77,18 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
                 />
                 
                 {/* Subtle Radiant Gradient Frame */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-[#0D2440]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-7">
-                  <div className="flex items-end justify-between gap-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-[#0D2440]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-6 md:p-7">
+                  <div className="flex items-end justify-between gap-3 sm:gap-4 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
                     <div>
-                      <span className="inline-block px-2.5 py-1 rounded-lg bg-white/15 backdrop-blur-md border border-white/20 text-[11px] font-semibold uppercase tracking-wider text-[#7BA4D0] mb-2">
+                      <span className="inline-block px-2.5 py-1 rounded-lg bg-white/15 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-[#7BA4D0] mb-1.5 sm:mb-2">
                         {item.category}
                       </span>
-                      <h3 className="text-white font-heading font-bold text-lg md:text-xl leading-snug">
+                      <h3 className="text-white font-heading font-bold text-base sm:text-lg md:text-xl leading-snug">
                         {item.title}
                       </h3>
                     </div>
-                    <div className="w-10 h-10 rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#0D2440] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] border border-white/30 flex items-center justify-center shrink-0 backdrop-blur-md transition-all duration-200">
-                      <Maximize2 className="w-4 h-4" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/20 hover:bg-white text-white hover:text-[#0D2440] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] border border-white/30 flex items-center justify-center shrink-0 backdrop-blur-md transition-all duration-200">
+                      <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
                   </div>
                 </div>
@@ -125,11 +125,11 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-[100] bg-[#0D2440]/90 dark:bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] bg-[#0D2440]/90 dark:bg-black/95 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 md:p-8 animate-in fade-in duration-300"
           onClick={() => setSelectedImage(null)}
         >
           <button 
-            className="absolute top-6 right-6 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all duration-200 z-[110]"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-white/10 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all duration-200 z-[110]"
             onClick={() => setSelectedImage(null)}
             aria-label="Close modal"
           >

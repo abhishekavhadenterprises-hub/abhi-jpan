@@ -21,7 +21,7 @@ export function GrievanceTracking() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
+    <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
@@ -31,20 +31,20 @@ export function GrievanceTracking() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-3 sm:mb-4 w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
               Real-time Audit Trace
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-6 leading-[1.12] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-[1.12] tracking-tight">
               Track Your <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
                 Grievance Status
               </span>
             </h2>
-            <p className="text-[#0D2440]/70 dark:text-white/65 text-sm sm:text-base leading-relaxed max-w-xl mx-auto font-normal">
+            <p className="text-[#0D2440]/70 dark:text-white/65 text-xs sm:text-base leading-relaxed max-w-xl mx-auto font-normal">
               Input your unique Reference ID to monitor the real-time 
               progress of our internal compliance review.
             </p>
@@ -55,34 +55,34 @@ export function GrievanceTracking() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-8 sm:p-12 rounded-3xl shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 relative"
+            className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 relative"
           >
-            <form onSubmit={handleTrack} className="flex flex-col sm:flex-row gap-4">
+            <form onSubmit={handleTrack} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <div className="relative flex-grow">
-                <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-[#2E5E99]" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-[#2E5E99]" />
                 <input 
                   type="text" 
                   value={refId}
                   onChange={(e) => setRefId(e.target.value)}
                   placeholder="Enter Reference ID (e.g., JP_GRV_2025_...)"
-                  className="w-full bg-[#F8FAFC] dark:bg-[#071321] border border-[#7BA4D0]/30 rounded-2xl py-4 pl-12 pr-4 text-xs font-heading font-bold uppercase tracking-wider focus:outline-none focus:border-[#2E5E99] transition-all text-[#0D2440] dark:text-white placeholder:text-[#0D2440]/40 dark:placeholder:text-white/40 shadow-xs"
+                  className="w-full bg-[#F8FAFC] dark:bg-[#071321] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl py-3.5 sm:py-4 pl-10 sm:pl-12 pr-4 text-xs font-heading font-bold uppercase tracking-wider focus:outline-none focus:border-[#2E5E99] transition-all text-[#0D2440] dark:text-white placeholder:text-[#0D2440]/40 dark:placeholder:text-white/40 shadow-xs min-h-[44px]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isTracking || !refId.trim()}
-                className="px-8 py-4 bg-[#0D2440] hover:bg-[#2E5E99] disabled:opacity-50 text-white font-heading font-bold text-xs uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-3 shrink-0 shadow-md"
+                className="px-6 sm:px-8 py-3.5 sm:py-4 bg-[#0D2440] hover:bg-[#2E5E99] disabled:opacity-50 text-white font-heading font-bold text-xs uppercase tracking-widest rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-2.5 sm:gap-3 shrink-0 shadow-md min-h-[44px]"
               >
                 {isTracking ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin shrink-0" />
                     <span>Verifying...</span>
                   </>
                 ) : (
                   <>
                     <span>Track Status</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 shrink-0" />
                   </>
                 )}
               </button>
@@ -93,13 +93,13 @@ export function GrievanceTracking() {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-8 pt-8 border-t border-[#7BA4D0]/20"
+                className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#7BA4D0]/20"
               >
                 {status === 'valid' ? (
-                  <div className="p-6 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/40 flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/40 flex items-start gap-3 sm:gap-4">
+                    <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-sm font-heading font-black text-[#0D2440] dark:text-white mb-1">
+                      <h4 className="text-xs sm:text-sm font-heading font-black text-[#0D2440] dark:text-white mb-1">
                         Active Ticket Found: {refId.toUpperCase()}
                       </h4>
                       <p className="text-xs text-[#0D2440]/75 dark:text-white/70 leading-relaxed font-normal">
@@ -108,10 +108,10 @@ export function GrievanceTracking() {
                     </div>
                   </div>
                 ) : (
-                  <div className="p-6 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800/40 flex items-start gap-4">
-                    <AlertCircle className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
+                  <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800/40 flex items-start gap-3 sm:gap-4">
+                    <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-sm font-heading font-black text-[#0D2440] dark:text-white mb-1">
+                      <h4 className="text-xs sm:text-sm font-heading font-black text-[#0D2440] dark:text-white mb-1">
                         Invalid Reference ID
                       </h4>
                       <p className="text-xs text-[#0D2440]/75 dark:text-white/70 leading-relaxed font-normal">
