@@ -72,49 +72,21 @@ export function Hero() {
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
         >
-          {/* Base Layer: Cleanroom CNC Manufacturing Floor - Visible at 70% when unhovered */}
-          <div
-            className={`absolute inset-0 w-full h-full transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] transform-gpu ${
-              isAerialRevealed ? "opacity-0" : "opacity-70 dark:opacity-60"
-            }`}
-          >
-            <Image
-              src="/images/hero-light.png"
-              alt="J Pan Tubular Precision Manufacturing Facility"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center brightness-[1.02] contrast-[1.04]"
-            />
-          </div>
-
-          {/* User's Aerial Facility Imagery - 100% visible on hover, smoothly flows for 3s then returns */}
-          <div
-            className={`absolute inset-0 w-full h-full transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] transform-gpu ${
-              isAerialRevealed ? "opacity-100" : "opacity-0"
-            }`}
-          >
+          {/* Single Facility Aerial Image - Crystal clear in both collapsed and expanded states */}
+          <div className="absolute inset-0 w-full h-full">
             <Image
               src="/images/jpan-facility-aerial.jpg"
               alt="J Pan Tubular Greater Noida Plant Aerial View"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-center brightness-[1.02] contrast-[1.06]"
+              className="object-cover object-center brightness-[1.02] contrast-[1.05]"
             />
           </div>
 
-          {/* Minimal Architectural Readability Gradients - Light & non-intrusive */}
-          <div
-            className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] ${
-              isAerialRevealed ? "opacity-15" : "opacity-35"
-            } bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/55 to-transparent dark:from-[#0D2440] dark:via-[#0D2440]/55 dark:to-transparent`}
-          />
-          <div
-            className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] ${
-              isAerialRevealed ? "opacity-10" : "opacity-25"
-            } bg-gradient-to-b from-transparent via-transparent to-[#F1F5F9]/80 dark:to-[#0D2440]/80`}
-          />
+          {/* Minimal Architectural Readability Gradients - Consistently light and crystal-clear in both states */}
+          <div className="absolute inset-0 opacity-15 bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/55 to-transparent dark:from-[#0D2440] dark:via-[#0D2440]/55 dark:to-transparent" />
+          <div className="absolute inset-0 opacity-10 bg-gradient-to-b from-transparent via-transparent to-[#F1F5F9]/80 dark:to-[#0D2440]/80" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(46,94,153,0.12),transparent_65%)]" />
         </motion.div>
 
