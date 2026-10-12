@@ -5,6 +5,7 @@ import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import { Fan, Car, Home, Factory, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const industries = [
   {
@@ -73,13 +74,13 @@ const Card = ({ ind, i, scrollYProgress }: { ind: typeof industries[0], i: numbe
   return (
     <motion.div
       style={{ x, y, scale, rotateZ, rotateY, rotateX, opacity }}
-      className={`absolute w-[min(90vw,350px)] sm:w-[420px] md:w-[580px] lg:w-[680px] h-[220px] sm:h-[260px] md:h-[360px] lg:h-[420px] rounded-2xl sm:rounded-[2rem] ${ind.color} backdrop-blur-[40px] border border-black/5 dark:border-white/10 ${ind.shadow} flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 origin-center overflow-hidden group text-center`}
+      className={`absolute w-[min(90vw,350px)] sm:w-[400px] md:w-[500px] lg:w-[560px] xl:w-[600px] h-[220px] sm:h-[260px] md:h-[340px] lg:h-[390px] rounded-2xl sm:rounded-[2rem] ${ind.color} backdrop-blur-[40px] border border-black/5 dark:border-white/10 ${ind.shadow} flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 origin-center overflow-hidden group text-center`}
     >
       {/* Apple-style glossy sheen */}
       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 group-hover:translate-x-full -translate-x-full transition-all duration-[1.5s] ease-in-out pointer-events-none z-10" />
 
-      <div className="relative z-20 max-w-xl mx-auto px-2 sm:px-4">
-        <h4 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-medium text-[#111] dark:text-white tracking-tight mb-2 sm:mb-4 uppercase">
+      <div className="relative z-20 max-w-lg mx-auto px-2 sm:px-4">
+        <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-medium text-[#111] dark:text-white tracking-tight mb-2 sm:mb-4 uppercase">
           {ind.title}
         </h4>
         <div className="w-8 sm:w-12 h-[2px] bg-[#111] dark:bg-white mb-2 sm:mb-5 opacity-20 mx-auto"></div>
@@ -119,57 +120,60 @@ export function Industries() {
           <div className="w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-[#586854]/5 via-[#2E5E99]/5 to-transparent blur-[120px]" />
         </div>
 
-        {/* Global Layout: Top Left Header (Hidden on desktop to match Huyml, but kept for context on mobile) */}
-        <div className="absolute top-12 left-6 md:top-12 md:left-12 lg:left-24 z-20 max-w-sm pointer-events-auto md:hidden">
-          <h2 className="text-[10px] tracking-[0.3em] uppercase text-[#666] mb-4">Sectors</h2>
+        {/* Primary Sectors Navigation List - Positioned nicely to the left */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-4 sm:left-6 md:left-8 lg:left-10 xl:left-14 z-20 pointer-events-auto flex flex-col max-w-[260px] sm:max-w-[290px] md:max-w-[320px] lg:max-w-[360px] select-none">
+          {/* Header */}
+          <div className="mb-5 sm:mb-6 md:mb-8">
+            <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500 font-bold block mb-2 sm:mb-2.5">
+              PRIMARY SECTORS
+            </span>
+            <h3 className="font-heading font-black text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] leading-[1.05] tracking-tight uppercase">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#2E5E99] via-[#3B6FA8] to-slate-400 dark:from-[#7BA4D0] dark:via-white dark:to-slate-400">
+                ENGINEERED FOR
+              </span>
+              <span className="block font-light italic text-slate-300 dark:text-slate-600 text-lg sm:text-xl md:text-2xl lg:text-[1.8rem]">
+                GLOBAL INDUSTRIES.
+              </span>
+            </h3>
+          </div>
+
+          {/* List of Sectors */}
+          <div className="flex flex-col space-y-3.5 sm:space-y-4 md:space-y-5">
+            {industries.map((ind, idx) => {
+              const isActive = activeIndex === idx;
+              return (
+                <div
+                  key={ind.id}
+                  className="flex items-baseline transition-all duration-500"
+                >
+                  <span
+                    className={cn(
+                      "text-xs sm:text-sm font-mono font-bold mr-2.5 sm:mr-3.5 transition-colors duration-500 shrink-0",
+                      isActive
+                        ? "text-[#0D2440] dark:text-white"
+                        : "text-slate-300/80 dark:text-white/20"
+                    )}
+                  >
+                    {ind.num}
+                  </span>
+                  <span
+                    className={cn(
+                      "font-heading font-black tracking-tight uppercase transition-all duration-500",
+                      "text-base sm:text-lg md:text-xl lg:text-[1.65rem] xl:text-[1.75rem] leading-tight",
+                      isActive
+                        ? "text-[#0D2440] dark:text-white drop-shadow-sm"
+                        : "text-slate-300/70 dark:text-white/20"
+                    )}
+                  >
+                    {ind.title}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Dynamic Content: Middle Left Details (Role, Launch equivalent) */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-24 z-20 pointer-events-auto hidden md:flex flex-col gap-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-                exit: { opacity: 0, transition: { staggerChildren: 0.05, staggerDirection: -1 } }
-              }}
-              className="flex flex-col gap-12"
-            >
-              <div className="flex gap-16 items-start overflow-hidden">
-                <span className="text-[10px] uppercase tracking-widest text-[#999] font-medium w-16">Sector</span>
-                <motion.span
-                  variants={{
-                    hidden: { y: "100%", opacity: 0 },
-                    visible: { y: "0%", opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-                    exit: { y: "-100%", opacity: 0, transition: { duration: 0.4 } }
-                  }}
-                  className="text-[11px] font-bold text-[#111] dark:text-white uppercase tracking-wider block"
-                >
-                  {industries[activeIndex].tag}
-                </motion.span>
-              </div>
-              <div className="flex gap-16 items-start overflow-hidden">
-                <span className="text-[10px] uppercase tracking-widest text-[#999] font-medium w-16">Focus</span>
-                <motion.span
-                  variants={{
-                    hidden: { y: "100%", opacity: 0 },
-                    visible: { y: "0%", opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-                    exit: { y: "-100%", opacity: 0, transition: { duration: 0.4 } }
-                  }}
-                  className="text-[11px] font-bold text-[#111] dark:text-white uppercase tracking-wider leading-loose block"
-                >
-                  Precision<br />Engineering<br />Zero-Defect
-                </motion.span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* The 3D Flying Cards */}
+        {/* The 3D Flying Cards - Perfectly centered */}
         <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
           {industries.map((ind, i) => (
             <Card key={ind.id} ind={ind} i={i} scrollYProgress={scrollYProgress} />
@@ -198,28 +202,6 @@ export function Industries() {
               </Link>
             </motion.div>
           </AnimatePresence>
-        </div>
-
-        {/* Dynamic Content: Bottom Left (Massive Apple-Style Indicator) */}
-        <div className="absolute bottom-2 left-4 sm:bottom-0 sm:left-6 md:left-12 lg:left-24 z-20 pointer-events-none flex flex-col items-start overflow-hidden">
-          <div className="relative pb-2 sm:pb-6">
-            <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#999] font-medium block mb-1">Selected Sector</span>
-            <div className="text-[6rem] sm:text-[10rem] md:text-[16rem] lg:text-[22rem] font-bold leading-[0.8] tracking-tighter text-[#111] dark:text-white font-heading z-20 relative">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -100 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  className="inline-block"
-                >
-                  {industries[activeIndex].num}
-                </motion.span>
-              </AnimatePresence>
-            </div>
-            <span className="absolute top-6 -right-6 sm:top-12 sm:-right-8 md:top-20 md:-right-12 text-xs sm:text-base md:text-xl font-bold text-[#111] dark:text-white z-20">/04</span>
-          </div>
         </div>
 
       </div>
