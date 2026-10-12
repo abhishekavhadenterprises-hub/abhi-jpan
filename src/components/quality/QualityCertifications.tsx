@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { Shield, FileCheck, Globe, Award, CheckCircle2 } from "lucide-react";
-import { motion, useInView, useScroll, useTransform, useSpring, Variants } from "framer-motion";
+import { motion, useInView, useMotionValue, useMotionTemplate, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
@@ -37,6 +37,82 @@ const certifications = [
   }
 ];
 
+function CertificationCard({ cert, itemVariants }: { cert: typeof certifications[0]; itemVariants: Variants }) {
+  const boundingRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!boundingRef.current) return;
+    const rect = boundingRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  const bgSpotlight = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(46, 94, 153, 0.12), transparent 80%)`;
+  const bgBorder = useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, rgba(46, 94, 153, 0.45), transparent 80%)`;
+
+  return (
+    <motion.div
+      ref={boundingRef}
+      variants={itemVariants}
+      onMouseMove={handleMouseMove}
+      whileHover={{ 
+        y: -6, 
+        transition: { duration: 0.25, ease: "easeOut" } 
+      }}
+      className="group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default h-full"
+    >
+      {/* Dynamic Spotlight Background (From OurStory) */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{ background: bgSpotlight }}
+      />
+      
+      {/* Dynamic Border Glow (From OurStory) */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: bgBorder,
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          padding: "1px",
+        }}
+      />
+
+      <div className="relative z-10 mb-6 sm:mb-8">
+        {/* Top Row: Icon Pod + Squircle Tag Badge */}
+        <div className="flex items-center justify-between mb-5 sm:mb-7">
+          <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:-translate-y-1 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+            <cert.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
+          </div>
+          <span className="text-[10px] sm:text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 border border-[#7BA4D0]/25 dark:border-white/15 truncate">
+            {cert.tag}
+          </span>
+        </div>
+        
+        <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors mb-2 sm:mb-3">
+          {cert.name}
+        </h3>
+        
+        <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">
+          {cert.desc}
+        </p>
+      </div>
+
+      {/* Card Footer Marker */}
+      <div className="pt-3.5 sm:pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10">
+        <span className="uppercase tracking-wider text-[10px] sm:text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] truncate">
+          Verified Standard
+        </span>
+        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors shrink-0">
+          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.75} />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export function QualityCertifications() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
@@ -59,19 +135,29 @@ export function QualityCertifications() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.15,
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
       },
     },
   };
 
+  // Scroll-Based Content Reveal Animation
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 28, scale: 0.96 },
+    hidden: { 
+      opacity: 0, 
+      y: 45, 
+      scale: 0.94,
+      filter: "blur(6px)"
+    },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      filter: "blur(0px)",
+      transition: { 
+        duration: 0.85, 
+        ease: [0.16, 1, 0.3, 1] 
+      },
     },
   };
 
@@ -79,21 +165,21 @@ export function QualityCertifications() {
     <section 
       id="certifications" 
       ref={containerRef}
-      className="py-16 md:py-24 bg-white dark:bg-black transition-colors"
+      className="py-12 sm:py-16 md:py-24 bg-white dark:bg-black transition-colors"
     >
-      <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <div className="mb-6 overflow-visible">
+      <div className="container-custom px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16">
+          <div className="mb-4 sm:mb-6 overflow-visible">
             <ScrollWipeHeading
               as="h2"
-              className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
             >
               Recognized
             </ScrollWipeHeading>
-            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading tracking-tight">
               Quality & Accreditations
             </div>
           </div>
@@ -101,7 +187,7 @@ export function QualityCertifications() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-[#0D2440]/75 dark:text-silver/80 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
+            className="text-[#0D2440]/75 dark:text-silver/80 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
             Our facilities and processes are certified by leading international 
             bodies, ensuring that your products meet the highest regulatory standards.
@@ -119,57 +205,7 @@ export function QualityCertifications() {
             className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 px-1 md:px-0 gap-5 lg:gap-6 md:overflow-visible no-scrollbar w-full"
           >
             {certifications.map((cert) => (
-              <motion.div 
-                key={cert.index}
-                variants={itemVariants}
-                whileHover={{ 
-                  y: -6, 
-                  transition: { duration: 0.25, ease: "easeOut" } 
-                }}
-                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-7 sm:p-8 rounded-3xl transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default h-full"
-              >
-                {/* Corner Accent Reveal (#24) */}
-                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden pointer-events-none">
-                  <div className="absolute top-0 right-0 w-10 h-10 bg-gradient-to-bl from-[#2E5E99]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-bl-3xl" />
-                </div>
-
-                {/* Giant Numeric Watermark */}
-                <div 
-                  className="absolute top-4 right-6 text-7xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500 select-none pointer-events-none"
-                >
-                  {cert.index}
-                </div>
-
-                <div className="relative z-10 mb-8">
-                  {/* Top Row: Icon Pod + Squircle Tag Badge */}
-                  <div className="flex items-center justify-between mb-7">
-                    <div className="w-13 h-13 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:-translate-y-1 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
-                      <cert.icon className="w-6 h-6" strokeWidth={1.75} />
-                    </div>
-                    <span className="text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider px-3 py-1 rounded-xl bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25">
-                      {cert.tag}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors mb-3">
-                    {cert.name}
-                  </h3>
-                  
-                  <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">
-                    {cert.desc}
-                  </p>
-                </div>
-
-                {/* Card Footer Marker */}
-                <div className="pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10">
-                  <span className="uppercase tracking-wider text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0]">
-                    Verified Standard
-                  </span>
-                  <div className="w-7 h-7 rounded-xl bg-[#E7F0FA] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
-                    <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
-                  </div>
-                </div>
-              </motion.div>
+              <CertificationCard key={cert.index} cert={cert} itemVariants={itemVariants} />
             ))}
           </motion.div>
 

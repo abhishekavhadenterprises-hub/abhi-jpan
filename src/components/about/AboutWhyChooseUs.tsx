@@ -124,37 +124,37 @@ export function AboutWhyChooseUs() {
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/80 via-transparent to-white/90 dark:from-[#071321]/80 dark:via-transparent dark:to-[#071321]/90 pointer-events-none" />
 
-      <div className="container-custom relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+      <div className="container-custom relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+        <div className="flex flex-col lg:flex-row gap-12 sm:gap-16 lg:gap-24 items-start">
 
           {/* Left Side: Sticky Header and Context */}
           <div className="lg:w-5/12 lg:sticky lg:top-32 flex flex-col z-20">
-            <ScrollWipeHeading as="h2" className="text-5xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-[1.05] text-[#0D2440] dark:text-white drop-shadow-sm dark:drop-shadow-md mb-8">
+            <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-black tracking-tight leading-[1.1] sm:leading-[1.05] text-[#0D2440] dark:text-white drop-shadow-sm dark:drop-shadow-md mb-6 sm:mb-8">
               The structural advantage of <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
                 single-source accountability.
               </span>
             </ScrollWipeHeading>
 
-            <p className="text-lg sm:text-xl text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed backdrop-blur-md bg-white/50 dark:bg-black/10 p-6 rounded-3xl border border-[#0D2440]/5 dark:border-white/5 mb-10 shadow-xl shadow-slate-200/20 dark:shadow-none">
+            <p className="text-base sm:text-lg lg:text-xl text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed backdrop-blur-md bg-white/50 dark:bg-black/10 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#0D2440]/5 dark:border-white/5 mb-8 sm:mb-10 shadow-xl shadow-slate-200/20 dark:shadow-none">
               Global OEMs rely on J Pan Tubular because we control the entire value chain—from raw material extrusion and multi-axis CNC bending to automated induction brazing and 100% cycle-tested clearance.
             </p>
 
             <Link
               href="/contact"
-              className="group relative inline-flex items-center w-fit gap-4 px-8 py-4 rounded-full bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-[#0D2440]/10 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/50 transition-all duration-300 backdrop-blur-md shadow-lg shadow-slate-200/20 dark:shadow-none"
+              className="group relative inline-flex items-center w-fit gap-3 sm:gap-4 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-[#0D2440]/10 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/50 transition-all duration-300 backdrop-blur-md shadow-lg shadow-slate-200/20 dark:shadow-none"
             >
               <span className="text-sm sm:text-base font-heading font-bold text-[#0D2440] dark:text-white tracking-wide">
                 Request Technical Audit
               </span>
-              <div className="w-10 h-10 rounded-full bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/20 flex items-center justify-center group-hover:bg-[#2E5E99] dark:group-hover:bg-[#7BA4D0] transition-colors">
-                <ArrowUpRight className="w-5 h-5 text-[#2E5E99] dark:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/20 flex items-center justify-center group-hover:bg-[#2E5E99] dark:group-hover:bg-[#7BA4D0] transition-colors">
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#2E5E99] dark:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </Link>
           </div>
 
           {/* Right Side: Naturally Scrolling Pillar Cards */}
-          <div className="lg:w-7/12 flex flex-col gap-12 sm:gap-16 w-full pb-16 lg:pb-32">
+          <div className="lg:w-7/12 flex flex-col gap-8 sm:gap-12 lg:gap-16 w-full pb-12 sm:pb-16 lg:pb-32">
             {pillars.map((item, index) => (
               <motion.div
                 key={item.num}
@@ -162,34 +162,34 @@ export function AboutWhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full p-8 sm:p-12 lg:p-14 rounded-[3rem] bg-white/80 dark:bg-black/40 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-2xl shadow-[#2E5E99]/5 dark:shadow-black/50 flex flex-col group hover:-translate-y-2 transition-transform duration-500"
+                className="w-full p-6 sm:p-10 lg:p-14 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] bg-white/80 dark:bg-black/40 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-2xl shadow-[#2E5E99]/5 dark:shadow-black/50 flex flex-col group hover:-translate-y-2 transition-transform duration-500"
               >
-                <div className="flex justify-between items-start mb-10 sm:mb-14">
-                  <span className="font-heading text-7xl sm:text-8xl lg:text-9xl font-black text-[#0D2440]/5 dark:text-[#7BA4D0]/10 leading-none -ml-2 -mt-4 group-hover:text-[#2E5E99]/10 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
+                <div className="flex justify-between items-start mb-6 sm:mb-10 lg:mb-14">
+                  <span className="font-heading text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-[#0D2440]/5 dark:text-[#7BA4D0]/10 leading-none -ml-1 sm:-ml-2 -mt-2 sm:-mt-4 group-hover:text-[#2E5E99]/10 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
                     {item.num}
                   </span>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0] animate-pulse" />
-                    <span className="text-xs font-sans font-bold tracking-[0.2em] text-[#2E5E99] dark:text-[#7BA4D0] uppercase">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10">
+                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0] animate-pulse" />
+                    <span className="text-[10px] sm:text-xs font-sans font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#2E5E99] dark:text-[#7BA4D0] uppercase">
                       {item.tag}
                     </span>
                   </div>
                 </div>
 
                 <div className="mt-auto">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight mb-6 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight mb-4 sm:mb-6 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-lg sm:text-xl text-[#0D2440]/75 dark:text-white/70 font-light leading-relaxed max-w-lg mb-10">
+                  <p className="text-base sm:text-lg lg:text-xl text-[#0D2440]/75 dark:text-white/70 font-light leading-relaxed max-w-lg mb-6 sm:mb-10">
                     {item.desc}
                   </p>
 
-                  <div className="pt-8 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-end justify-between gap-4">
-                    <div className="flex flex-col gap-2">
-                      <span className="text-sm text-[#0D2440]/50 dark:text-white/50 font-mono tracking-widest uppercase">
+                  <div className="pt-6 sm:pt-8 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-end justify-between gap-4">
+                    <div className="flex flex-col gap-1 sm:gap-2">
+                      <span className="text-xs sm:text-sm text-[#0D2440]/50 dark:text-white/50 font-mono tracking-widest uppercase">
                         {item.detail}
                       </span>
-                      <span className="text-3xl sm:text-5xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0]">
+                      <span className="text-2xl sm:text-4xl lg:text-5xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0]">
                         {item.metric}
                       </span>
                     </div>

@@ -62,7 +62,7 @@ export function Hero() {
           setIsHovered(false);
         }}
         className={`relative w-full transition-all duration-[1200ms] ease-in-out max-h-[1080px] pt-20 sm:pt-24 lg:pt-24 pb-4 sm:pb-6 flex flex-col justify-between bg-gradient-to-b from-[#F8FAFC] via-[#FFFFFF] to-[#F1F5F9] dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#0D2440] overflow-hidden z-20 border-b border-slate-200/90 dark:border-white/10 ${
-          isAerialRevealed ? "h-[100vh] min-h-[760px]" : "h-[70vh] min-h-[760px]"
+          isAerialRevealed ? "h-[100svh] min-h-[580px] sm:min-h-[660px] lg:min-h-[740px]" : "h-[75svh] min-h-[560px] sm:min-h-[640px] lg:min-h-[720px]"
         }`}
       >
         {/* Background Visual: 70% visible unhovered, 100% full aerial facility on hover, fluid 3s cycle */}
@@ -149,7 +149,7 @@ export function Hero() {
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -60, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               >
-                <ScrollWipeHeading as="h1" className="text-3xl sm:text-5xl md:text-5xl lg:text-[3.75rem] xl:text-[4.5rem] 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+                <ScrollWipeHeading as="h1" className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                   Precision in <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D2440] via-[#1E3A8A] to-[#2E5E99] dark:from-white dark:via-slate-200 dark:to-slate-400">
                     every bend.

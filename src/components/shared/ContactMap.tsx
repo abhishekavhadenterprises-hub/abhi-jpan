@@ -315,9 +315,9 @@ export function ContactMap() {
       </div>
 
       {/* Right Top Corner: Heading & Interactive City Names */}
-      <div className="relative lg:absolute right-6 sm:right-10 lg:right-12 xl:right-16 top-24 sm:top-28 lg:top-32 xl:top-40 z-[40] flex flex-col items-start lg:items-end text-left lg:text-right select-none">
+      <div className="relative lg:absolute right-0 sm:right-6 lg:right-12 xl:right-16 top-0 lg:top-32 xl:top-40 z-[40] flex flex-col items-start lg:items-end text-left lg:text-right select-none px-6 sm:px-10 lg:px-0 pt-8 lg:pt-0">
         {/* Right Top Corner Heading */}
-        <div className="mb-6 lg:mb-8">
+        <div className="mb-4 sm:mb-6 lg:mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-heading font-black uppercase tracking-tight text-[#0D2440] dark:text-white leading-tight">
             Manufacturing <span className="text-[#2E5E99]">Hubs</span>
           </h2>

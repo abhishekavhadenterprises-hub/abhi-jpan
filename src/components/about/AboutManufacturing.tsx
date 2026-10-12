@@ -114,7 +114,7 @@ export function AboutManufacturing() {
     <section
       id="about-manufacturing"
       ref={containerRef}
-      className="relative py-20 md:py-36 bg-slate-50/50 dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-28 lg:py-36 bg-slate-50/50 dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
     >
       <div className="container-custom relative z-10 w-full">
         {/* ========================================================
@@ -125,16 +125,16 @@ export function AboutManufacturing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl mb-16 md:mb-20"
+          className="max-w-4xl mb-10 sm:mb-16 md:mb-20"
         >
-          <ScrollWipeHeading as="h2" className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-6">
+          <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4 sm:mb-6">
             High-throughput capacity, <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
               engineered for Tier-1 scale.
             </span>
           </ScrollWipeHeading>
 
-          <p className="text-base sm:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-3xl">
+          <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-3xl">
             Our nationwide manufacturing footprint integrates automated high-speed cold drawing benches, multi-axis computerized
             bending stations, and robotic induction brazing lines. Backed by 6 synchronized facilities across India, we ensure
             uninterrupted, just-in-time continuity for mission-critical global supply chains.
@@ -144,7 +144,7 @@ export function AboutManufacturing() {
         {/* ========================================================
             SHOWCASE ARCHITECTURE: Parallax Viewport (7) + Metrics (5)
            ======================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-stretch">
           {/* Visual Facility Canvas (7 Cols) with Scroll Parallax */}
           <motion.div
             ref={imageContainerRef}
@@ -152,7 +152,7 @@ export function AboutManufacturing() {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 relative rounded-3xl overflow-hidden border border-[#7BA4D0]/30 dark:border-white/15 group h-[420px] sm:h-[500px] lg:h-full min-h-[420px]"
+            className="lg:col-span-7 relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/30 dark:border-white/15 group h-[360px] sm:h-[460px] lg:h-full min-h-[360px]"
           >
             {/* Parallax Photo Layer */}
             <motion.div
@@ -172,30 +172,30 @@ export function AboutManufacturing() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#060D18]/60 via-transparent to-transparent pointer-events-none z-10" />
 
             {/* Bottom Control Bar */}
-            <div className="absolute bottom-6 left-6 right-6 z-20 p-5 rounded-2xl bg-white/90 dark:bg-[#0D2440]/90 backdrop-blur-md border border-[#7BA4D0]/40 dark:border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-xl bg-[#2E5E99] text-white flex items-center justify-center shrink-0">
-                  <Factory className="w-5 h-5" />
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 z-20 p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-white/90 dark:bg-[#0D2440]/90 backdrop-blur-md border border-[#7BA4D0]/40 dark:border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+              <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-[#2E5E99] text-white flex items-center justify-center shrink-0">
+                  <Factory className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <div>
-                  <div className="text-xs font-heading font-bold tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] uppercase">
+                <div className="min-w-0">
+                  <div className="text-[8px] sm:text-xs font-heading font-bold tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] uppercase truncate">
                     QUALITY SYSTEM COMPLIANCE
                   </div>
-                  <div className="text-sm font-heading font-bold text-[#0D2440] dark:text-white leading-tight">
+                  <div className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white leading-tight truncate">
                     100% Mass Spectrometer Leak Tested
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 font-sans font-medium text-xs text-[#0D2440]/70 dark:text-white/70">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+              <div className="flex items-center gap-1.5 sm:gap-2 font-sans font-medium text-[10px] sm:text-xs text-[#0D2440]/70 dark:text-white/70 shrink-0">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-500 shrink-0" />
                 <span>IATF 16949 &amp; ISO 9001:2015</span>
               </div>
             </div>
           </motion.div>
 
           {/* Telemetry Metrics Matrix (5 Cols - 2x2 Grid) */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
             {manufacturingStats.map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -208,18 +208,18 @@ export function AboutManufacturing() {
                   scale: 1.01,
                   transition: { duration: 0.2 },
                 }}
-                className="relative p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 group flex flex-col justify-between overflow-hidden transform-gpu"
+                className="relative p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 group flex flex-col justify-between overflow-hidden transform-gpu"
               >
                 {/* Top Row: Icon */}
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-300">
-                      <stat.icon className="w-5 h-5" />
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-300">
+                      <stat.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                   </div>
 
                   {/* Counter Value */}
-                  <div className="text-3xl sm:text-4xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight mb-1.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight mb-1 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
                     <AnimatedCounter
                       value={stat.num}
                       decimals={stat.decimals}
@@ -229,18 +229,18 @@ export function AboutManufacturing() {
                   </div>
 
                   {/* Label */}
-                  <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white mb-1.5 leading-snug">
+                  <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white mb-1 leading-snug">
                     {stat.label}
                   </h4>
 
                   {/* Description */}
-                  <p className="text-[11px] text-[#0D2440]/70 dark:text-white/70 font-light leading-relaxed">
+                  <p className="text-[10px] sm:text-[11px] text-[#0D2440]/70 dark:text-white/70 font-light leading-relaxed">
                     {stat.desc}
                   </p>
                 </div>
 
                 {/* Bottom Calibration Accent Line */}
-                <div className="mt-4 pt-3 border-t border-[#7BA4D0]/15 dark:border-white/10">
+                <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-[#7BA4D0]/15 dark:border-white/10">
                   <div className="h-1 w-full bg-[#E7F0FA] dark:bg-white/10 rounded-full overflow-hidden">
                     <motion.div
                       initial={{ scaleX: 0 }}

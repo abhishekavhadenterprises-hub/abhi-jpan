@@ -85,14 +85,14 @@ export function CareersCTA() {
   };
 
   return (
-    <section id="careers-cta" ref={containerRef} className="py-20 md:py-32 bg-white dark:bg-[#070b14] overflow-hidden relative border-t border-slate-200/60 dark:border-white/5">
+    <section id="careers-cta" ref={containerRef} className="py-12 sm:py-20 md:py-28 lg:py-32 bg-white dark:bg-[#070b14] overflow-hidden relative border-t border-slate-200/60 dark:border-white/5">
       <div className="container-custom relative z-10">
         {/* Atmospheric Horizon Monolith Container with horizon zoom */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.96 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-3xl sm:rounded-[36px] overflow-hidden bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0a182a] dark:via-[#0d223c] dark:to-[#091524] border border-[#7BA4D0]/35 dark:border-white/10 p-8 sm:p-12 lg:p-16 shadow-lg group"
+          className="relative rounded-2xl sm:rounded-3xl lg:rounded-[36px] overflow-hidden bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0a182a] dark:via-[#0d223c] dark:to-[#091524] border border-[#7BA4D0]/35 dark:border-white/10 p-6 sm:p-10 lg:p-14 shadow-lg group"
         >
           {/* Subtle architectural background texture */}
           <div className="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#2E5E99_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
@@ -104,32 +104,32 @@ export function CareersCTA() {
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center"
+            className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-14 items-center"
           >
             {/* Left Content */}
             <motion.div variants={itemVariants} className="lg:col-span-6">
               <div className="mb-6 overflow-visible">
                 <ScrollWipeHeading
                   as="h2"
-                  className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block"
+                  className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block"
                   revealedColor="currentColor"
                   wipingColor="#2E5E99"
                   unrevealedColor="rgba(148, 163, 184, 0.4)"
                 >
                   Shape Your
                 </ScrollWipeHeading>
-                <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#1B365D] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+                <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#1B365D] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl font-heading tracking-tight">
                   Future With Us
                 </div>
               </div>
               
-              <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base mb-8 leading-relaxed font-normal max-w-lg">
+              <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base mb-6 sm:mb-8 leading-relaxed font-normal max-w-lg">
                 Ready to contribute to J Pan Tubular Components Limited's legacy of excellence? 
                 Connect with our recruitment desk or apply for open roles 
                 to begin your institutional career.
               </p>
               
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 <button 
                   onClick={() => {
                     const openings = document.getElementById("openings");
@@ -139,13 +139,13 @@ export function CareersCTA() {
                       window.location.href = "/careers#openings";
                     }
                   }}
-                  className="px-8 py-4 bg-[#0D2440] hover:bg-[#1A365D] dark:bg-white dark:hover:bg-slate-100 text-white dark:text-[#0D2440] font-bold text-xs uppercase tracking-[0.2em] rounded-xl transition-all duration-300 flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] group/btn cursor-pointer shadow-md"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-[#0D2440] hover:bg-[#1A365D] dark:bg-white dark:hover:bg-slate-100 text-white dark:text-[#0D2440] font-bold text-xs uppercase tracking-[0.2em] rounded-xl transition-all duration-300 flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] group/btn cursor-pointer shadow-md"
                 >
                   <span>View All Roles</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1.5 transition-transform duration-300" strokeWidth={2} />
                 </button>
                 
-                <div className="flex items-center gap-3 px-5 py-3.5 bg-white/80 dark:bg-white/[0.06] border border-[#7BA4D0]/30 dark:border-white/10 rounded-xl text-[#0D2440] dark:text-white backdrop-blur-md">
+                <div className="w-full sm:w-auto flex items-center justify-center gap-3 px-4 sm:px-5 py-3 sm:py-3.5 bg-white/80 dark:bg-white/[0.06] border border-[#7BA4D0]/30 dark:border-white/10 rounded-xl text-[#0D2440] dark:text-white backdrop-blur-md">
                   <div className="w-7 h-7 rounded-lg bg-[#2E5E99]/10 dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0]">
                     <UserPlus className="w-4 h-4" strokeWidth={2} />
                   </div>
@@ -167,11 +167,11 @@ export function CareersCTA() {
                 {/* Talent Email (3D Gyro Interactive Card) */}
                 <GyroContactCard 
                   href="mailto:enquiry@jpantubular.com"
-                  className="p-6 md:p-7 rounded-2xl sm:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl cursor-pointer"
+                  className="p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl cursor-pointer"
                 >
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2E5E99] to-[#7BA4D0] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-[#2E5E99]/10 dark:bg-white/15 border border-[#2E5E99]/15 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover/card:scale-110 transition-transform duration-300 shadow-sm">
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#2E5E99]/10 dark:bg-white/15 border border-[#2E5E99]/15 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover/card:scale-110 transition-transform duration-300 shadow-sm">
                       <Mail className="w-5 h-5" strokeWidth={1.75} />
                     </div>
                   </div>
@@ -186,11 +186,11 @@ export function CareersCTA() {
                 {/* Recruitment Desk (3D Gyro Interactive Card) */}
                 <GyroContactCard 
                   href="tel:+911202560586"
-                  className="p-6 md:p-7 rounded-2xl sm:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl cursor-pointer"
+                  className="p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl cursor-pointer"
                 >
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2E5E99] to-[#7BA4D0] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-[#2E5E99]/10 dark:bg-white/15 border border-[#2E5E99]/15 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover/card:scale-110 transition-transform duration-300 shadow-sm">
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#2E5E99]/10 dark:bg-white/15 border border-[#2E5E99]/15 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover/card:scale-110 transition-transform duration-300 shadow-sm">
                       <Headphones className="w-5 h-5" strokeWidth={1.75} />
                     </div>
                   </div>
@@ -203,8 +203,8 @@ export function CareersCTA() {
                 </GyroContactCard>
                 
                 {/* Employer Authority: Zero Badge Pills */}
-                <div className="sm:col-span-2 p-6 rounded-2xl sm:rounded-3xl bg-white/70 dark:bg-white/[0.04] hover:bg-white/90 dark:hover:bg-white/[0.07] border border-[#7BA4D0]/20 dark:border-white/10 flex items-center gap-4 group hover:border-[#2E5E99]/30 transition-all duration-300 w-full shrink-0 snap-center sm:w-auto sm:shrink backdrop-blur-xl">
-                  <div className="w-12 h-12 rounded-2xl bg-[#2E5E99]/10 dark:bg-white/[0.08] border border-[#2E5E99]/15 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 group-hover:scale-105 transition-all">
+                <div className="sm:col-span-2 p-5 sm:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/70 dark:bg-white/[0.04] hover:bg-white/90 dark:hover:bg-white/[0.07] border border-[#7BA4D0]/20 dark:border-white/10 flex items-center gap-3 sm:gap-4 group hover:border-[#2E5E99]/30 transition-all duration-300 w-full shrink-0 snap-center sm:w-auto sm:shrink backdrop-blur-xl">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#2E5E99]/10 dark:bg-white/[0.08] border border-[#2E5E99]/15 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 group-hover:scale-105 transition-all">
                     <ShieldCheck className="w-5 h-5" strokeWidth={1.75} />
                   </div>
                   <div>

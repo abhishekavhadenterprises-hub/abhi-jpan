@@ -176,18 +176,18 @@ export function Certifications() {
               Audited Partner Evaluations
             </span>
           </div>
-          <ScrollWipeHeading as="h2" className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05] uppercase whitespace-nowrap">
+          <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] uppercase whitespace-normal sm:whitespace-nowrap">
             What partners <span className="text-[#666]">are saying.</span>
           </ScrollWipeHeading>
         </motion.div>
 
         {/* Horizontal Scrolling Track */}
         <div className="relative w-full overflow-hidden flex items-center">
-          <motion.div style={{ x }} className="flex gap-10 px-[10vw] md:px-[20vw]">
+          <motion.div style={{ x }} className="flex gap-4 sm:gap-6 md:gap-10 px-4 sm:px-[10vw] md:px-[20vw]">
             {allStreamItems.map((item, idx) => (
               <div 
                 key={`${item.id}-${idx}`} 
-                className="w-[380px] h-[480px] shrink-0"
+                className="w-[min(85vw,360px)] sm:w-[380px] h-[420px] sm:h-[480px] shrink-0"
               >
                 <CardRenderer item={item} />
               </div>
@@ -205,7 +205,7 @@ export function Certifications() {
 function CardRenderer({ item }: { item: StreamItem }) {
   if (item.type === "photo") {
     return (
-      <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] group shrink-0 bg-white dark:bg-[#111] transition-all duration-500 hover:scale-[1.02] shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+      <div className="relative w-full h-full rounded-2xl sm:rounded-[2rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] group shrink-0 bg-white dark:bg-[#111] transition-all duration-500 hover:scale-[1.02] shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
         <Image
           src={item.image}
           alt={item.title}
@@ -214,8 +214,8 @@ function CardRenderer({ item }: { item: StreamItem }) {
           sizes="360px"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        <div className="absolute bottom-5 left-5 right-5 z-10 p-4 rounded-xl bg-black/40 backdrop-blur-md border border-white/10">
-          <p className="text-sm font-medium text-white leading-snug line-clamp-2">
+        <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 z-10 p-3 sm:p-4 rounded-xl bg-black/40 backdrop-blur-md border border-white/10">
+          <p className="text-xs sm:text-sm font-medium text-white leading-snug line-clamp-2">
             {item.title}
           </p>
         </div>
@@ -224,36 +224,36 @@ function CardRenderer({ item }: { item: StreamItem }) {
   }
 
   return (
-    <div className="relative w-full h-full rounded-[2rem] bg-white dark:bg-[#111] p-8 border border-[#E5E5E5] dark:border-[#222] flex flex-col justify-between shrink-0 text-[#111] dark:text-white transition-all duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden group hover:border-[#111] dark:hover:border-white/50">
+    <div className="relative w-full h-full rounded-2xl sm:rounded-[2rem] bg-white dark:bg-[#111] p-5 sm:p-8 border border-[#E5E5E5] dark:border-[#222] flex flex-col justify-between shrink-0 text-[#111] dark:text-white transition-all duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden group hover:border-[#111] dark:hover:border-white/50">
       <div>
-        <div className="flex items-center gap-1.5 mb-5">
+        <div className="flex items-center gap-1.5 mb-3 sm:mb-5">
           {[...Array(item.rating)].map((_, i) => (
-            <Star key={i} className="w-4 h-4 fill-[#F5A623] text-[#F5A623]" />
+            <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#F5A623] text-[#F5A623]" />
           ))}
         </div>
 
-        <p className="text-sm text-[#444] dark:text-[#CCC] leading-relaxed font-light line-clamp-4">
+        <p className="text-xs sm:text-sm text-[#444] dark:text-[#CCC] leading-relaxed font-light line-clamp-5 sm:line-clamp-4">
           &ldquo;{item.quote}&rdquo;
         </p>
       </div>
 
-      <div className="pt-5 border-t border-[#E5E5E5] dark:border-[#333] flex items-center justify-between gap-3 mt-4">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-full bg-[#FAFAFA] dark:bg-black border border-[#E5E5E5] dark:border-[#333] text-[#111] dark:text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
+      <div className="pt-4 sm:pt-5 border-t border-[#E5E5E5] dark:border-[#333] flex items-center justify-between gap-2 sm:gap-3 mt-4">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FAFAFA] dark:bg-black border border-[#E5E5E5] dark:border-[#333] text-[#111] dark:text-white flex items-center justify-center font-bold text-xs sm:text-sm shrink-0 shadow-sm">
             {item.company.charAt(0)}
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold text-[#111] dark:text-white leading-none mb-1 truncate">
+            <div className="text-xs sm:text-sm font-semibold text-[#111] dark:text-white leading-none mb-1 truncate">
               {item.company}
             </div>
-            <div className="text-[10px] font-mono text-[#666] dark:text-[#999] uppercase tracking-widest truncate">
+            <div className="text-[9px] sm:text-[10px] font-mono text-[#666] dark:text-[#999] uppercase tracking-widest truncate">
               {item.role}
             </div>
           </div>
         </div>
 
         {item.award && (
-          <div className="px-3 py-1.5 rounded-full border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-black text-[9px] font-semibold text-[#111] dark:text-[#DDD] uppercase tracking-widest text-right shrink-0 whitespace-nowrap shadow-sm">
+          <div className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border border-[#E5E5E5] dark:border-[#333] bg-[#FAFAFA] dark:bg-black text-[8px] sm:text-[9px] font-semibold text-[#111] dark:text-[#DDD] uppercase tracking-widest text-right shrink-0 whitespace-nowrap shadow-sm">
             {item.award}
           </div>
         )}

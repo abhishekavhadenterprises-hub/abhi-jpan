@@ -80,25 +80,25 @@ export function Infrastructure() {
         <GridMotion items={gridItems} gradientColor="transparent" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 w-full">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 relative z-10 w-full">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-4 border-b border-[#E5E5E5] dark:border-[#222]">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 pb-4 border-b border-[#E5E5E5] dark:border-[#222]">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="max-w-3xl">
-            <h2 className="text-xs tracking-[0.3em] uppercase text-[#666] mb-6">Manufacturing Infrastructure</h2>
-            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.05]">
+            <h2 className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#666] mb-4 sm:mb-6">Manufacturing Infrastructure</h2>
+            <ScrollWipeHeading as="h3" className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08]">
               Industrial scale, <br />
               <span className="text-[#666]">aerospace precision.</span>
             </ScrollWipeHeading>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} className="max-w-md lg:pb-4">
-            <p className="text-[#666] dark:text-[#999] text-sm md:text-base leading-relaxed font-light">
+            <p className="text-[#666] dark:text-[#999] text-xs sm:text-sm md:text-base leading-relaxed font-light">
               Engineered across 6 automated facilities with robotic induction brazing, closed-loop CNC bending, and 100% vacuum chamber helium leak testing.
             </p>
           </motion.div>
         </div>
 
         {/* Floating Facility Tab Selector */}
-        <div className="flex flex-wrap gap-2 mb-6 p-1.5 rounded-[2rem] bg-white/50 dark:bg-black/50 backdrop-blur-2xl border border-[#E5E5E5] dark:border-[#222] w-fit shadow-sm relative z-20">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-6 p-1.5 rounded-2xl sm:rounded-[2rem] bg-white/50 dark:bg-black/50 backdrop-blur-2xl border border-[#E5E5E5] dark:border-[#222] w-full sm:w-fit shadow-sm relative z-20">
           {pillars.map((pillar, idx) => {
             const isActive = activeTab === idx;
             const Icon = pillar.icon;
@@ -107,14 +107,14 @@ export function Infrastructure() {
               <button
                 key={pillar.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-6 py-3 rounded-full transition-all duration-500 flex items-center gap-3 ${isActive
-                    ? "bg-[#2E5E99] text-white shadow-lg scale-105"
+                className={`relative px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-full transition-all duration-500 flex items-center gap-2 sm:gap-3 ${isActive
+                    ? "bg-[#2E5E99] text-white shadow-lg scale-[1.02]"
                     : "bg-transparent text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white hover:bg-white dark:hover:bg-[#222]"
                   }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-white dark:text-[#111]" : "text-[#999]"}`} />
+                <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? "text-white dark:text-[#111]" : "text-[#999]"}`} />
                 <div className="text-left">
-                  <h3 className={`text-xs font-semibold uppercase tracking-widest ${isActive ? "opacity-100" : "opacity-80"}`}>
+                  <h3 className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider sm:tracking-widest ${isActive ? "opacity-100" : "opacity-80"}`}>
                     {pillar.title}
                   </h3>
                 </div>
@@ -131,7 +131,7 @@ export function Infrastructure() {
             animate={{ opacity: 1, scale: 1.0, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -20 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative min-h-[400px] lg:min-h-[450px] xl:min-h-[400px] rounded-[3rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] bg-[#0A0A0A] shadow-[0_30px_80px_rgba(0,0,0,0.15)] dark:shadow-2xl flex flex-col justify-end p-6 lg:p-10 mb-8 lg:mb-10 group"
+            className="relative min-h-[420px] sm:min-h-[380px] lg:min-h-[440px] rounded-2xl sm:rounded-3xl lg:rounded-[3rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] bg-[#0A0A0A] shadow-[0_30px_80px_rgba(0,0,0,0.15)] dark:shadow-2xl flex flex-col justify-end p-5 sm:p-6 lg:p-10 mb-6 sm:mb-8 lg:mb-10 group"
           >
             <Image
               src={activePillar.image}
@@ -144,14 +144,14 @@ export function Infrastructure() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-transparent to-transparent" />
 
             {/* Top Facility Location Tag */}
-            <div className="absolute top-6 left-6 lg:top-8 lg:left-8 z-10 flex items-center gap-3 px-5 py-2 rounded-full bg-black/50 backdrop-blur-2xl border border-white/10 font-mono text-xs text-white shadow-lg">
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_#3b82f6]" />
-              <span className="tracking-widest font-semibold">{activePillar.facility}</span>
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8 z-10 flex items-center gap-2 sm:gap-3 px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full bg-black/50 backdrop-blur-2xl border border-white/10 font-mono text-[10px] sm:text-xs text-white shadow-lg max-w-[calc(100%-2rem)] truncate">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 shrink-0 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_#3b82f6]" />
+              <span className="tracking-widest font-semibold truncate">{activePillar.facility}</span>
             </div>
 
             {/* Bottom Content Dossier */}
             <div className="relative z-10 max-w-3xl">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[10px] tracking-[0.2em] text-white uppercase mb-4 font-medium backdrop-blur-md">
+              <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/10 border border-white/20 text-[9px] sm:text-[10px] tracking-[0.2em] text-white uppercase mb-3 sm:mb-4 font-medium backdrop-blur-md">
                 {activePillar.badge}
               </div>
               <ScrollWipeHeading
@@ -159,23 +159,23 @@ export function Infrastructure() {
                 revealedColor="#FFFFFF"
                 wipingColor="#93C5FD"
                 unrevealedColor="rgba(255, 255, 255, 0.45)"
-                className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight mb-3 group-hover:translate-x-2 transition-transform duration-700"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight mb-2 sm:mb-3 group-hover:translate-x-2 transition-transform duration-700"
               >
                 {activePillar.title}
               </ScrollWipeHeading>
-              <p className="text-white/70 text-sm md:text-base font-light leading-relaxed mb-6 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
+              <p className="text-white/70 text-xs sm:text-sm md:text-base font-light leading-relaxed mb-4 sm:mb-6 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
                 {activePillar.desc}
               </p>
 
-              <div className="flex flex-wrap items-center gap-6">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
                 <Link
                   href="/about#infrastructure"
-                  className="group/btn px-6 py-3 rounded-full bg-white text-[#111] hover:bg-transparent hover:text-white border border-transparent hover:border-white font-semibold text-xs uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-2 shadow-xl hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
+                  className="group/btn px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white text-[#111] hover:bg-transparent hover:text-white border border-transparent hover:border-white font-semibold text-[10px] sm:text-xs uppercase tracking-widest transition-all duration-500 inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)] w-fit"
                 >
                   <span>Explore Facility</span>
-                  <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                 </Link>
-                <span className="font-mono text-xs text-white/50 tracking-widest uppercase">
+                <span className="font-mono text-[10px] sm:text-xs text-white/50 tracking-widest uppercase">
                   {activePillar.stat}
                 </span>
               </div>
@@ -184,21 +184,21 @@ export function Infrastructure() {
         </AnimatePresence>
 
         {/* Bottom Technical Highlights Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 pt-6 border-t border-[#E5E5E5] dark:border-[#222]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-6 border-t border-[#E5E5E5] dark:border-[#222]">
           {highlights.map((item, idx) => (
-            <div key={idx} className="border-l border-[#E5E5E5] dark:border-[#333] pl-6 group">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="font-light tracking-tighter text-4xl sm:text-5xl text-[#111] dark:text-white group-hover:scale-105 transition-transform duration-500 origin-left">
+            <div key={idx} className="border-l border-[#E5E5E5] dark:border-[#333] pl-3 sm:pl-6 group">
+              <div className="flex items-baseline gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                <span className="font-light tracking-tighter text-2xl sm:text-4xl lg:text-5xl text-[#111] dark:text-white group-hover:scale-105 transition-transform duration-500 origin-left">
                   {item.value}
                 </span>
-                <span className="text-[10px] text-[#999] uppercase tracking-widest font-semibold">
+                <span className="text-[9px] sm:text-[10px] text-[#999] uppercase tracking-widest font-semibold">
                   {item.unit}
                 </span>
               </div>
-              <span className="block text-sm text-[#111] dark:text-[#DDD] mb-1 font-medium group-hover:text-[#2E5E99] transition-colors duration-500">
+              <span className="block text-xs sm:text-sm text-[#111] dark:text-[#DDD] mb-0.5 sm:mb-1 font-medium group-hover:text-[#2E5E99] transition-colors duration-500">
                 {item.label}
               </span>
-              <span className="block text-xs text-[#999] dark:text-[#666] font-light">
+              <span className="block text-[10px] sm:text-xs text-[#999] dark:text-[#666] font-light leading-tight">
                 {item.sub}
               </span>
             </div>

@@ -101,21 +101,21 @@ export function QualityProcess() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-16 md:py-24 lg:py-32 bg-[#F8FAFC]/60 dark:bg-black/60 overflow-hidden transition-colors border-y border-[#7BA4D0]/15"
+      className="relative py-12 sm:py-20 md:py-28 bg-[#F8FAFC]/60 dark:bg-black/60 overflow-hidden transition-colors border-y border-[#7BA4D0]/15"
     >
-      <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
-          <div className="mb-6 overflow-visible">
+      <div className="container-custom relative z-10 px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 md:mb-24">
+          <div className="mb-4 sm:mb-6 overflow-visible">
             <ScrollWipeHeading
               as="h2"
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.14] tracking-tight block"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.14] tracking-tight block"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
             >
               The Quality Control
             </ScrollWipeHeading>
-            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
+            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
               Lifecycle Pipeline
             </div>
           </div>
@@ -124,7 +124,7 @@ export function QualityProcess() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[#0D2440]/75 dark:text-silver/80 text-base sm:text-lg font-normal leading-relaxed max-w-2xl mx-auto"
+            className="text-[#0D2440]/75 dark:text-silver/80 text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto"
           >
             Our multi-stage quality control process ensures that every component 
             undergoes rigorous scrutiny at every phase of manufacturing.
@@ -149,7 +149,7 @@ export function QualityProcess() {
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="flex flex-row md:grid md:grid-cols-3 lg:grid-cols-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-6 pb-6 px-2 md:px-0 gap-4 md:gap-x-5 lg:gap-x-5 no-scrollbar w-full relative z-10"
+              className="flex flex-row md:grid md:grid-cols-3 lg:grid-cols-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-4 sm:pt-6 pb-4 sm:pb-6 px-1 md:px-0 gap-4 md:gap-x-5 lg:gap-x-5 no-scrollbar w-full relative z-10"
             >
               {steps.map((step, idx) => (
                 <motion.div 
@@ -159,26 +159,26 @@ export function QualityProcess() {
                     y: -6, 
                     transition: { duration: 0.25, ease: "easeOut" } 
                   }}
-                  className="group relative flex flex-col items-center text-center p-5 sm:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 cursor-default h-full"
+                  className="group relative flex flex-col items-center text-center p-4 sm:p-5 md:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 cursor-default h-full"
                 >
                   {/* Journey Node with Scroll Threshold Activation */}
-                  <div className="relative mb-4 sm:mb-5">
+                  <div className="relative mb-3.5 sm:mb-5">
                     <motion.div 
                       style={{ scale: nodeScales[idx] }}
-                      className="w-16 h-16 sm:w-16 sm:h-16 bg-[#EBF3FC] dark:bg-[#0D2440] border-2 border-[#7BA4D0]/40 group-hover:border-[#2E5E99] rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-[#2E5E99] overflow-hidden relative z-10 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs"
+                      className="w-14 h-14 sm:w-16 sm:h-16 bg-[#EBF3FC] dark:bg-[#0D2440] border-2 border-[#7BA4D0]/40 group-hover:border-[#2E5E99] rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:bg-[#2E5E99] overflow-hidden relative z-10 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs"
                     >
-                      <step.icon className="w-7 h-7 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
+                      <step.icon className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
                     </motion.div>
                     
                     {/* Step Number Squircle Badge */}
-                    <div className="absolute -top-2 -right-2 w-7 h-7 bg-[#0D2440] dark:bg-white text-white dark:text-[#0D2440] font-heading font-black text-xs flex items-center justify-center rounded-lg border-2 border-white dark:border-black group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-500 z-20 shadow-xs">
+                    <div className="absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-7 sm:h-7 bg-[#0D2440] dark:bg-white text-white dark:text-[#0D2440] font-heading font-black text-[11px] sm:text-xs flex items-center justify-center rounded-lg border-2 border-white dark:border-black group-hover:bg-[#2E5E99] group-hover:text-white transition-colors duration-500 z-20 shadow-xs">
                       {step.step}
                     </div>
                   </div>
                   
                   {/* Step Titles & Descriptions */}
                   <div className="w-full">
-                    <h3 className="text-base sm:text-lg font-heading font-bold text-[#0D2440] dark:text-white mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 leading-snug">
+                    <h3 className="text-sm sm:text-base md:text-lg font-heading font-bold text-[#0D2440] dark:text-white mb-1.5 sm:mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 leading-snug">
                       {step.title}
                     </h3>
                     <p className="text-xs text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">

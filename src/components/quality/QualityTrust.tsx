@@ -59,10 +59,10 @@ export function QualityTrust() {
   return (
     <section 
       ref={containerRef}
-      className="py-16 md:py-24 lg:py-32 bg-white dark:bg-black overflow-hidden relative transition-colors"
+      className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black overflow-hidden relative transition-colors"
     >
-      <div className="container-custom relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 md:mb-20 gap-8 lg:gap-12">
+      <div className="container-custom relative z-10 px-4 sm:px-6">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 sm:mb-12 md:mb-20 gap-6 sm:gap-8 lg:gap-12">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
@@ -72,14 +72,14 @@ export function QualityTrust() {
             <div className="mb-4 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
+                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 Why Our Standards
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
                 Impact Your Scale
               </div>
             </div>
@@ -91,7 +91,7 @@ export function QualityTrust() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-sm"
           >
-            <p className="text-[#0D2440]/75 dark:text-silver/80 text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-[#0D2440]/75 dark:text-silver/80 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
               Beyond certifications, our commitment to quality translates into 
               tangible industrial stability for your operations.
             </p>
@@ -103,7 +103,7 @@ export function QualityTrust() {
           <div 
             ref={cardsRef}
             onScroll={handleMobileScroll}
-            className="flex flex-row sm:grid sm:grid-cols-2 lg:grid-cols-4 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 sm:pt-4 sm:pb-4 px-1 sm:px-0 gap-5 lg:gap-6 sm:overflow-visible no-scrollbar w-full"
+            className="flex flex-row sm:grid sm:grid-cols-2 lg:grid-cols-4 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 sm:pt-4 sm:pb-4 px-1 sm:px-0 gap-4 sm:gap-5 lg:gap-6 sm:overflow-visible no-scrollbar w-full"
           >
             {pillars.map((p, idx) => (
               <motion.div
@@ -115,15 +115,15 @@ export function QualityTrust() {
                   y: -6, 
                   transition: { duration: 0.25, ease: "easeOut" } 
                 }}
-                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl p-7 sm:p-8 transition-all duration-300 overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 transition-all duration-300 overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Icon Box */}
-                <div className="w-14 h-14 mb-6 sm:mb-8 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] relative z-10 shrink-0 shadow-xs">
-                  <p.icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] relative z-10 shrink-0 shadow-xs">
+                  <p.icon className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
                 </div>
 
-                <div className="space-y-2.5 relative z-10 flex-grow mb-6">
-                  <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white leading-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                <div className="space-y-2 relative z-10 flex-grow mb-4 sm:mb-6">
+                  <h3 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white leading-tight group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
                     {p.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-silver/80 leading-relaxed font-normal">
@@ -132,12 +132,12 @@ export function QualityTrust() {
                 </div>
 
                 {/* Card Footer Marker */}
-                <div className="pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10">
-                  <span className="uppercase tracking-wider text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0]">
+                <div className="pt-3.5 sm:pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10 gap-2">
+                  <span className="uppercase tracking-wider text-[10px] sm:text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] truncate">
                     Institutional Trust
                   </span>
-                  <div className="w-7 h-7 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors">
-                    <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440] flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors shrink-0">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.75} />
                   </div>
                 </div>
               </motion.div>
@@ -170,15 +170,15 @@ export function QualityTrust() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-16 md:mt-20"
+          className="mt-12 sm:mt-16 md:mt-20"
         >
-          <div className="bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/35 rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-            <div className="flex items-center gap-4 sm:gap-6">
+          <div className="bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/35 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5 sm:gap-6 shadow-sm">
+            <div className="flex items-start sm:items-center gap-3.5 sm:gap-6">
               <motion.div 
                 whileHover={{ scale: 1.05 }}
-                className="w-14 h-14 shrink-0 bg-white dark:bg-[#0D2440] rounded-2xl flex items-center justify-center border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs"
+                className="w-11 h-11 sm:w-14 sm:h-14 shrink-0 bg-white dark:bg-[#0D2440] rounded-xl sm:rounded-2xl flex items-center justify-center border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs"
               >
-                <ShieldCheck className="w-7 h-7" strokeWidth={1.75} />
+                <ShieldCheck className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={1.75} />
               </motion.div>
               <p className="text-xs sm:text-sm md:text-base font-normal text-[#0D2440] dark:text-white max-w-xl leading-relaxed">
                 Our quality management systems are independently audited and certified to <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-bold">ISO 9001:2015</span> standards for global reliability.
@@ -196,7 +196,7 @@ export function QualityTrust() {
                 const el = document.getElementById('certifications');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="shrink-0 px-8 py-3.5 bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold uppercase tracking-[0.18em] rounded-xl sm:rounded-2xl transition-colors duration-300 whitespace-nowrap shadow-sm hover:shadow-lg hover:shadow-[#2E5E99]/20 cursor-pointer"
+              className="shrink-0 px-6 sm:px-8 py-3.5 bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold uppercase tracking-[0.18em] rounded-xl sm:rounded-2xl transition-colors duration-300 whitespace-nowrap shadow-sm hover:shadow-lg hover:shadow-[#2E5E99]/20 cursor-pointer w-full md:w-auto text-center"
             >
               View Certifications
             </motion.button>

@@ -120,13 +120,13 @@ export function PremiumHero({ title, subtitle, description, imageSrc, badgeText 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8 md:mb-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
+            className="mb-6 sm:mb-8 md:mb-12 inline-flex items-center gap-2 sm:gap-3 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)] max-w-[calc(100vw-2rem)]"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7BA4D0] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7BA4D0]"></span>
             </span>
-            <span className="text-xs sm:text-sm font-sans font-bold text-white uppercase tracking-[0.3em]">
+            <span className="text-[9px] sm:text-xs md:text-sm font-sans font-bold text-white uppercase tracking-[0.18em] sm:tracking-[0.3em] truncate">
               {badgeText}
             </span>
           </motion.div>
@@ -179,7 +179,7 @@ export function PremiumHero({ title, subtitle, description, imageSrc, badgeText 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 sm:mt-12 text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto"
+          className="mt-6 sm:mt-10 md:mt-12 text-xs sm:text-base md:text-lg lg:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto px-2"
         >
           {description}
         </motion.p>
@@ -191,10 +191,10 @@ export function PremiumHero({ title, subtitle, description, imageSrc, badgeText 
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 1.8 }}
-        className="absolute bottom-16 z-20 flex flex-col items-center gap-4"
+        className="absolute bottom-6 sm:bottom-10 md:bottom-16 z-20 flex flex-col items-center gap-2 sm:gap-4"
       >
-        <span className="text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.4em]">Scroll to Explore</span>
-        <div className="w-[1px] h-12 bg-white/20 overflow-hidden relative">
+        <span className="text-[9px] sm:text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.3em] sm:tracking-[0.4em]">Scroll to Explore</span>
+        <div className="w-[1px] h-8 sm:h-12 bg-white/20 overflow-hidden relative">
           <motion.div
             animate={{ y: ["-100%", "200%"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}

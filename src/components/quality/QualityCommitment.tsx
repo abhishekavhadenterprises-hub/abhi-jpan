@@ -66,10 +66,10 @@ export function QualityCommitment() {
     <section 
       id="commitment"
       ref={containerRef}
-      className="relative py-16 md:py-24 bg-white dark:bg-black overflow-hidden transition-colors"
+      className="relative py-12 sm:py-16 md:py-24 bg-white dark:bg-black overflow-hidden transition-colors"
     >
-      <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="container-custom relative z-10 px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
           
           {/* Text Side - Dual-Axis Architectural Left Split */}
           <motion.div 
@@ -81,19 +81,19 @@ export function QualityCommitment() {
             <div className="mb-6 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 A Culture of
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading tracking-tight">
                 Zero-Defect Manufacturing
               </div>
             </div>
             
-            <div className="space-y-4 text-[#0D2440]/75 dark:text-silver/80 text-base md:text-lg leading-relaxed font-normal mb-8">
+            <div className="space-y-4 text-[#0D2440]/75 dark:text-silver/80 text-sm sm:text-base md:text-lg leading-relaxed font-normal mb-6 sm:mb-8">
               <p>
                 At J Pan Tubular Components Limited, quality is not just a final check—it's the foundational principle of 
                 our entire manufacturing lifecycle. From raw material sourcing to final component 
@@ -108,9 +108,9 @@ export function QualityCommitment() {
 
             {/* Quote block with subtle scroll counter-float on desktop */}
             <div 
-              className="flex items-start sm:items-center gap-4 p-5 sm:p-6 border-l-4 border-[#2E5E99] bg-[#EBF3FC]/80 dark:bg-[#0D2440]/40 rounded-r-2xl border border-[#7BA4D0]/20 shadow-xs"
+              className="flex items-start sm:items-center gap-3.5 sm:gap-4 p-4 sm:p-5 md:p-6 border-l-4 border-[#2E5E99] bg-[#EBF3FC]/80 dark:bg-[#0D2440]/40 rounded-r-2xl border border-[#7BA4D0]/20 shadow-xs"
             >
-              <CheckCircle2 className="w-6 h-6 text-[#2E5E99] shrink-0" />
+              <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E5E99] shrink-0 mt-0.5 sm:mt-0" />
               <p className="text-xs sm:text-sm font-semibold text-[#0D2440] dark:text-white leading-relaxed">
                 Continuously upgrading testing protocols to ensure every part delivered contributes to long-term reliability.
               </p>
@@ -138,18 +138,18 @@ export function QualityCommitment() {
                     y: -6,
                     transition: { duration: 0.25, ease: "easeOut" } 
                   }}
-                  className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 sm:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default"
+                  className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 md:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default"
                 >
-                  <div className="w-14 h-14 shrink-0 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
-                    <feature.icon className="w-6 h-6" strokeWidth={1.75} />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
+                    <feature.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
                   </div>
                   
-                  <div className="relative z-10 flex-1">
-                    <div className="flex items-center justify-between mb-1.5">
-                      <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                  <div className="relative z-10 flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1.5 gap-2">
+                      <h3 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 truncate">
                         {feature.title}
                       </h3>
-                      <span className="text-xs font-mono font-bold text-[#2E5E99]/60 dark:text-[#7BA4D0]/60 uppercase tracking-widest">
+                      <span className="text-xs font-mono font-bold text-[#2E5E99]/60 dark:text-[#7BA4D0]/60 uppercase tracking-widest shrink-0">
                         0{idx + 1}
                       </span>
                     </div>

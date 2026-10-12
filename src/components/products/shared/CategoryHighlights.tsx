@@ -54,7 +54,7 @@ export function CategoryHighlights() {
   };
 
   return (
-    <section className="py-14 md:py-20 bg-slate-50/60 dark:bg-[#070b14] overflow-visible border-t border-slate-200/80 dark:border-white/5 transition-colors duration-500">
+    <section className="py-12 sm:py-16 md:py-20 bg-slate-50/60 dark:bg-[#070b14] overflow-visible border-t border-slate-200/80 dark:border-white/5 transition-colors duration-500">
       <div className="container-custom">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 relative">
@@ -71,7 +71,7 @@ export function CategoryHighlights() {
             </div>
             <ScrollWipeHeading 
               as="h2" 
-              className="text-4xl sm:text-5xl md:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.05] tracking-tight"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.1] sm:leading-[1.05] tracking-tight"
             >
               Primary Product <br />
               <span className="font-serif italic text-[#2E5E99] dark:text-[#7BA4D0]">Engineering Families</span>
@@ -96,7 +96,7 @@ export function CategoryHighlights() {
           <div 
             ref={cardsRef}
             onScroll={handleMobileScroll}
-            className="flex flex-row lg:grid lg:grid-cols-3 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pt-3 pb-8 lg:pt-3 lg:pb-8 px-2 sm:px-3 lg:px-1 gap-5 sm:gap-6 lg:gap-7 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            className="flex flex-row lg:grid lg:grid-cols-3 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pt-3 pb-8 lg:pt-3 lg:pb-8 px-1 sm:px-3 lg:px-1 gap-4 sm:gap-6 lg:gap-7 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {mainCategories.map((cat, idx) => (
               <CategoryCard key={idx} category={cat} index={idx} />
@@ -152,25 +152,25 @@ function CategoryCard({ category, index }: { category: (typeof mainCategories)[0
         </div>
 
         {/* Top Badges */}
-        <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
+        <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-20 flex items-center justify-between pointer-events-none">
           {/* Component Count Glass Pill */}
-          <div className="px-3 py-1 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-white/80 dark:border-white/20 rounded-full flex items-center gap-1.5 text-[#0D2440] dark:text-white">
-            <category.icon className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-            <span className="text-[10px] font-heading font-semibold uppercase tracking-wider">{category.count}</span>
+          <div className="px-2.5 sm:px-3 py-1 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-white/80 dark:border-white/20 rounded-full flex items-center gap-1.5 text-[#0D2440] dark:text-white">
+            <category.icon className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
+            <span className="text-[10px] font-heading font-semibold uppercase tracking-wider truncate">{category.count}</span>
           </div>
 
           {/* Domain Tag */}
-          <span className="text-[9px] font-heading font-semibold uppercase tracking-widest text-[#0D2440] dark:text-white bg-white/90 dark:bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/80 dark:border-white/20">
+          <span className="text-[9px] font-heading font-semibold uppercase tracking-widest text-[#0D2440] dark:text-white bg-white/90 dark:bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/80 dark:border-white/20 truncate">
             {category.tag}
           </span>
         </div>
 
         {/* Bottom Card Content - Light Color Styling as requested */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-20">
-          <div className="relative flex flex-col justify-between bg-white/95 dark:bg-[#0B1728]/95 backdrop-blur-xl border border-white/80 dark:border-white/15 rounded-xl sm:rounded-2xl p-4 text-[#0D2440] dark:text-white transition-colors duration-300 group-hover:border-[#2E5E99]/50">
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5 z-20">
+          <div className="relative flex flex-col justify-between bg-white/95 dark:bg-[#0B1728]/95 backdrop-blur-xl border border-white/80 dark:border-white/15 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 text-[#0D2440] dark:text-white transition-colors duration-300 group-hover:border-[#2E5E99]/50">
             {/* Title & Description */}
-            <div className="space-y-1 pr-6">
-              <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white leading-snug group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+            <div className="space-y-1 pr-4 sm:pr-6">
+              <h3 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white leading-snug group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 truncate">
                 {category.name}
               </h3>
               <p className="text-slate-600 dark:text-white/70 text-xs leading-relaxed line-clamp-1 font-sans font-normal">
@@ -179,11 +179,11 @@ function CategoryCard({ category, index }: { category: (typeof mainCategories)[0
             </div>
 
             {/* Bottom Strip */}
-            <div className="pt-2.5 flex items-center justify-between border-t border-slate-100 dark:border-white/10 mt-2.5">
-              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#0D2440]/80 dark:text-white/80 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors">
+            <div className="pt-2 sm:pt-2.5 flex items-center justify-between border-t border-slate-100 dark:border-white/10 mt-2 sm:mt-2.5 gap-2">
+              <span className="text-[10px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider text-[#0D2440]/80 dark:text-white/80 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors truncate">
                 Browse Components
               </span>
-              <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-200/80 dark:border-white/20 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white text-[#0D2440] dark:text-white flex items-center justify-center transition-all duration-300 group-hover:scale-105">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-100 dark:bg-white/10 border border-slate-200/80 dark:border-white/20 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white text-[#0D2440] dark:text-white flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0">
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </div>
             </div>

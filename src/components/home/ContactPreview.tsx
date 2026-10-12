@@ -67,31 +67,31 @@ export function ContactPreview() {
                 <span>09 // TECHNICAL DESK & GLOBAL SOURCING</span>
               </div>
 
-              <ScrollWipeHeading as="h2" className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight uppercase text-[#0D2440] dark:text-white leading-[1.02] mb-4">
+              <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-tight uppercase text-[#0D2440] dark:text-white leading-[1.05] mb-3 sm:mb-4">
                 Engineering <br />
                 <span className="font-heading italic font-light text-slate-600 dark:text-slate-300">
                   support desk.
                 </span>
               </ScrollWipeHeading>
 
-              <p className="text-slate-600 dark:text-slate-300/85 text-base font-light leading-relaxed mb-6">
+              <p className="text-slate-600 dark:text-slate-300/85 text-xs sm:text-sm md:text-base font-light leading-relaxed mb-4 sm:mb-6">
                 Our application engineers review complex 3D CAD step files, suggest alloy optimizations, and supply prototype samples with full CMM inspection reports.
               </p>
 
               <div className="pt-4 border-t border-slate-200 dark:border-white/[0.08]">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#2E5E99] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-[0_10px_30px_rgba(46,94,153,0.3)] hover:scale-105 hover:shadow-[0_10px_40px_rgba(46,94,153,0.4)]"
+                  className="group inline-flex items-center justify-center gap-2.5 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#2E5E99] text-white font-heading font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all shadow-[0_10px_30px_rgba(46,94,153,0.3)] hover:scale-105 hover:shadow-[0_10px_40px_rgba(46,94,153,0.4)] w-full sm:w-auto text-center"
                 >
                   <span>Connect With Our Engineers</span>
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
               </div>
             </div>
           </div>
 
           {/* RIGHT COLUMN: 4 Architectural Contact Panels */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {contactCards.map((card) => {
               const Icon = card.icon;
               return (
@@ -100,28 +100,28 @@ export function ContactPreview() {
                   href={card.href}
                   target={card.isExternal ? "_blank" : undefined}
                   rel={card.isExternal ? "noopener noreferrer" : undefined}
-                  className="group relative p-6 md:p-8 rounded-[2rem] bg-white/60 dark:bg-black/40 backdrop-blur-2xl border border-black/5 dark:border-white/5 hover:border-[#2E5E99]/30 transition-all duration-500 flex flex-col justify-between hover:-translate-y-2 shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(46,94,153,0.15)] overflow-hidden"
+                  className="group relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-[2rem] bg-white/60 dark:bg-black/40 backdrop-blur-2xl border border-black/5 dark:border-white/5 hover:border-[#2E5E99]/30 transition-all duration-500 flex flex-col justify-between hover:-translate-y-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(46,94,153,0.15)] overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-[#2E5E99]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <div className="flex items-center justify-between gap-2 mb-6 relative z-10">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#2E5E99] font-bold">
+                  <div className="flex items-center justify-between gap-2 mb-4 sm:mb-6 relative z-10">
+                    <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#2E5E99] font-bold">
                       {card.status}
                     </span>
-                    <div className="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-sm flex items-center justify-center group-hover:bg-[#2E5E99] transition-colors duration-500">
-                      <Icon className="w-4 h-4 text-[#111] dark:text-white group-hover:text-white transition-colors duration-500" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-white/10 shadow-sm flex items-center justify-center group-hover:bg-[#2E5E99] transition-colors duration-500 shrink-0">
+                      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#111] dark:text-white group-hover:text-white transition-colors duration-500" />
                     </div>
                   </div>
 
-                  <div className="font-heading font-black text-xl md:text-2xl text-[#111] dark:text-white group-hover:text-[#2E5E99] transition-colors duration-500 mb-4 truncate relative z-10">
+                  <div className="font-heading font-black text-lg sm:text-xl md:text-2xl text-[#111] dark:text-white group-hover:text-[#2E5E99] transition-colors duration-500 mb-3 sm:mb-4 truncate relative z-10">
                     {card.displayValue}
                   </div>
 
-                  <div className="pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between relative z-10">
-                    <span className="font-mono text-[9px] text-[#666] dark:text-[#999] uppercase tracking-widest font-semibold">
+                  <div className="pt-3 sm:pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between relative z-10">
+                    <span className="font-mono text-[8px] sm:text-[9px] text-[#666] dark:text-[#999] uppercase tracking-wider sm:tracking-widest font-semibold truncate mr-2">
                       {card.caption}
                     </span>
-                    <ArrowUpRight className="w-4 h-4 text-[#999] group-hover:text-[#2E5E99] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#999] group-hover:text-[#2E5E99] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500 shrink-0" />
                   </div>
                 </a>
               );

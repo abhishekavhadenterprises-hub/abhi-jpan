@@ -66,7 +66,7 @@ export function ContactForm({
     <section 
       id="enquiry-form" 
       ref={containerRef} 
-      className="relative py-16 md:py-28 bg-gradient-to-b from-slate-50/80 via-white to-slate-50/50 dark:from-[#070b14] dark:via-[#0c1424] dark:to-[#070b14] overflow-hidden border-b border-slate-200/70 dark:border-white/5 scroll-mt-24"
+      className="relative py-12 sm:py-20 md:py-28 bg-gradient-to-b from-slate-50/80 via-white to-slate-50/50 dark:from-[#070b14] dark:via-[#0c1424] dark:to-[#070b14] overflow-hidden border-b border-slate-200/70 dark:border-white/5 scroll-mt-24"
     >
       {/* Anchor for Digital Inquiry scrolling */}
       <div id="digital-inquiry" className="absolute -top-24" />
@@ -79,20 +79,20 @@ export function ContactForm({
               variants={successVariants}
               initial="hidden"
               animate="visible"
-              className="flex items-center justify-center min-h-[460px] py-12"
+              className="flex items-center justify-center min-h-[420px] py-8 sm:py-12"
             >
-              <div className="max-w-xl w-full mx-auto text-center p-10 md:p-14 rounded-3xl bg-white dark:bg-[#0c1527]/90 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl relative overflow-hidden">
-                <div className="w-20 h-20 bg-emerald-500/10 dark:bg-emerald-500/15 flex items-center justify-center rounded-2xl mx-auto mb-8 border border-emerald-500/25 relative">
+              <div className="max-w-xl w-full mx-auto text-center p-6 sm:p-10 md:p-14 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#0c1527]/90 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl relative overflow-hidden">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-500/10 dark:bg-emerald-500/15 flex items-center justify-center rounded-2xl mx-auto mb-6 sm:mb-8 border border-emerald-500/25 relative">
                   <div className="absolute inset-0 border border-emerald-500/40 rounded-2xl animate-ping opacity-25" />
-                  <CheckCircle2 className="w-10 h-10 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
+                  <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
                 </div>
                 
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-5 leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-4 sm:mb-5 leading-tight">
                   Inquiry <br />
                   <span className="text-[#2E5E99] dark:text-[#7BA4D0] italic font-light">Received</span>
                 </h2>
                 
-                <p className="text-slate-600 dark:text-slate-300 font-normal text-sm md:text-base mb-8 max-w-md mx-auto leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-300 font-normal text-xs sm:text-sm md:text-base mb-6 sm:mb-8 max-w-md mx-auto leading-relaxed">
                   Thank you for reaching out. Your inquiry has been routed to our 
                   relevant desk. You will receive a response within 
                   24–48 working hours.
@@ -100,7 +100,7 @@ export function ContactForm({
                 
                 <button 
                   onClick={() => setIsSubmitted(false)}
-                  className="px-8 py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[#0D2440]/15 cursor-pointer"
+                  className="px-6 sm:px-8 py-3.5 sm:py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[#0D2440]/15 cursor-pointer"
                 >
                   Send Another Inquiry
                 </button>
@@ -113,14 +113,14 @@ export function ContactForm({
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               exit="exit"
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 lg:gap-16 items-start"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start"
             >
               {/* Left Column: Heading & Assurances */}
               <div className="lg:col-span-5 lg:sticky lg:top-28">
                 <div className="mb-6 overflow-visible">
                   <ScrollWipeHeading
                     as="h2"
-                    className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] tracking-tight block"
+                    className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] tracking-tight block"
                     revealedColor="currentColor"
                     wipingColor="#2E5E99"
                     unrevealedColor="rgba(148, 163, 184, 0.4)"
@@ -132,12 +132,12 @@ export function ContactForm({
                   </ScrollWipeHeading>
                 </div>
 
-                <p className="text-slate-600 dark:text-slate-300 font-normal text-base md:text-lg mb-8 leading-relaxed max-w-lg">
+                <p className="text-slate-600 dark:text-slate-300 font-normal text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-lg">
                   {description}
                 </p>
                 
                 {/* Privacy Assured Card */}
-                <div className="p-6 md:p-7 bg-white/90 dark:bg-white/[0.03] backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-2xl relative overflow-hidden group shadow-sm">
+                <div className="p-5 sm:p-6 md:p-7 bg-white/90 dark:bg-white/[0.03] backdrop-blur-xl border border-slate-200/80 dark:border-white/10 rounded-2xl relative overflow-hidden group shadow-sm">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#2E5E99]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   <div className="flex items-center gap-3.5 mb-3.5 relative z-10">
                     <div className="w-9 h-9 rounded-xl bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/10 border border-[#2E5E99]/20 dark:border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -162,14 +162,14 @@ export function ContactForm({
               <div className="lg:col-span-7">
                 <form 
                   onSubmit={handleSubmit} 
-                  className="bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl p-7 sm:p-10 md:p-12 border border-slate-200/90 dark:border-white/10 rounded-3xl relative overflow-hidden space-y-6 shadow-xl"
+                  className="bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl p-5 sm:p-8 md:p-10 lg:p-12 border border-slate-200/90 dark:border-white/10 rounded-2xl sm:rounded-3xl relative overflow-hidden space-y-5 sm:space-y-6 shadow-xl"
                 >
                   {/* Subtle top brand hairline */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2E5E99] to-transparent opacity-75" />
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 relative z-10">
                     {/* Full Name */}
-                    <div className="space-y-2.5">
+                    <div className="space-y-2">
                       <label className="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
                         <User className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={2} />
                         Full Name
@@ -178,12 +178,12 @@ export function ContactForm({
                         type="text" 
                         required
                         placeholder="John Doe"
-                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all"
+                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3 sm:py-3.5 px-3.5 sm:px-4 text-xs sm:text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all"
                       />
                     </div>
 
                     {/* Email Address */}
-                    <div className="space-y-2.5">
+                    <div className="space-y-2">
                       <label className="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
                         <Mail className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={2} />
                         Email Address
@@ -192,12 +192,12 @@ export function ContactForm({
                         type="email" 
                         required
                         placeholder="john@example.com"
-                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all"
+                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3 sm:py-3.5 px-3.5 sm:px-4 text-xs sm:text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all"
                       />
                     </div>
 
                     {/* Contact Number */}
-                    <div className="space-y-2.5">
+                    <div className="space-y-2">
                       <label className="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
                         <Phone className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={2} />
                         Contact Number
@@ -205,12 +205,12 @@ export function ContactForm({
                       <input 
                         type="tel" 
                         placeholder="+91 00000 00000"
-                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all"
+                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3 sm:py-3.5 px-3.5 sm:px-4 text-xs sm:text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all"
                       />
                     </div>
 
                     {/* Subject Dropdown */}
-                    <div className="space-y-2.5 relative">
+                    <div className="space-y-2 relative">
                       <label className="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
                         <MessageSquare className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={2} />
                         Subject
@@ -219,7 +219,7 @@ export function ContactForm({
                         <button
                           type="button"
                           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                          className={`w-full flex items-center justify-between bg-slate-50 dark:bg-white/[0.04] border rounded-xl py-3.5 px-4 text-sm text-left transition-all cursor-pointer ${
+                          className={`w-full flex items-center justify-between bg-slate-50 dark:bg-white/[0.04] border rounded-xl py-3 sm:py-3.5 px-3.5 sm:px-4 text-xs sm:text-sm text-left transition-all cursor-pointer ${
                             isDropdownOpen 
                               ? "border-[#2E5E99] ring-4 ring-[#2E5E99]/10 bg-white dark:bg-[#0e192f]" 
                               : "border-slate-200 dark:border-white/10 hover:border-[#2E5E99]/50"
@@ -256,7 +256,7 @@ export function ContactForm({
                                     setSelectedSubject(opt.value);
                                     setIsDropdownOpen(false);
                                   }}
-                                  className={`w-full text-left px-4 py-3 text-xs rounded-xl font-medium transition-colors flex items-center justify-between cursor-pointer ${
+                                  className={`w-full text-left px-4 py-2.5 sm:py-3 text-xs rounded-xl font-medium transition-colors flex items-center justify-between cursor-pointer ${
                                     selectedSubject === opt.value
                                       ? "bg-[#2E5E99]/10 text-[#2E5E99] dark:text-[#7BA4D0] font-bold"
                                       : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.05]"
@@ -276,20 +276,20 @@ export function ContactForm({
                   </div>
 
                   {/* Detailed Message */}
-                  <div className="space-y-2.5 relative z-10">
+                  <div className="space-y-2 relative z-10">
                     <label className="text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Detailed Message</label>
                     <textarea 
-                      rows={5}
+                      rows={4}
                       required
                       placeholder="Please provide details of your inquiry..."
-                      className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3.5 px-4 text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all resize-none"
+                      className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl py-3 sm:py-3.5 px-3.5 sm:px-4 text-xs sm:text-sm text-[#0D2440] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-[#2E5E99] focus:ring-4 focus:ring-[#2E5E99]/10 focus:bg-white dark:focus:bg-[#0e192f] transition-all resize-none"
                     />
                   </div>
 
                   {/* Submit Button */}
                   <button 
                     type="submit"
-                    className="w-full py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white font-semibold text-xs uppercase tracking-[0.25em] rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 group/btn relative overflow-hidden z-10 cursor-pointer shadow-lg shadow-[#0D2440]/15"
+                    className="w-full py-3.5 sm:py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white font-semibold text-xs uppercase tracking-[0.25em] rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-3 group/btn relative overflow-hidden z-10 cursor-pointer shadow-lg shadow-[#0D2440]/15"
                   >
                     <span className="relative z-10 flex items-center gap-3">
                       Send Inquiry

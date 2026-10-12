@@ -59,13 +59,14 @@ export function QualityCompliance() {
     },
   };
 
-  // Fade-Down Reveal (#5)
+  // Statistics Fade-Up Animation
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: -20 },
+    hidden: { opacity: 0, y: 35, scale: 0.96 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      scale: 1,
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -83,10 +84,10 @@ export function QualityCompliance() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-16 md:py-24 lg:py-32 bg-white dark:bg-black overflow-hidden transition-colors"
+      className="relative py-12 sm:py-20 md:py-28 bg-white dark:bg-black overflow-hidden transition-colors"
     >
-      <div className="container-custom relative z-10">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+      <div className="container-custom relative z-10 px-4 sm:px-6">
+        <div className="flex flex-col lg:flex-row gap-10 sm:gap-12 lg:gap-20 items-start">
           
           {/* Header Side (Sticky Architectural Anchor) */}
           <motion.div 
@@ -95,22 +96,22 @@ export function QualityCompliance() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="mb-6 md:mb-8 overflow-visible">
+            <div className="mb-4 sm:mb-6 md:mb-8 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
+                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 Compliance &
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
                 ESG Standards
               </div>
             </div>
             
-            <p className="text-[#0D2440]/75 dark:text-silver/80 text-base sm:text-lg leading-relaxed font-normal">
+            <p className="text-[#0D2440]/75 dark:text-silver/80 text-sm sm:text-base md:text-lg leading-relaxed font-normal">
               We operate at the intersection of technical excellence and 
               regulatory responsibility, ensuring that our products and 
               processes respect global safety and environmental protocols.
@@ -122,7 +123,7 @@ export function QualityCompliance() {
             <motion.div 
               ref={cardsRef}
               onScroll={handleMobileScroll}
-              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 sm:pt-4 sm:pb-4 px-1 sm:px-0 gap-5 lg:gap-6 sm:overflow-visible no-scrollbar w-full"
+              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 sm:pt-4 sm:pb-4 px-1 sm:px-0 gap-4 sm:gap-5 lg:gap-6 sm:overflow-visible no-scrollbar w-full"
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -136,21 +137,21 @@ export function QualityCompliance() {
                     transition: { duration: 0.25, ease: "easeOut" } 
                   }}
                   className={cn(
-                    "group relative p-7 sm:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl transition-all duration-300 overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
+                    "group relative p-5 sm:p-6 md:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all duration-300 overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
                     s.pointer && "border-[#2E5E99]/40 bg-gradient-to-b from-white/90 via-[#F8FAFC] to-[#EBF3FC]/80 dark:from-[#091A2E]/90 dark:to-[#0D2440]/80"
                   )}
                 >
                   <div className="relative z-10 flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="w-14 h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
-                          <s.icon className="w-7 h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
+                      <div className="flex items-center justify-between mb-4 sm:mb-6">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                          <s.icon className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
                         </div>
                         <span className="text-xs font-mono font-bold text-[#2E5E99]/60 dark:text-[#7BA4D0]/60">
                           0{idx + 1}
                         </span>
                       </div>
                       
-                      <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2.5 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+                      <h3 className="text-base sm:text-lg md:text-xl font-heading font-bold text-[#0D2440] dark:text-white mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
                         {s.title}
                       </h3>
                       
@@ -159,7 +160,7 @@ export function QualityCompliance() {
                       </p>
 
                       {s.pointer && (
-                        <div className="mt-4 pt-3.5 border-t border-[#7BA4D0]/20 flex items-start gap-2.5 text-xs font-semibold text-[#2E5E99] dark:text-[#7BA4D0] bg-[#E7F0FA]/80 dark:bg-[#0D2440]/80 p-3 rounded-2xl border border-[#7BA4D0]/25 shadow-xs">
+                        <div className="mt-3 sm:mt-4 pt-3 border-t border-[#7BA4D0]/20 flex items-start gap-2 text-[11px] sm:text-xs font-semibold text-[#2E5E99] dark:text-[#7BA4D0] bg-[#E7F0FA]/80 dark:bg-[#0D2440]/80 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-[#7BA4D0]/25 shadow-xs">
                           <Sun className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5 animate-pulse" />
                           <span className="leading-snug">{s.pointer}</span>
                         </div>

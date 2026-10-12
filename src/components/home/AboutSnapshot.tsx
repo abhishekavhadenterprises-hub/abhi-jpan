@@ -126,7 +126,7 @@ export function AboutSnapshot() {
           {/* Scroll-scrub Heading (United Carriers Exact Left-to-Right Wipe) */}
           <ScrollWipeHeading
             as="h3"
-            className="text-5xl md:text-6xl lg:text-[5.5rem] font-medium tracking-tighter leading-[1.05] max-w-5xl"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[5.2rem] font-medium tracking-tighter leading-[1.08] max-w-5xl"
             revealedColor="#111111"
             wipingColor="#2E5E99"
             unrevealedColor="#CCCCCC"
@@ -135,7 +135,7 @@ export function AboutSnapshot() {
             FOR GLOBAL INDUSTRY.
           </ScrollWipeHeading>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mt-4 text-[#666] max-w-xl text-sm leading-relaxed font-light">
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mt-4 text-[#666] max-w-xl text-xs sm:text-sm leading-relaxed font-light">
             Founded in 1998, J Pan Tubular Components Limited is more than just a manufacturer. We're a network of engineering experts passionate about bringing absolute precision to the world's most exacting automotive, refrigeration, and HVAC leaders.
           </motion.p>
         </div>
@@ -151,15 +151,15 @@ export function AboutSnapshot() {
                 <motion.button
                   key={mod.id} onClick={() => setActiveModuleIndex(idx)}
                   initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className={`group text-left p-3 lg:p-4 rounded-[1.5rem] transition-all duration-700 ease-out flex items-center justify-between border ${isActive ? "border-white/80 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] scale-[1.02]" : "border-transparent bg-transparent hover:bg-white/60 hover:border-white/50"}`}
+                  className={`group text-left p-3 lg:p-4 rounded-2xl lg:rounded-[1.5rem] transition-all duration-700 ease-out flex items-center justify-between border ${isActive ? "border-white/80 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] scale-[1.01]" : "border-transparent bg-transparent hover:bg-white/60 hover:border-white/50"}`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 ${isActive ? "bg-[#2E5E99] text-white shadow-xl scale-110" : "bg-white/50 text-[#999] group-hover:bg-white"}`}>
-                      <ModIcon className="w-5 h-5 stroke-[1.5]" />
+                  <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl flex items-center justify-center transition-all duration-500 ${isActive ? "bg-[#2E5E99] text-white shadow-xl scale-105" : "bg-white/50 text-[#999] group-hover:bg-white"}`}>
+                      <ModIcon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
                     </div>
-                    <div>
-                      <span className={`block text-[9px] tracking-[0.15em] uppercase mb-1 transition-colors duration-500 ${isActive ? 'text-[#2E5E99] font-medium' : 'text-[#999]'}`}>{mod.sublabel}</span>
-                      <span className={`block text-sm lg:text-base tracking-tight transition-colors duration-500 ${isActive ? 'text-[#2E5E99] font-semibold' : 'text-[#666]'}`}>{mod.name}</span>
+                    <div className="min-w-0">
+                      <span className={`block text-[8px] sm:text-[9px] tracking-[0.15em] uppercase mb-0.5 sm:mb-1 truncate transition-colors duration-500 ${isActive ? 'text-[#2E5E99] font-medium' : 'text-[#999]'}`}>{mod.sublabel}</span>
+                      <span className={`block text-xs sm:text-sm lg:text-base tracking-tight truncate transition-colors duration-500 ${isActive ? 'text-[#2E5E99] font-semibold' : 'text-[#666]'}`}>{mod.name}</span>
                     </div>
                   </div>
                 </motion.button>
@@ -167,34 +167,35 @@ export function AboutSnapshot() {
             })}
           </div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="lg:col-span-7 relative min-h-[300px] lg:min-h-[350px] bg-[#111] overflow-hidden group rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1 }} className="lg:col-span-7 relative min-h-[360px] sm:min-h-[320px] lg:min-h-[360px] bg-[#111] overflow-hidden group rounded-2xl sm:rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
             <AnimatePresence mode="wait">
               <motion.div key={activeModule.id} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.2, ease: "easeOut" }} className="absolute inset-0">
                 <Image src={activeModule.image} alt={activeModule.headline} fill className="object-cover transition-transform duration-[15s] group-hover:scale-110" priority />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/90 via-black/20 to-transparent mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/95 via-black/30 to-transparent mix-blend-multiply" />
 
-                <div className="absolute top-8 left-8 z-10">
-                  <span className="text-[10px] tracking-[0.2em] text-white uppercase backdrop-blur-xl bg-white/10 border border-white/20 px-6 py-2.5 rounded-full shadow-lg flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" /> {activeModule.badge}
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 max-w-[calc(100%-2rem)]">
+                  <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-white uppercase backdrop-blur-xl bg-white/10 border border-white/20 px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full shadow-lg inline-flex items-center gap-2 truncate">
+                    <span className="w-1.5 h-1.5 shrink-0 bg-green-400 rounded-full animate-pulse" />
+                    <span className="truncate">{activeModule.badge}</span>
                   </span>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 lg:p-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-                  <div>
-                    <span className="block text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">{activeModule.specLabel}</span>
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 sm:gap-4">
+                  <div className="min-w-0 max-w-full">
+                    <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/60 mb-1 sm:mb-2">{activeModule.specLabel}</span>
                     <ScrollWipeHeading
                       as="h3"
                       revealedColor="#FFFFFF"
                       wipingColor="#93C5FD"
                       unrevealedColor="rgba(255, 255, 255, 0.45)"
-                      className="text-2xl md:text-3xl font-light text-white tracking-tight leading-tight max-w-sm"
+                      className="text-lg sm:text-2xl md:text-3xl font-light text-white tracking-tight leading-tight max-w-sm"
                     >
                       {activeModule.headline}
                     </ScrollWipeHeading>
                   </div>
-                  <div className="text-left md:text-right p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
-                    <span className="block text-3xl md:text-4xl font-light text-white tracking-tighter mb-1">{activeModule.specValue}</span>
-                    <span className="block text-[10px] uppercase tracking-widest text-white/60">Verified Spec</span>
+                  <div className="text-left md:text-right p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl shrink-0">
+                    <span className="block text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-tighter mb-0.5 sm:mb-1">{activeModule.specValue}</span>
+                    <span className="block text-[9px] sm:text-[10px] uppercase tracking-widest text-white/60">Verified Spec</span>
                   </div>
                 </div>
               </motion.div>

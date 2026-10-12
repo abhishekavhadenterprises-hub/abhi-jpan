@@ -45,14 +45,14 @@ export function ProductsHero() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-32 pb-20"
+      className="relative min-h-[85vh] sm:min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-24 sm:pt-32 pb-20 sm:pb-28"
     >
       {/* Dynamic Cinematic Inset Frame */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95, borderRadius: "100px" }}
-        animate={{ opacity: 1, scale: 1, borderRadius: "40px" }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute inset-x-4 sm:inset-x-8 top-8 bottom-8 z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50"
+        className="absolute inset-x-2 sm:inset-x-6 md:inset-x-8 top-3 sm:top-6 md:top-8 bottom-3 sm:bottom-6 md:bottom-8 z-0 overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50 rounded-2xl sm:rounded-[32px] md:rounded-[40px]"
       >
         <motion.div 
           style={{ y: imageY, scale: imageScale }}
@@ -73,26 +73,26 @@ export function ProductsHero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
         
         {/* Subtle glowing edges */}
-        <div className="absolute inset-0 border border-white/20 dark:border-white/10 rounded-[40px] pointer-events-none mix-blend-overlay" />
+        <div className="absolute inset-0 border border-white/20 dark:border-white/10 rounded-2xl sm:rounded-[32px] md:rounded-[40px] pointer-events-none mix-blend-overlay" />
       </motion.div>
 
       {/* Centered Hero Content Lockup */}
       <motion.div 
         style={{ y: textY, opacity: textOpacity }}
-        className="container-custom relative z-10 w-full flex flex-col items-center text-center justify-center h-full px-4"
+        className="container-custom relative z-10 w-full flex flex-col items-center text-center justify-center h-full px-4 sm:px-6"
       >
         {/* Floating Glassmorphic Badge */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 md:mb-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)]"
+          className="mb-6 sm:mb-8 md:mb-12 inline-flex items-center gap-2.5 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.1)] max-w-[calc(100vw-2.5rem)]"
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2 w-2 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7BA4D0] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#7BA4D0]"></span>
           </span>
-          <span className="text-xs sm:text-sm font-sans font-bold text-white uppercase tracking-[0.3em]">
+          <span className="text-[11px] sm:text-xs md:text-sm font-sans font-bold text-white uppercase tracking-[0.25em] sm:tracking-[0.3em] truncate">
             The Catalog
           </span>
         </motion.div>
@@ -102,17 +102,17 @@ export function ProductsHero() {
           variants={sentence}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-center justify-center space-y-2 md:space-y-4"
+          className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 md:space-y-4 w-full"
           style={{ perspective: "1000px" }}
         >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-black text-white tracking-tighter leading-[0.9]">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-heading font-black text-white tracking-tighter leading-[1.05] sm:leading-[0.9]">
             {titleText.split("").map((char, index) => (
               <motion.span key={char + "-" + index} variants={letter} className="inline-block">
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
           </h1>
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[0.9] pr-4">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[1.05] sm:leading-[0.9] pr-1 sm:pr-4">
             {subtitleText.split("").map((char, index) => (
               <motion.span key={char + "-" + index} variants={letter} className="inline-block">
                 {char === " " ? "\u00A0" : char}
@@ -126,7 +126,7 @@ export function ProductsHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 sm:mt-12 text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto"
+          className="mt-6 sm:mt-10 md:mt-12 text-sm sm:text-base md:text-lg lg:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto px-2"
         >
           Zero-defect brass, copper, and steel components engineered with sub-micron precision for automotive, HVAC, and industrial leaders worldwide.
         </motion.p>
@@ -137,10 +137,10 @@ export function ProductsHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
-        className="absolute bottom-16 z-20 flex flex-col items-center gap-4"
+        className="absolute bottom-6 sm:bottom-10 md:bottom-16 z-20 flex flex-col items-center gap-2 sm:gap-4 pointer-events-none"
       >
-        <span className="text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.4em]">Scroll to Explore</span>
-        <div className="w-[1px] h-12 bg-white/20 overflow-hidden relative">
+        <span className="text-[9px] sm:text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.3em] sm:tracking-[0.4em]">Scroll to Explore</span>
+        <div className="w-[1px] h-8 sm:h-12 bg-white/20 overflow-hidden relative">
           <motion.div 
             animate={{ y: ["-100%", "200%"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}

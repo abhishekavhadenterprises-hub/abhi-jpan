@@ -32,45 +32,45 @@ const features = [
 
 export function CustomManufacturing() {
   return (
-    <section className="py-20 md:py-32 bg-white dark:bg-[#070b14] relative overflow-visible transition-colors duration-500">
+    <section className="py-14 sm:py-20 md:py-28 bg-white dark:bg-[#070b14] relative overflow-visible transition-colors duration-500">
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
           {/* Content Side (7 Cols) */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 space-y-6"
+            className="lg:col-span-7 space-y-5 sm:space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2E5E99]/10 dark:bg-white/5 border border-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-heading font-semibold uppercase tracking-wider">
-              <Cpu className="w-3.5 h-3.5" />
-              <span>Bespoke Engineering Capabilities</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-[#2E5E99]/10 dark:bg-white/5 border border-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-heading font-semibold uppercase tracking-wider max-w-[calc(100vw-3rem)]">
+              <Cpu className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">Bespoke Engineering Capabilities</span>
             </div>
 
             <ScrollWipeHeading 
               as="h2" 
-              className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.05] tracking-tight"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.1] sm:leading-[1.05] tracking-tight"
             >
               Need a Custom Engineered <br />
               <span className="font-serif italic text-[#2E5E99] dark:text-[#7BA4D0]">Tubular Solution?</span>
             </ScrollWipeHeading>
 
-            <p className="text-slate-600 dark:text-white/65 text-sm sm:text-base leading-relaxed max-w-xl font-sans font-normal">
+            <p className="text-slate-600 dark:text-white/65 text-xs sm:text-sm md:text-base leading-relaxed max-w-xl font-sans font-normal">
               Beyond our standard catalog, we specialize in co-engineering mission-critical fluid, refrigerant, and thermal assemblies. Our engineering team works directly with your blueprints to ensure exact fit and zero-leakage reliability.
             </p>
 
             {/* 2x2 Feature Matrix Cards - with hover lift & shadow */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 pt-2">
               {features.map((f, idx) => (
                 <div
                   key={idx}
                   className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/50 hover:bg-slate-100/60 dark:hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-3 group-hover:scale-110 transition-transform duration-300">
-                    <f.icon className="w-5 h-5" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-2.5 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <f.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <h3 className="text-sm font-heading font-bold text-[#0D2440] dark:text-white mb-1">
+                  <h3 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white mb-1">
                     {f.title}
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-white/55 leading-relaxed font-sans font-normal">
@@ -84,10 +84,10 @@ export function CustomManufacturing() {
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#0D2440] dark:bg-[#2E5E99] text-white dark:text-white hover:bg-[#2E5E99] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] font-heading font-semibold text-sm transition-all duration-300 cursor-pointer group"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#0D2440] dark:bg-[#2E5E99] text-white dark:text-white hover:bg-[#2E5E99] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] font-heading font-semibold text-xs sm:text-sm transition-all duration-300 cursor-pointer group w-full sm:w-auto text-center shadow-md shadow-[#0D2440]/10"
               >
-                <span>Request Custom Engineering Quote</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <span className="truncate">Request Custom Engineering Quote</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
               </Link>
             </div>
           </motion.div>
@@ -98,10 +98,10 @@ export function CustomManufacturing() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 relative py-6 px-2 sm:px-4 lg:p-2"
+            className="lg:col-span-5 relative py-4 sm:py-6 px-1 sm:px-4 lg:p-2"
           >
             {/* Main Showcase Card */}
-            <div className="relative aspect-[4/3] sm:aspect-square rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 group bg-slate-100 dark:bg-[#0A1626]">
+            <div className="relative aspect-[4/3] sm:aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 group bg-slate-100 dark:bg-[#0A1626]">
               <Image
                 src="/images/custom-engineering.png"
                 alt="Custom Engineering and Blueprints"
@@ -117,16 +117,16 @@ export function CustomManufacturing() {
             <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-2 right-2 sm:-top-4 sm:-right-2 p-3.5 sm:p-4 rounded-2xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/15 flex items-center gap-3 z-20"
+              className="absolute top-2 right-2 sm:-top-4 sm:-right-2 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/15 flex items-center gap-2.5 sm:gap-3 z-20 shadow-lg max-w-[85%] sm:max-w-none"
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#2E5E99] text-white flex items-center justify-center font-heading font-black text-xs">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#2E5E99] text-white flex items-center justify-center font-heading font-black text-[11px] sm:text-xs shrink-0">
                 ±0.02
               </div>
-              <div>
-                <div className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white">
+              <div className="min-w-0">
+                <div className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white truncate">
                   CNC Precision Tolerance
                 </div>
-                <div className="text-[10px] text-slate-500 dark:text-white/60 font-sans">
+                <div className="text-[9px] sm:text-[10px] text-slate-500 dark:text-white/60 font-sans truncate">
                   Automated Cold-Draw & Bend
                 </div>
               </div>
@@ -136,14 +136,14 @@ export function CustomManufacturing() {
             <motion.div
               animate={{ y: [4, -4, 4] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-2 left-2 sm:-bottom-4 sm:-left-2 p-3 sm:p-3.5 rounded-2xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/15 flex items-center gap-2.5 z-20"
+              className="absolute bottom-2 left-2 sm:-bottom-4 sm:-left-2 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/15 flex items-center gap-2 sm:gap-2.5 z-20 shadow-lg max-w-[85%] sm:max-w-none"
             >
-              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E5E99] dark:text-[#7BA4D0]" />
-              <div>
-                <div className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white">
+              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
+              <div className="min-w-0">
+                <div className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white truncate">
                   Zero-Defect Standard
                 </div>
-                <div className="text-[10px] text-slate-500 dark:text-white/60 font-sans">
+                <div className="text-[9px] sm:text-[10px] text-slate-500 dark:text-white/60 font-sans truncate">
                   100% Helium Leak Tested
                 </div>
               </div>

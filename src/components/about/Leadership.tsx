@@ -159,32 +159,32 @@ function ParallaxLeaderCard({
           aria-hidden="true"
         />
 
-        {/* SLIDE-UP HOVER DRAWER: Name, Role & Description come smoothly on hover */}
-        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 bg-gradient-to-t from-[#060D18]/95 via-[#060D18]/85 to-transparent backdrop-blur-md border-t border-white/10 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out z-30 flex flex-col justify-end pointer-events-auto">
-          <div className="space-y-2">
-            <div className="text-xs font-heading font-bold tracking-wider uppercase text-[#7BA4D0]">
+        {/* SLIDE-UP HOVER DRAWER: Always legible on mobile touch screens, slide-up hover on desktop */}
+        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 lg:p-7 bg-gradient-to-t from-[#060D18]/95 via-[#060D18]/85 to-transparent backdrop-blur-md border-t border-white/10 opacity-95 sm:opacity-0 sm:group-hover:opacity-100 translate-y-0 sm:translate-y-6 sm:group-hover:translate-y-0 transition-all duration-400 ease-out z-30 flex flex-col justify-end pointer-events-auto">
+          <div className="space-y-1.5 sm:space-y-2">
+            <div className="text-[10px] sm:text-xs font-heading font-bold tracking-wider uppercase text-[#7BA4D0]">
               {leader.role}
             </div>
-            <h3 className="text-xl sm:text-2xl font-heading font-bold text-white leading-tight">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-heading font-bold text-white leading-tight">
               {leader.name}
             </h3>
-            <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed line-clamp-2 sm:line-clamp-none">
               {leader.bio}
             </p>
-            <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+            <div className="flex items-center gap-2 pt-2 sm:pt-3 border-t border-white/10">
               <a
                 href={leader.email}
-                className="w-8 h-8 rounded-xl bg-white/10 hover:bg-[#2E5E99] text-white flex items-center justify-center transition-all duration-200 hover:scale-110"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-white/10 hover:bg-[#2E5E99] text-white flex items-center justify-center transition-all duration-200 hover:scale-110"
                 aria-label={`Email ${leader.name}`}
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               </a>
               <a
                 href={leader.linkedin}
-                className="w-8 h-8 rounded-xl bg-white/10 hover:bg-[#2E5E99] text-white flex items-center justify-center transition-all duration-200 hover:scale-110"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-white/10 hover:bg-[#2E5E99] text-white flex items-center justify-center transition-all duration-200 hover:scale-110"
                 aria-label={`LinkedIn profile of ${leader.name}`}
               >
-                <Linkedin className="w-3.5 h-3.5" />
+                <Linkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               </a>
             </div>
           </div>
@@ -201,7 +201,7 @@ export function Leadership() {
     <section
       id="leadership"
       ref={containerRef}
-      className="relative py-20 md:py-36 bg-slate-50/50 dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-28 lg:py-36 bg-slate-50/50 dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
     >
       <div className="container-custom relative z-10 w-full">
         {/* Section Headline */}
@@ -210,10 +210,10 @@ export function Leadership() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 md:mb-20"
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-10 sm:mb-16 md:mb-20"
         >
           <div>
-            <ScrollWipeHeading as="h2" className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white max-w-2xl">
+            <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white max-w-2xl">
               Leadership driving <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
                 institutional excellence.
@@ -221,13 +221,13 @@ export function Leadership() {
             </ScrollWipeHeading>
           </div>
 
-          <p className="text-base sm:text-lg text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed max-w-md">
+          <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed max-w-md">
             Decades of specialized engineering mastery directing over 65,000 MT of annual production capacity across 6 facilities.
           </p>
         </motion.div>
 
         {/* Premium Executive Card Grid with Parallax Effect & Hover Slide-Up */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 items-stretch">
           {leaders.map((leader, idx) => (
             <ParallaxLeaderCard key={leader.name} leader={leader} idx={idx} />
           ))}

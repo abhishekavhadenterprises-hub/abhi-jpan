@@ -67,7 +67,7 @@ export function ContactSupportInfo() {
   };
 
   return (
-    <section ref={containerRef} className="py-12 md:py-20 bg-white dark:bg-[#070b14] relative transition-colors duration-500 overflow-visible border-b border-slate-200/70 dark:border-white/5">
+    <section ref={containerRef} className="py-10 sm:py-14 md:py-20 bg-white dark:bg-[#070b14] relative transition-colors duration-500 overflow-visible border-b border-slate-200/70 dark:border-white/5">
       <div className="container-custom relative z-10">
         <motion.div 
           ref={scrollContainerRef}
@@ -75,28 +75,28 @@ export function ContactSupportInfo() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 lg:gap-7 no-scrollbar pt-2 pb-6 md:pb-2"
+          className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-7 no-scrollbar pt-2 pb-6 md:pb-2"
         >
           {supportMetrics.map((metric, idx) => (
             <motion.div 
               key={idx}
               variants={itemVariants}
               whileHover={{ y: -6 }}
-              className="group bg-slate-50/70 dark:bg-[#0c1527] border border-slate-200/90 dark:border-white/10 p-7 sm:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden transition-all duration-400 hover:border-[#2E5E99]/50 hover:shadow-xl hover:shadow-[#0D2440]/5 w-full shrink-0 snap-center md:w-auto md:shrink flex flex-col justify-between cursor-default"
+              className="group bg-slate-50/70 dark:bg-[#0c1527] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden transition-all duration-400 hover:border-[#2E5E99]/50 hover:shadow-xl hover:shadow-[#0D2440]/5 w-full shrink-0 snap-center md:w-auto md:shrink flex flex-col justify-between cursor-default"
             >
               {/* Subtle Ambient Hover Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#7BA4D0]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-[#EBF3FC] dark:bg-[#2E5E99]/20 border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#0D2440] group-hover:text-white dark:group-hover:bg-[#2E5E99] dark:group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#EBF3FC] dark:bg-[#2E5E99]/20 border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#0D2440] group-hover:text-white dark:group-hover:bg-[#2E5E99] dark:group-hover:text-white transition-all duration-300 shadow-sm">
                     <metric.icon className="w-5 h-5" strokeWidth={1.75} />
                   </div>
                   <div className="h-0.5 w-6 rounded-full bg-slate-200 dark:bg-white/15 group-hover:bg-[#2E5E99] dark:group-hover:bg-[#7BA4D0] group-hover:w-10 transition-all duration-300" />
                 </div>
                 
-                <p className="text-[11px] font-heading font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">{metric.label}</p>
-                <h4 className="text-2xl sm:text-3xl font-heading font-black text-[#0D2440] dark:text-white mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 tracking-tight">
+                <p className="text-[10px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">{metric.label}</p>
+                <h4 className="text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#0D2440] dark:text-white mb-2 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 tracking-tight">
                   {metric.value}
                 </h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-sans leading-relaxed font-normal">{metric.detail}</p>

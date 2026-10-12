@@ -87,11 +87,11 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative p-8 sm:p-10 rounded-[2rem] bg-white dark:bg-[#091524] border border-slate-200/60 dark:border-white/5 shadow-lg flex flex-col justify-between group cursor-crosshair overflow-visible transition-colors duration-500"
+      className="relative p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-[2rem] bg-white dark:bg-[#091524] border border-slate-200/60 dark:border-white/5 shadow-lg flex flex-col justify-between group cursor-crosshair overflow-visible transition-colors duration-500"
     >
       {/* 1. Dynamic Spotlight Background */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover/opacity-100"
         style={{
           background: bgSpotlight,
         }}
@@ -99,7 +99,7 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
       
       {/* 2. Dynamic Border Glow */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover/opacity-100"
         style={{
           background: bgBorder,
           WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -110,24 +110,24 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
 
       <div style={{ transform: "translateZ(30px)" }} className="relative z-10">
         {/* Top Row: Icon + Number */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/[0.02] text-[#2E5E99] dark:text-[#7BA4D0] border border-slate-200 dark:border-white/10 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white transition-all duration-500 shadow-sm">
-            <card.icon className="w-5 h-5" />
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/[0.02] text-[#2E5E99] dark:text-[#7BA4D0] border border-slate-200 dark:border-white/10 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white transition-all duration-500 shadow-sm">
+            <card.icon className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <span className="text-3xl font-mono font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
+          <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
             {card.num}
           </span>
         </div>
 
-        <div className="text-[10px] font-mono tracking-[0.2em] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-4">
+        <div className="text-[9px] sm:text-[10px] font-mono tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-2 sm:mb-4">
           {card.tag}
         </div>
 
-        <h3 className="text-2xl sm:text-3xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white mb-4 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white mb-2 sm:mb-4 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
           {card.title}
         </h3>
 
-        <p className="text-sm sm:text-[15px] text-[#0D2440]/70 dark:text-white/60 font-medium leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-[15px] text-[#0D2440]/70 dark:text-white/60 font-medium leading-relaxed">
           {card.description}
         </p>
       </div>
@@ -142,7 +142,7 @@ export function OurStory() {
     <section
       id="our-story"
       ref={sectionRef}
-      className="relative py-24 md:py-36 bg-[#FAFAFA] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden perspective-[2000px]"
+      className="relative py-16 sm:py-24 md:py-32 bg-[#FAFAFA] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden perspective-[2000px]"
     >
       {/* Background Architectural Grid Lines */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]">
@@ -153,15 +153,15 @@ export function OurStory() {
 
       <div className="container-custom relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
-          <ScrollWipeHeading as="h2" className="text-4xl sm:text-5xl lg:text-7xl font-heading font-black tracking-tight leading-[1.05] text-[#0D2440] dark:text-white mb-6">
+        <div className="max-w-4xl mx-auto text-center mb-10 sm:mb-16 md:mb-20">
+          <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4 sm:mb-6">
             Precision that builds <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
               enduring global partnerships.
             </span>
           </ScrollWipeHeading>
 
-          <p className="text-base sm:text-lg text-[#0D2440]/75 dark:text-white/75 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/75 dark:text-white/75 font-medium leading-relaxed max-w-2xl mx-auto">
             From a 400 sq. ft. precision workshop to an institutional manufacturing powerhouse producing over 65,000 MT
             of mission-critical tubular assemblies annually.
           </p>
@@ -176,7 +176,7 @@ export function OurStory() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.15 } }
           }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
           style={{ perspective: "1200px" }}
         >
           {storyCards.map((card, idx) => (

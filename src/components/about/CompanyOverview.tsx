@@ -158,16 +158,16 @@ export function CompanyOverview() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 dark:bg-[#0D2440]/90 backdrop-blur-md border border-[#7BA4D0]/40 dark:border-white/20 flex items-center gap-3.5"
+                className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/90 dark:bg-[#0D2440]/90 backdrop-blur-md border border-[#7BA4D0]/40 dark:border-white/20 flex items-center gap-2.5 sm:gap-3.5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#2E5E99] text-white flex items-center justify-center shrink-0">
-                  <Activity className="w-5 h-5 animate-pulse" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#2E5E99] text-white flex items-center justify-center shrink-0">
+                  <Activity className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
                 </div>
-                <div>
-                  <div className="text-[10px] font-mono font-bold tracking-widest text-[#2E5E99] dark:text-[#7BA4D0] uppercase">
+                <div className="min-w-0">
+                  <div className="text-[8px] sm:text-[10px] font-mono font-bold tracking-wider sm:tracking-widest text-[#2E5E99] dark:text-[#7BA4D0] uppercase truncate">
                     QUALITY ASSURANCE PASS
                   </div>
-                  <div className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white">
+                  <div className="text-[11px] sm:text-xs md:text-sm font-heading font-bold text-[#0D2440] dark:text-white truncate">
                     100% Mass Spectrometer Leak Tested
                   </div>
                 </div>
@@ -176,22 +176,22 @@ export function CompanyOverview() {
           </motion.div>
 
           {/* Right: Authoritative Editorial & Elevated Cards */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl font-heading font-black tracking-tight leading-[1.1] text-[#0D2440] dark:text-white">
+              <ScrollWipeHeading as="h2" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white">
                 Engineered for environments where <br />
                 <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
                   failure is not an option.
                 </span>
               </ScrollWipeHeading>
 
-              <p className="text-base sm:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-2xl">
                 We combine decades of institutional metallurgy expertise with high-speed automated CNC bending,
                 end-forming, and induction brazing lines. Our continuous investments in multi-axis automation
                 ensure that every component leaving our shop floors complies with the tightest tolerances in the industry.
@@ -203,26 +203,26 @@ export function CompanyOverview() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2 [perspective:1200px]"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5 pt-2 [perspective:1200px]"
             >
               {highlights.map((item, idx) => (
                 <motion.div
                   key={idx}
                   variants={cardVariants[idx]}
                   whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.2 } }}
-                  className="p-6 rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-colors duration-300 group flex flex-col justify-between transform-gpu"
+                  className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-colors duration-300 group flex flex-col justify-between transform-gpu"
                 >
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                        <item.icon className="w-5 h-5" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                        <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
-                      <span className="text-[10px] font-mono font-bold uppercase text-[#2E5E99] dark:text-[#7BA4D0] tracking-wider">
+                      <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase text-[#2E5E99] dark:text-[#7BA4D0] tracking-wider">
                         {item.unit}
                       </span>
                     </div>
 
-                    <div className="text-3xl sm:text-4xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
                       <AnimatedCounter
                         value={item.val}
                         decimals={item.decimals}
@@ -231,11 +231,11 @@ export function CompanyOverview() {
                       />
                     </div>
 
-                    <h4 className="text-sm font-heading font-bold text-[#0D2440] dark:text-white leading-snug">
+                    <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white leading-snug">
                       {item.title}
                     </h4>
 
-                    <p className="text-xs text-[#0D2440]/70 dark:text-white/70 font-light leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#0D2440]/70 dark:text-white/70 font-light leading-relaxed">
                       {item.desc}
                     </p>
                   </div>

@@ -182,7 +182,7 @@ export function JourneyTimeline() {
           }
         `}} />
         
-        <div className="accordion-grid w-full h-[85vh] lg:h-[70vh] min-h-[500px] max-h-[800px] px-4 lg:px-8 gap-2 lg:gap-3">
+        <div className="accordion-grid w-full h-[85vh] lg:h-[70vh] min-h-[500px] max-h-[850px] px-3 sm:px-4 lg:px-8 gap-2 lg:gap-3">
           {units.map((unit, idx) => {
             const isActive = activeIdx === idx;
             const Icon = unit.icon;
@@ -193,21 +193,21 @@ export function JourneyTimeline() {
                 onMouseEnter={() => setActiveIdx(idx)}
                 onClick={() => setActiveIdx(idx)}
                 className={cn(
-                  "relative rounded-3xl overflow-hidden cursor-pointer flex flex-col justify-end bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 transition-shadow duration-700",
+                  "relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer flex flex-col justify-end bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 transition-shadow duration-700",
                   isActive ? "shadow-2xl" : "shadow-sm"
                 )}
               >
                 {/* Collapsed State (Visible when not active) */}
                 <div 
                   className={cn(
-                    "absolute inset-0 p-4 lg:p-6 flex flex-row lg:flex-col items-center justify-center lg:justify-start gap-4 transition-opacity duration-500", 
+                    "absolute inset-0 p-3 sm:p-4 lg:p-6 flex flex-row lg:flex-col items-center justify-center lg:justify-start gap-3 sm:gap-4 transition-opacity duration-500", 
                     isActive ? "opacity-0 pointer-events-none" : "opacity-100 delay-200"
                   )}
                 >
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 shrink-0">
-                    <Icon className="w-5 h-5 text-slate-400 dark:text-slate-500" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 shrink-0">
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 dark:text-slate-500" />
                   </div>
-                  <span className="font-mono text-xl lg:text-2xl font-bold text-slate-300 dark:text-white/20 lg:[writing-mode:vertical-rl] lg:rotate-180 whitespace-nowrap">
+                  <span className="font-mono text-base sm:text-xl lg:text-2xl font-bold text-slate-300 dark:text-white/20 lg:[writing-mode:vertical-rl] lg:rotate-180 whitespace-nowrap">
                     {unit.year}
                   </span>
                 </div>
@@ -215,30 +215,30 @@ export function JourneyTimeline() {
                 {/* Expanded State (Visible when active) */}
                 <div 
                   className={cn(
-                    "absolute inset-0 p-6 lg:p-12 flex flex-col justify-end transition-opacity duration-500 bg-gradient-to-t from-white via-white/90 to-transparent dark:from-[#091524] dark:via-[#091524]/90", 
+                    "absolute inset-0 p-4 sm:p-6 lg:p-12 flex flex-col justify-end transition-opacity duration-500 bg-gradient-to-t from-white via-white/95 to-transparent dark:from-[#091524] dark:via-[#091524]/95 overflow-y-auto lg:overflow-visible", 
                     isActive ? "opacity-100 delay-200" : "opacity-0 pointer-events-none"
                   )}
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-[#2E5E99] dark:bg-[#7BA4D0] text-white flex items-center justify-center mb-6 shadow-xl shadow-[#2E5E99]/30 shrink-0">
-                    <Icon className="w-7 h-7" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl bg-[#2E5E99] dark:bg-[#7BA4D0] text-white flex items-center justify-center mb-2 sm:mb-4 lg:mb-6 shadow-xl shadow-[#2E5E99]/30 shrink-0">
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                   </div>
                   
-                  <span className="font-mono text-4xl sm:text-5xl font-bold text-[#2E5E99] dark:text-[#7BA4D0] mb-3">
+                  <span className="font-mono text-2xl sm:text-3xl lg:text-5xl font-bold text-[#2E5E99] dark:text-[#7BA4D0] mb-1 sm:mb-2">
                     {unit.year}
                   </span>
                   
-                  <h3 className="font-heading text-3xl sm:text-4xl font-semibold text-[#0D2440] dark:text-white mb-3 line-clamp-1 whitespace-nowrap">
+                  <h3 className="font-heading text-lg sm:text-2xl lg:text-4xl font-semibold text-[#0D2440] dark:text-white mb-1 sm:mb-2 truncate">
                     {unit.title.split(" // ")[0]}
                   </h3>
                   
-                  <span className="text-[11px] sm:text-sm font-mono tracking-widest text-slate-500 dark:text-white/40 uppercase mb-6 block line-clamp-1 whitespace-nowrap">
+                  <span className="text-[10px] sm:text-xs lg:text-sm font-mono tracking-wider sm:tracking-widest text-slate-500 dark:text-white/40 uppercase mb-2 sm:mb-4 lg:mb-6 block truncate">
                     {unit.title.split(" // ")[1]} • {unit.tag}
                   </span>
 
-                  <div className="space-y-3 opacity-90 max-w-2xl">
+                  <div className="space-y-1.5 sm:space-y-2.5 opacity-90 max-w-2xl min-w-0 w-full">
                     {unit.details.slice(0, 3).map((detail: string, dIdx: number) => (
-                      <div key={dIdx} className="flex items-start gap-4 text-sm sm:text-base text-slate-600 dark:text-white/70 font-light min-w-[300px]">
-                        <span className="w-2 h-2 rounded-full bg-[#2E5E99]/50 dark:bg-[#7BA4D0]/50 shrink-0 mt-2" />
+                      <div key={dIdx} className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-white/70 font-light min-w-0">
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#2E5E99]/50 dark:bg-[#7BA4D0]/50 shrink-0 mt-1.5 sm:mt-2" />
                         <span className="line-clamp-2 leading-relaxed">{detail}</span>
                       </div>
                     ))}

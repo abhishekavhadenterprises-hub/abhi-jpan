@@ -101,7 +101,7 @@ export function AboutQuality() {
         </div>
 
         {/* Premium Expanding Accordion */}
-        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 h-[800px] lg:h-[600px] w-full">
+        <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 h-[880px] sm:h-[820px] lg:h-[600px] w-full">
           {certifications.map((cert, i) => {
             const isActive = activeIdx === i;
 
@@ -117,7 +117,7 @@ export function AboutQuality() {
                   layout: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
                   opacity: { duration: 0.5, delay: i * 0.1 } 
                 }}
-                className={`relative rounded-3xl sm:rounded-[2.5rem] bg-white dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-xl shadow-slate-200/50 dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] overflow-hidden cursor-pointer group flex flex-col lg:flex-row items-center transition-colors duration-500 hover:border-slate-300 dark:hover:border-white/20 ${
+                className={`relative rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] bg-white dark:bg-white/[0.02] backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-xl shadow-slate-200/50 dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] overflow-hidden cursor-pointer group flex flex-col lg:flex-row items-center transition-colors duration-500 hover:border-slate-300 dark:hover:border-white/20 ${
                   isActive ? "flex-[4] lg:flex-[3]" : "flex-1 hover:bg-slate-100 dark:hover:bg-white/[0.04]"
                 }`}
               >
@@ -127,9 +127,9 @@ export function AboutQuality() {
                 {/* Vertical/Collapsed Title Area */}
                 <motion.div 
                   layout="position"
-                  className={`flex flex-row lg:flex-col items-center justify-between lg:justify-center w-full lg:w-24 h-24 lg:h-full shrink-0 p-6 sm:p-8 z-20 ${isActive ? 'bg-slate-50/50 dark:bg-black/20 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/10' : ''}`}
+                  className={`flex flex-row lg:flex-col items-center justify-between lg:justify-center w-full lg:w-24 h-16 sm:h-20 lg:h-full shrink-0 p-4 sm:p-6 lg:p-8 z-20 ${isActive ? 'bg-slate-50/50 dark:bg-black/20 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/10' : ''}`}
                 >
-                  <div className="text-3xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] opacity-50">
+                  <div className="text-2xl sm:text-3xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] opacity-50">
                     {cert.num}
                   </div>
                   
@@ -141,38 +141,38 @@ export function AboutQuality() {
                   </div>
                   
                   <div className="block lg:hidden text-right">
-                    <h3 className={`text-lg font-heading font-bold transition-colors duration-300 ${isActive ? 'text-[#0D2440] dark:text-white' : 'text-[#0D2440]/60 dark:text-white/50'}`}>
+                    <h3 className={`text-base sm:text-lg font-heading font-bold transition-colors duration-300 ${isActive ? 'text-[#0D2440] dark:text-white' : 'text-[#0D2440]/60 dark:text-white/50'}`}>
                       {cert.code}
                     </h3>
                   </div>
 
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isActive ? 'bg-[#2E5E99] dark:bg-[#7BA4D0] rotate-90 lg:rotate-0' : 'bg-slate-100 dark:bg-white/5 group-hover:bg-[#2E5E99]/10 dark:group-hover:bg-white/10'}`}>
-                    <ChevronRight className={`w-5 h-5 transition-colors ${isActive ? 'text-white' : 'text-[#0D2440]/40 dark:text-white/40 group-hover:text-[#2E5E99] dark:group-hover:text-white'}`} />
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isActive ? 'bg-[#2E5E99] dark:bg-[#7BA4D0] rotate-90 lg:rotate-0' : 'bg-slate-100 dark:bg-white/5 group-hover:bg-[#2E5E99]/10 dark:group-hover:bg-white/10'}`}>
+                    <ChevronRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors ${isActive ? 'text-white' : 'text-[#0D2440]/40 dark:text-white/40 group-hover:text-[#2E5E99] dark:group-hover:text-white'}`} />
                   </div>
                 </motion.div>
 
                 {/* Expanded Content Area */}
-                <div className={`flex-grow h-full relative z-10 overflow-hidden transition-opacity duration-500 ${isActive ? 'opacity-100 pointer-events-auto delay-200' : 'opacity-0 pointer-events-none absolute'}`}>
-                  <div className="p-6 sm:p-10 lg:p-12 w-full h-full flex flex-col justify-center min-w-[300px]">
+                <div className={`flex-grow h-full relative z-10 overflow-y-auto lg:overflow-hidden transition-opacity duration-500 ${isActive ? 'opacity-100 pointer-events-auto delay-200' : 'opacity-0 pointer-events-none absolute'}`}>
+                  <div className="p-4 sm:p-8 lg:p-12 w-full h-full flex flex-col justify-center min-w-0">
                     <motion.div
                       initial={false}
                       animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 20 }}
                       transition={{ duration: 0.4, delay: isActive ? 0.2 : 0 }}
                     >
-                      <div className="inline-flex px-3 py-1 rounded-full bg-slate-100 dark:bg-[#7BA4D0]/10 border border-slate-200 dark:border-[#7BA4D0]/30 text-[10px] sm:text-xs font-mono tracking-widest text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-4">
+                      <div className="inline-flex px-2.5 py-1 rounded-full bg-slate-100 dark:bg-[#7BA4D0]/10 border border-slate-200 dark:border-[#7BA4D0]/30 text-[9px] sm:text-xs font-mono tracking-wider sm:tracking-widest text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-2 sm:mb-4">
                         {cert.category}
                       </div>
-                      <h4 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight mb-4 leading-tight">
+                      <h4 className="text-xl sm:text-2xl lg:text-4xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight mb-2 sm:mb-4 leading-tight">
                         {cert.title}
                       </h4>
-                      <p className="text-sm sm:text-base text-[#0D2440]/75 dark:text-white/70 font-light leading-relaxed mb-8 max-w-md">
+                      <p className="text-xs sm:text-sm lg:text-base text-[#0D2440]/75 dark:text-white/70 font-light leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-md">
                         {cert.desc}
                       </p>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
                         {cert.highlights.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/[0.05]">
-                            <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <div key={idx} className="flex items-start gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/[0.05]">
+                            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
                               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-500" />
                             </div>
                             <span className="text-xs sm:text-sm font-medium text-[#0D2440]/80 dark:text-white/80 leading-snug">

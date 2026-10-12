@@ -95,34 +95,34 @@ export function Testimonials() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/90 via-[#080c14]/20 to-transparent" />
 
               {/* Bottom Credential Tag */}
-              <div className="absolute bottom-5 left-5 right-5 p-3 sm:p-4 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/15 text-white flex items-center justify-between shadow-xl">
-                <div>
-                  <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-[#2E5E99] dark:text-cyan-400">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 p-2.5 sm:p-4 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/15 text-white flex items-center justify-between shadow-xl">
+                <div className="min-w-0 pr-2">
+                  <div className="flex items-center gap-1.5 text-[8px] sm:text-[10px] font-mono uppercase tracking-wider text-[#2E5E99] dark:text-cyan-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-cyan-400 animate-pulse shadow-[0_0_6px_#2E5E99] dark:shadow-[0_0_6px_#38bdf8]" />
                     ACADEMIC PEDIGREE
                   </div>
-                  <div className="text-xs sm:text-sm font-heading font-bold text-white mt-0.5">
+                  <div className="text-[11px] sm:text-sm font-heading font-bold text-white mt-0.5 truncate">
                     M.Tech Industrial Engineering
                   </div>
                 </div>
-                <div className="text-right border-l border-white/15 pl-3 sm:pl-4">
-                  <div className="text-[8px] sm:text-[9px] font-mono text-slate-500 dark:text-slate-400 uppercase">ALUMNI</div>
-                  <div className="text-[10px] sm:text-xs font-mono font-bold text-white">SOUTH KOREA</div>
+                <div className="text-right border-l border-white/15 pl-2.5 sm:pl-4 shrink-0">
+                  <div className="text-[7px] sm:text-[9px] font-mono text-slate-500 dark:text-slate-400 uppercase">ALUMNI</div>
+                  <div className="text-[9px] sm:text-xs font-mono font-bold text-white whitespace-nowrap">SOUTH KOREA</div>
                 </div>
               </div>
             </motion.div>
 
             {/* Experience Ticker with Animated Counter */}
-            <div className="mt-3 xl:mt-4 flex items-center gap-4 p-3 xl:p-4 rounded-2xl bg-slate-950/40 border border-slate-200 dark:border-white/[0.08] backdrop-blur-md">
-              <div className="text-3xl xl:text-4xl font-heading font-black text-white tabular-nums flex items-center">
+            <div className="mt-3 xl:mt-4 flex items-center gap-3 sm:gap-4 p-3 xl:p-4 rounded-2xl bg-slate-950/40 border border-slate-200 dark:border-white/[0.08] backdrop-blur-md">
+              <div className="text-2xl sm:text-3xl xl:text-4xl font-heading font-black text-white tabular-nums flex items-center shrink-0">
                 <AnimatedCounter to={28} />
                 <span className="text-[#2E5E99] dark:text-cyan-400">+</span>
               </div>
-              <div className="border-l border-white/15 pl-4">
-                <div className="text-[10px] xl:text-xs font-heading font-bold text-white tracking-wider uppercase">
+              <div className="border-l border-white/15 pl-3 sm:pl-4 min-w-0">
+                <div className="text-[9px] sm:text-[10px] xl:text-xs font-heading font-bold text-white tracking-wider uppercase truncate">
                   YEARS OF ENGINEERING TENURE
                 </div>
-                <div className="text-[10px] xl:text-xs text-slate-600 dark:text-slate-300 font-light">
+                <div className="text-[9px] sm:text-[10px] xl:text-xs text-slate-600 dark:text-slate-300 font-light line-clamp-1 sm:line-clamp-none">
                   Pioneering tubular manufacturing systems since 1998.
                 </div>
               </div>
@@ -132,24 +132,24 @@ export function Testimonials() {
           {/* RIGHT: Editorial Pull-Quote & Pillars */}
           <div className="lg:col-span-7 pt-4 lg:pt-0 space-y-4 xl:space-y-5">
             <div>
-              <div className="flex items-center gap-2 mb-2 xl:mb-3 text-[#2E5E99] dark:text-cyan-400 font-mono text-xs uppercase tracking-widest">
-                <Quote className="w-4 h-4 text-[#2E5E99] dark:text-cyan-400" />
+              <div className="flex items-center gap-2 mb-2 xl:mb-3 text-[#2E5E99] dark:text-cyan-400 font-mono text-[10px] sm:text-xs uppercase tracking-widest">
+                <Quote className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-cyan-400" />
                 <span>EXECUTIVE DIRECTIVE</span>
               </div>
               <h2
                 suppressHydrationWarning
-                className="text-3xl lg:text-4xl xl:text-[42px] font-heading font-black text-[#111] dark:text-white tracking-tight leading-tight uppercase"
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-heading font-black text-[#111] dark:text-white tracking-tight leading-snug sm:leading-tight uppercase"
               >
                 &ldquo;Every manufacturing process must begin and end with the customer&apos;s exacting standard.&rdquo;
               </h2>
             </div>
 
             {/* Narrative Quote */}
-            <div className="pl-5 border-l-2 border-[#E5E5E5] dark:border-white/40 space-y-3">
-              <p className="text-[#444] dark:text-slate-200 text-base sm:text-lg md:text-xl leading-relaxed font-light">
+            <div className="pl-4 sm:pl-5 border-l-2 border-[#E5E5E5] dark:border-white/40 space-y-2.5 sm:space-y-3">
+              <p className="text-[#444] dark:text-slate-200 text-sm sm:text-base md:text-lg leading-relaxed font-light">
                 The evolution of global precision requirements has redefined what industrial partners demand. At J Pan, customer satisfaction is not a downstream checkpoint—it is the foundational constraint that governs our metallurgy, toolmaking, robotic bending, and zero-defect mass spectrometry testing.
               </p>
-              <p className="text-[#666] dark:text-slate-300/80 text-sm sm:text-base leading-relaxed font-light">
+              <p className="text-[#666] dark:text-slate-300/80 text-xs sm:text-sm leading-relaxed font-light">
                 From our beginnings as a precision startup to a pan-India network of 6 advanced facilities, our growth has been driven by a relentless focus on engineering integrity and exceeding OEM tolerances.
               </p>
             </div>
@@ -213,9 +213,9 @@ export function Testimonials() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-[10px] xl:text-xs font-mono text-[#0D2440] dark:text-slate-200 bg-slate-100 dark:bg-white/[0.06] px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-white/20">
-                <Award className="w-4 h-4 text-[#2E5E99] dark:text-cyan-400" />
-                <span>ISO 9001 & IATF 16949 LEADERSHIP</span>
+              <div className="flex items-center gap-2 text-[9px] sm:text-[10px] xl:text-xs font-mono text-[#0D2440] dark:text-slate-200 bg-slate-100 dark:bg-white/[0.06] px-3 sm:px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-white/20 w-fit">
+                <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-cyan-400 shrink-0" />
+                <span className="truncate">ISO 9001 & IATF 16949 LEADERSHIP</span>
               </div>
             </div>
           </div>

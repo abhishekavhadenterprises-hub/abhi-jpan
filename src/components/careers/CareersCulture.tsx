@@ -65,10 +65,10 @@ export function CareersCulture() {
     <section 
       id="culture"
       ref={containerRef}
-      className="py-24 md:py-32 bg-slate-50/60 dark:bg-black overflow-hidden relative border-b border-slate-200/70 dark:border-white/5"
+      className="py-12 sm:py-20 md:py-28 lg:py-32 bg-slate-50/60 dark:bg-black overflow-hidden relative border-b border-slate-200/70 dark:border-white/5"
     >
       <div className="container-custom relative z-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 md:mb-20 gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-16 md:mb-20 gap-6 sm:gap-8">
           
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -79,19 +79,19 @@ export function CareersCulture() {
             <div className="mb-6 overflow-visible">
               <ScrollWipeHeading
                 as="h2"
-                className="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
+                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 Life at
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-5xl lg:text-6xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
                 J Pan Tubular Components Limited
               </div>
             </div>
             
-            <p className="text-slate-600 dark:text-slate-300 font-normal text-base sm:text-lg leading-relaxed max-w-xl">
+            <p className="text-slate-600 dark:text-slate-300 font-normal text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
               We foster an environment where precision meets passion. Explore 
               our vibrant workplace culture through the eyes of those who 
               build the legacy every day.
@@ -103,19 +103,19 @@ export function CareersCulture() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-3 sm:gap-4 flex-wrap"
+            className="flex items-center gap-2.5 sm:gap-4 flex-wrap"
           >
-             <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/40 transition-colors">
-                <Users className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={1.75} />
-                <span className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Collaborative</span>
+             <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/40 transition-colors">
+                <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={1.75} />
+                <span className="text-[11px] sm:text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Collaborative</span>
              </div>
-             <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/40 transition-colors">
-                <Zap className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={1.75} />
-                <span className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Innovative</span>
+             <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/40 transition-colors">
+                <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={1.75} />
+                <span className="text-[11px] sm:text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Innovative</span>
              </div>
-             <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/40 transition-colors">
-                <Heart className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={1.75} />
-                <span className="text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Inclusive</span>
+             <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/40 transition-colors">
+                <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-[#7BA4D0]" strokeWidth={1.75} />
+                <span className="text-[11px] sm:text-xs font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">Inclusive</span>
              </div>
           </motion.div>
         </div>
@@ -127,7 +127,7 @@ export function CareersCulture() {
           variants={galleryVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:grid-rows-[280px_280px] lg:grid-rows-[340px_340px] gap-5 no-scrollbar pb-6 md:pb-0 h-[340px] md:h-auto"
+          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:grid-rows-[240px_240px] lg:grid-rows-[340px_340px] gap-4 sm:gap-5 no-scrollbar pb-6 md:pb-0 h-[260px] sm:h-[300px] md:h-auto"
         >
            {cultureImages.map((img, idx) => (
               <motion.div 

@@ -132,16 +132,16 @@ export function UpcomingEvents() {
                 className="group flex flex-col md:flex-row bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-3xl overflow-hidden transition-colors duration-300 w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Monolithic Date Vault */}
-                <div className="w-full md:w-44 bg-[#0D2440] dark:bg-[#070b14] p-6 sm:p-8 flex flex-col items-center justify-center text-white shrink-0 border-b md:border-b-0 md:border-r border-[#7BA4D0]/20 relative overflow-hidden">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-[#7BA4D0] mb-3 group-hover:scale-105 transition-transform duration-300">
+                <div className="w-full md:w-44 bg-[#EBF3FC] dark:bg-[#0D2440] p-6 sm:p-8 flex flex-col items-center justify-center text-[#0D2440] dark:text-white shrink-0 border-b md:border-b-0 md:border-r border-[#7BA4D0]/30 relative overflow-hidden">
+                  <div className="w-12 h-12 rounded-2xl bg-[#2E5E99]/10 dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-3 group-hover:scale-105 transition-transform duration-300">
                     <Calendar className="w-6 h-6" strokeWidth={1.75} />
                   </div>
-                  <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-slate-300">Starts</span>
-                  <span className="text-2xl sm:text-3xl font-heading font-black text-white my-0.5">{event.date.split(' ')[1]}</span>
-                  <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#7BA4D0]">{event.date.split(' ')[0]}</span>
+                  <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#2E5E99] dark:text-slate-300">Starts</span>
+                  <span className="text-2xl sm:text-3xl font-heading font-black text-[#0D2440] dark:text-white my-0.5">{event.date.split(' ')[1]}</span>
+                  <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#2E5E99] dark:text-[#7BA4D0]">{event.date.split(' ')[0]}</span>
 
                   {event.booth && (
-                    <div className="mt-4 px-3 py-1 rounded-xl bg-white/10 border border-white/15 text-[10px] font-heading font-bold text-slate-200 uppercase tracking-wider text-center">
+                    <div className="mt-4 px-3 py-1 rounded-xl bg-white dark:bg-white/10 border border-[#7BA4D0]/30 dark:border-white/15 text-[10px] font-heading font-bold text-[#2E5E99] dark:text-slate-200 uppercase tracking-wider text-center shadow-xs">
                       {event.booth}
                     </div>
                   )}

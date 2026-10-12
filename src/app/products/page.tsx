@@ -110,7 +110,7 @@ function ProductsPageInner() {
       <div className="relative z-10 animate-in fade-in duration-1000">
         <ProductsHero />
       </div>
-      <div className="relative z-40 sticky top-20 animate-in fade-in slide-in-from-top-4 duration-700 delay-200">
+      <div className="relative z-40 animate-in fade-in slide-in-from-top-4 duration-700 delay-200">
         <FilterBar 
           activeCategory={activeCategory} 
           onCategoryChange={handleCategoryChange} 

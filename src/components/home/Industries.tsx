@@ -73,17 +73,17 @@ const Card = ({ ind, i, scrollYProgress }: { ind: typeof industries[0], i: numbe
   return (
     <motion.div
       style={{ x, y, scale, rotateZ, rotateY, rotateX, opacity }}
-      className={`absolute w-[340px] h-[240px] md:w-[600px] md:h-[400px] lg:w-[700px] lg:h-[460px] rounded-[2rem] ${ind.color} backdrop-blur-[40px] border border-black/5 dark:border-white/10 ${ind.shadow} flex flex-col items-center justify-center p-8 origin-center overflow-hidden group text-center`}
+      className={`absolute w-[min(90vw,350px)] sm:w-[420px] md:w-[580px] lg:w-[680px] h-[220px] sm:h-[260px] md:h-[360px] lg:h-[420px] rounded-2xl sm:rounded-[2rem] ${ind.color} backdrop-blur-[40px] border border-black/5 dark:border-white/10 ${ind.shadow} flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 origin-center overflow-hidden group text-center`}
     >
       {/* Apple-style glossy sheen */}
       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 opacity-0 group-hover:opacity-100 group-hover:translate-x-full -translate-x-full transition-all duration-[1.5s] ease-in-out pointer-events-none z-10" />
 
-      <div className="relative z-20 max-w-xl mx-auto px-4">
-        <h4 className="text-3xl md:text-5xl font-heading font-medium text-[#111] dark:text-white tracking-tight mb-6 uppercase">
+      <div className="relative z-20 max-w-xl mx-auto px-2 sm:px-4">
+        <h4 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading font-medium text-[#111] dark:text-white tracking-tight mb-2 sm:mb-4 uppercase">
           {ind.title}
         </h4>
-        <div className="w-12 h-[2px] bg-[#111] dark:bg-white mb-6 opacity-20 mx-auto"></div>
-        <p className="text-sm md:text-lg text-[#666] dark:text-[#999] leading-relaxed font-light">
+        <div className="w-8 sm:w-12 h-[2px] bg-[#111] dark:bg-white mb-2 sm:mb-5 opacity-20 mx-auto"></div>
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#666] dark:text-[#999] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
           {ind.description}
         </p>
       </div>
@@ -201,10 +201,10 @@ export function Industries() {
         </div>
 
         {/* Dynamic Content: Bottom Left (Massive Apple-Style Indicator) */}
-        <div className="absolute bottom-0 left-6 md:bottom-0 md:left-12 lg:left-24 z-20 pointer-events-none flex flex-col items-start overflow-hidden">
-          <div className="relative pb-6">
-            <span className="absolute -top-12 left-2 text-[10px] uppercase tracking-widest text-[#999] font-medium">Selected Sector</span>
-            <div className="text-[14rem] md:text-[20rem] lg:text-[24rem] font-bold leading-[0.75] tracking-tighter text-[#111] dark:text-white font-heading z-20 relative">
+        <div className="absolute bottom-2 left-4 sm:bottom-0 sm:left-6 md:left-12 lg:left-24 z-20 pointer-events-none flex flex-col items-start overflow-hidden">
+          <div className="relative pb-2 sm:pb-6">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#999] font-medium block mb-1">Selected Sector</span>
+            <div className="text-[6rem] sm:text-[10rem] md:text-[16rem] lg:text-[22rem] font-bold leading-[0.8] tracking-tighter text-[#111] dark:text-white font-heading z-20 relative">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={activeIndex}
@@ -218,7 +218,7 @@ export function Industries() {
                 </motion.span>
               </AnimatePresence>
             </div>
-            <span className="absolute top-12 -right-8 md:top-24 md:-right-12 text-sm md:text-xl font-bold text-[#111] dark:text-white z-20">/04</span>
+            <span className="absolute top-6 -right-6 sm:top-12 sm:-right-8 md:top-20 md:-right-12 text-xs sm:text-base md:text-xl font-bold text-[#111] dark:text-white z-20">/04</span>
           </div>
         </div>
 

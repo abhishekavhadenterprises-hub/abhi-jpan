@@ -62,10 +62,10 @@ export function ProductIndustries() {
   };
 
   return (
-    <section className="pt-12 pb-12 md:pt-16 md:pb-16 bg-slate-50/60 dark:bg-[#070b14] text-[#0D2440] dark:text-white relative overflow-visible border-t border-slate-200/80 dark:border-white/5 transition-colors duration-500">
+    <section className="pt-10 pb-10 sm:pt-12 sm:pb-12 md:pt-16 md:pb-16 bg-slate-50/60 dark:bg-[#070b14] text-[#0D2440] dark:text-white relative overflow-visible border-t border-slate-200/80 dark:border-white/5 transition-colors duration-500">
       <div className="container-custom relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-10 space-y-2.5">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 space-y-2.5 px-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export function ProductIndustries() {
           <div 
             ref={cardsRef}
             onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:pt-2 md:pb-4 px-2 sm:px-3 md:px-0 gap-4 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:pt-2 md:pb-4 px-1 sm:px-3 md:px-0 gap-3.5 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {usageSectors.map((sector, idx) => (
               <motion.div
@@ -112,7 +112,7 @@ export function ProductIndustries() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6 }}
-                className="group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all duration-500 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between cursor-pointer p-4 sm:p-5"
+                className="group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all duration-500 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between cursor-pointer p-3.5 sm:p-5"
               >
                 {/* 100% Crisp Background Image with Zero Wash/Blur */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

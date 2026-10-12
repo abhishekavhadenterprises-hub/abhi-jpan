@@ -120,7 +120,7 @@ export function AboutPresence() {
   return (
     <section
       id="about-presence"
-      className="relative min-h-[90vh] h-screen max-h-screen flex flex-col justify-center py-12 md:py-16 bg-[#FAFAFA] dark:bg-[#071321] transition-colors duration-500 overflow-hidden border-b border-[#7BA4D0]/20 dark:border-white/10"
+      className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center py-12 sm:py-16 md:py-24 bg-[#FAFAFA] dark:bg-[#071321] transition-colors duration-500 overflow-hidden border-b border-[#7BA4D0]/20 dark:border-white/10"
     >
       {/* Dynamic Background Tint based on hovered item */}
       <div 
@@ -135,17 +135,17 @@ export function AboutPresence() {
       <div className="container-custom relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 md:mb-10">
           <div className="max-w-3xl">
-            <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl lg:text-5xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-3">
+            <ScrollWipeHeading as="h2" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-2 sm:mb-3">
               Strategically situated near <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
                 key OEM industrial corridors.
               </span>
             </ScrollWipeHeading>
           </div>
-          <div className="max-w-md pb-2">
-            <p className="text-base text-[#0D2440]/70 dark:text-white/60 font-light leading-relaxed">
+          <div className="max-w-md pb-1 sm:pb-2">
+            <p className="text-xs sm:text-sm md:text-base text-[#0D2440]/70 dark:text-white/60 font-light leading-relaxed">
               Spanning over 32,000 sq. meters across 6 specialized manufacturing campuses in Northern, Western, and Southern corridors, delivering high-volume supply continuity directly to OEM assembly lines.
             </p>
           </div>
@@ -166,24 +166,24 @@ export function AboutPresence() {
                 }
               }}
             >
-              <div className="py-4 sm:py-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors duration-500 hover:bg-[#0F172A]/[0.02] dark:hover:bg-white/[0.02] px-4 -mx-4 rounded-xl">
+              <div className="py-3 sm:py-4 md:py-5 flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4 transition-colors duration-500 hover:bg-[#0F172A]/[0.02] dark:hover:bg-white/[0.02] px-2 sm:px-4 -mx-2 sm:-mx-4 rounded-xl">
                 
                 {/* Left Side: Number & Huge Typography */}
-                <div className="flex items-center gap-6 sm:gap-12 w-full md:w-auto">
-                  <span className="font-mono text-xl sm:text-2xl text-[#0F172A]/40 dark:text-white/30 font-light w-8">
+                <div className="flex items-center gap-3 sm:gap-6 md:gap-10 w-full md:w-auto">
+                  <span className="font-mono text-base sm:text-xl md:text-2xl text-[#0F172A]/40 dark:text-white/30 font-light w-6 sm:w-8 shrink-0">
                     {fac.num}
                   </span>
                   
                   {/* Animated Typography Row */}
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black tracking-tight text-[#0F172A] dark:text-white transition-all duration-500 group-hover:translate-x-4 md:group-hover:translate-x-6 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0]">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-heading font-black tracking-tight text-[#0F172A] dark:text-white transition-all duration-500 group-hover:translate-x-2 sm:group-hover:translate-x-4 md:group-hover:translate-x-6 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] truncate">
                     {fac.title}
                   </h3>
                 </div>
 
                 {/* Right Side: Arrow (Desktop) / Mobile Toggle Icon */}
-                <div className="hidden md:flex items-center justify-end w-20">
-                  <div className="w-12 h-12 rounded-full border border-[#0F172A]/20 dark:border-white/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white text-[#0F172A] dark:text-white">
-                    <ArrowUpRight className="w-5 h-5 transition-transform duration-500 group-hover:rotate-45" />
+                <div className="hidden md:flex items-center justify-end w-16 sm:w-20">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#0F172A]/20 dark:border-white/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white text-[#0F172A] dark:text-white">
+                    <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 group-hover:rotate-45" />
                   </div>
                 </div>
               </div>

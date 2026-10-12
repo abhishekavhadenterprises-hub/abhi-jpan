@@ -94,7 +94,7 @@ export function ProductShowcase() {
         />
       </div>
 
-      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[80svh]">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[80svh]">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#111]/5 dark:border-white/5">
           <motion.div
@@ -104,10 +104,10 @@ export function ProductShowcase() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-4xl"
           >
-            <h2 className="text-xs tracking-[0.4em] font-bold uppercase text-[#2E5E99] dark:text-cyan-400 mb-6">
+            <h2 className="text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] font-bold uppercase text-[#2E5E99] dark:text-cyan-400 mb-4 sm:mb-6">
               Product Catalogue & Specifications
             </h2>
-            <ScrollWipeHeading as="h3" className="text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.05]">
+            <ScrollWipeHeading as="h3" className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.08]">
               Precision alloy <br />
               <span className="text-[#666] dark:text-[#888]">manufacturing excellence.</span>
             </ScrollWipeHeading>
@@ -119,21 +119,21 @@ export function ProductShowcase() {
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-lg lg:pb-4"
           >
-            <p className="text-[#666] dark:text-[#999] text-base leading-relaxed font-light">
+            <p className="text-[#666] dark:text-[#999] text-xs sm:text-sm md:text-base leading-relaxed font-light">
               Engineered from certified electrolytic copper, forged brass alloys, and surgical-grade stainless steel to satisfy the world's most stringent OEM tolerance benchmarks.
             </p>
           </motion.div>
         </div>
 
-        {/* Premium Tab Selector Bar with Layout Animation */}
-        <div className="flex flex-wrap items-center gap-2 mb-6 p-1.5 rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/40 dark:border-white/10 w-fit shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative z-20 mx-auto lg:mx-0">
+        {/* Premium Tab Selector Bar with Fluid Wrapping */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-6 p-1.5 rounded-2xl sm:rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/40 dark:border-white/10 w-full sm:w-fit shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative z-20 mx-auto lg:mx-0">
           {capabilities.map((item, idx) => {
             const isActive = activeTab === idx;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-5 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest transition-colors duration-500 flex items-center gap-2 z-10 ${isActive
+                className={`relative px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-full text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider sm:tracking-widest transition-colors duration-500 flex items-center gap-1.5 sm:gap-2 z-10 ${isActive
                     ? "text-white dark:text-[#050505]"
                     : "text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white"
                   }`}
@@ -141,11 +141,11 @@ export function ProductShowcase() {
                 {isActive && (
                   <motion.div
                     layoutId="activeProductTab"
-                    className="absolute inset-0 bg-[#2E5E99] rounded-full -z-10 shadow-[0_0_20px_rgba(46,94,153,0.4)]"
+                    className="absolute inset-0 bg-[#2E5E99] rounded-xl sm:rounded-full -z-10 shadow-[0_0_20px_rgba(46,94,153,0.4)]"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className={`font-mono text-[9px] ${isActive ? 'opacity-80' : 'opacity-50'}`}>{item.roman} //</span>
+                <span className={`font-mono text-[8px] sm:text-[9px] ${isActive ? 'opacity-80' : 'opacity-50'}`}>{item.roman} //</span>
                 <span>{item.name}</span>
               </button>
             );
@@ -161,7 +161,7 @@ export function ProductShowcase() {
               animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, scale: 0.98, y: -20, filter: "blur(10px)" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch rounded-[3rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-3xl border border-white/50 dark:border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.07)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.4)] overflow-hidden group"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch rounded-2xl sm:rounded-3xl lg:rounded-[3rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-3xl border border-white/50 dark:border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.07)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.4)] overflow-hidden group"
               onMouseMove={(e: MouseEvent<HTMLDivElement>) => {
                 const { left, top } = e.currentTarget.getBoundingClientRect();
                 mouseX.set(e.clientX - left);
@@ -170,7 +170,7 @@ export function ProductShowcase() {
             >
               {/* React Bits Spotlight Overlay */}
               <motion.div
-                className="pointer-events-none absolute -inset-px rounded-[3rem] opacity-0 transition-opacity duration-500 group-hover/spotlight:opacity-100 z-50 mix-blend-overlay"
+                className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl lg:rounded-[3rem] opacity-0 transition-opacity duration-500 group-hover/spotlight:opacity-100 z-50 mix-blend-overlay"
                 style={{
                   background: useMotionTemplate`
                     radial-gradient(
@@ -183,53 +183,53 @@ export function ProductShowcase() {
               />
 
               {/* Left Column: Technical Dossier */}
-              <div className="lg:col-span-6 flex flex-col justify-between p-6 lg:p-8 z-10 relative">
+              <div className="lg:col-span-6 flex flex-col justify-between p-5 sm:p-7 lg:p-8 z-10 relative">
                 <div>
-                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/50 dark:bg-black/50 border border-[#111]/5 dark:border-white/5 mb-6 shadow-sm backdrop-blur-md">
+                  <div className="inline-flex items-center gap-2.5 sm:gap-3 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/50 dark:bg-black/50 border border-[#111]/5 dark:border-white/5 mb-4 sm:mb-6 shadow-sm backdrop-blur-md">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] animate-pulse shadow-[0_0_10px_rgba(46,94,153,0.5)]" />
-                    <span className="text-[10px] tracking-widest text-[#555] dark:text-[#AAA] uppercase font-bold">
+                    <span className="text-[9px] sm:text-[10px] tracking-widest text-[#555] dark:text-[#AAA] uppercase font-bold">
                       {activeProduct.eyebrowCategory}
                     </span>
                   </div>
 
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#111] dark:text-white leading-[1.1] mb-4 tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#111] dark:text-white leading-[1.1] mb-3 sm:mb-4 tracking-tight">
                     {activeProduct.title}
                   </h3>
 
-                  <p className="text-[#555] dark:text-[#AAA] text-sm lg:text-base font-light leading-relaxed mb-6 max-w-xl">
+                  <p className="text-[#555] dark:text-[#AAA] text-xs sm:text-sm lg:text-base font-light leading-relaxed mb-4 sm:mb-6 max-w-xl">
                     {activeProduct.description}
                   </p>
 
                   {/* Key Spec Highlights */}
-                  <div className="space-y-3 pt-6 border-t border-[#111]/10 dark:border-white/10">
+                  <div className="space-y-2.5 sm:space-y-3 pt-4 sm:pt-6 border-t border-[#111]/10 dark:border-white/10">
                     {activeProduct.specDetails.map((spec, i) => (
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 + (i * 0.1), duration: 0.6 }}
                         key={i}
-                        className="flex items-center gap-5 text-sm font-mono text-[#666] dark:text-[#999]"
+                        className="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-mono text-[#666] dark:text-[#999]"
                       >
-                        <div className="w-6 h-6 rounded-full bg-[#111]/5 dark:bg-white/5 flex items-center justify-center shrink-0">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#111]/5 dark:bg-white/5 flex items-center justify-center shrink-0">
                           <Icon className="w-3 h-3 text-[#111] dark:text-white" />
                         </div>
-                        <span className="tracking-wide text-xs">{spec}</span>
+                        <span className="tracking-wide text-[11px] sm:text-xs">{spec}</span>
                       </motion.div>
                     ))}
                   </div>
                 </div>
 
                 {/* Bottom Metric & Action */}
-                <div className="flex flex-wrap items-end justify-between gap-6 pt-6 mt-6 border-t border-[#111]/10 dark:border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-[#111]/10 dark:border-white/10">
                   <div>
-                    <span className="block text-[10px] uppercase tracking-[0.25em] text-[#888] dark:text-[#777] mb-2 font-bold">
+                    <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#888] dark:text-[#777] mb-1 sm:mb-2 font-bold">
                       {activeProduct.metricLabel}
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="font-light tracking-tighter text-4xl md:text-5xl text-[#111] dark:text-white">
+                      <span className="font-light tracking-tighter text-3xl sm:text-4xl md:text-5xl text-[#111] dark:text-white">
                         {activeProduct.metricValue}
                       </span>
-                      <span className="text-sm text-[#888] font-medium tracking-widest uppercase">
+                      <span className="text-xs sm:text-sm text-[#888] font-medium tracking-widest uppercase">
                         {activeProduct.metricSub}
                       </span>
                     </div>
@@ -237,16 +237,16 @@ export function ProductShowcase() {
 
                   <Link
                     href="/products"
-                    className="relative overflow-hidden group/btn px-6 py-3 rounded-full bg-[#2E5E99] text-white font-bold text-[10px] uppercase tracking-widest transition-all duration-500 inline-flex items-center gap-3 shadow-md hover:shadow-[0_10px_20px_rgba(46,94,153,0.3)] hover:scale-105 z-20"
+                    className="relative overflow-hidden group/btn px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-[#2E5E99] text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest transition-all duration-500 inline-flex items-center justify-center gap-3 shadow-md hover:shadow-[0_10px_20px_rgba(46,94,153,0.3)] hover:scale-105 z-20 w-full sm:w-auto text-center"
                   >
                     <span>View Specifications</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </Link>
                 </div>
               </div>
 
               {/* Right Column: Premium Showcase Image */}
-              <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full bg-gradient-to-br from-[#F5F5F5] to-[#EAEAEA] dark:from-[#080808] dark:to-[#020202] flex items-center justify-center p-6 overflow-hidden border-l border-[#111]/5 dark:border-white/5">
+              <div className="lg:col-span-6 relative min-h-[260px] sm:min-h-[320px] lg:min-h-full bg-gradient-to-br from-[#F5F5F5] to-[#EAEAEA] dark:from-[#080808] dark:to-[#020202] flex items-center justify-center p-4 sm:p-6 overflow-hidden border-t lg:border-t-0 lg:border-l border-[#111]/5 dark:border-white/5">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.1)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
 
                 <motion.div
