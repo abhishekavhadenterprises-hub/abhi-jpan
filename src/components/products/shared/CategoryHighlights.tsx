@@ -65,10 +65,6 @@ export function CategoryHighlights() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl space-y-2.5"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2E5E99]/10 dark:bg-white/5 border border-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-heading font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Core Metallurgy Disciplines</span>
-            </div>
             <ScrollWipeHeading 
               as="h2" 
               className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.1] sm:leading-[1.05] tracking-tight"

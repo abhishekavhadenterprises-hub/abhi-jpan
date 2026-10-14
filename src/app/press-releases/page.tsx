@@ -66,13 +66,6 @@ export default function PressReleasesPage() {
       {/* Featured Press Release Card */}
       <section className="py-8 sm:py-12 md:py-16 bg-white dark:bg-black">
         <div className="container-custom">
-          <div className="flex items-center gap-2.5 mb-4 sm:mb-6">
-            <div className="w-8 h-0.5 bg-[#2E5E99]" />
-            <span className="text-[#2E5E99] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[10px] sm:text-xs">
-              Featured Editorial Release
-            </span>
-          </div>
-
           <div className="relative rounded-2xl sm:rounded-3xl md:rounded-[36px] bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] border border-[#7BA4D0]/35 p-5 sm:p-8 md:p-12 lg:p-14 overflow-hidden group">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
               <div className="lg:col-span-8 space-y-3 sm:space-y-4">

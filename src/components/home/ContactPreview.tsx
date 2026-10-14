@@ -62,11 +62,6 @@ export function ContactPreview() {
           {/* LEFT COLUMN: Narrative & Engagement */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div>
-              <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.25em] text-slate-500 dark:text-slate-400 uppercase mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] animate-pulse shadow-[0_0_6px_#2E5E99]" />
-                <span>09 // TECHNICAL DESK & GLOBAL SOURCING</span>
-              </div>
-
               <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-tight uppercase text-[#0D2440] dark:text-white leading-[1.05] mb-3 sm:mb-4">
                 Engineering <br />
                 <span className="font-heading italic font-light text-slate-600 dark:text-slate-300">

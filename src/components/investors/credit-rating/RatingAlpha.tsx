@@ -25,14 +25,9 @@ export function RatingAlpha() {
             {/* Left Column: Rating Alpha Spotlight */}
             <div className="lg:col-span-5 p-5 sm:p-10 md:p-14 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#7BA4D0]/25 bg-radial from-[#153860] to-[#0D2440]">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-heading font-black uppercase tracking-[0.2em] mb-5 sm:mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Primary Accreditation
-                </div>
-
                 <div className="mb-6 sm:mb-8">
                   <div className="text-6xl sm:text-8xl md:text-9xl font-heading font-black text-white leading-none tracking-tighter mb-3 sm:mb-4 pr-2">
-                    A<span className="text-[#7BA4D0]">+</span>
+                    A<span className="text-white">+</span>
                   </div>
                   <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                     <div className="px-3.5 sm:px-4 py-1.5 bg-[#2E5E99] text-white text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider rounded-xl">

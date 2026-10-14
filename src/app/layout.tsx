@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
 import { SmoothScroll } from "@/components/shared/SmoothScroll";
+import { ScrollRestoration } from "@/components/shared/ScrollRestoration";
 import { Agentation } from "agentation";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -44,6 +45,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
+          <ScrollRestoration />
           <SmoothScroll />
           <Navbar />
           <main className="flex-grow">{children}</main>

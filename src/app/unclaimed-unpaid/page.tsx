@@ -20,8 +20,9 @@ export default function UnclaimedUnpaidPage() {
         image="/images/industry-appliances.png"
       />
       <UnclaimedIntro />
-      <GenericInvestorFilter />
-      <UnclaimedTable />
+      <React.Suspense fallback={<div className="py-12 text-center text-xs text-[#0D2440]/60">Loading entitlement data...</div>}>
+        <UnclaimedTable />
+      </React.Suspense>
       <UnclaimedRecovery />
       <UnclaimedCompliance />
       <UnclaimedCTA />

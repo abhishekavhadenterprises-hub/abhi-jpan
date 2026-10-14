@@ -142,13 +142,6 @@ export function Infrastructure() {
             {/* Cinematic Gradients */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-transparent to-transparent" />
-
-            {/* Top Facility Location Tag */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8 z-10 flex items-center gap-2 sm:gap-3 px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full bg-black/50 backdrop-blur-2xl border border-white/10 font-mono text-[10px] sm:text-xs text-white shadow-lg max-w-[calc(100%-2rem)] truncate">
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 shrink-0 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_#3b82f6]" />
-              <span className="tracking-widest font-semibold truncate">{activePillar.facility}</span>
-            </div>
-
             {/* Bottom Content Dossier */}
             <div className="relative z-10 max-w-3xl">
               <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/10 border border-white/20 text-[9px] sm:text-[10px] tracking-[0.2em] text-white uppercase mb-3 sm:mb-4 font-medium backdrop-blur-md">

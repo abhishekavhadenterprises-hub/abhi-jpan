@@ -34,11 +34,6 @@ export function AudioCTA() {
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 dark:bg-charcoal/80 border border-[#7BA4D0]/30 text-[#2E5E99] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99]" />
-                Investor Relations
-              </div>
-              
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-tight tracking-tight">
                 Communication <br />
                 <span className="italic bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] bg-clip-text text-transparent inline-block pb-1 pr-1">

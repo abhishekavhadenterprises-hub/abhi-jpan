@@ -32,14 +32,6 @@ export function CTAStrip() {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-center">
             {/* Left Column: Authoritative Editorial Heading & Subtext */}
             <div className="lg:col-span-7">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex items-center gap-2 sm:gap-2.5 font-mono text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] text-[#2E5E99] uppercase mb-3 sm:mb-5 relative z-10"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] animate-pulse shadow-[0_0_6px_#2E5E99]" />
-                <span className="font-bold">08 // COLLABORATION & TOOLING FEASIBILITY</span>
-              </motion.div>
-
               <motion.h2
                 initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.2rem] font-heading font-black tracking-tighter leading-[1] sm:leading-[0.95] text-[#0D2440] dark:text-white uppercase mb-4 sm:mb-6"

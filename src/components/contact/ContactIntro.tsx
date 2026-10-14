@@ -53,11 +53,6 @@ export function ContactIntro({
             animate={isInView ? "visible" : "hidden"}
             className="lg:col-span-7 space-y-4 sm:space-y-6"
           >
-            {/* Section Subtitle Tag */}
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-xl bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-semibold uppercase tracking-wider">
-              {subtitle}
-            </div>
-
             <div className="overflow-visible">
               <ScrollWipeHeading
                 as="h1"

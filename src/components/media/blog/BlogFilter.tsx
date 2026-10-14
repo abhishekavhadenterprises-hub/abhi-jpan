@@ -31,19 +31,12 @@ export function BlogFilter({
                 <button
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
-                  className={`relative px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer select-none ${
+                  className={`relative px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer select-none ${
                     isActive
-                      ? "text-white"
+                      ? "bg-[#0D2440] dark:bg-[#2E5E99] text-white shadow-md shadow-[#0D2440]/20"
                       : "text-slate-600 dark:text-slate-300 hover:text-[#0D2440] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"
                   }`}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="blogTabHighlight"
-                      className="absolute inset-0 bg-[#0D2440] dark:bg-[#2E5E99] rounded-lg sm:rounded-xl shadow-md shadow-[#0D2440]/15 dark:shadow-none -z-10"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
                   <span className="relative z-10">{cat}</span>
                 </button>
               );

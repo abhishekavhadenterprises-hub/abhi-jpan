@@ -64,12 +64,6 @@ export function Testimonials() {
       <YoutubeBackground videoId="MPW60Fci930" />
 
       <div className="container-custom relative z-10 w-full">
-        {/* Section Header */}
-        <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.25em] text-slate-500 dark:text-slate-400 uppercase mb-5 xl:mb-6 pb-3 border-b border-slate-200 dark:border-white/[0.08]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-cyan-400 animate-pulse shadow-[0_0_6px_#2E5E99] dark:shadow-[0_0_6px_#38bdf8]" />
-          <span>07 // EXECUTIVE PERSPECTIVE & INTEGRITY</span>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center">
           {/* LEFT: Editorial Portrait */}
           <div className="lg:col-span-5 relative">
@@ -113,13 +107,13 @@ export function Testimonials() {
             </motion.div>
 
             {/* Experience Ticker with Animated Counter */}
-            <div className="mt-3 xl:mt-4 flex items-center gap-3 sm:gap-4 p-3 xl:p-4 rounded-2xl bg-slate-950/40 border border-slate-200 dark:border-white/[0.08] backdrop-blur-md">
-              <div className="text-2xl sm:text-3xl xl:text-4xl font-heading font-black text-white tabular-nums flex items-center shrink-0">
+            <div className="mt-3 xl:mt-4 flex items-center gap-3 sm:gap-4 p-3 xl:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm backdrop-blur-md">
+              <div className="text-2xl sm:text-3xl xl:text-4xl font-heading font-black text-[#0D2440] dark:text-white tabular-nums flex items-center shrink-0">
                 <AnimatedCounter to={28} />
                 <span className="text-[#2E5E99] dark:text-cyan-400">+</span>
               </div>
-              <div className="border-l border-white/15 pl-3 sm:pl-4 min-w-0">
-                <div className="text-[9px] sm:text-[10px] xl:text-xs font-heading font-bold text-white tracking-wider uppercase truncate">
+              <div className="border-l border-slate-200 dark:border-white/15 pl-3 sm:pl-4 min-w-0">
+                <div className="text-[9px] sm:text-[10px] xl:text-xs font-heading font-bold text-[#0D2440] dark:text-white tracking-wider uppercase truncate">
                   YEARS OF ENGINEERING TENURE
                 </div>
                 <div className="text-[9px] sm:text-[10px] xl:text-xs text-slate-600 dark:text-slate-300 font-light line-clamp-1 sm:line-clamp-none">
@@ -208,12 +202,12 @@ export function Testimonials() {
                 <div className="text-xl font-heading font-black text-[#111] dark:text-white">
                   Jignesh Panchal
                 </div>
-                <div className="text-[10px] xl:text-xs font-mono text-slate-500 dark:text-slate-400 tracking-wider">
+                <div className="text-[10px] xl:text-xs font-sans font-medium text-slate-500 dark:text-slate-400 tracking-wider">
                   Founder & Managing Director • J Pan Tubular Components Limited
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-[9px] sm:text-[10px] xl:text-xs font-mono text-[#0D2440] dark:text-slate-200 bg-slate-100 dark:bg-white/[0.06] px-3 sm:px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-white/20 w-fit">
+              <div className="flex items-center gap-2 text-[9px] sm:text-[10px] xl:text-xs font-heading font-bold text-[#0D2440] dark:text-slate-200 bg-slate-100 dark:bg-white/[0.06] px-3 sm:px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-white/20 w-fit">
                 <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-cyan-400 shrink-0" />
                 <span className="truncate">ISO 9001 & IATF 16949 LEADERSHIP</span>
               </div>

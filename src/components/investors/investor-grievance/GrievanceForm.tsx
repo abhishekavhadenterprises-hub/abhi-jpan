@@ -86,11 +86,6 @@ export function GrievanceForm() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="lg:sticky lg:top-32"
             >
-              <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-3 sm:mb-4 w-fit">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
-                Official Statutory Registry
-              </div>
-
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-[1.12] tracking-tight">
                 Institutional <br />
                 <span className="text-[#2E5E99] dark:text-[#7BA4D0]">

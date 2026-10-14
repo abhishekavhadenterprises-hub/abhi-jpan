@@ -170,12 +170,6 @@ export function Certifications() {
           style={{ x: textX }}
           className="max-w-[1400px] mx-auto px-6 md:px-12 relative w-full mb-12 text-center flex flex-col items-center pointer-events-none"
         >
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] mb-6 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-            <span className="text-[10px] tracking-[0.25em] text-[#666] dark:text-[#999] uppercase font-medium">
-              Audited Partner Evaluations
-            </span>
-          </div>
           <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] uppercase whitespace-normal sm:whitespace-nowrap">
             What partners <span className="text-[#666]">are saying.</span>
           </ScrollWipeHeading>
@@ -194,9 +188,6 @@ export function Certifications() {
             ))}
           </motion.div>
         </div>
-        
-        {/* Ambient background glows */}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#FAFAFA] dark:from-[#0A0A0A] to-transparent z-0 h-32 pointer-events-none" />
       </div>
     </section>
   );

@@ -43,11 +43,6 @@ export function CustomManufacturing() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-5 sm:space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-[#2E5E99]/10 dark:bg-white/5 border border-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-heading font-semibold uppercase tracking-wider max-w-[calc(100vw-3rem)]">
-              <Cpu className="w-3.5 h-3.5 shrink-0" />
-              <span className="truncate">Bespoke Engineering Capabilities</span>
-            </div>
-
             <ScrollWipeHeading 
               as="h2" 
               className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#0D2440] dark:text-white leading-[1.1] sm:leading-[1.05] tracking-tight"

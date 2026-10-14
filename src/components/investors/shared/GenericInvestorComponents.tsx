@@ -80,12 +80,14 @@ export function GenericInvestorHero({
     },
   };
 
-  const displayBadge = badgeText || parent || "OFFICIAL DISCLOSURES";
+  const displayBadge = badgeText;
+  const normalizedTitle = title.replace(/\u00A0/g, " ").trim();
+  const words = normalizedTitle.split(/\s+/);
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[75vh] sm:min-h-[85vh] md:min-h-[90vh] w-full flex flex-col items-center justify-center overflow-hidden pt-24 sm:pt-32 pb-14 sm:pb-20 bg-[#071321]"
+      className="relative min-h-[65vh] sm:min-h-[75vh] md:min-h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden pt-24 sm:pt-32 pb-14 sm:pb-20 bg-[#071321]"
     >
       {/* Dynamic Cinematic Inset Frame */}
       <motion.div
@@ -173,11 +175,11 @@ export function GenericInvestorHero({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 max-w-5xl mx-auto w-full"
+          className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 max-w-4xl mx-auto w-full"
           style={{ perspective: "1000px" }}
         >
-          <motion.h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[4.25rem] xl:text-[4.75rem] font-heading font-black text-white tracking-tight leading-[1.1] sm:leading-[1.08] text-balance text-center [word-break:keep-all] [overflow-wrap:normal]">
-            {title.split(" ").map((word, wordIndex, wordsArr) => (
+          <motion.h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-heading font-black text-white tracking-tight leading-[1.12] text-balance text-center">
+            {words.map((word, wordIndex, wordsArr) => (
               <span key={word + "-" + wordIndex} className="inline-block whitespace-nowrap">
                 {word.split("").map((char, charIndex) => (
                   <motion.span key={char + "-" + charIndex} variants={letter} className="inline-block">

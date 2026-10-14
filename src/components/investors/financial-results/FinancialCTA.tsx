@@ -38,11 +38,6 @@ export function FinancialCTA() {
             
             {/* Left Column */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-heading font-black uppercase tracking-[0.2em]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7BA4D0]" />
-                Institutional Advisory
-              </div>
-
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-white leading-[1.12] tracking-tight">
                 Dedicated <br />
                 <span className="text-[#7BA4D0]">Investor Relations</span> Support

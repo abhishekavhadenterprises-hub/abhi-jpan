@@ -10,7 +10,6 @@ export function SEBIDisclosureHero() {
       subtitle="Disclosures."
       description="Official statutory disclosures as per SEBI (LODR) Regulations 2015. J Pan Tubular Components Limited maintains absolute market transparency through systematic, audited, and timely corporate reporting."
       imageSrc="/images/blueprint.png"
-      badgeText="REGULATORY COMPLIANCE FRAMEWORK"
     />
   );
 }

@@ -239,13 +239,13 @@ export function JourneyTimeline() {
                         <div className="flex items-center justify-between gap-2 mb-1">
                           <span
                             className={cn(
-                              "text-xs sm:text-xs font-black uppercase tracking-[0.2em] font-mono",
+                              "text-xs sm:text-xs font-black uppercase tracking-[0.2em] font-heading",
                               unit.color
                             )}
                           >
                             Established {unit.year}
                           </span>
-                          <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-[#0D2440]/50 dark:text-white/50 uppercase font-semibold">
+                          <span className="text-[9px] sm:text-[10px] font-heading tracking-wider text-[#0D2440]/50 dark:text-white/50 uppercase font-semibold">
                             {unit.tag}
                           </span>
                         </div>

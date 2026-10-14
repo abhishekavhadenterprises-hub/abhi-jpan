@@ -66,16 +66,6 @@ export function ProductIndustries() {
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 space-y-2.5 px-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2E5E99]/10 dark:bg-white/5 border border-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-heading font-semibold uppercase tracking-wider"
-          >
-            <span>Sector Deployments</span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}

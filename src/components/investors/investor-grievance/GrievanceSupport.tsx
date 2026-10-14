@@ -47,10 +47,6 @@ export function GrievanceSupport() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-3 sm:mb-4 w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
-              Support Infrastructure
-            </div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
               Direct <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -89,7 +85,7 @@ export function GrievanceSupport() {
             className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
           >
             {/* Nodal Officer - Hero Card */}
-            <motion.div variants={cardVariants} className="bg-gradient-to-br from-[#E7F0FA] via-[#F2F7FD] to-[#E7F0FA] dark:from-[#0D2440] dark:via-[#102D50] dark:to-[#0D2440] border border-[#7BA4D0]/40 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] transition-all duration-300 relative overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
+            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 hover:bg-gradient-to-br hover:from-[#E7F0FA] hover:via-[#F2F7FD] hover:to-[#E7F0FA] dark:hover:from-[#0D2440] dark:hover:via-[#102D50] dark:hover:to-[#0D2440] border border-[#7BA4D0]/30 hover:border-[#2E5E99] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group transition-all duration-300 relative overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:-translate-y-1">
               <div>
                 <div className="w-11 h-11 sm:w-13 sm:h-13 bg-white dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
                   <User className="w-5 h-5 sm:w-6 sm:h-6" />

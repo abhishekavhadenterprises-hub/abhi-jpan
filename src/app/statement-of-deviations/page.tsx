@@ -45,12 +45,6 @@ export default function StatementOfDeviationsPage() {
         subtitle="Periodic statutory disclosures submitted to Stock Exchanges under Regulation 32 of SEBI (LODR) Regulations, confirming NIL deviation or variation in the utilization of public issue proceeds."
         variant="centered"
         image="/images/industrial_cta_bg.png"
-        chips={[
-          { label: "Statutory Mandate", value: "SEBI LODR Reg. 32" },
-          { label: "Deviation / Variation", value: "NIL Reported" },
-          { label: "Proceeds Deployment", value: "100% Verified" },
-          { label: "Review Status", value: "Audit Committee Cleared" },
-        ]}
       />
       <StatementOfDeviationsIntro />
       <GenericInvestorFilter />

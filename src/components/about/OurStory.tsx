@@ -114,12 +114,12 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/[0.02] text-[#2E5E99] dark:text-[#7BA4D0] border border-slate-200 dark:border-white/10 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white transition-all duration-500 shadow-sm">
             <card.icon className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <span className="text-2xl sm:text-3xl font-mono font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
+          <span className="text-2xl sm:text-3xl font-heading font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
             {card.num}
           </span>
         </div>
 
-        <div className="text-[9px] sm:text-[10px] font-mono tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-2 sm:mb-4">
+        <div className="text-[9px] sm:text-[10px] font-heading tracking-[0.18em] sm:tracking-[0.2em] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase mb-2 sm:mb-4">
           {card.tag}
         </div>
 

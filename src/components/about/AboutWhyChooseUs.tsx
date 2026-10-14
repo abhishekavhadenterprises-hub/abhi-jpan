@@ -186,7 +186,7 @@ export function AboutWhyChooseUs() {
 
                   <div className="pt-6 sm:pt-8 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-end justify-between gap-4">
                     <div className="flex flex-col gap-1 sm:gap-2">
-                      <span className="text-xs sm:text-sm text-[#0D2440]/50 dark:text-white/50 font-mono tracking-widest uppercase">
+                      <span className="text-xs sm:text-sm text-[#0D2440]/60 dark:text-white/60 font-sans font-medium tracking-wide uppercase">
                         {item.detail}
                       </span>
                       <span className="text-2xl sm:text-4xl lg:text-5xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0]">

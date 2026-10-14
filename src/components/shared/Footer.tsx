@@ -66,22 +66,16 @@ export function Footer() {
   return (
     <footer
       ref={containerRef}
-      className="relative z-30 bg-white text-[#111] font-sans overflow-hidden rounded-t-[2.5rem] border-t border-gray-200"
+      className="relative z-30 -mt-8 sm:-mt-10 bg-white dark:bg-[#070b14] text-[#111] dark:text-white font-sans overflow-hidden rounded-t-[2rem] sm:rounded-t-[2.5rem] border-t border-gray-200 dark:border-white/10"
     >
       <motion.div
         style={{ y, opacity, scale }}
-        className="w-full relative z-10 will-change-transform px-6 md:px-12 pt-16 pb-6 max-w-[1600px] mx-auto flex flex-col justify-between min-h-[60vh]"
+        className="w-full relative z-10 will-change-transform px-6 md:px-12 pt-14 sm:pt-16 pb-6 max-w-[1600px] mx-auto flex flex-col justify-between min-h-[60vh]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
 
           {/* CTA */}
           <div className="lg:col-span-8 flex flex-col items-start">
-            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-              <span className="text-[9px] tracking-[0.2em] text-gray-500 uppercase font-medium">
-                Let's Build The Future
-              </span>
-            </div>
 
             <motion.h2
               className="text-4xl md:text-5xl lg:text-[4.5rem] font-medium tracking-tighter leading-[1.05] mb-8"

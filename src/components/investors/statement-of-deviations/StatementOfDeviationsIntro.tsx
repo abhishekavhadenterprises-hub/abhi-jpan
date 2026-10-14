@@ -58,11 +58,6 @@ export function StatementOfDeviationsIntro() {
             variants={perspectiveEntranceLeft}
             className="lg:col-span-7"
           >
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-4 sm:mb-6 w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
-              SEBI Regulation 32
-            </div>
-
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white mb-4 sm:mb-6 leading-[1.12] tracking-tight">
               Integrity in <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -118,9 +113,6 @@ export function StatementOfDeviationsIntro() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-white dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
                     <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] bg-white/80 dark:bg-black/30 px-3 py-1 rounded-full border border-[#7BA4D0]/20">
-                    Audit Certified
-                  </span>
                 </div>
 
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#0D2440] dark:text-white mb-4 sm:mb-6">

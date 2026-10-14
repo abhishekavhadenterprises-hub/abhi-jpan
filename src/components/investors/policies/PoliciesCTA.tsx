@@ -38,11 +38,6 @@ export function PoliciesCTA() {
             
             {/* Left Column */}
             <div className="lg:col-span-6 space-y-5 sm:space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-heading font-black uppercase tracking-[0.2em]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7BA4D0]" />
-                Governance Inquiries
-              </div>
-
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-heading font-black text-white leading-[1.15] tracking-tight">
                 Policy <br />
                 <span className="text-[#7BA4D0]">
@@ -103,16 +98,16 @@ export function PoliciesCTA() {
                   </p>
                 </div>
 
-                <div className="sm:col-span-2 p-6 sm:p-7 bg-white/10 text-white border border-white/20 rounded-3xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center backdrop-blur-sm">
+                <div className="sm:col-span-2 p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
                   <div className="flex items-center gap-4 sm:gap-5">
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 text-[#7BA4D0]">
+                    <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center shrink-0 text-[#2E5E99]">
                       <Scale className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="text-white font-heading font-bold text-xs uppercase tracking-wider mb-1">
+                      <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1">
                         Statutory Governance
                       </h4>
-                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-normal">
+                      <p className="text-[#1F4E79]/80 text-xs sm:text-sm leading-relaxed font-normal">
                         All policies are reviewed in compliance with SEBI and Companies Act provisions.
                       </p>
                     </div>

@@ -24,7 +24,7 @@ export function ScrollWipeHeading({
 
   // Use a motion value that animates from 0 to 100 when in view
   const percentage = useMotionValue(0);
-  const isInView = useInView(textRef, { once: true, amount: 0.3 });
+  const isInView = useInView(textRef, { once: true, amount: 0.1 });
 
   React.useEffect(() => {
     if (isInView) {
@@ -40,7 +40,7 @@ export function ScrollWipeHeading({
   return (
     <MotionComponent
       ref={textRef}
-      className={`w-fit inline-block ${className}`}
+      className={`w-fit inline-block pb-[0.2em] -mb-[0.2em] pr-[0.1em] overflow-visible ${className}`}
       style={{
         backgroundImage: bgImage,
         WebkitBackgroundClip: "text",

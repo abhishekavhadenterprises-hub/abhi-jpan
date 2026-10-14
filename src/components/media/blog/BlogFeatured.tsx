@@ -57,12 +57,6 @@ export function BlogFeatured({ onReadMore }: BlogFeaturedProps) {
 
           {/* Content Side */}
           <div className="w-full lg:w-2/5 p-5 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center">
-            {/* Category Squircle Badge */}
-            <div className="mb-3 sm:mb-4">
-              <span className="inline-block px-2.5 sm:px-3 py-1 rounded-lg bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
-                {featuredArticle.category} Spotlight
-              </span>
-            </div>
 
             <div className="flex flex-wrap items-center gap-3 sm:gap-5 mb-4 sm:mb-5 text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               <div className="flex items-center gap-1.5">

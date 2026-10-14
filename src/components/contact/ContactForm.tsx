@@ -117,19 +117,13 @@ export function ContactForm({
             >
               {/* Left Column: Heading & Assurances */}
               <div className="lg:col-span-5 lg:sticky lg:top-28">
-                <div className="mb-6 overflow-visible">
-                  <ScrollWipeHeading
-                    as="h2"
-                    className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] tracking-tight block"
-                    revealedColor="currentColor"
-                    wipingColor="#2E5E99"
-                    unrevealedColor="rgba(148, 163, 184, 0.4)"
-                  >
+                <div className="mb-6">
+                  <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight">
                     <span>{mainTitle}</span> <br />
                     <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">
                       {highlightedTitle}
                     </span>
-                  </ScrollWipeHeading>
+                  </h2>
                 </div>
 
                 <p className="text-slate-600 dark:text-slate-300 font-normal text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed max-w-lg">

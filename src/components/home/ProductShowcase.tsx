@@ -185,13 +185,6 @@ export function ProductShowcase() {
               {/* Left Column: Technical Dossier */}
               <div className="lg:col-span-6 flex flex-col justify-between p-5 sm:p-7 lg:p-8 z-10 relative">
                 <div>
-                  <div className="inline-flex items-center gap-2.5 sm:gap-3 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/50 dark:bg-black/50 border border-[#111]/5 dark:border-white/5 mb-4 sm:mb-6 shadow-sm backdrop-blur-md">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] animate-pulse shadow-[0_0_10px_rgba(46,94,153,0.5)]" />
-                    <span className="text-[9px] sm:text-[10px] tracking-widest text-[#555] dark:text-[#AAA] uppercase font-bold">
-                      {activeProduct.eyebrowCategory}
-                    </span>
-                  </div>
-
                   <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#111] dark:text-white leading-[1.1] mb-3 sm:mb-4 tracking-tight">
                     {activeProduct.title}
                   </h3>
@@ -258,19 +251,8 @@ export function ProductShowcase() {
                     src={activeProduct.image}
                     alt={activeProduct.name}
                     fill
-                    className="object-contain object-center drop-shadow-[0_40px_80px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] group-hover:scale-110 group-hover:rotate-2 transition-all duration-[2s] ease-out"
+                    className="object-contain object-center drop-shadow-[0_40px_80px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-all duration-[1.5s] ease-out"
                   />
-                </motion.div>
-
-                {/* Floating Engineering Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="absolute bottom-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-black/90 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_10px_20px_rgba(0,0,0,0.1)] z-20 hover:-translate-y-1 transition-transform duration-500"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-                  <span className="font-mono text-[9px] tracking-widest text-[#111] dark:text-white font-bold">CMM VERIFIED</span>
                 </motion.div>
               </div>
             </motion.div>

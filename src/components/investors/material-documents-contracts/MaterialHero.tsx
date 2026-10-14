@@ -10,7 +10,6 @@ export function MaterialHero() {
       subtitle="Corporate Contracts."
       description="Authoritative disclosures of key corporate agreements, constitutional documents, and material contracts, maintained in strict accordance with SEBI (LODR) Regulations."
       imageSrc="/images/custom-engineering.png"
-      badgeText="STATUTORY DISCLOSURES & SEBI COMPLIANCE"
     />
   );
 }

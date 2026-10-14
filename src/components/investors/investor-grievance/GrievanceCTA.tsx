@@ -38,11 +38,6 @@ export function GrievanceCTA() {
             
             {/* Left Column */}
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-heading font-black uppercase tracking-[0.2em] w-fit">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7BA4D0]" />
-                Escalation Redressal
-              </div>
-
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-white leading-[1.12] tracking-tight">
                 Responsive <br />
                 <span className="text-[#7BA4D0]">
@@ -102,16 +97,16 @@ export function GrievanceCTA() {
                   </p>
                 </div>
 
-                <div className="sm:col-span-2 p-4 sm:p-6 md:p-7 bg-white/10 text-white border border-white/20 rounded-2xl sm:rounded-3xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center backdrop-blur-sm">
+                <div className="sm:col-span-2 p-4 sm:p-6 md:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
                   <div className="flex items-center gap-3 sm:gap-5">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 text-[#7BA4D0]">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center shrink-0 text-[#2E5E99]">
                       <Scale className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h4 className="text-white font-heading font-bold text-xs uppercase tracking-wider mb-1">
+                      <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1">
                         SEBI SCORES Escalation
                       </h4>
-                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-normal">
+                      <p className="text-[#1F4E79]/80 text-xs sm:text-sm leading-relaxed font-normal">
                         Shareholders may also lodge unresolved grievances through the SEBI SCORES 2.0 portal.
                       </p>
                     </div>

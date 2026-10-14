@@ -59,11 +59,6 @@ export function FinancialInvestorInfo() {
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-[#071321] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
       <div className="container-custom relative z-10">
         <div className="max-w-3xl mb-8 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-[11px] font-heading font-black uppercase tracking-[0.2em] mb-3 sm:mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0]" />
-            Regulatory Compliance
-          </div>
-
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight mb-3 sm:mb-4">
             Policies & <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0]">

@@ -173,13 +173,6 @@ export function AboutSnapshot() {
                 <Image src={activeModule.image} alt={activeModule.headline} fill className="object-cover transition-transform duration-[15s] group-hover:scale-110" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D2440]/95 via-black/30 to-transparent mix-blend-multiply" />
 
-                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 max-w-[calc(100%-2rem)]">
-                  <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-white uppercase backdrop-blur-xl bg-white/10 border border-white/20 px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full shadow-lg inline-flex items-center gap-2 truncate">
-                    <span className="w-1.5 h-1.5 shrink-0 bg-green-400 rounded-full animate-pulse" />
-                    <span className="truncate">{activeModule.badge}</span>
-                  </span>
-                </div>
-
                 <div className="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 sm:gap-4">
                   <div className="min-w-0 max-w-full">
                     <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/60 mb-1 sm:mb-2">{activeModule.specLabel}</span>
