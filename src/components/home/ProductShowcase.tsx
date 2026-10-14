@@ -238,22 +238,21 @@ export function ProductShowcase() {
                 </div>
               </div>
 
-              {/* Right Column: Premium Showcase Image */}
-              <div className="lg:col-span-6 relative min-h-[260px] sm:min-h-[320px] lg:min-h-full bg-gradient-to-br from-[#F5F5F5] to-[#EAEAEA] dark:from-[#080808] dark:to-[#020202] flex items-center justify-center p-4 sm:p-6 overflow-hidden border-t lg:border-t-0 lg:border-l border-[#111]/5 dark:border-white/5">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.1)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-
-                <motion.div
-                  className="relative w-full h-full min-h-[250px] flex items-center justify-center"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                >
+              {/* Right Column: Premium Showcase Image (Perfect Fit & Smooth Hover Zoom) */}
+              <div className="lg:col-span-6 relative min-h-[340px] sm:min-h-[420px] lg:min-h-full w-full overflow-hidden border-t lg:border-t-0 lg:border-l border-[#111]/5 dark:border-white/5 bg-slate-100/50 dark:bg-black/30 group/image">
+                <div className="relative w-full h-full min-h-[340px] sm:min-h-[420px] lg:min-h-full overflow-hidden">
                   <Image
                     src={activeProduct.image}
                     alt={activeProduct.name}
                     fill
-                    className="object-contain object-center drop-shadow-[0_40px_80px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-all duration-[1.5s] ease-out"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                    className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 group-hover:scale-110 group-hover/image:scale-110"
                   />
-                </motion.div>
+                  {/* Subtle Specular & Ambient Sheen */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/5 pointer-events-none transition-opacity duration-500 opacity-60 group-hover:opacity-40" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,94,153,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
