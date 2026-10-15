@@ -175,23 +175,14 @@ export function InvestorMegamenu({
                       }
                     }}
                     className={cn(
-                      "group/box relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-center cursor-pointer select-none min-h-[140px]",
+                      "group/box relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[145px]",
                       isExpanded
-                        ? "bg-white dark:bg-[#0D2440] border-[#2E5E99] shadow-[0_12px_32px_rgba(46,94,153,0.22)] -translate-y-1"
+                        ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
                         : isHovered
-                          ? "bg-white dark:bg-[#0D2440]/60 border-[#7BA4D0]/60 shadow-[0_8px_20px_rgba(13,36,64,0.08)] -translate-y-0.5"
-                          : "bg-[#F8FAFC]/90 dark:bg-white/[0.03] border-slate-200/80 dark:border-white/5 hover:border-[#7BA4D0]/40"
+                          ? "bg-white dark:bg-[#0D2440]/60 border-[#2563EB]/40 dark:border-[#3B82F6]/40 shadow-[0_8px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.4)] -translate-y-0.5"
+                          : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                     )}
                   >
-                    {/* Ambient Glow Aura on Hover */}
-                    <div
-                      className={cn(
-                        "absolute inset-0 rounded-2xl transition-opacity duration-500 pointer-events-none",
-                        isHovered || isExpanded
-                          ? "opacity-60 bg-radial from-[#60A5FA]/25 via-transparent to-transparent blur-md"
-                          : "opacity-0"
-                      )}
-                    />
 
                     {/* 3D Component Icon */}
                     <div className="mb-3 flex items-center justify-center">
@@ -247,21 +238,12 @@ export function InvestorMegamenu({
                           onMouseEnter={() => setHoveredSubCardId(subItem.id)}
                           onMouseLeave={() => setHoveredSubCardId(null)}
                           className={cn(
-                            "group/subcard relative p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-center cursor-pointer select-none overflow-hidden min-h-[110px]",
+                            "group/subcard relative p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none overflow-hidden min-h-[115px]",
                             isSubHovered
-                              ? "bg-white dark:bg-[#0D2440] border-[#2E5E99] shadow-[0_8px_24px_rgba(46,94,153,0.22)] -translate-y-1"
-                              : "bg-[#F8FAFC]/80 dark:bg-white/[0.03] border-slate-200/70 dark:border-white/5 hover:border-[#7BA4D0]/50"
+                              ? "bg-white dark:bg-[#0D2440] border-[#2563EB]/50 dark:border-[#3B82F6]/50 shadow-[0_6px_18px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.4)] -translate-y-0.5"
+                              : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                           )}
                         >
-                          {/* Ambient Sub-Glow */}
-                          <div
-                            className={cn(
-                              "absolute inset-0 rounded-2xl transition-opacity duration-500 pointer-events-none",
-                              isSubHovered
-                                ? "opacity-60 bg-radial from-[#60A5FA]/25 to-transparent blur-md"
-                                : "opacity-0"
-                            )}
-                          />
 
                           <div className="mb-2 flex items-center justify-center">
                             <SubIcon isHovered={isSubHovered} />

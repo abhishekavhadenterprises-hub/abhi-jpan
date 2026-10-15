@@ -40,7 +40,7 @@ export function ScrollWipeHeading({
   return (
     <MotionComponent
       ref={textRef}
-      className={`w-fit inline-block pb-[0.2em] -mb-[0.2em] pr-[0.1em] overflow-visible ${className}`}
+      className={`w-fit ${className.includes("block") ? "" : "inline-block"} pb-[0.2em] -mb-[0.2em] pr-[0.1em] overflow-visible ${className}`}
       style={{
         backgroundImage: bgImage,
         WebkitBackgroundClip: "text",

@@ -35,10 +35,16 @@ export default function Home() {
       {/* 2. Middle Content Sections */}
       <div className="relative w-full z-10 bg-transparent transition-colors duration-500">
         
-        {/* Top chunk with blur */}
+        {/* About Snapshot */}
         <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
           <AboutSnapshot />
-          <Industries />
+        </div>
+
+        {/* Industries - Corporate Blue Curved Wheel Section (Isolated from backdrop-blur for flawless sticky scroll) */}
+        <Industries />
+
+        {/* Middle Sections */}
+        <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
           <ProductShowcase />
           <WhyChooseUs />
           <Infrastructure />

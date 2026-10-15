@@ -144,19 +144,27 @@ export function Infrastructure() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-transparent to-transparent" />
             {/* Bottom Content Dossier */}
             <div className="relative z-10 max-w-3xl">
-              <div className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/10 border border-white/20 text-[9px] sm:text-[10px] tracking-[0.2em] text-white uppercase mb-3 sm:mb-4 font-medium backdrop-blur-md">
-                {activePillar.badge}
+              {/* Pill Badge Container */}
+              <div className="mb-3 sm:mb-4">
+                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[10px] sm:text-[11px] tracking-[0.2em] text-white uppercase font-semibold backdrop-blur-md shadow-sm">
+                  {activePillar.badge}
+                </span>
               </div>
-              <ScrollWipeHeading
-                as="h3"
-                revealedColor="#FFFFFF"
-                wipingColor="#93C5FD"
-                unrevealedColor="rgba(255, 255, 255, 0.45)"
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight mb-2 sm:mb-3 group-hover:translate-x-2 transition-transform duration-700"
-              >
-                {activePillar.title}
-              </ScrollWipeHeading>
-              <p className="text-white/70 text-xs sm:text-sm md:text-base font-light leading-relaxed mb-4 sm:mb-6 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
+
+              {/* Facility Title */}
+              <div className="block mb-2.5 sm:mb-3.5">
+                <ScrollWipeHeading
+                  as="h3"
+                  revealedColor="#FFFFFF"
+                  wipingColor="#93C5FD"
+                  unrevealedColor="rgba(255, 255, 255, 0.45)"
+                  className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight group-hover:translate-x-2 transition-transform duration-700"
+                >
+                  {activePillar.title}
+                </ScrollWipeHeading>
+              </div>
+
+              <p className="text-white/75 text-xs sm:text-sm md:text-base font-light leading-relaxed mb-4 sm:mb-6 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
                 {activePillar.desc}
               </p>
 

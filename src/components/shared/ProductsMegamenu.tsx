@@ -75,6 +75,8 @@ export function ProductsMegamenu({
                 const IconComponent = product.icon;
                 const isHovered = hoveredCardId === product.id;
 
+                const isCopper = product.id === "copper-components";
+
                 return (
                   <Link
                     key={product.id}
@@ -83,34 +85,25 @@ export function ProductsMegamenu({
                     onMouseEnter={() => setHoveredCardId(product.id)}
                     onMouseLeave={() => setHoveredCardId(null)}
                     className={cn(
-                      "group/card relative p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-center cursor-pointer select-none min-h-[145px]",
+                      "group/card relative p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[160px]",
                       isHovered
-                        ? "bg-white dark:bg-[#0D2440] border-[#2E5E99] shadow-[0_12px_32px_rgba(46,94,153,0.22)] -translate-y-1"
-                        : "bg-[#F8FAFC]/90 dark:bg-white/[0.03] border-slate-200/80 dark:border-white/5 hover:border-[#7BA4D0]/40"
+                        ? "bg-white dark:bg-[#0D2440] border-[#2563EB]/50 dark:border-[#3B82F6]/50 shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
+                        : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                     )}
                   >
-                    {/* Ambient Glow Aura */}
-                    <div
-                      className={cn(
-                        "absolute inset-0 rounded-2xl transition-opacity duration-500 pointer-events-none",
-                        isHovered
-                          ? "opacity-60 bg-radial from-[#60A5FA]/25 via-transparent to-transparent blur-md"
-                          : "opacity-0"
-                      )}
-                    />
 
                     {/* 3D Component Icon */}
-                    <div className="mb-3.5 flex items-center justify-center">
+                    <div className="flex-1 flex items-center justify-center my-1 w-full">
                       <IconComponent isHovered={isHovered} />
                     </div>
 
                     {/* Clean Bold Title */}
                     <h3
                       className={cn(
-                        "text-xs sm:text-[13px] font-bold tracking-tight transition-colors text-center leading-snug",
+                        "text-xs sm:text-[13px] font-bold tracking-tight transition-colors text-center leading-snug mt-2",
                         isHovered
-                          ? "text-[#0D2440] dark:text-white"
-                          : "text-slate-700 dark:text-slate-200"
+                          ? "text-[#1D4ED8] dark:text-[#93C5FD]"
+                          : "text-slate-700 dark:text-slate-300"
                       )}
                     >
                       {product.title}

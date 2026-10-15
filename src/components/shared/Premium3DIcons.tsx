@@ -129,146 +129,174 @@ export function SquircleIconBadge({
 // Backward-compatibility container alias
 export const GlassIconContainer = SquircleIconBadge;
 
+import { Clay3DAnnualReportsComponent } from "./Clay3DAnnualReportsComponent";
+import { Clay3DFinancialInfoComponent } from "./Clay3DFinancialInfoComponent";
+import { Clay3DGrievanceComponent } from "./Clay3DGrievanceComponent";
+import { Clay3DGovernanceComponent } from "./Clay3DGovernanceComponent";
+import { Clay3DOtherInfoComponent } from "./Clay3DOtherInfoComponent";
+
+/** 1. Annual Reports 3D Claymorphic Component */
+export function Icon3DAnnualReport({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  return (
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DAnnualReportsComponent isHovered={isHovered} size={pixelSize} />
+    </div>
+  );
+}
+
+/** 2. Financial Information / Results 3D Claymorphic Component */
+export function Icon3DFinancialResults({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  return (
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DFinancialInfoComponent isHovered={isHovered} size={pixelSize} />
+    </div>
+  );
+}
+
+/** 3. Investor Grievance 3D Claymorphic Component */
+export function Icon3DGrievance({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  return (
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DGrievanceComponent isHovered={isHovered} size={pixelSize} />
+    </div>
+  );
+}
+
+/** 4. Corporate Governance 3D Claymorphic Component */
+export function Icon3DGovernance({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  return (
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DGovernanceComponent isHovered={isHovered} size={pixelSize} />
+    </div>
+  );
+}
+
+/** 5. Other Information / Contracts 3D Claymorphic Component */
+export function Icon3DOtherInfo({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  return (
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DOtherInfoComponent isHovered={isHovered} size={pixelSize} />
+    </div>
+  );
+}
+
+import { Clay3DDocumentComponent } from "./Clay3DDocumentComponent";
+import { Clay3DCalendarComponent } from "./Clay3DCalendarComponent";
+import { Clay3DAssemblyComponent } from "./Clay3DAssemblyComponent";
+import { Clay3DWaxSealComponent } from "./Clay3DWaxSealComponent";
+import { Clay3DPresentationComponent } from "./Clay3DPresentationComponent";
+import { Clay3DAudioComponent } from "./Clay3DAudioComponent";
+import { Clay3DNewspaperComponent } from "./Clay3DNewspaperComponent";
+import { Clay3DChartComponent } from "./Clay3DChartComponent";
+import { Clay3DScalesComponent } from "./Clay3DScalesComponent";
+import { Clay3DCreditScoreComponent } from "./Clay3DCreditScoreComponent";
+
 /* =========================================================================
-   PRIMARY INVESTOR PILLARS (SQUIRCLE LINE-ART BADGES)
+   SUB-OPTIONS 3D CLAY COMPONENTS
    ========================================================================= */
 
-/** 1. Annual Reports Squircle Badge */
-export function Icon3DAnnualReport({ isHovered }: IconProps) {
+/** Document / Generic Statutory Filing 3D Clay Component */
+export function Icon3DDocument({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8] transition-transform duration-300 group-hover/box:scale-110" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DDocumentComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** 2. Financial Information / Results Squircle Badge */
-export function Icon3DFinancialResults({ isHovered }: IconProps) {
+/** Call Audio Recording 3D Clay Component */
+export function Icon3DAudio({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8] transition-transform duration-300 group-hover/box:scale-110" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DAudioComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** 3. Investor Grievance Squircle Badge */
-export function Icon3DGrievance({ isHovered }: IconProps) {
+/** Presentation / Keynote 3D Clay Component */
+export function Icon3DPresentation({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8] transition-transform duration-300 group-hover/box:scale-110" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DPresentationComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** 4. Corporate Governance Squircle Badge */
-export function Icon3DGovernance({ isHovered }: IconProps) {
+/** Shareholding Donut Chart 3D Clay Component */
+export function Icon3DChart({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <Landmark className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8] transition-transform duration-300 group-hover/box:scale-110" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DChartComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** 5. Other Information / Contracts Squircle Badge */
-export function Icon3DOtherInfo({ isHovered }: IconProps) {
+/** Statement of Deviations Scales 3D Clay Component */
+export function Icon3DScales({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <FolderArchive className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8] transition-transform duration-300 group-hover/box:scale-110" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DScalesComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/* =========================================================================
-   SUB-OPTIONS SQUIRCLE LINE-ART BADGES
-   ========================================================================= */
-
-/** Document / Generic Filing Squircle Badge */
-export function Icon3DDocument({ isHovered }: IconProps) {
+/** Board Meeting Calendar 3D Clay Component */
+export function Icon3DCalendar({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <FileText className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DCalendarComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Audio Recording Squircle Badge */
-export function Icon3DAudio({ isHovered }: IconProps) {
+/** General Meeting Assembly 3D Clay Component */
+export function Icon3DAssembly({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Mic className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DAssemblyComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Presentation / Keynote Squircle Badge */
-export function Icon3DPresentation({ isHovered }: IconProps) {
+/** Secretarial Compliance Wax Seal 3D Clay Component */
+export function Icon3DWaxSeal({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Presentation className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DWaxSealComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Shareholding Chart Squircle Badge */
-export function Icon3DChart({ isHovered }: IconProps) {
+/** Newspaper Publications 3D Clay Component */
+export function Icon3DNewspaper({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <PieChart className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DNewspaperComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Statement of Deviations Scales Squircle Badge */
-export function Icon3DScales({ isHovered }: IconProps) {
+/** Credit Rating Gauge 3D Clay Component */
+export function Icon3DCreditScore({ isHovered, size = "sm" }: IconProps) {
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Scale className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
-  );
-}
-
-/** Board Meeting Calendar Squircle Badge */
-export function Icon3DCalendar({ isHovered }: IconProps) {
-  return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Calendar className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
-  );
-}
-
-/** General Meeting Assembly Squircle Badge */
-export function Icon3DAssembly({ isHovered }: IconProps) {
-  return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Users className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
-  );
-}
-
-/** Secretarial Compliance Wax Seal Squircle Badge */
-export function Icon3DWaxSeal({ isHovered }: IconProps) {
-  return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Award className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
-  );
-}
-
-/** Newspaper Publications Squircle Badge */
-export function Icon3DNewspaper({ isHovered }: IconProps) {
-  return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <Newspaper className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
-  );
-}
-
-/** Credit Rating Squircle Badge */
-export function Icon3DCreditScore({ isHovered }: IconProps) {
-  return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="sm">
-      <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DCreditScoreComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
@@ -283,78 +311,97 @@ export const Icon3DGenericScales = Icon3DScales;
    PRODUCTS SQUIRCLE LINE-ART BADGES (ALL UNIFORMLY J-PAN BLUE)
    ========================================================================= */
 
-/** All Products Catalog Squircle Badge */
-export function Icon3DAllProducts({ isHovered }: IconProps) {
+import { Clay3DCopperComponent } from "./Clay3DCopperComponent";
+import { Clay3DBrassComponent } from "./Clay3DBrassComponent";
+import { Clay3DSteelComponent } from "./Clay3DSteelComponent";
+import { Clay3DAllProductsComponent } from "./Clay3DAllProductsComponent";
+
+/** All Products Catalog Claymorphic 3D Component */
+export function Icon3DAllProducts({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <Boxes className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DAllProductsComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Copper Components Squircle Badge */
-export function Icon3DCopper({ isHovered }: IconProps) {
+/** Copper Components Claymorphic 3D Component */
+export function Icon3DCopper({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <Flame className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DCopperComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Brass Components Squircle Badge */
-export function Icon3DBrass({ isHovered }: IconProps) {
+/** Brass Components Claymorphic 3D Component */
+export function Icon3DBrass({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <Hexagon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DBrassComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Steel Components Squircle Badge */
-export function Icon3DSteel({ isHovered }: IconProps) {
+/** Steel Components Claymorphic 3D Component */
+export function Icon3DSteel({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <Layers className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DSteelComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
 /* =========================================================================
-   MEDIA SQUIRCLE LINE-ART BADGES (ALL UNIFORMLY J-PAN BLUE)
+   MEDIA 3D CLAYMORPHIC COMPONENTS (GROUP 3)
    ========================================================================= */
 
-/** Press Releases Squircle Badge */
-export function Icon3DMediaPress({ isHovered }: IconProps) {
+import { Clay3DMediaPressComponent } from "./Clay3DMediaPressComponent";
+import { Clay3DMediaEventsComponent } from "./Clay3DMediaEventsComponent";
+import { Clay3DMediaBlogComponent } from "./Clay3DMediaBlogComponent";
+import { Clay3DMediaGalleryComponent } from "./Clay3DMediaGalleryComponent";
+
+/** Press Releases 3D Claymorphic Component */
+export function Icon3DMediaPress({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DMediaPressComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Events & Exhibitions Squircle Badge */
-export function Icon3DMediaEvents({ isHovered }: IconProps) {
+/** Events & Exhibitions 3D Claymorphic Component */
+export function Icon3DMediaEvents({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <CalendarDays className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DMediaEventsComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Industrial Blog Squircle Badge */
-export function Icon3DMediaBlog({ isHovered }: IconProps) {
+/** Industrial Blog 3D Claymorphic Component */
+export function Icon3DMediaBlog({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <PenTool className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DMediaBlogComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
 
-/** Media Gallery Squircle Badge */
-export function Icon3DMediaGallery({ isHovered }: IconProps) {
+/** Media Gallery 3D Claymorphic Component */
+export function Icon3DMediaGallery({ isHovered, size = "md" }: IconProps) {
+  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
   return (
-    <SquircleIconBadge isHovered={isHovered} variant="blue" size="md">
-      <GalleryImage className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
-    </SquircleIconBadge>
+    <div className="flex items-center justify-center -my-1">
+      <Clay3DMediaGalleryComponent isHovered={isHovered} size={pixelSize} />
+    </div>
   );
 }
+
