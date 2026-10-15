@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Fan, Car, Home, Factory, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,7 @@ const industries = [
     num: "01",
     title: "HVAC & Climate Control",
     icon: Fan,
+    image: "/industry_hvac.png",
     tag: "THERMAL TRANSFER",
     description:
       "Advanced copper, stainless steel and aluminum solutions designed for high-efficiency air conditioning and refrigeration applications.",
@@ -22,6 +24,7 @@ const industries = [
     num: "02",
     title: "Automotive Engineering",
     icon: Car,
+    image: "/industry_auto.png",
     tag: "BRAKE & FUEL LINES",
     description:
       "Precision-manufactured components supporting performance-driven automotive and mobility systems.",
@@ -32,6 +35,7 @@ const industries = [
     num: "03",
     title: "Consumer Appliances",
     icon: Home,
+    image: "/industry_appliances.png",
     tag: "REFRIGERATION",
     description:
       "Reliable engineered solutions powering modern home and commercial appliance technologies.",
@@ -42,6 +46,7 @@ const industries = [
     num: "04",
     title: "Industrial & Data Infrastructure",
     icon: Factory,
+    image: "/industry_industrial.png",
     tag: "CRITICAL COOLING",
     description:
       "Heavy-duty precision components supporting industrial operations and mission-critical data center cooling environments.",
@@ -54,15 +59,43 @@ export function Industries() {
 
   return (
     <section className="relative py-20 sm:py-24 md:py-28 bg-[#EEF5FC] dark:bg-[#081220] transition-colors duration-500 overflow-hidden border-y border-slate-200/70 dark:border-white/5">
-      {/* Subtle Atmospheric Light Blue Gradients */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      {/* 1. Dynamic Section Background Image on Card Hover */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {industries.map((ind, idx) => (
+          <div
+            key={ind.id}
+            className={cn(
+              "absolute inset-0 transition-opacity duration-700 ease-out",
+              hoveredIdx === idx ? "opacity-100" : "opacity-0"
+            )}
+          >
+            <Image
+              src={ind.image}
+              alt={ind.title}
+              fill
+              priority={idx === 0}
+              className="object-cover object-center scale-100 transition-transform duration-700 ease-out filter contrast-105 brightness-95"
+            />
+            {/* Subtle 20% Blur & Gentle Gradient so foreground text reads comfortably while image remains recognizable */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#EEF5FC]/35 via-transparent to-[#EEF5FC]/45 dark:from-[#081220]/45 dark:via-transparent dark:to-[#081220]/55 backdrop-blur-[2px] pointer-events-none" />
+          </div>
+        ))}
+      </div>
+
+      {/* 2. Default Ambient Atmospheric Glows (Fades out when hovered to keep the image 100% crisp) */}
+      <div
+        className={cn(
+          "absolute inset-0 pointer-events-none overflow-hidden z-0 transition-opacity duration-500",
+          hoveredIdx !== null ? "opacity-0" : "opacity-100"
+        )}
+      >
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-blue-200/40 dark:bg-blue-600/10 blur-[130px]" />
         <div className="absolute bottom-0 right-10 w-[600px] h-[400px] rounded-full bg-sky-200/30 dark:bg-sky-500/5 blur-[120px]" />
       </div>
 
       <div className="container-custom relative z-10">
         {/* =========================================================================
-           SECTION HEADER (Matching User Reference Image)
+           SECTION HEADER
            ========================================================================= */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16 md:mb-20 space-y-4">
           {/* Top Tag: STRATEGIC EXCELLENCE with flanking decorative lines */}
@@ -107,7 +140,7 @@ export function Industries() {
         </div>
 
         {/* =========================================================================
-           4 SECTOR CARDS WITH CURVING RIGHT EDGE ON HOVER
+           4 SECTOR CARDS: Clean White Cards with D-Shape Curving Right Edge on Hover
            ========================================================================= */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
           {industries.map((ind, idx) => {
@@ -125,15 +158,15 @@ export function Industries() {
                 onMouseLeave={() => setHoveredIdx(null)}
                 className={cn(
                   "relative group flex flex-col justify-between p-7 sm:p-8 min-h-[390px] sm:min-h-[430px]",
-                  "bg-white dark:bg-[#0c1626] text-left cursor-pointer overflow-hidden",
-                  // D-shape continuous circular arch on hover (matching reference image)
+                  "bg-white/95 dark:bg-[#0c1626]/95 backdrop-blur-md text-left cursor-pointer overflow-hidden",
+                  // D-shape continuous circular arch on hover
                   "transition-all duration-500 ease-out transform-gpu select-none",
                   isHovered
                     ? "rounded-l-2xl rounded-tr-[210px] rounded-br-[210px] border-2 border-[#2563EB] shadow-[0_25px_60px_rgba(37,99,235,0.22)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] -translate-y-2"
                     : "rounded-2xl border border-slate-200/90 dark:border-white/10 shadow-[0_8px_30px_rgba(46,94,153,0.06)] hover:border-slate-300"
                 )}
               >
-                {/* Top Section: Icon Circle Badge (No Numbers) */}
+                {/* Top Section: Icon Circle Badge */}
                 <div className="max-w-[85%]">
                   <div className="mb-6">
                     <div
