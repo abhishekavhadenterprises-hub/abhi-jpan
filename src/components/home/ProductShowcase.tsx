@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, MouseEvent } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import Link from "next/link";
@@ -75,6 +75,13 @@ export function ProductShowcase() {
   const activeProduct = capabilities[activeTab];
   const Icon = activeProduct.icon;
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % capabilities.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -97,21 +104,21 @@ export function ProductShowcase() {
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[80svh]">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#111]/5 dark:border-white/5">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-4xl"
-          >
-            <h2 className="text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] font-bold uppercase text-[#2E5E99] dark:text-cyan-400 mb-4 sm:mb-6">
+          <div className="max-w-4xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] font-bold uppercase text-[#2E5E99] dark:text-cyan-400 mb-4 sm:mb-6"
+            >
               Product Catalogue & Specifications
-            </h2>
+            </motion.h2>
             <ScrollWipeHeading as="h3" className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tighter text-[#111] dark:text-white leading-[1.08]">
               Precision alloy <br />
               <span className="text-[#666] dark:text-[#888]">manufacturing excellence.</span>
             </ScrollWipeHeading>
-          </motion.div>
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

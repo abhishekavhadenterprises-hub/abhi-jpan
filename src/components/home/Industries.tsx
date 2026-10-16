@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Fan, Car, Home, Factory, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 const industries = [
   {
@@ -104,28 +105,25 @@ export function Industries() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 text-[#2E5E99] dark:text-[#60A5FA]"
+            className="flex items-center justify-center gap-3 text-[#2E5E99] dark:text-[#7BA4D0]"
           >
-            <span className="w-8 sm:w-12 h-[1.5px] bg-[#2E5E99]/40 dark:bg-blue-400/40" />
+            <span className="w-8 sm:w-12 h-[1.5px] bg-[#2E5E99]/40 dark:bg-[#7BA4D0]/40" />
             <span className="text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase">
               STRATEGIC EXCELLENCE
             </span>
-            <span className="w-8 sm:w-12 h-[1.5px] bg-[#2E5E99]/40 dark:bg-blue-400/40" />
+            <span className="w-8 sm:w-12 h-[1.5px] bg-[#2E5E99]/40 dark:bg-[#7BA4D0]/40" />
           </motion.div>
 
-          {/* Main Title: Pioneering Critical Solutions */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight text-[#0D2440] dark:text-white leading-[1.12]"
+          {/* Main Title: Pioneering Critical Solutions with ScrollWipe Heading matching ProductShowcase */}
+          <ScrollWipeHeading
+            as="h2"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] text-center mx-auto"
           >
             Pioneering <br />
-            <span className="text-[#2563EB] dark:text-[#60A5FA]">
+            <span className="text-[#666] dark:text-[#888]">
               Critical Solutions
             </span>
-          </motion.h2>
+          </ScrollWipeHeading>
 
           {/* Subtitle Description */}
           <motion.p
@@ -162,7 +160,7 @@ export function Industries() {
                   // D-shape continuous circular arch on hover
                   "transition-all duration-500 ease-out transform-gpu select-none",
                   isHovered
-                    ? "rounded-l-2xl rounded-tr-[210px] rounded-br-[210px] border-2 border-[#2563EB] shadow-[0_25px_60px_rgba(37,99,235,0.22)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] -translate-y-2"
+                    ? "rounded-l-2xl rounded-tr-[210px] rounded-br-[210px] border-2 border-[#2E5E99] shadow-[0_25px_60px_rgba(46,94,153,0.22)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] -translate-y-2"
                     : "rounded-2xl border border-slate-200/90 dark:border-white/10 shadow-[0_8px_30px_rgba(46,94,153,0.06)] hover:border-slate-300"
                 )}
               >
@@ -190,7 +188,7 @@ export function Industries() {
                   <div
                     className={cn(
                       "h-[2px] transition-all duration-500 mb-4",
-                      isHovered ? "w-12 bg-[#2563EB]" : "w-7 bg-slate-200 dark:bg-white/20"
+                      isHovered ? "w-12 bg-[#2E5E99]" : "w-7 bg-slate-200 dark:bg-white/20"
                     )}
                   />
 

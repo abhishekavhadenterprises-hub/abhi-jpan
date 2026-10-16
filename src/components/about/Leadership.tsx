@@ -69,7 +69,7 @@ export function Leadership() {
     <section
       id="leadership"
       ref={containerRef}
-      className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 lg:pb-32 bg-[#F8FAFC] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
+      className="relative pt-20 sm:pt-28 lg:pt-32 pb-14 sm:pb-20 lg:pb-24 bg-[#F8FAFC] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
     >
       {/* Background Subtle Tech Grid Accent */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
@@ -84,7 +84,7 @@ export function Leadership() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-12 sm:mb-16"
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10"
         >
           <div>
             <ScrollWipeHeading
@@ -103,11 +103,10 @@ export function Leadership() {
           </p>
         </motion.div>
 
-        {/* 4 Cards Row: When not hovered, all 4 cards are large equal image cards without detail data.
-            When hovered, the hovered card expands to reveal the details directly to the right of its image. */}
+        {/* 4 Cards Row: Reduced card height matching user's marked bounds */}
         <div
           onMouseLeave={() => setHoveredIdx(null)}
-          className="flex flex-col lg:flex-row gap-4 sm:gap-5 min-h-[580px] lg:h-[620px] w-full items-stretch"
+          className="flex flex-col lg:flex-row gap-4 sm:gap-5 min-h-[440px] lg:h-[485px] xl:h-[495px] w-full items-stretch"
         >
           {leadersData.map((leader, idx) => {
             const isHovered = hoveredIdx === idx;
@@ -134,7 +133,7 @@ export function Leadership() {
                 <div
                   className={`relative overflow-hidden shrink-0 transition-all duration-500 ${
                     isHovered
-                      ? "w-full lg:w-[320px] xl:w-[360px] h-[320px] sm:h-[360px] lg:h-full rounded-2xl lg:rounded-l-3xl lg:rounded-r-none"
+                      ? "w-full lg:w-[280px] xl:w-[320px] h-[280px] sm:h-[320px] lg:h-full rounded-2xl lg:rounded-l-3xl lg:rounded-r-none"
                       : "w-full h-full absolute inset-0"
                   }`}
                 >
@@ -174,7 +173,7 @@ export function Leadership() {
                 <div
                   className={`flex-1 h-full relative z-10 transition-opacity duration-300 ${
                     isHovered
-                      ? "opacity-100 pointer-events-auto delay-100 px-6 sm:px-8 lg:px-10 py-6 sm:py-8 flex flex-col justify-center overflow-hidden"
+                      ? "opacity-100 pointer-events-auto delay-100 px-5 sm:px-7 lg:px-8 py-4 sm:py-5 flex flex-col justify-center overflow-hidden"
                       : "opacity-0 pointer-events-none hidden lg:block lg:w-0"
                   }`}
                 >

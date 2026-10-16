@@ -207,8 +207,8 @@ export function ContactMap() {
         )}
       </AnimatePresence>
 
-      {/* Interactive 3D Dotted WebGL Globe (Restored Large Dimension with Slow Motion) */}
-      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-[-12vw] xl:left-[-8vw] top-auto lg:top-[50%] lg:-translate-y-[50%] w-[92vw] h-[92vw] sm:w-[620px] sm:h-[620px] lg:w-[115vh] lg:h-[115vh] xl:w-[122vh] xl:h-[122vh] max-w-[1100px] max-h-[1100px] z-10 opacity-90 lg:opacity-85 pointer-events-auto my-6 lg:my-0">
+      {/* Interactive 3D Dotted WebGL Globe (Centered and sized to fit the section) */}
+      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[39%] xl:left-[40%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-[92vw] h-[92vw] sm:w-[620px] sm:h-[620px] lg:w-[92vh] lg:h-[92vh] xl:w-[96vh] xl:h-[96vh] max-w-[950px] max-h-[950px] z-10 opacity-90 lg:opacity-85 pointer-events-auto my-6 lg:my-0">
         <CobeInteractiveGlobe
           markers={hubLocations.map((h) => ({
             id: h.id,
@@ -227,7 +227,7 @@ export function ContactMap() {
       </div>
 
       {/* Floating Tactical Detail Card */}
-      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[43%] xl:left-[45%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-full max-w-[480px] sm:max-w-[500px] px-4 sm:px-0 z-[50] pointer-events-none my-6 lg:my-0">
+      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[39%] xl:left-[40%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-full max-w-[480px] sm:max-w-[500px] px-4 sm:px-0 z-[50] pointer-events-none my-6 lg:my-0">
         <AnimatePresence mode="wait">
           {isCardOpen && activeHub && (
             <motion.div

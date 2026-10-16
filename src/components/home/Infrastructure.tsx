@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import Link from "next/link";
@@ -66,6 +66,13 @@ const highlights = [
 export function Infrastructure() {
   const [activeTab, setActiveTab] = useState(0);
   const activePillar = pillars[activeTab];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % pillars.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Dummy items for the background GridMotion
   const gridItems = [

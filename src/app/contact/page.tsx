@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { ContactIntro } from "@/components/contact/ContactIntro";
 import { ContactSupportInfo } from "@/components/contact/ContactSupportInfo";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { ContactMap } from "@/components/shared/ContactMap";
 import { ContactCTA } from "@/components/contact/ContactCTA";
 
 export const metadata: Metadata = {
@@ -27,8 +26,6 @@ export default function ContactPage() {
         subtitle="Formal Submission"
         description="Initiate a dialogue with our dedicated teams. Please provide specific project parameters or contextual details to ensure a prompt, accurate, and authoritative technical response."
       />
-      
-      <ContactMap />
       
       <ContactCTA 
         title="Reach Out Desk"
