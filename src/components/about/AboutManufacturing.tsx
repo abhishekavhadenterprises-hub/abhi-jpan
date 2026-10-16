@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
 import { Maximize2, TrendingUp, Cpu, CheckCircle2, Factory, Sparkles, Activity } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
@@ -108,7 +108,12 @@ export function AboutManufacturing() {
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [-25, 25]);
+  const rawImageY = useTransform(scrollYProgress, [0, 1], [-25, 25]);
+  const imageY = useSpring(rawImageY, {
+    stiffness: 90,
+    damping: 26,
+    mass: 0.5,
+  });
 
   return (
     <section

@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export interface PremiumHeroProps {
   title: string;
@@ -19,11 +19,17 @@ export function PremiumHero({ title, subtitle, description, imageSrc, badgeText 
     offset: ["start start", "end start"],
   });
 
-  // Premium Parallax Math
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 26,
+    mass: 0.5,
+  });
+
+  // Premium Parallax Math with consistent drag deceleration
+  const imageY = useTransform(smoothProgress, [0, 1], ["0%", "25%"]);
+  const imageScale = useTransform(smoothProgress, [0, 1], [1, 1.08]);
+  const textY = useTransform(smoothProgress, [0, 1], ["0%", "40%"]);
+  const textOpacity = useTransform(smoothProgress, [0, 0.8], [1, 0]);
 
   // Staggered Text Animation Variants
   const sentence = {

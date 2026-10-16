@@ -16,9 +16,9 @@ export function Footer() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 20,
-    mass: 1,
+    stiffness: 90,
+    damping: 26,
+    mass: 0.5,
     restDelta: 0.001,
   });
 

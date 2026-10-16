@@ -82,22 +82,17 @@ export function Infrastructure() {
 
   return (
     <section className="relative py-8 md:py-10 flex flex-col justify-center min-h-[72vh] bg-[#FAFAFA] dark:bg-[#050505] text-[#111] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
-      {/* Dynamic GridMotion Background */}
-      <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
-        <GridMotion items={gridItems} gradientColor="transparent" />
-      </div>
-
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 relative z-10 w-full">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-8 pb-4 border-b border-[#E5E5E5] dark:border-[#222]">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="max-w-3xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-3xl">
             <h2 className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#666] mb-4 sm:mb-6">Manufacturing Infrastructure</h2>
             <ScrollWipeHeading as="h3" className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08]">
               Industrial scale, <br />
               <span className="text-[#666]">aerospace precision.</span>
             </ScrollWipeHeading>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} className="max-w-md lg:pb-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.1 }} className="max-w-md lg:pb-4">
             <p className="text-[#666] dark:text-[#999] text-xs sm:text-sm md:text-base leading-relaxed font-light">
               Engineered across 6 automated facilities with robotic induction brazing, closed-loop CNC bending, and 100% vacuum chamber helium leak testing.
             </p>
@@ -130,66 +125,74 @@ export function Infrastructure() {
           })}
         </div>
 
-        {/* Active Facility Cinematic Window */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activePillar.id}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="relative min-h-[420px] sm:min-h-[380px] lg:min-h-[440px] rounded-2xl sm:rounded-3xl lg:rounded-[3rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] bg-[#0A0A0A] shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-2xl flex flex-col justify-end p-5 sm:p-6 lg:p-10 mb-6 sm:mb-8 lg:mb-10 group"
-          >
-            <Image
-              src={activePillar.image}
-              alt={activePillar.title}
-              fill
-              className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-            {/* Cinematic Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-transparent to-transparent" />
-            {/* Bottom Content Dossier */}
-            <div className="relative z-10 max-w-3xl">
-              {/* Pill Badge Container */}
-              <div className="mb-3 sm:mb-4">
-                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[10px] sm:text-[11px] tracking-[0.2em] text-white uppercase font-semibold shadow-sm">
-                  {activePillar.badge}
-                </span>
-              </div>
-
-              {/* Facility Title */}
-              <div className="block mb-2.5 sm:mb-3.5">
-                <ScrollWipeHeading
-                  as="h3"
-                  revealedColor="#FFFFFF"
-                  wipingColor="#93C5FD"
-                  unrevealedColor="rgba(255, 255, 255, 0.45)"
-                  className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight group-hover:translate-x-2 transition-transform duration-700"
-                >
-                  {activePillar.title}
-                </ScrollWipeHeading>
-              </div>
-
-              <p className="text-white/75 text-xs sm:text-sm md:text-base font-light leading-relaxed mb-4 sm:mb-6 max-w-2xl group-hover:translate-x-2 transition-transform duration-700 delay-75">
-                {activePillar.desc}
-              </p>
-
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-                <Link
-                  href="/about#infrastructure"
-                  className="group/btn px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white text-[#111] hover:bg-transparent hover:text-white border border-transparent hover:border-white font-semibold text-[10px] sm:text-xs uppercase tracking-widest transition-all duration-500 inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)] w-fit"
-                >
-                  <span>Explore Facility</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </Link>
-                <span className="font-mono text-[10px] sm:text-xs text-white/50 tracking-widest uppercase">
-                  {activePillar.stat}
-                </span>
-              </div>
+        {/* Active Facility Cinematic Window - Stable Frame, Silky Image & Text Cross-fade */}
+        <div className="relative min-h-[420px] sm:min-h-[380px] lg:min-h-[440px] rounded-2xl sm:rounded-3xl lg:rounded-[3rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] bg-[#0A0A0A] shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-2xl flex flex-col justify-end p-5 sm:p-6 lg:p-10 mb-6 sm:mb-8 lg:mb-10 group">
+          {/* Facility Background Photos with smooth hardware-accelerated cross-fade */}
+          {pillars.map((pillar, idx) => (
+            <div
+              key={pillar.id}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                activeTab === idx ? "opacity-100 z-0 pointer-events-auto" : "opacity-0 -z-10 pointer-events-none"
+              }`}
+            >
+              <Image
+                src={pillar.image}
+                alt={pillar.title}
+                fill
+                priority={idx === 0}
+                className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
             </div>
-          </motion.div>
-        </AnimatePresence>
+          ))}
+
+          {/* Cinematic Gradients (Permanent, zero repaint) */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent pointer-events-none z-[1]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-transparent to-transparent pointer-events-none z-[1]" />
+
+          {/* Bottom Content Dossier (Animated smoothly without collapsing) */}
+          <div className="relative z-10 max-w-3xl">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activePillar.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                {/* Pill Badge Container */}
+                <div className="mb-3 sm:mb-4">
+                  <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[10px] sm:text-[11px] tracking-[0.2em] text-white uppercase font-semibold shadow-sm">
+                    {activePillar.badge}
+                  </span>
+                </div>
+
+                {/* Facility Title */}
+                <div className="block mb-2.5 sm:mb-3.5">
+                  <h3 className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight">
+                    {activePillar.title}
+                  </h3>
+                </div>
+
+                <p className="text-white/75 text-xs sm:text-sm md:text-base font-light leading-relaxed mb-4 sm:mb-6 max-w-2xl">
+                  {activePillar.desc}
+                </p>
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+                  <Link
+                    href="/about#infrastructure"
+                    className="group/btn px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white text-[#111] hover:bg-transparent hover:text-white border border-transparent hover:border-white font-semibold text-[10px] sm:text-xs uppercase tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)] w-fit"
+                  >
+                    <span>Explore Facility</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  </Link>
+                  <span className="font-mono text-[10px] sm:text-xs text-white/50 tracking-widest uppercase">
+                    {activePillar.stat}
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
 
         {/* Bottom Technical Highlights Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-6 border-t border-[#E5E5E5] dark:border-[#222]">

@@ -6,14 +6,14 @@ import "lenis/dist/lenis.css";
 
 export function SmoothScroll() {
   useEffect(() => {
-    // Ultra-smooth, cinematic scrolling with responsive wheel travel
+    // Ultra-smooth, cinematic scrolling with authentic physical drag & weighted deceleration
     const lenis = new Lenis({
-      duration: 0.95,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.15,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4), // Quartic drag curve: natural viscous friction and silky settle
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.35, // Responsive scroll distance per wheel click
+      wheelMultiplier: 1.25, // Responsive yet weighted scroll travel
       touchMultiplier: 1.2,
       infinite: false,
     });

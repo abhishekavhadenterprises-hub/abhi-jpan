@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useMemo } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { 
   Download, 
   FileText, 
@@ -52,11 +52,17 @@ export function GenericInvestorHero({
     offset: ["start start", "end start"],
   });
 
-  // Parallax Calculations
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 26,
+    mass: 0.5,
+  });
+
+  // Parallax Calculations with consistent drag deceleration
+  const imageY = useTransform(smoothProgress, [0, 1], ["0%", "25%"]);
+  const imageScale = useTransform(smoothProgress, [0, 1], [1, 1.08]);
+  const textY = useTransform(smoothProgress, [0, 1], ["0%", "35%"]);
+  const textOpacity = useTransform(smoothProgress, [0, 0.8], [1, 0]);
 
   // Staggered 3D Character Animation Variants
   const sentence = {

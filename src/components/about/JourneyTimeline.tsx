@@ -147,8 +147,9 @@ export function JourneyTimeline() {
   });
 
   const pathLength = useSpring(scrollYProgress, {
-    stiffness: 220,
-    damping: 35,
+    stiffness: 90,
+    damping: 26,
+    mass: 0.5,
     restDelta: 0.001,
   });
 

@@ -144,10 +144,17 @@ export function Certifications() {
     offset: ["start start", "end end"],
   });
 
-  // Maps pinned scroll progress (0 to 1) to horizontal translation of the cards container
-  // Stops cleanly at -71% where the final Sanand Unit facility card is fully framed on the right,
-  // matching the user's exact placement with Daikin centered and Neemrana on the left, holding steadily before unpinning.
-  const x = useTransform(scrollYProgress, [0, 0.9, 1], ["0%", "-71%", "-71%"]);
+  // Deceleration curve approaching -71% to bleed off velocity naturally
+  const rawX = useTransform(scrollYProgress, [0, 0.7, 0.88, 0.96, 1], [0, -55, -68.5, -71, -71]);
+
+  // Spring physics with tuned damping (drag/friction) for a luxurious, cinematic stop
+  const smoothX = useSpring(rawX, {
+    stiffness: 90,
+    damping: 26, // Viscous drag that brings the cards to a silky, gradual halt
+    mass: 0.5,
+  });
+
+  const x = useTransform(smoothX, (v) => `${v}%`);
   
   // Clean, responsive header fade & subtle slide without fighting scroll
   const headerOpacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0.85, 1, 1, 0.85]);

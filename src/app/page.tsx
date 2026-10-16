@@ -46,6 +46,10 @@ export default function Home() {
         <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
           <ProductShowcase />
           <WhyChooseUs />
+        </div>
+
+        {/* Infrastructure - Isolated from backdrop-blur to eliminate GPU glitching */}
+        <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90">
           <Infrastructure />
         </div>
 
