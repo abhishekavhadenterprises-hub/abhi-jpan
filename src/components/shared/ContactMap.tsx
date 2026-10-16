@@ -177,7 +177,7 @@ export function ContactMap() {
   return (
     <section
       onClick={handleBackgroundClick}
-      className="relative w-full min-h-[95vh] lg:min-h-[110vh] xl:min-h-[115vh] bg-white dark:bg-[#070b14] overflow-hidden font-heading selection:bg-[#2E5E99] selection:text-white z-20 text-[#0D2440] dark:text-white transition-colors duration-500 py-12 lg:py-0 flex flex-col justify-center select-none"
+      className="relative w-full min-h-[85vh] lg:min-h-[92vh] xl:min-h-[95vh] bg-white dark:bg-[#070b14] overflow-hidden font-heading selection:bg-[#2E5E99] selection:text-white z-20 text-[#0D2440] dark:text-white transition-colors duration-500 py-8 lg:py-0 flex flex-col justify-center select-none"
     >
 
       {/* Dynamic Background Marquee */}

@@ -112,7 +112,7 @@ export function AboutSnapshot() {
   const activeModule = capabilityModules[activeModuleIndex];
 
   return (
-    <section className="px-4 md:px-8 py-6 relative overflow-hidden bg-[#FAFAFA] min-h-[90svh] flex flex-col justify-center">
+    <section className="px-4 md:px-8 py-8 sm:py-12 relative overflow-hidden bg-[#FAFAFA] dark:bg-[#091A2E] min-h-[75vh] flex flex-col justify-center">
       {/* Ambient background glow */}
       <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-l from-[#586854]/10 to-transparent blur-[100px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[800px] h-[800px] bg-gradient-to-r from-[#2E5E99]/5 to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />

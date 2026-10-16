@@ -72,7 +72,7 @@ export function AboutQuality() {
       id="about-quality"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative bg-slate-50 dark:bg-[#060e18] text-[#0D2440] dark:text-white border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden transition-colors duration-300 py-24 sm:py-32"
+      className="relative bg-slate-50 dark:bg-[#060e18] text-[#0D2440] dark:text-white border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden transition-colors duration-300 py-12 sm:py-16"
     >
       {/* Interactive Global Spotlight */}
       <motion.div
@@ -88,8 +88,8 @@ export function AboutQuality() {
       <div className="relative z-10 container-custom max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
-        <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-24">
-          <ScrollWipeHeading as="h2" className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-6">
+        <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10">
+          <ScrollWipeHeading as="h2" className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4 sm:mb-5">
             Uncompromising standards,{" "}
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
               verified at every cycle.
@@ -101,7 +101,7 @@ export function AboutQuality() {
         </div>
 
         {/* Premium Expanding Accordion */}
-        <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 h-[880px] sm:h-[820px] lg:h-[600px] w-full">
+        <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-5 h-[680px] sm:h-[620px] lg:h-[480px] w-full">
           {certifications.map((cert, i) => {
             const isActive = activeIdx === i;
 

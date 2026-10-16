@@ -120,7 +120,7 @@ export function AboutPresence() {
   return (
     <section
       id="about-presence"
-      className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center py-12 sm:py-16 md:py-24 bg-[#FAFAFA] dark:bg-[#071321] transition-colors duration-500 overflow-hidden border-b border-[#7BA4D0]/20 dark:border-white/10"
+      className="relative min-h-[70vh] flex flex-col justify-center py-10 sm:py-12 md:py-14 bg-[#FAFAFA] dark:bg-[#071321] transition-colors duration-500 overflow-hidden border-b border-[#7BA4D0]/20 dark:border-white/10"
     >
       {/* Dynamic Background Tint based on hovered item */}
       <div 

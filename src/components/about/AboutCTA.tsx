@@ -12,7 +12,7 @@ export function AboutCTA() {
   return (
     <section
       ref={containerRef}
-      className="relative py-10 sm:py-16 md:py-20 bg-white dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-t border-[#7BA4D0]/20 dark:border-white/10"
+      className="relative py-8 sm:py-12 md:py-14 bg-white dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-t border-[#7BA4D0]/20 dark:border-white/10"
     >
       <div className="container-custom relative z-10 w-full px-4 sm:px-6">
         {/* Short, Crisp & Summarised Elevated Card */}

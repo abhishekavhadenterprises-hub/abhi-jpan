@@ -81,7 +81,7 @@ export function Infrastructure() {
   ];
 
   return (
-    <section className="relative py-10 md:py-12 flex flex-col justify-center min-h-[90svh] bg-[#FAFAFA] dark:bg-[#050505] text-[#111] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
+    <section className="relative py-8 md:py-10 flex flex-col justify-center min-h-[72vh] bg-[#FAFAFA] dark:bg-[#050505] text-[#111] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
       {/* Dynamic GridMotion Background */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
         <GridMotion items={gridItems} gradientColor="transparent" />
@@ -105,7 +105,7 @@ export function Infrastructure() {
         </div>
 
         {/* Floating Facility Tab Selector */}
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-6 p-1.5 rounded-2xl sm:rounded-[2rem] bg-white/50 dark:bg-black/50 backdrop-blur-2xl border border-[#E5E5E5] dark:border-[#222] w-full sm:w-fit shadow-sm relative z-20">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-6 p-1.5 rounded-2xl sm:rounded-[2rem] bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] w-full sm:w-fit shadow-sm relative z-20">
           {pillars.map((pillar, idx) => {
             const isActive = activeTab === idx;
             const Icon = pillar.icon;
@@ -114,12 +114,12 @@ export function Infrastructure() {
               <button
                 key={pillar.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-full transition-all duration-500 flex items-center gap-2 sm:gap-3 ${isActive
-                    ? "bg-[#2E5E99] text-white shadow-lg scale-[1.02]"
-                    : "bg-transparent text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white hover:bg-white dark:hover:bg-[#222]"
+                className={`relative px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 ${isActive
+                    ? "bg-[#2E5E99] text-white shadow-md scale-[1.02]"
+                    : "bg-transparent text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
                   }`}
               >
-                <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? "text-white dark:text-[#111]" : "text-[#999]"}`} />
+                <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? "text-white" : "text-[#999]"}`} />
                 <div className="text-left">
                   <h3 className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider sm:tracking-widest ${isActive ? "opacity-100" : "opacity-80"}`}>
                     {pillar.title}
@@ -134,17 +134,17 @@ export function Infrastructure() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activePillar.id}
-            initial={{ opacity: 0, scale: 0.98, y: 20 }}
-            animate={{ opacity: 1, scale: 1.0, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -20 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative min-h-[420px] sm:min-h-[380px] lg:min-h-[440px] rounded-2xl sm:rounded-3xl lg:rounded-[3rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] bg-[#0A0A0A] shadow-[0_30px_80px_rgba(0,0,0,0.15)] dark:shadow-2xl flex flex-col justify-end p-5 sm:p-6 lg:p-10 mb-6 sm:mb-8 lg:mb-10 group"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="relative min-h-[420px] sm:min-h-[380px] lg:min-h-[440px] rounded-2xl sm:rounded-3xl lg:rounded-[3rem] overflow-hidden border border-[#E5E5E5] dark:border-[#222] bg-[#0A0A0A] shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-2xl flex flex-col justify-end p-5 sm:p-6 lg:p-10 mb-6 sm:mb-8 lg:mb-10 group"
           >
             <Image
               src={activePillar.image}
               alt={activePillar.title}
               fill
-              className="object-cover object-center brightness-[0.7] contrast-[1.1] opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-[2s] ease-out"
+              className="object-cover object-center opacity-85 group-hover:scale-105 transition-transform duration-700 ease-out"
             />
             {/* Cinematic Gradients */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
@@ -153,7 +153,7 @@ export function Infrastructure() {
             <div className="relative z-10 max-w-3xl">
               {/* Pill Badge Container */}
               <div className="mb-3 sm:mb-4">
-                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[10px] sm:text-[11px] tracking-[0.2em] text-white uppercase font-semibold backdrop-blur-md shadow-sm">
+                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-black/60 border border-white/20 text-[10px] sm:text-[11px] tracking-[0.2em] text-white uppercase font-semibold shadow-sm">
                   {activePillar.badge}
                 </span>
               </div>

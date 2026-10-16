@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useMotionValue, useMotionTemplate, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Cog, Box, ArrowUpRight } from "lucide-react";
 
 interface ProductCapability {
@@ -82,26 +82,15 @@ export function ProductShowcase() {
     return () => clearInterval(timer);
   }, []);
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
   return (
     <section className="relative py-12 md:py-16 bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white transition-colors duration-700 overflow-hidden border-b border-[#111]/10 dark:border-white/10">
-      {/* Ambient Glows */}
-      <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[80vw] h-[80vw] max-w-[1200px] max-h-[1200px] rounded-full bg-gradient-to-tr from-[#2E5E99]/5 dark:from-[#2E5E99]/10 to-transparent blur-[120px] absolute -left-[10%] top-0 mix-blend-multiply dark:mix-blend-screen"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] rounded-full bg-gradient-to-bl from-purple-500/5 dark:from-purple-900/10 to-transparent blur-[150px] absolute right-0 bottom-0 mix-blend-multiply dark:mix-blend-screen"
-        />
+      {/* Ambient Glows (Static CSS, zero GPU animation overhead) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full bg-[radial-gradient(circle,rgba(46,94,153,0.06)_0%,transparent_70%)] absolute -left-[10%] top-0" />
+        <div className="w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] rounded-full bg-[radial-gradient(circle,rgba(147,51,234,0.04)_0%,transparent_70%)] absolute right-0 bottom-0" />
       </div>
 
-      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[80svh]">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32 relative z-10 flex flex-col justify-center min-h-[70vh]">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 pb-4 border-b border-[#111]/5 dark:border-white/5">
           <div className="max-w-4xl">
@@ -120,10 +109,10 @@ export function ProductShowcase() {
             </ScrollWipeHeading>
           </div>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="max-w-lg lg:pb-4"
           >
             <p className="text-[#666] dark:text-[#999] text-xs sm:text-sm md:text-base leading-relaxed font-light">
@@ -133,14 +122,14 @@ export function ProductShowcase() {
         </div>
 
         {/* Premium Tab Selector Bar with Fluid Wrapping */}
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-6 p-1.5 rounded-2xl sm:rounded-full bg-white/60 dark:bg-black/60 backdrop-blur-2xl border border-white/40 dark:border-white/10 w-full sm:w-fit shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative z-20 mx-auto lg:mx-0">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 mb-6 p-1.5 rounded-2xl sm:rounded-full bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] w-full sm:w-fit shadow-sm relative z-20 mx-auto lg:mx-0">
           {capabilities.map((item, idx) => {
             const isActive = activeTab === idx;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(idx)}
-                className={`relative px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-full text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider sm:tracking-widest transition-colors duration-500 flex items-center gap-1.5 sm:gap-2 z-10 ${isActive
+                className={`relative px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-full text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider sm:tracking-widest transition-colors duration-300 flex items-center gap-1.5 sm:gap-2 z-10 ${isActive
                     ? "text-white dark:text-[#050505]"
                     : "text-[#666] dark:text-[#888] hover:text-[#111] dark:hover:text-white"
                   }`}
@@ -148,8 +137,8 @@ export function ProductShowcase() {
                 {isActive && (
                   <motion.div
                     layoutId="activeProductTab"
-                    className="absolute inset-0 bg-[#2E5E99] rounded-xl sm:rounded-full -z-10 shadow-[0_0_20px_rgba(46,94,153,0.4)]"
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    className="absolute inset-0 bg-[#2E5E99] rounded-xl sm:rounded-full -z-10 shadow-sm"
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
                   />
                 )}
                 <span className={`font-mono text-[8px] sm:text-[9px] ${isActive ? 'opacity-80' : 'opacity-50'}`}>{item.roman} //</span>
@@ -160,35 +149,16 @@ export function ProductShowcase() {
         </div>
 
         {/* Active Product Detailed Dossier */}
-        <div className="relative group/spotlight w-full">
+        <div className="relative w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeProduct.id}
-              initial={{ opacity: 0, scale: 0.98, y: 30, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.98, y: -20, filter: "blur(10px)" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch rounded-2xl sm:rounded-3xl lg:rounded-[3rem] bg-white/70 dark:bg-[#0A0A0A]/70 backdrop-blur-3xl border border-white/50 dark:border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.07)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.4)] overflow-hidden group"
-              onMouseMove={(e: MouseEvent<HTMLDivElement>) => {
-                const { left, top } = e.currentTarget.getBoundingClientRect();
-                mouseX.set(e.clientX - left);
-                mouseY.set(e.clientY - top);
-              }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch rounded-2xl sm:rounded-3xl lg:rounded-[3rem] bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#222] shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] overflow-hidden group"
             >
-              {/* React Bits Spotlight Overlay */}
-              <motion.div
-                className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl lg:rounded-[3rem] opacity-0 transition-opacity duration-500 group-hover/spotlight:opacity-100 z-50 mix-blend-overlay"
-                style={{
-                  background: useMotionTemplate`
-                    radial-gradient(
-                      800px circle at ${mouseX}px ${mouseY}px,
-                      rgba(255, 255, 255, 0.15),
-                      transparent 80%
-                    )
-                  `,
-                }}
-              />
-
               {/* Left Column: Technical Dossier */}
               <div className="lg:col-span-6 flex flex-col justify-between p-5 sm:p-7 lg:p-8 z-10 relative">
                 <div>

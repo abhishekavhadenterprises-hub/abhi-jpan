@@ -114,7 +114,7 @@ export function AboutManufacturing() {
     <section
       id="about-manufacturing"
       ref={containerRef}
-      className="relative py-16 sm:py-20 md:py-28 lg:py-36 bg-slate-50/50 dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
+      className="relative py-10 sm:py-14 md:py-16 bg-slate-50/50 dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden"
     >
       <div className="container-custom relative z-10 w-full">
         {/* ========================================================
@@ -125,7 +125,7 @@ export function AboutManufacturing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl mb-10 sm:mb-16 md:mb-20"
+          className="max-w-4xl mb-8 sm:mb-10 md:mb-12"
         >
           <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4 sm:mb-6">
             High-throughput capacity, <br />

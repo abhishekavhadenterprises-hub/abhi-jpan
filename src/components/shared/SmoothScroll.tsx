@@ -6,15 +6,15 @@ import "lenis/dist/lenis.css";
 
 export function SmoothScroll() {
   useEffect(() => {
-    // Smooth, buttery scrolling configuration
+    // Ultra-smooth, cinematic scrolling with responsive wheel travel
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 0.95,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.0, // Standard smooth scrolling instead of aggressive jumping
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.35, // Responsive scroll distance per wheel click
+      touchMultiplier: 1.2,
       infinite: false,
     });
 

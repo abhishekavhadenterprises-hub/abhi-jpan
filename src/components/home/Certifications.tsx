@@ -141,43 +141,38 @@ export function Certifications() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start start", "end end"],
   });
 
-  // Maps scroll progress (0 to 1) to horizontal translation of the cards container
-  // We translate by -75% so that the last cards come into view but we don't scroll off-screen completely
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  // Maps pinned scroll progress (0 to 1) to horizontal translation of the cards container
+  // Stops cleanly at -71% where the final Sanand Unit facility card is fully framed on the right,
+  // matching the user's exact placement with Daikin centered and Neemrana on the left, holding steadily before unpinning.
+  const x = useTransform(scrollYProgress, [0, 0.9, 1], ["0%", "-71%", "-71%"]);
   
-  // Animate the text horizontally: Start from left (-40vw), move to center (0vw), stay, then exit right (100vw)
-  const rawTextX = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["-40vw", "0vw", "0vw", "100vw"]);
-  
-  // Add physics-based smoothness
-  const textX = useSpring(rawTextX, {
-    stiffness: 70,
-    damping: 20,
-    mass: 1.2
-  });
+  // Clean, responsive header fade & subtle slide without fighting scroll
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0.85, 1, 1, 0.85]);
 
   return (
     <section
       id="awards-recognition"
       ref={targetRef}
-      className="relative h-[400vh] bg-transparent text-[#111] dark:text-white"
+      className="relative h-[280vh] bg-transparent text-[#111] dark:text-white"
     >
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-b border-[#E5E5E5]/50 dark:border-[#222]/50">
         
-        {/* Section Header (Slides in, stays, slides out) */}
+        {/* Section Header */}
         <motion.div 
-          style={{ x: textX }}
-          className="max-w-[1400px] mx-auto px-6 md:px-12 relative w-full mb-12 text-center flex flex-col items-center pointer-events-none"
+          style={{ opacity: headerOpacity }}
+          className="max-w-[1400px] mx-auto px-6 md:px-12 relative w-full mb-8 sm:mb-10 text-center flex flex-col items-center pointer-events-none"
         >
-          <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl md:text-5xl lg:text-[5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] uppercase whitespace-normal sm:whitespace-nowrap">
+          <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] uppercase whitespace-normal sm:whitespace-nowrap">
             What partners <span className="text-[#666]">are saying.</span>
           </ScrollWipeHeading>
         </motion.div>
 
         {/* Horizontal Scrolling Track */}
         <div className="relative w-full overflow-hidden flex items-center">
-          <motion.div style={{ x }} className="flex gap-4 sm:gap-6 md:gap-10 px-4 sm:px-[10vw] md:px-[20vw]">
+          <motion.div style={{ x }} className="flex gap-4 sm:gap-6 md:gap-10 px-4 sm:px-[10vw] md:px-[20vw] pr-[28vw]">
             {allStreamItems.map((item, idx) => (
               <div 
                 key={`${item.id}-${idx}`} 

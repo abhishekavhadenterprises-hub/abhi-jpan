@@ -124,7 +124,7 @@ export function AboutWhyChooseUs() {
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/80 via-transparent to-white/90 dark:from-[#071321]/80 dark:via-transparent dark:to-[#071321]/90 pointer-events-none" />
 
-      <div className="container-custom relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+      <div className="container-custom relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="flex flex-col lg:flex-row gap-12 sm:gap-16 lg:gap-24 items-start">
 
           {/* Left Side: Sticky Header and Context */}

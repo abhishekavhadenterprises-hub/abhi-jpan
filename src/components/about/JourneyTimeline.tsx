@@ -147,8 +147,8 @@ export function JourneyTimeline() {
   });
 
   const pathLength = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 220,
+    damping: 35,
     restDelta: 0.001,
   });
 
@@ -156,11 +156,11 @@ export function JourneyTimeline() {
     <section
       id="journey-timeline"
       ref={containerRef}
-      className="py-14 md:py-20 bg-white dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 overflow-hidden relative border-b border-[#7BA4D0]/20 dark:border-white/10"
+      className="py-10 md:py-14 bg-white dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 overflow-hidden relative border-b border-[#7BA4D0]/20 dark:border-white/10"
     >
       <div className="container-custom relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="text-center max-w-4xl mx-auto mb-10 md:mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-8 md:mb-10">
           <ScrollWipeHeading as="h2" className="text-3xl sm:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white mb-4 sm:mb-6 tracking-tight leading-[1.1]">
             Company{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E5E99] via-[#4A7BB0] to-[#7BA4D0]">
@@ -199,7 +199,7 @@ export function JourneyTimeline() {
           </div>
 
           {/* Unit Milestone List - Compact Spacing for Smooth, Effortless Scrolling */}
-          <div className="space-y-8 sm:space-y-10 md:space-y-12 relative">
+          <div className="space-y-5 sm:space-y-6 md:space-y-7 relative">
             {units.map((unit, idx) => (
               <div
                 key={unit.id}

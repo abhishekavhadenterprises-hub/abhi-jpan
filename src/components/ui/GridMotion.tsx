@@ -19,39 +19,46 @@ const GridMotion = ({ items = [], gradientColor = 'black' }: GridMotionProps) =>
   const combinedItems = items.length > 0 ? items.slice(0, totalItems) : defaultItems;
 
   useEffect(() => {
-    gsap.ticker.lagSmoothing(0);
+    let rafId: number | null = null;
+    let isVisible = false;
+    const maxMoveAmount = 140;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+
+    if (gridRef.current) {
+      observer.observe(gridRef.current);
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseXRef.current = e.clientX;
-    };
-
-    const updateMotion = () => {
-      const maxMoveAmount = 300;
-      const baseDuration = 0.8;
-      const inertiaFactors = [0.6, 0.4, 0.3, 0.2];
-
-      rowRefs.current.forEach((row, index) => {
-        if (row) {
-          const direction = index % 2 === 0 ? 1 : -1;
-          const moveAmount = ((mouseXRef.current / window.innerWidth) * maxMoveAmount - maxMoveAmount / 2) * direction;
-
-          gsap.to(row, {
-            x: moveAmount,
-            duration: baseDuration + inertiaFactors[index % inertiaFactors.length],
-            ease: 'power3.out',
-            overwrite: 'auto'
-          });
-        }
+      if (!isVisible || rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        const ratio = (e.clientX / window.innerWidth) - 0.5;
+        rowRefs.current.forEach((row, index) => {
+          if (row) {
+            const direction = index % 2 === 0 ? 1 : -1;
+            gsap.to(row, {
+              x: ratio * maxMoveAmount * direction,
+              duration: 1.0,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          }
+        });
+        rafId = null;
       });
     };
 
-    const removeAnimationLoop = gsap.ticker.add(updateMotion);
-
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
-      removeAnimationLoop();
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 

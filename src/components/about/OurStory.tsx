@@ -142,7 +142,7 @@ export function OurStory() {
     <section
       id="our-story"
       ref={sectionRef}
-      className="relative py-16 sm:py-24 md:py-32 bg-[#FAFAFA] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden perspective-[2000px]"
+      className="relative py-10 sm:py-14 md:py-16 bg-[#FAFAFA] dark:bg-[#071321] text-[#0D2440] dark:text-white transition-colors duration-300 border-b border-[#7BA4D0]/20 dark:border-white/10 overflow-hidden perspective-[2000px]"
     >
       {/* Background Architectural Grid Lines */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]">
@@ -153,7 +153,7 @@ export function OurStory() {
 
       <div className="container-custom relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="max-w-4xl mx-auto text-center mb-10 sm:mb-16 md:mb-20">
+        <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-10 md:mb-12">
           <ScrollWipeHeading as="h2" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4 sm:mb-6">
             Precision that builds <br />
             <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-light italic">
