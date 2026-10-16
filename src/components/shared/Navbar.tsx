@@ -120,7 +120,7 @@ export function Navbar() {
         className={cn(
           "pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border-slate-200/90 dark:border-white/10 shadow-[0_12px_40px_rgba(13,36,64,0.08)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.6)] transform-gpu will-change-[width,max-width,margin,border-radius]",
           isScrolled
-            ? "w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-6xl xl:max-w-7xl h-14 sm:h-[60px] px-4 sm:px-6 rounded-full mt-2.5 sm:mt-3 border shadow-[0_16px_45px_rgba(13,36,64,0.12)]"
+            ? "w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-6xl xl:max-w-7xl h-14 sm:h-[60px] px-4 sm:px-6 rounded-xl sm:rounded-2xl mt-2.5 sm:mt-3 border shadow-[0_16px_45px_rgba(13,36,64,0.12)]"
             : "w-full max-w-full h-16 sm:h-[72px] px-5 sm:px-8 xl:px-12 rounded-none border-b border-x-0 border-t-0 mt-0"
         )}
       >
