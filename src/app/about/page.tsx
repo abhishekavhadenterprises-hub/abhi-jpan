@@ -5,8 +5,6 @@ import { VisionMission } from "@/components/about/VisionMission";
 import { JourneyTimeline } from "@/components/about/JourneyTimeline";
 import { Leadership } from "@/components/about/Leadership";
 import { AboutManufacturing } from "@/components/about/AboutManufacturing";
-import { AboutQuality } from "@/components/about/AboutQuality";
-import { AboutPresence } from "@/components/about/AboutPresence";
 import { AboutWhyChooseUs } from "@/components/about/AboutWhyChooseUs";
 import { AboutCTA } from "@/components/about/AboutCTA";
 
@@ -25,8 +23,6 @@ export default function AboutPage() {
       <JourneyTimeline />
       <Leadership />
       <AboutManufacturing />
-      <AboutQuality />
-      <AboutPresence />
       <AboutWhyChooseUs />
       <AboutCTA />
     </>

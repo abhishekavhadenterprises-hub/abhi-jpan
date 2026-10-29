@@ -212,7 +212,7 @@ export function Navbar() {
 
           {/* Roveia-style Black/Navy Pill Button */}
           <Link
-            href="/contact"
+            href="/contact#enquiry-form"
             className="group hidden sm:inline-flex items-center gap-3 bg-[#0D2440] hover:bg-[#2E5E99] text-white font-sans font-bold text-xs uppercase tracking-wider pl-5 pr-2 py-2 rounded-full transition-all duration-300 shadow-md shadow-[#0D2440]/15 hover:shadow-lg hover:shadow-[#2E5E99]/25 active:scale-95 shrink-0"
           >
             <span>Get in touch</span>
@@ -330,7 +330,7 @@ export function Navbar() {
 
           {/* Mobile Action Button */}
           <Link
-            href="/contact"
+            href="/contact#enquiry-form"
             onClick={() => setIsOpen(false)}
             className="mt-3 flex items-center justify-center gap-2 bg-[#0D2440] hover:bg-[#2E5E99] text-white font-sans font-bold text-xs uppercase tracking-wider py-3.5 rounded-full transition-colors shadow-md"
           >

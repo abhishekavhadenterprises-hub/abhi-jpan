@@ -2,12 +2,8 @@ import { Hero } from "@/components/home/Hero";
 import { AboutSnapshot } from "@/components/home/AboutSnapshot";
 import { Industries } from "@/components/home/Industries";
 import { ProductShowcase } from "@/components/home/ProductShowcase";
-import { WhyChooseUs } from "@/components/home/WhyChooseUs";
-import { Infrastructure } from "@/components/home/Infrastructure";
 import { Certifications } from "@/components/home/Certifications";
 import { CTAStrip } from "@/components/home/CTAStrip";
-import { ContactPreview } from "@/components/home/ContactPreview";
-import { ContactMap } from "@/components/shared/ContactMap";
 import GridMotion from "@/components/ui/GridMotion";
 
 import { ScrollRestoration } from "@/components/shared/ScrollRestoration";
@@ -33,7 +29,7 @@ export default function Home() {
 
       {/* 2. Middle Content Sections */}
       <div className="relative w-full z-10 bg-transparent transition-colors duration-500">
-        
+
         {/* About Snapshot */}
         <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
           <AboutSnapshot />
@@ -45,12 +41,6 @@ export default function Home() {
         {/* Middle Sections */}
         <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
           <ProductShowcase />
-          <WhyChooseUs />
-        </div>
-
-        {/* Infrastructure - Isolated from backdrop-blur to eliminate GPU glitching */}
-        <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90">
-          <Infrastructure />
         </div>
 
         {/* Certifications - No backdrop-blur parent to allow sticky to work */}
@@ -61,14 +51,8 @@ export default function Home() {
         {/* Bottom chunk with blur */}
         <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
           <CTAStrip />
-          <ContactPreview />
         </div>
 
-      </div>
-
-      {/* 3. Globe Section (<ContactMap />) - 100% Protected from any canvas or wave effect */}
-      <div className="relative w-full z-30 bg-[#F8FAFC] dark:bg-[#091A2E]">
-        <ContactMap />
       </div>
     </div>
   );

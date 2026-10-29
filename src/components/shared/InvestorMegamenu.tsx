@@ -61,7 +61,6 @@ const pillarBoxes: PillarBox[] = [
       { id: "fin-results", title: "Financial Results", href: "/financial-results", icon: Icon3DFinancialResults },
       { id: "inv-meet", title: "Investor Meet Intimation", href: "/investor-meet-intimation", icon: Icon3DPresentation },
       { id: "inv-pres", title: "Investor Presentation", href: "/investor-presentation", icon: Icon3DPresentation },
-      { id: "press-rel", title: "Press Releases", href: "/press-releases", icon: Icon3DDocument },
       { id: "call-audio", title: "Call Audio Recordings", href: "/call-audio-recordings", icon: Icon3DAudio },
       { id: "call-trans", title: "Call Transcripts", href: "/call-transcripts", icon: Icon3DDocument },
       { id: "news-pub", title: "Newspaper Publications", href: "/newspaper-publication", icon: Icon3DNewspaper },

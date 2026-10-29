@@ -4,6 +4,7 @@ import { ContactIntro } from "@/components/contact/ContactIntro";
 import { ContactSupportInfo } from "@/components/contact/ContactSupportInfo";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactCTA } from "@/components/contact/ContactCTA";
+import { ContactMap } from "@/components/shared/ContactMap";
 
 export const metadata: Metadata = {
   title: "Contact Us | J Pan Tubular Components Limited",
@@ -32,6 +33,9 @@ export default function ContactPage() {
         subtitle="Authorized Channels"
         description="Our designated representatives are available to assist with comprehensive technical specifications, institutional pricing structures, or strategic partnership opportunities."
       />
+
+      {/* Interactive Global/Domestic Hubs Map Section */}
+      <ContactMap />
     </main>
   );
 }
