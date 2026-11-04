@@ -121,10 +121,11 @@ export function Footer() {
 
               <div>
                 <h4 className="text-[9px] tracking-[0.2em] text-gray-400 uppercase font-bold mb-4">Location</h4>
-                <p className="text-gray-500 text-sm font-light leading-relaxed">
-                  Neemrana, Rajasthan <br />
-                  Sanand, Gujarat <br />
-                  India
+                <p className="text-gray-500 text-xs sm:text-sm font-light leading-relaxed">
+                  B-2/31, 32 &amp; 42, Site-B, <br />
+                  Surajpur Industrial Area, Greater Noida, <br />
+                  Gautam Buddha Nagar 201306, <br />
+                  Uttar Pradesh, India.
                 </p>
               </div>
             </div>
