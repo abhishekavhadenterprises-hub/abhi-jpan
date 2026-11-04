@@ -164,18 +164,18 @@ export function QualityImprovement() {
       className="py-12 sm:py-16 md:py-24 bg-[#F8FAFC]/50 dark:bg-black/50 overflow-hidden transition-colors border-y border-[#7BA4D0]/15"
     >
       <div className="container-custom px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16">
-          <div className="mb-4 sm:mb-6 overflow-visible">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16 flex flex-col items-center">
+          <div className="mb-4 sm:mb-6 overflow-visible flex flex-col items-center w-full">
             <ScrollWipeHeading
               as="h2"
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight block mx-auto text-center"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
             >
               The Path of
             </ScrollWipeHeading>
-            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight">
+            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight text-center">
               Continuous Improvement
             </div>
           </div>
