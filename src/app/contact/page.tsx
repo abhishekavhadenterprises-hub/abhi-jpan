@@ -1,7 +1,5 @@
 import React from "react";
 import { Metadata } from "next";
-import { ContactIntro } from "@/components/contact/ContactIntro";
-import { ContactSupportInfo } from "@/components/contact/ContactSupportInfo";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactCTA } from "@/components/contact/ContactCTA";
 import { ContactMap } from "@/components/shared/ContactMap";
@@ -13,15 +11,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="bg-white dark:bg-charcoal min-h-screen selection:bg-gold/30 selection:text-white">
-      <ContactIntro 
-        title="Direct Engagement"
-        subtitle="Corporate Communication"
-        description="We prioritize open and transparent dialogue with our stakeholders. Our specialized technical and corporate teams are positioned to address your inquiries regarding engineering solutions, institutional partnerships, and operational capabilities with uncompromising professional rigor."
-      />
-      
-      <ContactSupportInfo />
-      
+    <main className="bg-white dark:bg-charcoal min-h-screen selection:bg-gold/30 selection:text-white pt-20 sm:pt-24">
       <ContactForm 
         title="Digital Inquiry"
         subtitle="Formal Submission"
