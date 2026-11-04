@@ -77,8 +77,9 @@ export function Industries() {
               priority={idx === 0}
               className="object-cover object-center scale-100 transition-transform duration-700 ease-out filter contrast-105 brightness-95"
             />
-            {/* Subtle 20% Blur & Gentle Gradient so foreground text reads comfortably while image remains recognizable */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#EEF5FC]/35 via-transparent to-[#EEF5FC]/45 dark:from-[#081220]/45 dark:via-transparent dark:to-[#081220]/55 backdrop-blur-[2px] pointer-events-none" />
+            {/* Scrim overlay: richer darkened contrast so header text reads with 100% clarity over any photo */}
+            <div className="absolute inset-0 bg-[#081220]/55 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#081220]/80 via-transparent to-[#081220]/85 pointer-events-none" />
           </div>
         ))}
       </div>
@@ -96,7 +97,7 @@ export function Industries() {
 
       <div className="container-custom relative z-10">
         {/* =========================================================================
-           SECTION HEADER
+           SECTION HEADER - Dynamic high-contrast color transitions when card is hovered
            ========================================================================= */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16 md:mb-20 space-y-4">
           {/* Top Tag: STRATEGIC EXCELLENCE with flanking decorative lines */}
@@ -105,22 +106,33 @@ export function Industries() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 text-[#2E5E99] dark:text-[#7BA4D0]"
+            className={cn(
+              "flex items-center justify-center gap-3 transition-colors duration-500",
+              hoveredIdx !== null ? "text-[#7BA4D0]" : "text-[#2E5E99] dark:text-[#7BA4D0]"
+            )}
           >
-            <span className="w-8 sm:w-12 h-[1.5px] bg-[#2E5E99]/40 dark:bg-[#7BA4D0]/40" />
+            <span className={cn("w-8 sm:w-12 h-[1.5px] transition-colors duration-500", hoveredIdx !== null ? "bg-[#7BA4D0]" : "bg-[#2E5E99]/40 dark:bg-[#7BA4D0]/40")} />
             <span className="text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase">
               STRATEGIC EXCELLENCE
             </span>
-            <span className="w-8 sm:w-12 h-[1.5px] bg-[#2E5E99]/40 dark:bg-[#7BA4D0]/40" />
+            <span className={cn("w-8 sm:w-12 h-[1.5px] transition-colors duration-500", hoveredIdx !== null ? "bg-[#7BA4D0]" : "bg-[#2E5E99]/40 dark:bg-[#7BA4D0]/40")} />
           </motion.div>
 
-          {/* Main Title: Pioneering Critical Solutions with ScrollWipe Heading matching ProductShowcase */}
+          {/* Main Title: Pioneering Critical Solutions */}
           <ScrollWipeHeading
             as="h2"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] text-center mx-auto"
+            className={cn(
+              "text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-light tracking-tight leading-[1.08] text-center mx-auto transition-colors duration-500",
+              hoveredIdx !== null
+                ? "text-white"
+                : "text-[#111] dark:text-white"
+            )}
           >
             Pioneering <br />
-            <span className="text-[#666] dark:text-[#888]">
+            <span className={cn(
+              "transition-colors duration-500",
+              hoveredIdx !== null ? "text-slate-200" : "text-[#666] dark:text-[#888]"
+            )}>
               Critical Solutions
             </span>
           </ScrollWipeHeading>
@@ -131,7 +143,12 @@ export function Industries() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-[15px] leading-relaxed max-w-2xl mx-auto font-normal px-2"
+            className={cn(
+              "text-xs sm:text-sm md:text-[15px] leading-relaxed max-w-2xl mx-auto font-normal px-2 transition-colors duration-500",
+              hoveredIdx !== null
+                ? "text-slate-100 font-medium"
+                : "text-slate-600 dark:text-slate-300"
+            )}
           >
             From HVAC and refrigeration systems to automotive, home appliances, industrial machinery, and modern data center cooling infrastructure — our precision-engineered components power the technologies driving today&apos;s industries.
           </motion.p>

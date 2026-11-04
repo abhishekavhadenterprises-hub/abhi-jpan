@@ -7,7 +7,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Preloader } from "./Preloader";
-import SpotlightCard from "@/components/ui/SpotlightCard";
 
 export function Hero() {
   const [isRevealed, setIsRevealed] = useState(false);
@@ -126,8 +125,8 @@ export function Hero() {
         {/* Main Hero Content */}
         <div className="w-full max-w-[94%] xl:max-w-[1440px] 2xl:max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto py-1">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center justify-between">
-            {/* Left Column: Monumental Clean Headline & Narrative */}
-            <div className="lg:col-span-8 flex flex-col justify-center">
+            {/* Monumental Clean Headline & Narrative */}
+            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center -translate-y-2 sm:-translate-y-4 lg:-translate-y-6">
               <motion.div
                 initial={{ x: -60, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -60, opacity: 0 }}
@@ -145,13 +144,13 @@ export function Hero() {
                 initial={{ x: -50, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-                className="mt-4 sm:mt-5 max-w-2xl"
+                className="mt-3 sm:mt-3.5 max-w-3xl xl:max-w-4xl"
               >
-                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-[#2E5E99] dark:text-slate-600 dark:text-slate-300 tracking-wide mb-2 sm:mb-3">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-black dark:text-white font-medium tracking-wide mb-1.5 sm:mb-2">
                   Under extreme pressure.
                 </h2>
-                <p className="text-xs sm:text-sm md:text-[15px] text-slate-700 dark:text-slate-200 font-medium leading-relaxed drop-shadow-[0_1px_4px_rgba(255,255,255,0.7)] dark:drop-shadow-none">
-                  A <strong className="text-[#0D2440] dark:text-white font-semibold">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-[#0D2440] dark:text-white font-semibold">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
+                <p className="text-xs sm:text-sm md:text-[15px] text-black dark:text-white font-semibold leading-relaxed">
+                  A <strong className="text-black dark:text-white font-black">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-black dark:text-white font-black">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
                 </p>
               </motion.div>
 
@@ -160,7 +159,7 @@ export function Hero() {
                 initial={{ x: -40, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -40, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
-                className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3.5"
+                className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3.5"
               >
                 {/* Primary Pill: Executive Royal Navy */}
                 <Link
@@ -184,23 +183,8 @@ export function Hero() {
                 </Link>
               </motion.div>
             </div>
-
-            {/* Right Column: Industrial Sector Dossier & Reference Watermark */}
-            <div className="lg:col-span-4 flex flex-col justify-end items-start lg:items-end self-stretch pt-2 lg:pt-0">
-
-              {/* Reference Script Watermark: precision engineering */}
-              <motion.div
-                initial={{ x: 60, opacity: 0 }}
-                animate={isRevealed ? { x: 0, opacity: 1 } : { x: 60, opacity: 0 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}
-                className="font-heading italic text-2xl sm:text-3xl text-slate-600 dark:text-slate-300/70 dark:text-white/20 tracking-wide select-none pt-4 lg:pt-3 text-right"
-              >
-                precision engineering
-              </motion.div>
-            </div>
           </div>
         </div>
-
 
       </section>
     </>

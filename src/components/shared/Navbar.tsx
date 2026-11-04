@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
 import { InvestorMegamenu } from "./InvestorMegamenu";
 import { ProductsMegamenu } from "./ProductsMegamenu";
 import { MediaMegamenu } from "./MediaMegamenu";
@@ -206,10 +205,8 @@ export function Navbar() {
           })}
         </div>
 
-        {/* Right Shelf: Theme Toggle + Roveia Pill CTA Button */}
+        {/* Right Shelf: Roveia Pill CTA Button */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <ThemeToggle />
-
           {/* Roveia-style Black/Navy Pill Button */}
           <Link
             href="/contact#enquiry-form"

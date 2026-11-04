@@ -38,8 +38,8 @@ export default function Home() {
         {/* Industries - Corporate Blue Curved Wheel Section (Isolated from backdrop-blur for flawless sticky scroll) */}
         <Industries />
 
-        {/* Middle Sections */}
-        <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90 backdrop-blur-md">
+        {/* Product Showcase - Isolated from backdrop-blur for sticky scroll synchronization */}
+        <div className="bg-[#F8FAFC]/90 dark:bg-[#091A2E]/90">
           <ProductShowcase />
         </div>
 

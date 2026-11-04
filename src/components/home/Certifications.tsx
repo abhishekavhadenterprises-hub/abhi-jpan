@@ -4,7 +4,6 @@ import React, { useRef } from "react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import { Star } from "lucide-react";
-import DriftWall from "@/components/ui/DriftWall";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export interface TestimonialCard {
@@ -75,23 +74,6 @@ export const allStreamItems: StreamItem[] = [
   },
   {
     type: "review",
-    id: "samsung-ehs",
-    rating: 5,
-    quote:
-      "Commendable adherence to Environmental, Health, Safety (EHS) protocols and clean manufacturing standards. Their automated facility sets an industry benchmark for precision manufacturing.",
-    author: "Vendor Quality Assurance",
-    role: "Manufacturing Audit Team",
-    company: "Samsung",
-    award: "EHS Activities Appreciation",
-  },
-  {
-    type: "photo",
-    id: "photo-infra",
-    image: "/images/infrastructure.png",
-    title: "Robotic Induction Brazing & Automated Production Cell",
-  },
-  {
-    type: "review",
     id: "lg-sps",
     rating: 5,
     quote:
@@ -102,21 +84,10 @@ export const allStreamItems: StreamItem[] = [
     award: "SPS Level 4 Certified",
   },
   {
-    type: "review",
-    id: "wabtec-2018",
-    rating: 5,
-    quote:
-      "High-endurance stainless steel tubular components engineered for severe operating environments and extreme vibration transit lines with zero field failures.",
-    author: "Locomotive Engineering Lead",
-    role: "Strategic Component Sourcing",
-    company: "Wabtec Corporation",
-    award: "Supplier Excellence Award",
-  },
-  {
     type: "photo",
-    id: "photo-neemrana",
-    image: "/engineering_precision_facility_1778657209621.png",
-    title: "Neemrana Precision Manufacturing Hub · DMIC Corridor",
+    id: "photo-infra",
+    image: "/images/infrastructure.png",
+    title: "Robotic Induction Brazing & Automated Production Cell",
   },
   {
     type: "review",
@@ -129,12 +100,6 @@ export const allStreamItems: StreamItem[] = [
     company: "Daikin India",
     award: "Zero Defect Vendor 2024",
   },
-  {
-    type: "photo",
-    id: "photo-sanand",
-    image: "/premium_infrastructure_facility_1778674475991.png",
-    title: "Sanand Unit · Tier-1 High-Volume Production Cell",
-  },
 ];
 
 export function Certifications() {
@@ -144,32 +109,42 @@ export function Certifications() {
     offset: ["start start", "end end"],
   });
 
-  // Deceleration curve approaching -71% to bleed off velocity naturally
-  const rawX = useTransform(scrollYProgress, [0, 0.7, 0.88, 0.96, 1], [0, -55, -68.5, -71, -71]);
+  // Direct, smooth mapping calibrated across the 8-card section
+  // Glides to -56.5% by scrollYProgress 0.82 so the final Daikin card settles into full view
+  // and holds steadily through 1.0 before unpinning to scroll down
+  const rawX = useTransform(scrollYProgress, [0, 0.82, 1], [0, -56.5, -56.5]);
 
-  // Spring physics with tuned damping (drag/friction) for a luxurious, cinematic stop
+  // Cinematic weighted spring: Gentle glide with smooth momentum
   const smoothX = useSpring(rawX, {
-    stiffness: 90,
-    damping: 26, // Viscous drag that brings the cards to a silky, gradual halt
-    mass: 0.5,
+    stiffness: 80,
+    damping: 25,
+    mass: 0.65,
   });
 
   const x = useTransform(smoothX, (v) => `${v}%`);
-  
-  // Clean, responsive header fade & subtle slide without fighting scroll
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0.85, 1, 1, 0.85]);
+
+  // Heading slides in from the left (-28vw) to center (0vw) upon entering section
+  const rawHeadingX = useTransform(scrollYProgress, [0, 0.14], ["-28vw", "0vw"]);
+  const headingX = useSpring(rawHeadingX, {
+    stiffness: 85,
+    damping: 24,
+    mass: 0.7,
+  });
+
+  // Clean, responsive header fade
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.06, 0.94, 1], [0.85, 1, 1, 0.85]);
 
   return (
     <section
       id="awards-recognition"
       ref={targetRef}
-      className="relative h-[280vh] bg-transparent text-[#111] dark:text-white"
+      className="relative h-[238vh] bg-transparent text-[#111] dark:text-white"
     >
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-b border-[#E5E5E5]/50 dark:border-[#222]/50">
-        
-        {/* Section Header */}
-        <motion.div 
-          style={{ opacity: headerOpacity }}
+
+        {/* Section Header with Left-to-Center Slide */}
+        <motion.div
+          style={{ x: headingX, opacity: headerOpacity }}
           className="max-w-[1400px] mx-auto px-6 md:px-12 relative w-full mb-8 sm:mb-10 text-center flex flex-col items-center pointer-events-none"
         >
           <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-light tracking-tight text-[#111] dark:text-white leading-[1.08] uppercase whitespace-normal sm:whitespace-nowrap">
@@ -181,8 +156,8 @@ export function Certifications() {
         <div className="relative w-full overflow-hidden flex items-center">
           <motion.div style={{ x }} className="flex gap-4 sm:gap-6 md:gap-10 px-4 sm:px-[10vw] md:px-[20vw] pr-[28vw]">
             {allStreamItems.map((item, idx) => (
-              <div 
-                key={`${item.id}-${idx}`} 
+              <div
+                key={`${item.id}-${idx}`}
                 className="w-[min(85vw,360px)] sm:w-[380px] h-[420px] sm:h-[480px] shrink-0"
               >
                 <CardRenderer item={item} />
