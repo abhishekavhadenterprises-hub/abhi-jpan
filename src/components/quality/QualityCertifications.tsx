@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { Shield, FileCheck, Globe, Award, CheckCircle2 } from "lucide-react";
+import { Shield, FileCheck, Globe, Award, CheckCircle2, Clock } from "lucide-react";
 import { motion, useInView, useMotionValue, useMotionTemplate, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
@@ -103,10 +103,10 @@ function CertificationCard({ cert, itemVariants }: { cert: typeof certifications
       {/* Card Footer Marker */}
       <div className="pt-3.5 sm:pt-4 border-t border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-between text-xs font-semibold relative z-10">
         <span className="uppercase tracking-wider text-[10px] sm:text-[11px] font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] truncate">
-          Verified Standard
+          Under Process
         </span>
         <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-colors shrink-0">
-          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.75} />
+          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={1.75} />
         </div>
       </div>
     </motion.div>
