@@ -13,7 +13,7 @@ interface JobSummaryProps {
 
 export function JobSummary({ job }: JobSummaryProps) {
   return (
-    <section className="py-8 sm:py-12 md:py-14 bg-white dark:bg-charcoal border-b border-border">
+    <section className="py-6 sm:py-8 md:py-10 bg-white dark:bg-charcoal border-b border-border">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 xl:gap-20 items-start">
           
@@ -52,7 +52,7 @@ export function JobSummary({ job }: JobSummaryProps) {
             </div>
           </div>
 
-          <div className="lg:col-span-4 lg:sticky lg:top-32 animate-in fade-in slide-in-from-right duration-700 delay-200 w-full">
+          <div className="lg:col-span-4 animate-in fade-in slide-in-from-right duration-700 delay-200 w-full">
              <div className="p-5 sm:p-6 md:p-7 bg-charcoal dark:bg-black/20 border border-white/5 rounded-2xl relative overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] bg-[url('/images/blueprint.png')] bg-repeat" />
                 <div className="relative z-10">
