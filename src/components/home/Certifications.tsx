@@ -114,31 +114,31 @@ export function Certifications() {
   // and holds steadily through 1.0 before unpinning to scroll down
   const rawX = useTransform(scrollYProgress, [0, 0.82, 1], [0, -56.5, -56.5]);
 
-  // Cinematic weighted spring: Gentle glide with smooth momentum
+  // Cinematic weighted spring: Gentle glide with smooth momentum (calibrated 20% slower)
   const smoothX = useSpring(rawX, {
-    stiffness: 80,
-    damping: 25,
-    mass: 0.65,
+    stiffness: 75,
+    damping: 24,
+    mass: 0.7,
   });
 
   const x = useTransform(smoothX, (v) => `${v}%`);
 
   // Heading slides in from the left (-28vw) to center (0vw) upon entering section
-  const rawHeadingX = useTransform(scrollYProgress, [0, 0.14], ["-28vw", "0vw"]);
+  const rawHeadingX = useTransform(scrollYProgress, [0, 0.12], ["-28vw", "0vw"]);
   const headingX = useSpring(rawHeadingX, {
-    stiffness: 85,
+    stiffness: 80,
     damping: 24,
-    mass: 0.7,
+    mass: 0.75,
   });
 
   // Clean, responsive header fade
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.06, 0.94, 1], [0.85, 1, 1, 0.85]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0.85, 1, 1, 0.85]);
 
   return (
     <section
       id="awards-recognition"
       ref={targetRef}
-      className="relative h-[238vh] bg-transparent text-[#111] dark:text-white"
+      className="relative h-[268vh] bg-transparent text-[#111] dark:text-white"
     >
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-b border-[#E5E5E5]/50 dark:border-[#222]/50">
 
