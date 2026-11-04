@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Layers } from "lucide-react";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/products/shared/ProductCard";
@@ -57,7 +57,7 @@ export function ProductsGrid({ selectedCategory, searchQuery = "" }: ProductsGri
           ref={gridRef}
           className="overflow-visible px-1 pt-2 pb-10 relative"
         >
-          <AnimatePresence mode="popLayout">
+          
             <motion.div
               key={selectedCategory + searchQuery}
               initial={{ opacity: 0, y: 10 }}
@@ -70,7 +70,7 @@ export function ProductsGrid({ selectedCategory, searchQuery = "" }: ProductsGri
                 <ProductCard key={product.id} product={product} idx={idx} />
               ))}
             </motion.div>
-          </AnimatePresence>
+          
         </div>
       )}
     </div>

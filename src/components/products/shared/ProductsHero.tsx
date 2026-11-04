@@ -83,25 +83,16 @@ export function ProductsHero() {
       >
         {/* Staggered 3D Typography Reveal */}
         <motion.div
-          variants={sentence}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 md:space-y-4 w-full"
-          style={{ perspective: "1000px" }}
         >
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-heading font-black text-white tracking-tighter leading-[1.05] sm:leading-[0.9]">
-            {titleText.split("").map((char, index) => (
-              <motion.span key={char + "-" + index} variants={letter} className="inline-block">
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
+            {titleText}
           </h1>
           <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-heading font-light italic text-[#7BA4D0] tracking-tight leading-[1.05] sm:leading-[0.9] pr-1 sm:pr-4">
-            {subtitleText.split("").map((char, index) => (
-              <motion.span key={char + "-" + index} variants={letter} className="inline-block">
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
+            {subtitleText}
           </h2>
         </motion.div>
 

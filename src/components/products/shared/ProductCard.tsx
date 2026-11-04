@@ -59,7 +59,7 @@ export function ProductCard({ product, idx = 0, className }: ProductCardProps) {
         className="block h-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E5E99] rounded-2xl sm:rounded-3xl"
       >
         {/* Simple & Sober Premium Card Container */}
-        <div className="relative h-full bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-[2rem] overflow-hidden transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-slate-300 dark:hover:border-white/20 hover:shadow-xl dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] flex flex-col group/card">
+        <div className="relative h-full bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-[2rem] overflow-hidden transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-slate-300 dark:hover:border-white/20 hover:shadow-xl dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1 flex flex-col group/card">
 
           {/* ========================================================
               TOP IMAGE VIEWPORT: Clean & Minimalist
