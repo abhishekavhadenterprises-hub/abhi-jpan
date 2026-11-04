@@ -101,13 +101,7 @@ export function AboutSnapshot() {
   const [activeModuleIndex, setActiveModuleIndex] = useState(0);
   const textRef = useRef<HTMLHeadingElement>(null);
 
-  // Auto-cycle modules every 6 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveModuleIndex((prev) => (prev + 1) % capabilityModules.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
+
 
   const activeModule = capabilityModules[activeModuleIndex];
 

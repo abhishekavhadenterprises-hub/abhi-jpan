@@ -60,9 +60,7 @@ export function Hero() {
         onMouseLeave={() => {
           setIsHovered(false);
         }}
-        className={`relative w-full transition-all duration-[1200ms] ease-in-out max-h-[1080px] pt-20 sm:pt-24 lg:pt-24 pb-4 sm:pb-6 flex flex-col justify-between bg-gradient-to-b from-[#F8FAFC] via-[#FFFFFF] to-[#F1F5F9] dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#0D2440] overflow-hidden z-20 border-b border-slate-200/90 dark:border-white/10 ${
-          isAerialRevealed ? "h-[100svh] min-h-[580px] sm:min-h-[660px] lg:min-h-[740px]" : "h-[75svh] min-h-[560px] sm:min-h-[640px] lg:min-h-[720px]"
-        }`}
+        className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[660px] lg:min-h-[740px] max-h-[1080px] pt-20 sm:pt-24 lg:pt-24 pb-4 sm:pb-6 flex flex-col justify-between bg-gradient-to-b from-[#F8FAFC] via-[#FFFFFF] to-[#F1F5F9] dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#0D2440] overflow-hidden z-20 border-b border-slate-200/90 dark:border-white/10"
       >
         {/* Background Visual: 70% visible unhovered, 100% full aerial facility on hover, fluid 3s cycle */}
         <motion.div

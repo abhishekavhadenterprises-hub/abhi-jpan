@@ -6,8 +6,6 @@ import { Certifications } from "@/components/home/Certifications";
 import { CTAStrip } from "@/components/home/CTAStrip";
 import GridMotion from "@/components/ui/GridMotion";
 
-import { ScrollRestoration } from "@/components/shared/ScrollRestoration";
-
 export default function Home() {
   const gridItems = [
     'CNC', 'BRAZING', 'TOLERANCE', 'HELIUM', 'TESTING', 'CAPACITY', 'VACUUM',
@@ -16,7 +14,6 @@ export default function Home() {
 
   return (
     <div className="relative w-full">
-      <ScrollRestoration />
       {/* Global Fixed Background Grid (4 lines as requested) */}
       <div className="fixed inset-0 pointer-events-none flex justify-center items-center z-0 overflow-hidden">
         <GridMotion items={gridItems} gradientColor="transparent" />
