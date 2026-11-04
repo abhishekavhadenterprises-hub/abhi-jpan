@@ -9,19 +9,19 @@ interface JobResponsibilitiesProps {
 
 export function JobResponsibilities({ responsibilities }: JobResponsibilitiesProps) {
   return (
-    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-charcoal border-b border-border">
+    <section className="py-8 sm:py-12 md:py-14 bg-white dark:bg-charcoal border-b border-border">
       <div className="container-custom">
         <div className="max-w-4xl animate-in fade-in slide-in-from-left duration-700">
           <div className="flex items-center gap-2 mb-4 sm:mb-6">
             <div className="h-0.5 w-8 sm:w-10 bg-gold" />
             <span className="text-gold font-bold uppercase tracking-widest text-[10px] sm:text-xs">Role Blueprint</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-charcoal dark:text-white leading-tight mb-8 sm:mb-14 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-charcoal dark:text-white leading-tight mb-5 sm:mb-8">
             Key <br />
             <span className="text-muted-foreground">Responsibilities</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-16 xl:gap-x-20 gap-y-6 sm:gap-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-16 xl:gap-x-20 gap-y-3.5 sm:gap-y-5">
             {responsibilities.map((item, idx) => (
               <div 
                 key={idx}
@@ -40,7 +40,7 @@ export function JobResponsibilities({ responsibilities }: JobResponsibilitiesPro
             ))}
           </div>
 
-          <div className="mt-12 sm:mt-16 md:mt-24 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 p-6 sm:p-8 md:p-12 bg-silver/5 border border-border rounded-xl sm:rounded-2xl animate-in fade-in duration-1000 delay-500">
+          <div className="mt-6 sm:mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 p-4 sm:p-6 md:p-8 bg-silver/5 border border-border rounded-xl sm:rounded-2xl animate-in fade-in duration-1000 delay-500">
              <div className="flex flex-col items-center text-center">
                 <Target className="w-6 h-6 sm:w-8 sm:h-8 text-gold/40 mb-3 sm:mb-4" />
                 <span className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-widest">Operational KPI</span>

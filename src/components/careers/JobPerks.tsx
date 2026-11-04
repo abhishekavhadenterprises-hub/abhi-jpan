@@ -28,9 +28,9 @@ export function JobPerks() {
   ];
 
   return (
-    <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-charcoal border-b border-border">
+    <section className="py-8 sm:py-12 md:py-14 bg-white dark:bg-charcoal border-b border-border">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 md:mb-20 gap-6 sm:gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-10 gap-6 sm:gap-8">
           <div className="max-w-2xl animate-in fade-in slide-in-from-left duration-700">
             <div className="flex items-center gap-2 mb-4 sm:mb-6">
               <div className="h-0.5 w-8 sm:w-10 bg-gold" />
@@ -51,10 +51,10 @@ export function JobPerks() {
            {perks.map((perk, idx) => (
               <div 
                 key={idx}
-                className="group p-5 sm:p-7 md:p-8 lg:p-10 bg-silver/5 border border-border rounded-xl sm:rounded-2xl hover:border-gold transition-all duration-500 animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
+                className="group p-4 sm:p-5 md:p-6 bg-silver/5 border border-border rounded-xl sm:rounded-2xl hover:border-gold transition-all duration-500 animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
                 style={{ animationDelay: `${idx * 150}ms` }}
               >
-                 <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-charcoal flex items-center justify-center rounded-lg sm:rounded-xl border border-border mb-6 sm:mb-8 group-hover:bg-gold group-hover:border-transparent transition-all">
+                 <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white dark:bg-charcoal flex items-center justify-center rounded-lg sm:rounded-xl border border-border mb-3.5 sm:mb-4 group-hover:bg-gold group-hover:border-transparent transition-all">
                     <perk.icon className="w-5 h-5 sm:w-6 sm:h-6 text-gold group-hover:text-charcoal transition-colors" />
                  </div>
                  <h4 className="text-xs sm:text-sm font-bold text-charcoal dark:text-white uppercase tracking-wider sm:tracking-widest mb-2 sm:mb-4 group-hover:text-gold transition-colors">
@@ -64,7 +64,7 @@ export function JobPerks() {
                     &ldquo;{perk.description}&rdquo;
                  </p>
                  
-                 <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border flex items-center gap-2 sm:gap-3">
+                 <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-border flex items-center gap-2 sm:gap-3">
                     <ShieldPlus className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold/40" />
                     <span className="text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Employee Benefit</span>
                  </div>

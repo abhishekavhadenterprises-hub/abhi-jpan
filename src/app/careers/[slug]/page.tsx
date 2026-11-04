@@ -8,7 +8,6 @@ import { JobCompetencies } from "@/components/careers/JobCompetencies";
 import { JobPerks } from "@/components/careers/JobPerks";
 import { JobApplicationForm } from "@/components/careers/JobApplicationForm";
 import { JobRelated } from "@/components/careers/JobRelated";
-import { JobDetailCTA } from "@/components/careers/JobDetailCTA";
 
 
 
@@ -131,7 +130,6 @@ export default async function JobDetailPage({ params }: any) {
       
       <JobApplicationForm />
       <JobRelated />
-      <JobDetailCTA />
     </main>
   );
 }

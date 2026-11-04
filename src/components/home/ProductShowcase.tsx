@@ -98,7 +98,12 @@ export function ProductShowcase() {
     const scrollTop = window.scrollY + rect.top;
     const scrollHeight = sectionRef.current.offsetHeight - window.innerHeight;
     const targetScroll = scrollTop + scrollHeight * (idx / (capabilities.length - 1));
-    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(targetScroll);
+    } else {
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    }
   };
 
   const activeProduct = capabilities[activeTab];
@@ -174,13 +179,13 @@ export function ProductShowcase() {
 
           {/* Active Product Detailed Dossier */}
           <div className="relative w-full">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               <motion.div
                 key={activeProduct.id}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#222] shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] overflow-hidden group max-h-[58vh] lg:max-h-[54vh]"
               >
                 {/* Left Column: Technical Dossier */}
@@ -210,25 +215,11 @@ export function ProductShowcase() {
                     </div>
                   </div>
 
-                  {/* Bottom Metric & Action */}
-                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-[#111]/10 dark:border-white/10">
-                    <div>
-                      <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#888] dark:text-[#777] mb-1 font-bold">
-                        {activeProduct.metricLabel}
-                      </span>
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-light tracking-tighter text-2xl sm:text-3xl md:text-4xl text-[#111] dark:text-white">
-                          {activeProduct.metricValue}
-                        </span>
-                        <span className="text-xs text-[#888] font-medium tracking-widest uppercase">
-                          {activeProduct.metricSub}
-                        </span>
-                      </div>
-                    </div>
-
+                  {/* Bottom Action */}
+                  <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-[#111]/10 dark:border-white/10 flex justify-end">
                     <Link
                       href="/products"
-                      className="relative overflow-hidden group/btn px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-[#2E5E99] text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-md hover:shadow-[0_10px_20px_rgba(46,94,153,0.3)] hover:scale-105 z-20 w-full sm:w-auto text-center"
+                      className="relative overflow-hidden group/btn px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#2E5E99] hover:bg-[#1E3A8A] text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-md hover:shadow-[0_10px_20px_rgba(46,94,153,0.3)] hover:scale-105 z-20 text-center"
                     >
                       <span>View Specifications</span>
                       <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />

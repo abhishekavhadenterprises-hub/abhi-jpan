@@ -124,7 +124,7 @@ export function Hero() {
         <div className="w-full max-w-[94%] xl:max-w-[1440px] 2xl:max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto py-1">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center justify-between">
             {/* Monumental Clean Headline & Narrative */}
-            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center -translate-y-2 sm:-translate-y-4 lg:-translate-y-6">
+            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center -translate-y-8 sm:-translate-y-12 md:-translate-y-16 lg:-translate-y-20 xl:-translate-y-24">
               <motion.div
                 initial={{ x: -60, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -60, opacity: 0 }}

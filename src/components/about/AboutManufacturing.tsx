@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
-import { Maximize2, TrendingUp, Cpu, CheckCircle2, Factory, Sparkles, Activity } from "lucide-react";
+import { TrendingUp, Cpu, CheckCircle2, Factory, Sparkles, Activity } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 // High-precision RAF count-up component with exponential easing
@@ -60,15 +60,6 @@ function AnimatedCounter({
 }
 
 const manufacturingStats = [
-  {
-    icon: Maximize2,
-    num: 32000,
-    suffix: "+",
-    decimals: 0,
-    unit: "Sq. M.",
-    label: "Production Floor Space",
-    desc: "Across 6 synchronized manufacturing hubs in Delhi-NCR, Gujarat & Karnataka",
-  },
   {
     icon: TrendingUp,
     num: 65000,
@@ -141,7 +132,7 @@ export function AboutManufacturing() {
 
           <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/80 dark:text-white/80 font-light leading-relaxed max-w-3xl">
             Our nationwide manufacturing footprint integrates automated high-speed cold drawing benches, multi-axis computerized
-            bending stations, and robotic induction brazing lines. Backed by 6 synchronized facilities across India, we ensure
+            bending stations, and robotic induction brazing lines. Backed by synchronized facilities across India, we ensure
             uninterrupted, just-in-time continuity for mission-critical global supply chains.
           </p>
         </motion.div>
@@ -200,7 +191,7 @@ export function AboutManufacturing() {
           </motion.div>
 
           {/* Telemetry Metrics Matrix (5 Cols - 2x2 Grid) */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
+          <div className="lg:col-span-5 flex flex-col justify-between gap-3.5 sm:gap-4 lg:gap-4">
             {manufacturingStats.map((stat, idx) => (
               <motion.div
                 key={idx}
