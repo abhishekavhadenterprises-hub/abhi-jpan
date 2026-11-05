@@ -20,7 +20,7 @@ export const products: Product[] = [
     "image": "/products/5A-Distributor.png",
     "description": "Precision-engineered 5A Distributor designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
-    "overview": "At J pan Tubular, we specialize in manufacturing high-precision 5A Distributors engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
+    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision 5A Distributors engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
     "offerings": [
       "Precision internal chambers engineered for uniform pressure distribution",
       "Optimized flow path geometry ensuring equal refrigerant division",
@@ -36,7 +36,7 @@ export const products: Product[] = [
     "image": "/products/AHU.png",
     "description": "High-precision AHU engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium AHU is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium AHU is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -52,7 +52,7 @@ export const products: Product[] = [
     "image": "/products/AIRWAY GROUP.png",
     "description": "High-precision AIRWAY GROUP engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium AIRWAY GROUP is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium AIRWAY GROUP is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -72,7 +72,7 @@ export const products: Product[] = [
     ],
     "description": "Precision-engineered Brass Distributor (Copper Coated) designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "High Strength & Durability",
-    "overview": "At J pan Tubular, our Brass Distributor (Copper Coated) series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
+    "overview": "At J Pan Tubular, our Brass Distributor (Copper Coated) series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
     "offerings": [
       "Crafted from high-grade brass alloy with protective copper coating for enhanced brazeability and corrosion resistance",
       "Precision internal chambers engineered for uniform pressure distribution",
@@ -89,7 +89,7 @@ export const products: Product[] = [
     "image": "/products/Brazing Ring.png",
     "description": "High-precision Brazing Ring engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Brazing Ring is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Brazing Ring is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -105,7 +105,7 @@ export const products: Product[] = [
     "image": "/products/Bus Bar.png",
     "description": "High-precision Bus Bar engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Bus Bar is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Bus Bar is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -121,7 +121,7 @@ export const products: Product[] = [
     "image": "/products/Bush.png",
     "description": "High-precision Bush engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Bush is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Bush is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -137,7 +137,7 @@ export const products: Product[] = [
     "image": "/products/CAPILLARY TUBE ASSEMBLY.png",
     "description": "High-durability CAPILLARY TUBE ASSEMBLY with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty CAPILLARY TUBE ASSEMBLY assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty CAPILLARY TUBE ASSEMBLY assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -153,7 +153,7 @@ export const products: Product[] = [
     "image": "/products/Capillary.png",
     "description": "High-durability CAPILLARY with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty CAPILLARY assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty CAPILLARY assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -169,7 +169,7 @@ export const products: Product[] = [
     "image": "/products/Closed Distributor.png",
     "description": "Precision-engineered Closed Distributor designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
-    "overview": "At J pan Tubular, we specialize in manufacturing high-precision Closed Distributors engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
+    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision Closed Distributors engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
     "offerings": [
       "Precision internal chambers engineered for uniform pressure distribution",
       "Optimized flow path geometry ensuring equal refrigerant division",
@@ -186,7 +186,7 @@ export const products: Product[] = [
     "image": "/products/CONDENSER IN.png",
     "description": "High-precision CONDENSER IN engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium CONDENSER IN is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium CONDENSER IN is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -202,7 +202,7 @@ export const products: Product[] = [
     "image": "/products/Condenser Inlet.png",
     "description": "High-precision Condenser Inlet engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Condenser Inlet is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Condenser Inlet is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -218,7 +218,7 @@ export const products: Product[] = [
     "image": "/products/Copper Distributor - 24 Holes.png",
     "description": "Precision-engineered Copper Distributor 24 Holes designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
-    "overview": "At J pan Tubular, we specialize in manufacturing high-precision Copper Distributor 24 Holess engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
+    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision Copper Distributor 24 Holess engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
     "offerings": [
       "Precision internal chambers engineered for uniform pressure distribution",
       "Optimized flow path geometry ensuring equal refrigerant division",
@@ -234,7 +234,7 @@ export const products: Product[] = [
     "image": "/products/Copper Distributors.png",
     "description": "Precision-engineered Copper Distributors designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
-    "overview": "At J pan Tubular, we specialize in manufacturing high-precision Copper Distributorss engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
+    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision Copper Distributorss engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
     "offerings": [
       "Precision internal chambers engineered for uniform pressure distribution",
       "Optimized flow path geometry ensuring equal refrigerant division",
@@ -254,7 +254,7 @@ export const products: Product[] = [
     ],
     "description": "High-durability Copper Suction Tubing with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Copper Suction Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Copper Suction Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -274,7 +274,7 @@ export const products: Product[] = [
     ],
     "description": "High-durability Copper Tee with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Copper Tee assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Copper Tee assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -290,7 +290,7 @@ export const products: Product[] = [
     "image": "/products/Discharge Tubing.png",
     "description": "High-durability Discharge Tubing with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Discharge Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Discharge Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -310,7 +310,7 @@ export const products: Product[] = [
     ],
     "description": "Precision-engineered Distributor Assembly designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
-    "overview": "At J pan Tubular, we specialize in manufacturing high-precision Distributor Assembly solutions engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
+    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision Distributor Assembly solutions engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
     "offerings": [
       "Precision internal chambers engineered for uniform pressure distribution",
       "Optimized flow path geometry ensuring equal refrigerant division",
@@ -326,7 +326,7 @@ export const products: Product[] = [
     "image": "/products/EVA INLiquid Line Assembly.png",
     "description": "Pre-assembled EVA Inliquid Line Assembly designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered EVA Inliquid Line Assembly configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered EVA Inliquid Line Assembly configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -342,7 +342,7 @@ export const products: Product[] = [
     "image": "/products/EVA OutSuction Line Assembly_1024x683.png",
     "description": "Pre-assembled EVA Outsuction Line Assembly 1024x683 designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered EVA Outsuction Line Assembly 1024x683 configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered EVA Outsuction Line Assembly 1024x683 configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -358,7 +358,7 @@ export const products: Product[] = [
     "image": "/products/EXHAUST PIPE.png",
     "description": "High-durability EXHAUST PIPE with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty EXHAUST PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty EXHAUST PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -374,7 +374,7 @@ export const products: Product[] = [
     "image": "/products/Flare Nuts.png",
     "description": "High-precision Flare Nuts engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Flare Nuts is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Flare Nuts is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -391,7 +391,7 @@ export const products: Product[] = [
     "image": "/products/HEADER DISCHARGE.png",
     "description": "High-durability HEADER DISCHARGE with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty HEADER DISCHARGE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty HEADER DISCHARGE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -407,7 +407,7 @@ export const products: Product[] = [
     "image": "/products/Header Tubing.png",
     "description": "High-durability Header Tubing with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Header Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Header Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -423,7 +423,7 @@ export const products: Product[] = [
     "image": "/products/I KIT 2.png",
     "description": "Pre-assembled I KIT 2 designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered I KIT 2 configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered I KIT 2 configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -439,7 +439,7 @@ export const products: Product[] = [
     "image": "/products/LIQUID COLLECTING PIPE.png",
     "description": "High-durability LIQUID COLLECTING PIPE with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty LIQUID COLLECTING PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty LIQUID COLLECTING PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -455,7 +455,7 @@ export const products: Product[] = [
     "image": "/products/LIQUID INLET PIPE SET.png",
     "description": "High-durability LIQUID INLET PIPE SET with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty LIQUID INLET PIPE SET assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty LIQUID INLET PIPE SET assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -471,7 +471,7 @@ export const products: Product[] = [
     "image": "/products/Muffler and Coupling.png",
     "description": "High-efficiency protective Muffler And Coupling designed to filter out debris and dampen line vibration.",
     "specs": "System Protection",
-    "overview": "At J pan Tubular, our protective Muffler And Coupling components are built to suppress noise, absorb gas pulsation from compressors, or capture debris to extend the life of downstream components.",
+    "overview": "At J Pan Tubular, our protective Muffler And Coupling components are built to suppress noise, absorb gas pulsation from compressors, or capture debris to extend the life of downstream components.",
     "offerings": [
       "Acoustically optimized chambers or high-mesh strainers for clean operation",
       "Heavy-wall seamless copper/brass shells for high fatigue resistance",
@@ -487,7 +487,7 @@ export const products: Product[] = [
     "image": "/products/Nuts.png",
     "description": "High-precision Nuts engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Nuts is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Nuts is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -503,7 +503,7 @@ export const products: Product[] = [
     "image": "/products/OIL SEPARATOR INLET PIPE.png",
     "description": "High-durability OIL SEPARATOR INLET PIPE with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty OIL SEPARATOR INLET PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty OIL SEPARATOR INLET PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -520,7 +520,7 @@ export const products: Product[] = [
     "image": "/products/PLATE FINNED COIL HEADER ASSY 2.png",
     "description": "High-durability PLATE FINNED COIL HEADER ASSY 2 with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty PLATE FINNED COIL HEADER ASSY 2 assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty PLATE FINNED COIL HEADER ASSY 2 assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -536,7 +536,7 @@ export const products: Product[] = [
     "image": "/products/Plugs.png",
     "description": "High-precision Plugs engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Plugs is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Plugs is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -557,7 +557,7 @@ export const products: Product[] = [
     ],
     "description": "Pre-assembled PPM KIT designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered PPM KIT configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered PPM KIT configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -573,7 +573,7 @@ export const products: Product[] = [
     "image": "/products/RAC Discharge Pipe.png",
     "description": "High-durability RAC Discharge Pipe with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty RAC Discharge Pipe assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty RAC Discharge Pipe assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -589,7 +589,7 @@ export const products: Product[] = [
     "image": "/products/RAC EVA IN.png",
     "description": "High-precision RAC EVA IN engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium RAC EVA IN is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium RAC EVA IN is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -605,7 +605,7 @@ export const products: Product[] = [
     "image": "/products/RAC EVA OUT.png",
     "description": "High-precision RAC EVA OUT engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium RAC EVA OUT is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium RAC EVA OUT is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -621,7 +621,7 @@ export const products: Product[] = [
     "image": "/products/RAC SUCTION ASSEMBLY.png",
     "description": "Pre-assembled RAC SUCTION ASSEMBLY designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered RAC SUCTION ASSEMBLY configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered RAC SUCTION ASSEMBLY configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -643,7 +643,7 @@ export const products: Product[] = [
     ],
     "description": "High-precision Refnet and Y-Joint fittings engineered for optimal fluid distribution and reliable performance in VRF/VRV thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Refnet / Y Joint series is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Refnet / Y Joint series is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity seamless copper raw materials ensuring excellent durability",
       "Precise CNC-formed tolerances for secure, leak-free connection joints",
@@ -660,7 +660,7 @@ export const products: Product[] = [
     "image": "/products/Return Bend and Sensor Holder.png",
     "description": "High-durability Return Bend And Sensor Holder with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Return Bend And Sensor Holder assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Return Bend And Sensor Holder assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -676,7 +676,7 @@ export const products: Product[] = [
     "image": "/products/Socket.png",
     "description": "High-precision Socket engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Socket is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Socket is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -692,7 +692,7 @@ export const products: Product[] = [
     "image": "/products/SS Assembly 1.png",
     "description": "Pre-assembled SS Assembly 1 designed for rapid, error-free field installation and immediate performance.",
     "specs": "High Strength & Durability",
-    "overview": "At J pan Tubular, our Stainless Steel SS Assembly 1 series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
+    "overview": "At J Pan Tubular, our Stainless Steel SS Assembly 1 series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
     "offerings": [
       "Crafted from high-grade stainless steel (304/316) for ultimate corrosion resistance",
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
@@ -709,7 +709,7 @@ export const products: Product[] = [
     "image": "/products/SS Assembly 2.png",
     "description": "Pre-assembled SS Assembly 2 designed for rapid, error-free field installation and immediate performance.",
     "specs": "High Strength & Durability",
-    "overview": "At J pan Tubular, our Stainless Steel SS Assembly 2 series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
+    "overview": "At J Pan Tubular, our Stainless Steel SS Assembly 2 series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
     "offerings": [
       "Crafted from high-grade stainless steel (304/316) for ultimate corrosion resistance",
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
@@ -727,7 +727,7 @@ export const products: Product[] = [
     "image": "/products/SS Strainer.png",
     "description": "High-efficiency protective SS Strainer designed to filter out debris and dampen line vibration.",
     "specs": "High Strength & Durability",
-    "overview": "At J pan Tubular, our Stainless Steel SS Strainer series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
+    "overview": "At J Pan Tubular, our Stainless Steel SS Strainer series is engineered for high-vibration, high-pressure environments, offering superior mechanical strength and structural longevity compared to standard materials.",
     "offerings": [
       "Crafted from high-grade stainless steel (304/316) for ultimate corrosion resistance",
       "Acoustically optimized chambers or high-mesh strainers for clean operation",
@@ -761,7 +761,7 @@ export const products: Product[] = [
     "image": "/products/SUCTION TUBE SET 2.png",
     "description": "Pre-assembled SUCTION TUBE SET 2 designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered SUCTION TUBE SET 2 configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered SUCTION TUBE SET 2 configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -777,7 +777,7 @@ export const products: Product[] = [
     "image": "/products/SUCTION TUBE SET.png",
     "description": "Pre-assembled SUCTION TUBE SET designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered SUCTION TUBE SET configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered SUCTION TUBE SET configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -793,7 +793,7 @@ export const products: Product[] = [
     "image": "/products/Tripod.png",
     "description": "High-precision Tripod engineered for reliable performance in thermal systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Tripod is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
+    "overview": "At J Pan Tubular, our premium Tripod is manufactured from top-tier raw materials to meet strict dimensional and structural standards, guaranteeing long-term system integrity in demanding environments.",
     "offerings": [
       "High-purity raw materials ensuring excellent durability",
       "Precise tolerances for secure, leak-free connection joints",
@@ -809,7 +809,7 @@ export const products: Product[] = [
     "image": "/products/TUBE ASSEMBLY CONDENSER IN.png",
     "description": "Pre-assembled TUBE ASSEMBLY CONDENSER IN designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered TUBE ASSEMBLY CONDENSER IN configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered TUBE ASSEMBLY CONDENSER IN configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -825,7 +825,7 @@ export const products: Product[] = [
     "image": "/products/TUBE ASSEMBLY CONDENSER OUT.png",
     "description": "Pre-assembled TUBE ASSEMBLY CONDENSER OUT designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered TUBE ASSEMBLY CONDENSER OUT configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered TUBE ASSEMBLY CONDENSER OUT configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -841,7 +841,7 @@ export const products: Product[] = [
     "image": "/products/TUBE ASSEMBLY MANIFOLD.png",
     "description": "Pre-assembled TUBE ASSEMBLY MANIFOLD designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered TUBE ASSEMBLY MANIFOLD configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered TUBE ASSEMBLY MANIFOLD configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -857,7 +857,7 @@ export const products: Product[] = [
     "image": "/products/TUBE ASSEMBLY SUCTION OUTDOOR.png",
     "description": "Pre-assembled TUBE ASSEMBLY SUCTION OUTDOOR designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered TUBE ASSEMBLY SUCTION OUTDOOR configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered TUBE ASSEMBLY SUCTION OUTDOOR configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -873,7 +873,7 @@ export const products: Product[] = [
     "image": "/products/VALVE PLATE ASSEMBLY.png",
     "description": "Pre-assembled VALVE PLATE ASSEMBLY designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered VALVE PLATE ASSEMBLY configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered VALVE PLATE ASSEMBLY configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -889,7 +889,7 @@ export const products: Product[] = [
     "image": "/products/VRV ACCUMULATOR PIPE (2).png",
     "description": "High-durability VRV ACCUMULATOR PIPE (2) with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty VRV ACCUMULATOR PIPE (2) assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty VRV ACCUMULATOR PIPE (2) assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -905,7 +905,7 @@ export const products: Product[] = [
     "image": "/products/VRV ACCUMULATOR PIPE.png",
     "description": "High-durability VRV ACCUMULATOR PIPE with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty VRV ACCUMULATOR PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty VRV ACCUMULATOR PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -921,7 +921,7 @@ export const products: Product[] = [
     "image": "/products/VRV CONNECTION PIPE.png",
     "description": "High-durability VRV CONNECTION PIPE with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty VRV CONNECTION PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty VRV CONNECTION PIPE assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -937,7 +937,7 @@ export const products: Product[] = [
     "image": "/products/VRV HEADER ASSEMBLY.png",
     "description": "High-durability VRV HEADER ASSEMBLY with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty VRV HEADER ASSEMBLY assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty VRV HEADER ASSEMBLY assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -953,7 +953,7 @@ export const products: Product[] = [
     "image": "/products/VRV SUPPORTER ASSEMBLY (2).png",
     "description": "Pre-assembled VRV SUPPORTER ASSEMBLY (2) designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered VRV SUPPORTER ASSEMBLY (2) configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered VRV SUPPORTER ASSEMBLY (2) configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -969,7 +969,7 @@ export const products: Product[] = [
     "image": "/products/VRV SUPPORTER ASSEMBLY.png",
     "description": "Pre-assembled VRV SUPPORTER ASSEMBLY designed for rapid, error-free field installation and immediate performance.",
     "specs": "Plug-and-Play Integration",
-    "overview": "At J pan Tubular, our custom-engineered VRV SUPPORTER ASSEMBLY configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
+    "overview": "At J Pan Tubular, our custom-engineered VRV SUPPORTER ASSEMBLY configurations are fully pre-brazed and pre-aligned, allowing seamless integration of sensors, valves, and controls in the field.",
     "offerings": [
       "Pre-aligned and pre-formed sub-assemblies for quick mounting",
       "High-vacuum integrity joints pre-brazed under protective nitrogen gas",
@@ -985,7 +985,7 @@ export const products: Product[] = [
     "image": "/products/Window Tubing.png",
     "description": "High-durability Window Tubing with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Window Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Window Tubing assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless tubing rated for high burst pressures",
@@ -1005,7 +1005,7 @@ export const products: Product[] = [
     ],
     "description": "High-durability copper Y-Bend and Y-Branch fittings with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
-    "overview": "At J pan Tubular, our heavy-duty Y Bend and Y Branch assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
+    "overview": "At J Pan Tubular, our heavy-duty Y Bend and Y Branch assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
       "Precision CNC bending preventing restrictions or kink points",
       "High-grade seamless copper tubing rated for high burst pressures",
@@ -1025,7 +1025,7 @@ export const products: Product[] = [
     ],
     "description": "High-quality Chiller Assembly designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Chiller Assembly is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Chiller Assembly is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1041,7 +1041,7 @@ export const products: Product[] = [
     "image": "/products/Discharge_Pipe-1.png",
     "description": "High-quality Discharge Pipe 1 designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Discharge Pipe 1 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Discharge Pipe 1 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1057,7 +1057,7 @@ export const products: Product[] = [
     "image": "/products/Discharge_Pipe-2.png",
     "description": "High-quality Discharge Pipe 2 designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Discharge Pipe 2 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Discharge Pipe 2 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1073,7 +1073,7 @@ export const products: Product[] = [
     "image": "/products/Discharge_Pipe-3.png",
     "description": "High-quality Discharge Pipe 3 designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Discharge Pipe 3 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Discharge Pipe 3 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1089,7 +1089,7 @@ export const products: Product[] = [
     "image": "/products/Discharge_Pipe-4.png",
     "description": "High-quality Discharge Pipe 4 designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Discharge Pipe 4 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Discharge Pipe 4 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1105,7 +1105,7 @@ export const products: Product[] = [
     "image": "/products/Discharge_Pipe.png",
     "description": "High-quality Discharge Pipe designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Discharge Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Discharge Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1121,7 +1121,7 @@ export const products: Product[] = [
     "image": "/products/DX_600_-_model_-_Evaporator_Pipe.png",
     "description": "High-quality DX 600 Model Evaporator Pipe designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium DX 600 Model Evaporator Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium DX 600 Model Evaporator Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1137,7 +1137,7 @@ export const products: Product[] = [
     "image": "/products/DX_600_model_-_Discharge_pipe.png",
     "description": "High-quality DX 600 Model Discharge Pipe designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium DX 600 Model Discharge Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium DX 600 Model Discharge Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1153,7 +1153,7 @@ export const products: Product[] = [
     "image": "/products/H_-_Model_Assembly.png",
     "description": "High-quality H Model Assembly designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium H Model Assembly is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium H Model Assembly is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1169,7 +1169,7 @@ export const products: Product[] = [
     "image": "/products/Inroom_cooling_part_-_Inlet_pipe.png",
     "description": "High-quality Inroom Cooling Part Inlet Pipe designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Inroom Cooling Part Inlet Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Inroom Cooling Part Inlet Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1185,7 +1185,7 @@ export const products: Product[] = [
     "image": "/products/L-Bend_Part_-1.png",
     "description": "High-quality L-Bend Part 1 designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium L-Bend Part 1 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium L-Bend Part 1 is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1201,7 +1201,7 @@ export const products: Product[] = [
     "image": "/products/L-Bend.png",
     "description": "High-quality L-Bend designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium L-Bend is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium L-Bend is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1217,7 +1217,7 @@ export const products: Product[] = [
     "image": "/products/Rods_Assembly_parts.png",
     "description": "High-quality Rods Assembly Parts designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Rods Assembly Parts is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Rods Assembly Parts is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1233,7 +1233,7 @@ export const products: Product[] = [
     "image": "/products/Saral_Model_-_Evaporator_part.png",
     "description": "High-quality Saral Model Evaporator Part designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Saral Model Evaporator Part is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Saral Model Evaporator Part is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1249,7 +1249,7 @@ export const products: Product[] = [
     "image": "/products/Three_Connector_-_Discharge_Pipe.png",
     "description": "High-quality Three Connector Discharge Pipe designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Three Connector Discharge Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Three Connector Discharge Pipe is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",
@@ -1265,7 +1265,7 @@ export const products: Product[] = [
     "image": "/products/Y-_Fitting_Part.png",
     "description": "High-quality Y Fitting Part designed for optimal thermal performance and durability in chilling systems.",
     "specs": "Industrial Quality",
-    "overview": "At J pan Tubular, our premium Y Fitting Part is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
+    "overview": "At J Pan Tubular, our premium Y Fitting Part is manufactured to meet strict dimensional standards, ensuring reliable integration into high-capacity chiller units.",
     "offerings": [
       "High-grade materials ensuring maximum thermal efficiency",
       "Precise dimensional tolerances for secure, leak-free operation",

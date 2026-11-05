@@ -100,7 +100,7 @@ export function GalleryVideo() {
                     {v.title}
                   </h3>
                   <p className="text-silver/80 text-xs sm:text-sm font-normal">
-                    JPAN Precision Facility Tour
+                    J Pan Precision Facility Tour
                   </p>
                 </div>
                 <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold tracking-wider uppercase bg-white/20 text-white backdrop-blur-md border border-white/30 shrink-0">

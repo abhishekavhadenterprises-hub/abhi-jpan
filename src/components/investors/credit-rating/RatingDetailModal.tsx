@@ -106,7 +106,7 @@ export function RatingDetailModal({ isOpen, onClose, ratingData }: RatingDetailM
                 <div className="bg-white dark:bg-charcoal rounded-xl sm:rounded-2xl p-6 sm:p-12 md:p-20 min-h-[700px] sm:min-h-[1100px] border border-border relative overflow-hidden">
                    <div className="absolute top-0 left-0 w-full h-1 bg-[#2E5E99]" />
                    <div className="flex items-center justify-between mb-12 sm:mb-20 opacity-40">
-                      <div className="w-20 sm:w-24 h-10 sm:h-12 border border-border flex items-center justify-center font-bold text-[10px]">JPAN</div>
+                      <div className="w-20 sm:w-24 h-10 sm:h-12 border border-border flex items-center justify-center font-bold text-[10px]">J Pan</div>
                       <div className="text-[10px] font-bold uppercase tracking-widest">Confidential / Credit Evaluation</div>
                    </div>
 

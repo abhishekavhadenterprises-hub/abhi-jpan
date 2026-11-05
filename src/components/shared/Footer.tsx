@@ -144,7 +144,7 @@ export function Footer() {
               />
             </div>
             <div className="flex gap-4 text-[9px] uppercase tracking-widest text-gray-400">
-              <span>© {new Date().getFullYear()} JPan Tubular.</span>
+              <span>© {new Date().getFullYear()} J Pan Tubular.</span>
               <Link href="#" className="hover:text-[#111] transition-colors">Privacy</Link>
               <Link href="#" className="hover:text-[#111] transition-colors">Terms</Link>
             </div>
@@ -161,7 +161,7 @@ export function Footer() {
                 color: "transparent"
               }}
             >
-              JPAN
+              J PAN
             </motion.span>
             <motion.span
               className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap pr-4"

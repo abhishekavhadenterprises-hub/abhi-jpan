@@ -25,12 +25,12 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Product Not Found | J pan Tubular",
+      title: "Product Not Found | J Pan Tubular",
     };
   }
 
   return {
-    title: `${product.name} | J pan Tubular - Industrial Component Catalog`,
+    title: `${product.name} | J Pan Tubular - Industrial Component Catalog`,
     description: product.description,
   };
 }
@@ -109,7 +109,7 @@ export default async function ProductDetailPage({
             {/* Overview Lead Paragraph */}
             <p className="text-sm sm:text-base lg:text-lg text-charcoal/90 dark:text-white/90 leading-relaxed font-normal border-l-2 border-gold/50 pl-4 sm:pl-6 py-1">
               {product.overview ||
-                `At J pan Tubular, we specialize in manufacturing a comprehensive range of ${product.name} components that form the backbone of heat exchangers, condensers, evaporators, boilers, and industrial piping systems. Engineered with precision and reliability, our tubing solutions are available in copper, brass, cupro-nickel, and carbon steel, providing versatility across diverse applications.`}
+                `At J Pan Tubular, we specialize in manufacturing a comprehensive range of ${product.name} components that form the backbone of heat exchangers, condensers, evaporators, boilers, and industrial piping systems. Engineered with precision and reliability, our tubing solutions are available in copper, brass, cupro-nickel, and carbon steel, providing versatility across diverse applications.`}
             </p>
 
             {/* We Offer Card Block */}
@@ -152,7 +152,7 @@ export default async function ProductDetailPage({
             {/* Applications & Final Callout Paragraph */}
             <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed font-medium whitespace-pre-line">
               {product.applications ||
-                `Designed for efficiency, durability, and adaptability, J pan Tubular ${product.name} components deliver trusted solutions for HVAC, marine, industrial, automotive, and energy applications.`}
+                `Designed for efficiency, durability, and adaptability, J Pan Tubular ${product.name} components deliver trusted solutions for HVAC, marine, industrial, automotive, and energy applications.`}
             </p>
 
             {/* Action Buttons */}
