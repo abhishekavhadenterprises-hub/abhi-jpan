@@ -144,11 +144,11 @@ export function Hero() {
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
                 className="mt-3 sm:mt-3.5 max-w-3xl xl:max-w-4xl"
               >
-                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-black dark:text-white font-medium tracking-wide mb-1.5 sm:mb-2">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-white font-medium tracking-wide mb-1.5 sm:mb-2">
                   Under extreme pressure.
                 </h2>
-                <p className="text-xs sm:text-sm md:text-[15px] text-black dark:text-white font-semibold leading-relaxed">
-                  A <strong className="text-black dark:text-white font-black">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-black dark:text-white font-black">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
+                <p className="text-xs sm:text-sm md:text-[15px] text-white font-semibold leading-relaxed">
+                  A <strong className="text-white font-black">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-white font-black">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
                 </p>
               </motion.div>
 
