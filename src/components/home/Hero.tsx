@@ -69,9 +69,9 @@ export function Hero() {
           transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
         >
-          {/* Single Facility Aerial Image with Restored Fluid 1200ms Reveal Animation */}
+          {/* Single Facility Aerial Image with Smooth Scale Expand/Collapse (No Opacity Fade) */}
           <div
-            className={`absolute inset-0 w-full h-full transition-all duration-[1200ms] ease-in-out will-change-[opacity,transform] transform-gpu ${isAerialRevealed ? "opacity-100 scale-100" : "opacity-60 dark:opacity-50 scale-[1.03]"
+            className={`absolute inset-0 w-full h-full transition-transform duration-[1200ms] ease-in-out will-change-transform transform-gpu ${isAerialRevealed ? "scale-100" : "scale-[1.03]"
               }`}
           >
             <Image
@@ -84,14 +84,12 @@ export function Hero() {
             />
           </div>
 
-          {/* Restored Dynamic Architectural Readability Gradients - Lightens dynamically on reveal */}
+          {/* Dynamic Architectural Readability Gradients - Steady Constant Lighting Without Fade */}
           <div
-            className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] ${isAerialRevealed ? "opacity-15" : "opacity-35"
-              } bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/55 to-transparent dark:from-[#0D2440] dark:via-[#0D2440]/55 dark:to-transparent`}
+            className="absolute inset-0 opacity-25 bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/55 to-transparent dark:from-[#0D2440] dark:via-[#0D2440]/55 dark:to-transparent"
           />
           <div
-            className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] ${isAerialRevealed ? "opacity-10" : "opacity-25"
-              } bg-gradient-to-b from-transparent via-transparent to-[#F1F5F9]/80 dark:to-[#0D2440]/80`}
+            className="absolute inset-0 opacity-20 bg-gradient-to-b from-transparent via-transparent to-[#F1F5F9]/80 dark:to-[#0D2440]/80"
           />
           {/* Ellipse glow removed */}
         </motion.div>
