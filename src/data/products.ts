@@ -231,16 +231,21 @@ export const products: Product[] = [
     "id": 115,
     "name": "Copper Distributors",
     "category": "Copper Components",
-    "image": "/products/Copper Distributors.png",
+    "image": "/products/copper-distributors-front.jpg",
+    "images": [
+      "/products/copper-distributors-front.jpg",
+      "/products/copper-distributors-angle.jpg",
+      "/products/Copper Distributors.png"
+    ],
     "description": "Precision-engineered Copper Distributors designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
-    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision Copper Distributorss engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
+    "overview": "At J Pan Tubular, we specialize in manufacturing high-precision Copper Distributors engineered to ensure equal division of refrigerant across multiple evaporator and condenser circuits, optimizing heat exchanger efficiency.",
     "offerings": [
       "Precision internal chambers engineered for uniform pressure distribution",
       "Optimized flow path geometry ensuring equal refrigerant division",
       "Custom outlet configuration options to suit diverse circuit numbers"
     ],
-    "qualityAssurance": "Our Copper Distributorss undergo 100% helium mass spectrometer leak testing and flow-balance verification to ensure absolute vacuum integrity.",
+    "qualityAssurance": "Our Copper Distributors undergo 100% helium mass spectrometer leak testing and flow-balance verification to ensure absolute vacuum integrity.",
     "applications": "Perfect for multi-split VRF/VRV air conditioning units, commercial chillers, and large evaporator coil setups."
   },
   {
