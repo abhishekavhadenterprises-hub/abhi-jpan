@@ -1026,6 +1026,29 @@ export const products: Product[] = [
     "applications": "Essential for evaporator/condenser connections, compressor piping loops, and heat exchanger assemblies."
   },
   {
+    "id": 172,
+    "name": "Copper Pant Leg / Breeches Branch",
+    "category": "Copper Components",
+    "image": "/products/copper-pant-leg-assembly.jpg",
+    "images": [
+      "/products/copper-pant-leg-assembly.jpg",
+      "/products/copper-pant-leg-array.jpg",
+      "/products/copper-pant-leg-macro-internal.jpg",
+      "/products/copper-pant-leg-macro-ports.jpg"
+    ],
+    "description": "High-precision Copper Pant Leg and Breeches Branch fittings engineered for seamless fluid bifurcation and balanced dual/triple circuit distribution.",
+    "specs": "Precision Bifurcation",
+    "overview": "At J Pan Tubular, our heavy-duty Copper Pant Leg and Breeches Branch assemblies are engineered using specialized hydroforming and precision mechanical expansion to achieve balanced dual and triple-port refrigerant distribution with minimal flow turbulence.",
+    "offerings": [
+      "Smooth internal bifurcation bridge eliminating fluid stagnation and vortex turbulence",
+      "Calibrated multi-socket ports with tight inner-diameter tolerances for uniform braze flow",
+      "Seamless C12200 phosphorus-deoxidized copper construction certified for high operating pressures",
+      "Available in dual-outlet (bifurcated), triple-outlet (trifurcated), and custom header configurations"
+    ],
+    "qualityAssurance": "Each Copper Pant Leg assembly undergoes 100% helium leak verification, eddy-current structural inspection, and DIN 8964 internal cleanliness validation.",
+    "applications": "Widely utilized in VRF/VRV air conditioning branch joints, heat pump dual-circuit headers, commercial condenser splitters, and industrial refrigeration piping."
+  },
+  {
     "id": 2000,
     "name": "Chiller Assembly",
     "category": "Chiller",
