@@ -130,13 +130,13 @@ export function Hero() {
                 initial={{ x: -50, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-                className="mt-3 sm:mt-4 p-4 sm:p-5 md:p-6 rounded-2xl md:rounded-[1.75rem] bg-white/95 dark:bg-[#071321]/90 backdrop-blur-md border border-slate-200/90 dark:border-white/15 max-w-2xl xl:max-w-3xl shadow-xl shadow-slate-200/50 dark:shadow-none"
+                className="mt-3 sm:mt-4 p-4 sm:p-5 md:p-6 rounded-2xl md:rounded-[1.75rem] bg-white/30 dark:bg-white/10 backdrop-blur-md border border-white/40 dark:border-white/15 max-w-2xl xl:max-w-3xl shadow-lg shadow-black/5"
               >
-                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-[#0D2440] dark:text-white font-medium tracking-wide mb-1.5 sm:mb-2">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-[#0D2440] dark:text-white font-semibold tracking-wide mb-1.5 sm:mb-2">
                   Under extreme pressure.
                 </h2>
-                <p className="text-xs sm:text-sm md:text-[15px] text-slate-700 dark:text-slate-200 font-normal leading-relaxed">
-                  A <strong className="text-[#0D2440] dark:text-white font-bold">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-[#0D2440] dark:text-white font-bold">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
+                <p className="text-xs sm:text-sm md:text-[15px] text-[#111111] dark:text-slate-100 font-medium leading-relaxed">
+                  A <strong className="text-[#0D2440] dark:text-white font-black">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-[#0D2440] dark:text-white font-black">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
                 </p>
               </motion.div>
 
