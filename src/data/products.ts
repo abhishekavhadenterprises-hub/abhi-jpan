@@ -1027,26 +1027,26 @@ export const products: Product[] = [
   },
   {
     "id": 172,
-    "name": "Copper Pant Leg / Breeches Branch",
+    "name": "Copper Coupling",
     "category": "Copper Components",
-    "image": "/products/copper-pant-leg-assembly.jpg",
+    "image": "/products/copper-coupling-1.jpg",
     "images": [
-      "/products/copper-pant-leg-assembly.jpg",
-      "/products/copper-pant-leg-array.jpg",
-      "/products/copper-pant-leg-macro-internal.jpg",
-      "/products/copper-pant-leg-macro-ports.jpg"
+      "/products/copper-coupling-1.jpg",
+      "/products/copper-coupling-2.jpg",
+      "/products/copper-coupling-3.jpg",
+      "/products/copper-coupling-4.jpg"
     ],
-    "description": "High-precision Copper Pant Leg and Breeches Branch fittings engineered for seamless fluid bifurcation and balanced dual/triple circuit distribution.",
-    "specs": "Precision Bifurcation",
-    "overview": "At J Pan Tubular, our heavy-duty Copper Pant Leg and Breeches Branch assemblies are engineered using specialized hydroforming and precision mechanical expansion to achieve balanced dual and triple-port refrigerant distribution with minimal flow turbulence.",
+    "description": "High-durability Copper Coupling with precision bends to optimize fluid routing and minimize pressure drop.",
+    "specs": "Optimal Flow Routing",
+    "overview": "At J Pan Tubular, our heavy-duty Copper Coupling assemblies are engineered with precision manufacturing to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
     "offerings": [
-      "Smooth internal bifurcation bridge eliminating fluid stagnation and vortex turbulence",
-      "Calibrated multi-socket ports with tight inner-diameter tolerances for uniform braze flow",
-      "Seamless C12200 phosphorus-deoxidized copper construction certified for high operating pressures",
-      "Available in dual-outlet (bifurcated), triple-outlet (trifurcated), and custom header configurations"
+      "Precision formed geometry preventing restrictions or kink points",
+      "High-grade seamless tubing rated for high burst pressures",
+      "Deburred and calibrated socket ends for effortless braze jointing",
+      "Available in multiple branch and multi-outlet coupling configurations"
     ],
-    "qualityAssurance": "Each Copper Pant Leg assembly undergoes 100% helium leak verification, eddy-current structural inspection, and DIN 8964 internal cleanliness validation.",
-    "applications": "Widely utilized in VRF/VRV air conditioning branch joints, heat pump dual-circuit headers, commercial condenser splitters, and industrial refrigeration piping."
+    "qualityAssurance": "Subjected to rigorous eddy-current defect inspection and internal cleanliness testing according to DIN 8964 guidelines.",
+    "applications": "Essential for evaporator/condenser connections, compressor piping loops, and heat exchanger assemblies."
   },
   {
     "id": 2000,
@@ -1332,9 +1332,6 @@ export function getProductById(id: string | number): Product | undefined {
   }
   if (numericId === 147 || numericId === 148 || numericId === 149) {
     return products.find((p) => p.id === 146);
-  }
-  if (numericId === 172) {
-    return products.find((p) => p.id === 171);
   }
   if (numericId === 2001) {
     return products.find((p) => p.id === 2000);
