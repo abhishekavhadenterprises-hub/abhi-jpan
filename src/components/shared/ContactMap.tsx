@@ -207,8 +207,8 @@ export function ContactMap() {
         )}
       </AnimatePresence>
 
-      {/* Interactive 3D Dotted WebGL Globe (Centered and sized to fit the section) */}
-      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[39%] xl:left-[40%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-[92vw] h-[92vw] sm:w-[620px] sm:h-[620px] lg:w-[92vh] lg:h-[92vh] xl:w-[96vh] xl:h-[96vh] max-w-[950px] max-h-[950px] z-10 opacity-90 lg:opacity-85 pointer-events-auto my-6 lg:my-0">
+      {/* Interactive 3D Dotted WebGL Globe with Blue India Dots */}
+      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[44%] xl:left-[45%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-[92vw] h-[92vw] sm:w-[620px] sm:h-[620px] lg:w-[92vh] lg:h-[92vh] xl:w-[96vh] xl:h-[96vh] max-w-[950px] max-h-[950px] z-10 opacity-95 lg:opacity-90 pointer-events-auto my-6 lg:my-0">
         <CobeInteractiveGlobe
           markers={hubLocations.map((h) => ({
             id: h.id,
@@ -226,8 +226,8 @@ export function ContactMap() {
         />
       </div>
 
-      {/* Floating Tactical Detail Card */}
-      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-[39%] xl:left-[40%] lg:-translate-x-1/2 top-auto lg:top-1/2 lg:-translate-y-1/2 w-full max-w-[480px] sm:max-w-[500px] px-4 sm:px-0 z-[50] pointer-events-none my-6 lg:my-0">
+      {/* Floating Tactical Detail Card on Left Side */}
+      <div className="relative lg:absolute left-1/2 -translate-x-1/2 lg:left-6 xl:left-12 2xl:left-16 lg:translate-x-0 top-auto lg:top-1/2 lg:-translate-y-1/2 w-full max-w-[430px] sm:max-w-[460px] xl:max-w-[480px] px-4 sm:px-0 z-[50] pointer-events-none my-6 lg:my-0">
         <AnimatePresence mode="wait">
           {isCardOpen && activeHub && (
             <motion.div
@@ -355,12 +355,12 @@ export function ContactMap() {
       {/* Bottom-Left Legend */}
       <div className="relative lg:absolute bottom-4 lg:bottom-7 left-6 lg:left-10 z-[40] text-[10px] sm:text-[11px] text-[#0D2440] dark:text-white flex flex-row lg:flex-col flex-wrap gap-4 lg:gap-2.5 font-bold uppercase tracking-[0.25em] px-6 lg:px-0 mt-8 lg:mt-0 select-none">
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#2E5E99] mr-2.5" />
-          <span>Strategic Hub</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] mr-2.5 shadow-sm shadow-[#2E5E99]/50" />
+          <span>India Hub Network</span>
         </div>
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#7BA4D0] mr-2.5 border border-[#2E5E99]/20" />
-          <span>Precision Unit</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-white mr-2.5 border border-slate-300 shadow-sm" />
+          <span>Active Location</span>
         </div>
       </div>
     </section>

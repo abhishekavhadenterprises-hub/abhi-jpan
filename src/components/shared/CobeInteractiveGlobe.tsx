@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import createGlobe from "cobe";
+import { INDIA_DOT_COORDINATES } from "@/data/indiaCoordinates";
 
 export interface PlantLocationMarker {
   id: string;
@@ -39,12 +40,44 @@ export function CobeInteractiveGlobe({
   const targetThetaRef = useRef(defaultTheta);
   const isDragging = useRef(false);
   const dragStartPhi = useRef(defaultPhi);
+  const globeRef = useRef<ReturnType<typeof createGlobe> | null>(null);
+
+  const buildMarkers = (currActiveIdx: number | null) => {
+    // 1. Geographic dot matrix covering India in J Pan Blue dots
+    const indiaMarkers = INDIA_DOT_COORDINATES.map((pt) => ({
+      location: pt as [number, number],
+      size: 0.016,
+      color: [46 / 255, 110 / 255, 185 / 255] as [number, number, number],
+    }));
+
+    // 2. Hub location markers: Active location gets a distinct glowing White Dot
+    const hubMarkers = markers.map((m, idx) => {
+      const isActive = currActiveIdx === idx;
+      return {
+        location: [m.lat, m.lng] as [number, number],
+        size: isActive ? 0.085 : 0.038,
+        color: isActive
+          ? ([1, 1, 1] as [number, number, number]) // White Dot on active location
+          : ([46 / 255, 110 / 255, 185 / 255] as [number, number, number]), // Blue Dot
+      };
+    });
+
+    return [...indiaMarkers, ...hubMarkers];
+  };
 
   useEffect(() => {
     if (activeIndex !== null && markers[activeIndex]) {
       const active = markers[activeIndex];
       targetPhiRef.current = active.phi;
       targetThetaRef.current = active.theta;
+    } else {
+      targetPhiRef.current = defaultPhi;
+      targetThetaRef.current = defaultTheta;
+    }
+    if (globeRef.current) {
+      globeRef.current.update({
+        markers: buildMarkers(activeIndex),
+      });
     }
   }, [activeIndex, markers]);
 
@@ -60,11 +93,7 @@ export function CobeInteractiveGlobe({
     window.addEventListener("resize", onResize);
     onResize();
 
-    const cobeMarkers = markers.map((m) => ({
-      location: [m.lat, m.lng] as [number, number],
-      size: m.size || 0.02,
-      color: (isDark ? [1, 1, 1] as [number, number, number] : accentColor)
-    }));
+    const cobeMarkers = buildMarkers(activeIndex);
 
     const globe = createGlobe(canvas, {
       devicePixelRatio: Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 2 : 2, 2),
@@ -85,6 +114,7 @@ export function CobeInteractiveGlobe({
       arcWidth: 0
     });
 
+    globeRef.current = globe;
     let animationFrameId: number;
     let isVisible = true;
     let timeSinceFocus = 0;
@@ -137,6 +167,7 @@ export function CobeInteractiveGlobe({
       observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       globe.destroy();
+      globeRef.current = null;
       window.removeEventListener("resize", onResize);
     };
   }, [markers, accentColor, isDark]);
