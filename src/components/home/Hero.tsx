@@ -130,13 +130,13 @@ export function Hero() {
                 initial={{ x: -50, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-                className="mt-3 sm:mt-3.5 max-w-3xl xl:max-w-4xl"
+                className="mt-3 sm:mt-4 p-4 sm:p-5 md:p-6 rounded-2xl md:rounded-[1.75rem] bg-[#0D2440]/80 dark:bg-[#071321]/85 backdrop-blur-md border border-white/15 max-w-2xl xl:max-w-3xl shadow-xl shadow-[#0D2440]/20"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-white font-medium tracking-wide mb-1.5 sm:mb-2">
                   Under extreme pressure.
                 </h2>
-                <p className="text-xs sm:text-sm md:text-[15px] text-white font-semibold leading-relaxed">
-                  A <strong className="text-white font-black">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-white font-black">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
+                <p className="text-xs sm:text-sm md:text-[15px] text-white/95 font-normal leading-relaxed">
+                  A <strong className="text-white font-bold">precision tubular engineering partner</strong>. Fabricating custom copper, brass, and steel assemblies for <strong className="text-white font-bold">global HVAC, automotive, and industrial OEMs</strong> — delivering zero-defect reliability across every shipment.
                 </p>
               </motion.div>
 
