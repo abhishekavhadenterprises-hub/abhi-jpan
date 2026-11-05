@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
-import { ArrowUpRight, Award, Factory, Globe2, Users2, Cpu, ShieldCheck, Flame } from "lucide-react";
+import { ArrowUpRight, Award, Globe2, Users2, Cpu, ShieldCheck, Flame } from "lucide-react";
 
 interface CapabilityModule {
   id: string;
@@ -73,13 +73,6 @@ const stats = [
     sublabel: "ESTABLISHED 1998",
     description: "Decades of continuous manufacturing innovation and institutional engineering memory.",
     icon: Award,
-  },
-  {
-    label: "Specialized Manufacturing Plants",
-    value: "6",
-    sublabel: "PAN-INDIA FOOTPRINT",
-    description: "Strategically situated near key automotive and HVAC industrial clusters.",
-    icon: Factory,
   },
   {
     label: "Annual Tubular Capacity",
@@ -191,7 +184,7 @@ export function AboutSnapshot() {
         </div>
 
         {/* Premium Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {stats.map((stat, idx) => {
             const StatIcon = stat.icon;
             return (

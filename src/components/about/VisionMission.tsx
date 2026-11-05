@@ -28,7 +28,7 @@ const missionPoints = [
   },
   {
     title: "High-Throughput Scale",
-    desc: "65,000+ MT annual volume backed by 6 synchronized production hubs.",
+    desc: "65,000+ MT annual volume backed by synchronized production hubs.",
   },
   {
     title: "Robotic Precision",
