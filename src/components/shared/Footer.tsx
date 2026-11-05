@@ -150,7 +150,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="w-full flex justify-center items-center pointer-events-none select-none pb-0 -mb-[2.2vw] gap-4 md:gap-6">
+          <div className="w-full flex justify-center items-center pointer-events-none select-none pb-1 sm:pb-2 -mb-[1.5vw] gap-4 md:gap-6">
             <motion.span
               className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap"
               style={{
