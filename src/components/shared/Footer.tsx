@@ -70,7 +70,7 @@ export function Footer() {
     >
       <motion.div
         style={{ y, opacity, scale }}
-        className="w-full relative z-10 will-change-transform px-6 md:px-12 pt-14 sm:pt-16 pb-6 max-w-[1600px] mx-auto flex flex-col justify-between min-h-[60vh]"
+        className="w-full relative z-10 will-change-transform px-6 md:px-12 pt-14 sm:pt-16 pb-0 max-w-[1600px] mx-auto flex flex-col justify-between min-h-[60vh]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
 
@@ -134,7 +134,7 @@ export function Footer() {
 
         {/* Base Divider & Text */}
         <div className="border-t border-gray-200 pt-6 flex flex-col items-center mt-auto">
-          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 mb-3 sm:mb-4">
             <div className="relative h-10 w-28 md:h-12 md:w-36">
               <Image
                 src="/images/jpan-logo-transparent.png"
@@ -150,7 +150,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="w-full flex justify-center items-center pointer-events-none select-none pb-6 md:pb-8 gap-4 md:gap-6">
+          <div className="w-full flex justify-center items-center pointer-events-none select-none pb-0 -mb-[2.2vw] gap-4 md:gap-6">
             <motion.span
               className="text-[11vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap"
               style={{
