@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import createGlobe from "cobe";
+import { INDIA_DOT_COORDINATES } from "@/data/indiaCoordinates";
 
 export interface PlantLocationMarker {
   id: string;
@@ -42,19 +43,31 @@ export function CobeInteractiveGlobe({
   const globeRef = useRef<ReturnType<typeof createGlobe> | null>(null);
 
   const buildMarkers = (currActiveIdx: number | null) => {
-    // Only render the particular Blue Dot at the facility location when an option is selected
-    if (currActiveIdx === null || !markers[currActiveIdx]) {
-      return [];
+    // 1. Geographic dot matrix covering India in J Pan Blue dots so India is clearly identifiable
+    const indiaMarkers = INDIA_DOT_COORDINATES.map((pt) => ({
+      location: pt as [number, number],
+      size: 0.012,
+      color: [46 / 255, 110 / 255, 185 / 255] as [number, number, number],
+    }));
+
+    // 2. Active hub pinpoint: appears ONLY when an option is selected from the list (not always)
+    if (currActiveIdx !== null && markers[currActiveIdx]) {
+      const active = markers[currActiveIdx];
+      const activeHalo = {
+        location: [active.lat, active.lng] as [number, number],
+        size: 0.052,
+        color: [46 / 255, 110 / 255, 185 / 255] as [number, number, number], // Vibrant Blue halo
+      };
+      const activeCore = {
+        location: [active.lat, active.lng] as [number, number],
+        size: 0.030,
+        color: [1, 1, 1] as [number, number, number], // Crisp White center core
+      };
+      return [...indiaMarkers, activeHalo, activeCore];
     }
 
-    const active = markers[currActiveIdx];
-    return [
-      {
-        location: [active.lat, active.lng] as [number, number],
-        size: 0.040,
-        color: [46 / 255, 110 / 255, 185 / 255] as [number, number, number], // Signature J Pan Blue Dot on selected hub
-      },
-    ];
+    // Default unselected state: Only the uniform India blue dots are shown (no permanent hub clumps or dots)
+    return indiaMarkers;
   };
 
   useEffect(() => {

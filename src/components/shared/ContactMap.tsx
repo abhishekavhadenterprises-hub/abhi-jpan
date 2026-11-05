@@ -355,7 +355,11 @@ export function ContactMap() {
       {/* Bottom-Left Legend */}
       <div className="relative lg:absolute bottom-4 lg:bottom-7 left-6 lg:left-10 z-[40] text-[10px] sm:text-[11px] text-[#0D2440] dark:text-white flex flex-row lg:flex-col flex-wrap gap-4 lg:gap-2.5 font-bold uppercase tracking-[0.25em] px-6 lg:px-0 mt-8 lg:mt-0 select-none">
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] mr-2.5 shadow-sm shadow-[#2E5E99]/50 animate-pulse" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] mr-2.5 shadow-sm shadow-[#2E5E99]/50" />
+          <span>India Network Region</span>
+        </div>
+        <div className="flex items-center">
+          <span className="w-2.5 h-2.5 rounded-full bg-white mr-2.5 border-2 border-[#2E5E99] shadow-sm animate-pulse" />
           <span>Selected Manufacturing Hub</span>
         </div>
       </div>
