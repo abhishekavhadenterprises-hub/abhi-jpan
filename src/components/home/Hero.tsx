@@ -71,7 +71,7 @@ export function Hero() {
         >
           {/* Single Facility Aerial Image with Restored Fluid 1200ms Reveal Animation */}
           <div
-            className={`absolute inset-0 w-full h-full transition-all duration-[1200ms] ease-in-out will-change-[opacity,transform] transform-gpu ${isAerialRevealed ? "opacity-100 scale-100" : "opacity-85 dark:opacity-60 scale-[1.02]"
+            className={`absolute inset-0 w-full h-full transition-all duration-[1200ms] ease-in-out will-change-[opacity,transform] transform-gpu ${isAerialRevealed ? "opacity-100 scale-100" : "opacity-60 dark:opacity-50 scale-[1.03]"
               }`}
           >
             <Image
@@ -87,7 +87,7 @@ export function Hero() {
           {/* Restored Dynamic Architectural Readability Gradients - Lightens dynamically on reveal */}
           <div
             className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] ${isAerialRevealed ? "opacity-15" : "opacity-35"
-              } bg-gradient-to-r from-black/40 via-black/20 to-transparent dark:from-[#0D2440] dark:via-[#0D2440]/55 dark:to-transparent`}
+              } bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/55 to-transparent dark:from-[#0D2440] dark:via-[#0D2440]/55 dark:to-transparent`}
           />
           <div
             className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out will-change-[opacity] ${isAerialRevealed ? "opacity-10" : "opacity-25"
@@ -112,13 +112,13 @@ export function Hero() {
         <div className="w-full max-w-[94%] xl:max-w-[1440px] 2xl:max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto py-1">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center justify-between">
             {/* Monumental Clean Headline & Narrative */}
-            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center -translate-y-1 sm:-translate-y-2 lg:-translate-y-4">
+            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center translate-y-6 sm:translate-y-8 md:translate-y-10 lg:translate-y-12">
               <motion.div
                 initial={{ x: -60, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -60, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               >
-                <ScrollWipeHeading as="h1" className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+                <ScrollWipeHeading as="h1" className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] font-heading font-black tracking-tight leading-[0.96] text-[#0D2440] dark:text-white uppercase drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                   Precision in <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D2440] via-[#1E3A8A] to-[#2E5E99] dark:from-white dark:via-slate-200 dark:to-slate-400">
                     every bend.
