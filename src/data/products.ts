@@ -267,8 +267,9 @@ export const products: Product[] = [
     "id": 119,
     "name": "Copper Tee",
     "category": "Copper Components",
-    "image": "/products/Copper Tee.png",
+    "image": "/products/copper-tee-array.jpg",
     "images": [
+      "/products/copper-tee-array.jpg",
       "/products/Copper Tee.png",
       "/products/Copper Tee 2.png"
     ],
@@ -303,10 +304,13 @@ export const products: Product[] = [
     "id": 121,
     "name": "Distributor Assembly",
     "category": "Copper Components",
-    "image": "/products/Distributor Assembly 1.png",
+    "image": "/products/distributor-spider-assembly.jpg",
     "images": [
-      "/products/Distributor Assembly 1.png",
-      "/products/Distributor Assembly 2.png"
+      "/products/distributor-spider-assembly.jpg",
+      "/products/distributor-multi-circuit.jpg",
+      "/products/distributor-precision-manifold-1.jpg",
+      "/products/distributor-precision-manifold-2.jpg",
+      "/products/Distributor Assembly 1.png"
     ],
     "description": "Precision-engineered Distributor Assembly designed for perfectly balanced refrigerant flow across multiple circuits.",
     "specs": "Balanced Dispensing",
@@ -657,7 +661,13 @@ export const products: Product[] = [
     "id": 150,
     "name": "Return Bend And Sensor Holder",
     "category": "Copper Components",
-    "image": "/products/Return Bend and Sensor Holder.png",
+    "image": "/products/return-bend-array-1.jpg",
+    "images": [
+      "/products/return-bend-array-1.jpg",
+      "/products/return-bend-array-2.jpg",
+      "/products/return-bend-array-3.jpg",
+      "/products/Return Bend and Sensor Holder.png"
+    ],
     "description": "High-durability Return Bend And Sensor Holder with precision bends to optimize fluid routing and minimize pressure drop.",
     "specs": "Optimal Flow Routing",
     "overview": "At J Pan Tubular, our heavy-duty Return Bend And Sensor Holder assemblies are engineered with precision 3D CNC bending to facilitate smooth, low-friction fluid and refrigerant routing through restricted spaces.",
@@ -1001,6 +1011,7 @@ export const products: Product[] = [
     "image": "/products/Y Bend.png",
     "images": [
       "/products/Y Bend.png",
+      "/products/copper-y-bend-array.jpg",
       "/products/Y Branch.png"
     ],
     "description": "High-durability copper Y-Bend and Y-Branch fittings with precision bends to optimize fluid routing and minimize pressure drop.",
