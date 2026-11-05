@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import createGlobe from "cobe";
-import { INDIA_DOT_COORDINATES } from "@/data/indiaCoordinates";
 
 export interface PlantLocationMarker {
   id: string;
@@ -43,26 +42,19 @@ export function CobeInteractiveGlobe({
   const globeRef = useRef<ReturnType<typeof createGlobe> | null>(null);
 
   const buildMarkers = (currActiveIdx: number | null) => {
-    // 1. Geographic dot matrix covering India in J Pan Blue dots with balanced spacing
-    const indiaMarkers = INDIA_DOT_COORDINATES.map((pt) => ({
-      location: pt as [number, number],
-      size: 0.012,
-      color: [46 / 255, 110 / 255, 185 / 255] as [number, number, number],
-    }));
+    // Only render the particular Blue Dot at the facility location when an option is selected
+    if (currActiveIdx === null || !markers[currActiveIdx]) {
+      return [];
+    }
 
-    // 2. Hub location markers: Active location gets a refined, smaller White Dot
-    const hubMarkers = markers.map((m, idx) => {
-      const isActive = currActiveIdx === idx;
-      return {
-        location: [m.lat, m.lng] as [number, number],
-        size: isActive ? 0.040 : 0.024,
-        color: isActive
-          ? ([1, 1, 1] as [number, number, number]) // Refined White Dot on active location
-          : ([46 / 255, 110 / 255, 185 / 255] as [number, number, number]), // Blue Dot
-      };
-    });
-
-    return [...indiaMarkers, ...hubMarkers];
+    const active = markers[currActiveIdx];
+    return [
+      {
+        location: [active.lat, active.lng] as [number, number],
+        size: 0.040,
+        color: [46 / 255, 110 / 255, 185 / 255] as [number, number, number], // Signature J Pan Blue Dot on selected hub
+      },
+    ];
   };
 
   useEffect(() => {
