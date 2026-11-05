@@ -112,7 +112,7 @@ export function Hero() {
         <div className="w-full max-w-[94%] xl:max-w-[1440px] 2xl:max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 my-auto py-1">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center justify-between">
             {/* Monumental Clean Headline & Narrative */}
-            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center translate-y-14 sm:translate-y-16 md:translate-y-20 lg:translate-y-24">
+            <div className="lg:col-span-9 xl:col-span-8 flex flex-col justify-center translate-y-8 sm:translate-y-10 md:translate-y-12 lg:translate-y-14 xl:translate-y-16">
               <motion.div
                 initial={{ x: -60, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -60, opacity: 0 }}
