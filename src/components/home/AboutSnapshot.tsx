@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
-import { ArrowUpRight, Award, Globe2, Users2, Cpu, ShieldCheck, Flame } from "lucide-react";
+import { ArrowUpRight, Award, Globe2, Users2, Cpu, ShieldCheck, Flame, Factory } from "lucide-react";
 
 interface CapabilityModule {
   id: string;
@@ -75,11 +75,11 @@ const stats = [
     icon: Award,
   },
   {
-    label: "Annual Tubular Capacity",
-    value: "65k MT",
-    sublabel: "HIGH-THROUGHPUT VOLUME",
-    description: "High-speed cold drawing, multi-axis automated CNC bending, and induction brazing.",
-    icon: Globe2,
+    label: "Strategic Manufacturing Hubs",
+    value: "6 Plants",
+    sublabel: "PAN-INDIA FOOTPRINT",
+    description: "Integrated facilities across Greater Noida, Pune, Sanand, Neemrana, and Bengaluru delivering JIT OEM supplies.",
+    icon: Factory,
   },
   {
     label: "Tier-1 & Global OEM Partners",

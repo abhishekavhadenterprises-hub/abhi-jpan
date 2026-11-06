@@ -177,7 +177,7 @@ export function ContactMap() {
   return (
     <section
       onClick={handleBackgroundClick}
-      className="relative w-full min-h-[85vh] lg:min-h-[92vh] xl:min-h-[95vh] bg-white dark:bg-[#070b14] overflow-hidden font-heading selection:bg-[#2E5E99] selection:text-white z-20 text-[#0D2440] dark:text-white transition-colors duration-500 py-8 lg:py-0 flex flex-col justify-center select-none"
+      className="relative w-full min-h-[85vh] lg:min-h-[92vh] xl:min-h-[95vh] bg-white dark:bg-[#0D2440] overflow-hidden font-heading selection:bg-[#2E5E99] selection:text-white z-20 text-[#0D2440] dark:text-[#E7F0FA] transition-colors duration-500 py-8 lg:py-0 flex flex-col justify-center select-none"
     >
 
       {/* Dynamic Background Marquee */}
@@ -199,7 +199,7 @@ export function ContactMap() {
                 ease: "linear",
                 duration: 40,
               }}
-              className="whitespace-nowrap text-[20vw] font-heading font-black italic uppercase tracking-tighter text-[#0D2440]/[0.04] dark:text-white/[0.02] select-none pr-8"
+              className="whitespace-nowrap text-[20vw] font-heading font-black italic uppercase tracking-tighter text-[#0D2440]/[0.04] dark:text-[#E7F0FA]/[0.03] select-none pr-8"
             >
               {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title} • {activeHub.title}
             </motion.div>
@@ -214,6 +214,7 @@ export function ContactMap() {
             id: h.id,
             name: h.title,
             city: h.city,
+            state: h.state,
             lat: h.lat,
             lng: h.lng,
             phi: h.phi,
@@ -353,14 +354,20 @@ export function ContactMap() {
       </div>
 
       {/* Bottom-Left Legend */}
-      <div className="relative lg:absolute bottom-4 lg:bottom-7 left-6 lg:left-10 z-[40] text-[10px] sm:text-[11px] text-[#0D2440] dark:text-white flex flex-row lg:flex-col flex-wrap gap-4 lg:gap-2.5 font-bold uppercase tracking-[0.25em] px-6 lg:px-0 mt-8 lg:mt-0 select-none">
+      <div className="relative lg:absolute bottom-4 lg:bottom-7 left-6 lg:left-10 z-[40] text-[10px] sm:text-[11px] text-[#0D2440] dark:text-[#E7F0FA] flex flex-row lg:flex-col flex-wrap gap-4 lg:gap-2.5 font-bold uppercase tracking-[0.25em] px-6 lg:px-0 mt-8 lg:mt-0 select-none">
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#2E5E99] mr-2.5 shadow-sm shadow-[#2E5E99]/50" />
-          <span>India Network Region</span>
+          <span className="w-3.5 h-2 rounded-[2px] border-2 border-[#0D2440] dark:border-[#7BA4D0] mr-2.5 shadow-sm" />
+          <span>India Border (Outer)</span>
         </div>
+        {activeHub && (
+          <div className="flex items-center">
+            <span className="w-3.5 h-2 rounded-[2px] border-2 border-[#2E5E99] dark:border-[#7BA4D0] mr-2.5 shadow-sm" />
+            <span>{activeHub.state} Boundary (Inner - Blue)</span>
+          </div>
+        )}
         <div className="flex items-center">
-          <span className="w-2.5 h-2.5 rounded-full bg-white mr-2.5 border-2 border-[#2E5E99] shadow-sm animate-pulse" />
-          <span>Selected Manufacturing Hub</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#E7F0FA] mr-2.5 border-2 border-[#2E5E99] shadow-sm animate-pulse" />
+          <span>{activeHub ? "Plant Location" : "Manufacturing Hubs"}</span>
         </div>
       </div>
     </section>
