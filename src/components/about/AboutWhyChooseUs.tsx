@@ -84,16 +84,10 @@ export function AboutWhyChooseUs() {
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full p-6 sm:p-10 lg:p-14 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] bg-white/80 dark:bg-black/40 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-2xl shadow-[#2E5E99]/5 dark:shadow-black/50 flex flex-col group hover:-translate-y-2 transition-transform duration-500"
               >
-                <div className="flex justify-between items-start mb-6 sm:mb-10 lg:mb-14">
+                <div className="flex items-start mb-6 sm:mb-10 lg:mb-14">
                   <span className="font-heading text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-[#0D2440]/5 dark:text-[#7BA4D0]/10 leading-none -ml-1 sm:-ml-2 -mt-2 sm:-mt-4 group-hover:text-[#2E5E99]/10 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
                     {item.num}
                   </span>
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10">
-                    <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#2E5E99] dark:bg-[#7BA4D0] animate-pulse" />
-                    <span className="text-[10px] sm:text-xs font-sans font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#2E5E99] dark:text-[#7BA4D0] uppercase">
-                      {item.tag}
-                    </span>
-                  </div>
                 </div>
 
                 <div className="mt-auto">

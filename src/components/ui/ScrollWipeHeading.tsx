@@ -57,7 +57,7 @@ export function ScrollWipeHeading({
   return (
     <MotionComponent
       ref={textRef}
-      className={`w-fit ${className.includes("block") ? "" : "inline-block"} pb-[0.2em] -mb-[0.2em] pr-[0.1em] overflow-visible [&_*]:[background-image:inherit] [&_*]:[background-clip:text] [&_*]:[-webkit-background-clip:text] [&_*]:[-webkit-text-fill-color:transparent] ${className}`}
+      className={`w-fit mx-auto ${className.includes("block") ? "" : "inline-block"} pb-[0.2em] -mb-[0.2em] pr-[0.3em] overflow-visible [&_*]:[background-image:inherit] [&_*]:[background-clip:text] [&_*]:[-webkit-background-clip:text] [&_*]:[-webkit-text-fill-color:transparent] ${className}`}
       style={{
         backgroundImage: bgImage,
         WebkitBackgroundClip: "text",

@@ -270,18 +270,18 @@ export function EventPhotos() {
   return (
     <section className="py-16 md:py-24 bg-white dark:bg-black transition-colors">
       <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <div className="mb-4 overflow-visible">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 flex flex-col items-center">
+          <div className="mb-4 overflow-visible flex flex-col items-center w-full">
             <ScrollWipeHeading
               as="h2"
-              className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+              className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block mx-auto text-center"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
             >
               Exhibition & Event
             </ScrollWipeHeading>
-            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+            <div className="pt-1 pb-2 px-4 pr-6 overflow-visible inline-block bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl font-heading tracking-tight text-center">
               Visual Archives
             </div>
           </div>

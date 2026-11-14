@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Quote, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 
 interface LeaderDossier {
@@ -185,12 +185,6 @@ export function Leadership() {
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="w-full flex flex-col justify-center"
                     >
-                      {/* Executive Directive Tag */}
-                      <div className="flex items-center gap-2 text-[#2563EB] dark:text-[#7BA4D0] font-mono text-xs font-bold tracking-wider uppercase mb-2.5">
-                        <Quote className="w-3.5 h-3.5 fill-current rotate-180" />
-                        <span>EXECUTIVE DIRECTIVE</span>
-                      </div>
-
                       {/* Editorial Directive Headline with Comfortable Scale */}
                       <h4 className="text-base sm:text-lg lg:text-xl font-heading font-black tracking-tight leading-snug text-slate-900 dark:text-white uppercase mb-3.5">
                         {leader.directiveQuote}
