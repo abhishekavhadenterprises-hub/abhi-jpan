@@ -71,18 +71,18 @@ export function TestingFacilities() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           
           {/* Content Side: Interactive Facility Bento with Counter-Parallax */}
-          <div className="order-2 lg:order-1">
-            <div className="mb-6 overflow-visible">
+          <div className="order-2 lg:order-1 text-left">
+            <div className="mb-6 overflow-visible text-left">
               <ScrollWipeHeading
                 as="h2"
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block text-left"
                 revealedColor="currentColor"
                 wipingColor="#2E5E99"
                 unrevealedColor="rgba(148, 163, 184, 0.4)"
               >
                 In-House
               </ScrollWipeHeading>
-              <div className="pt-1 pb-2 pr-6 overflow-visible inline-block bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading tracking-tight">
+              <div className="pt-1 pb-2 pr-6 overflow-visible inline-block bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading tracking-tight text-left">
                 Testing Infrastructure
               </div>
             </div>
