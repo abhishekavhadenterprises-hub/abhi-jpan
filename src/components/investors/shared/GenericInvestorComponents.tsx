@@ -505,7 +505,7 @@ function GenericDocumentModal({
           <iframe
             src={`${downloadLink}#view=FitH`}
             className="w-full h-full min-h-[460px] md:min-h-[580px] border-0 flex-grow"
-            title={displayParticulars}
+            title={displayTitle}
           />
           <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99]" />
         </div>
