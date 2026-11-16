@@ -30,6 +30,24 @@ const data = [
     category: "Statutory Advertisement",
     status: "Published",
     fileSize: "12.0 MB"
+  },
+  {
+    id: 4,
+    date: "2026",
+    particulars: "DRHP Audio-Visual (English)",
+    link: "/videos/drhp-audio-visual-english.mp4",
+    category: "Audio-Visual Presentation",
+    status: "Official Media",
+    fileSize: "1.13 GB"
+  },
+  {
+    id: 5,
+    date: "2026",
+    particulars: "DRHP Audio-Visual (Hindi)",
+    link: "/videos/drhp-audio-visual-hindi.mp4",
+    category: "Audio-Visual Presentation",
+    status: "Official Media",
+    fileSize: "1.68 GB"
   }
 ];
 
@@ -38,7 +56,7 @@ export default function InitialPublicOfferPage() {
     <main className="overflow-hidden bg-white dark:bg-background">
       <GenericInvestorHero 
         title="Initial Public Offer"
-        subtitle="Official statutory offer documents, Draft Red Herring Prospectus (DRHP), abridged prospectus, and public advertisements for J Pan's Initial Public Offering."
+        subtitle="Official statutory offer documents, Draft Red Herring Prospectus (DRHP), abridged prospectus, public advertisements, and audio-visual presentations for J Pan's Initial Public Offering."
         image="/images/home_hero_3d.jpg"
         parent="INVESTOR RELATIONS"
         badgeText="Public Issue Filings"

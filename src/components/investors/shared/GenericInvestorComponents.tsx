@@ -19,7 +19,9 @@ import {
   ArrowUpRight, 
   Share2, 
   RotateCcw,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Video,
+  Play
 } from "lucide-react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -475,7 +477,7 @@ function GenericDocumentModal({
               className="w-full bg-[#0D2440] hover:bg-[#2E5E99] text-white px-5 py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-md"
             >
               <Download className="w-4 h-4" />
-              Download Official PDF
+              {downloadLink.toLowerCase().includes(".mp4") ? "Download Video (MP4)" : "Download Official PDF"}
             </a>
             <a 
               href={downloadLink}
@@ -484,7 +486,7 @@ function GenericDocumentModal({
               className="w-full bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white px-5 py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-xs"
             >
               <ExternalLink className="w-4 h-4 text-[#2E5E99]" />
-              Open in Full Viewer
+              {downloadLink.toLowerCase().includes(".mp4") ? "Watch in New Tab" : "Open in Full Viewer"}
             </a>
             <button 
               onClick={() => {
@@ -502,11 +504,23 @@ function GenericDocumentModal({
 
         {/* Right Preview Panel */}
         <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col relative overflow-hidden min-h-[460px] md:min-h-[580px] w-full">
-          <iframe
-            src={`${downloadLink}#view=FitH`}
-            className="w-full h-full min-h-[460px] md:min-h-[580px] border-0 flex-grow"
-            title={displayTitle}
-          />
+          {downloadLink.toLowerCase().includes(".mp4") ? (
+            <video
+              controls
+              autoPlay
+              playsInline
+              className="w-full h-full min-h-[460px] md:min-h-[580px] bg-black object-contain flex-grow"
+              src={downloadLink}
+            >
+              Your browser does not support video playback.
+            </video>
+          ) : (
+            <iframe
+              src={`${downloadLink}#view=FitH`}
+              className="w-full h-full min-h-[460px] md:min-h-[580px] border-0 flex-grow"
+              title={displayTitle}
+            />
+          )}
           <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99]" />
         </div>
 
@@ -778,7 +792,11 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                   <div>
                     <div className="flex items-center justify-between mb-4 sm:mb-5">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                        <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
+                        {item.link.toLowerCase().includes(".mp4") ? (
+                          <Video className="w-4 h-4 sm:w-5 sm:h-5" />
+                        ) : (
+                          <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
+                        )}
                       </div>
                       <span className="px-2.5 sm:px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[11px] sm:text-xs font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
                         {item.date}
@@ -791,7 +809,9 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                       </h4>
                       <div className="flex items-center gap-2 text-xs text-[#0D2440]/60 dark:text-white/60">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                        <span className="font-heading font-medium">Audited Statutory Filing</span>
+                        <span className="font-heading font-medium">
+                          {item.link.toLowerCase().includes(".mp4") ? "Audio-Visual Media" : "Audited Statutory Filing"}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -811,7 +831,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                       className="px-3.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-2 shadow-xs group/btn flex-1 sm:flex-initial"
                     >
                       <Download className="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
-                      Download PDF
+                      {item.link.toLowerCase().includes(".mp4") ? "Download Video" : "Download PDF"}
                     </a>
                   </div>
                 </motion.div>
@@ -853,14 +873,18 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                       <td className="py-3 px-3.5 sm:py-4 sm:px-6">
                         <div className="flex items-center gap-2.5 sm:gap-3">
                           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0">
-                            <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                            {item.link.toLowerCase().includes(".mp4") ? (
+                              <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                            ) : (
+                              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                            )}
                           </div>
                           <div>
                             <span className="font-heading font-semibold text-xs sm:text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block leading-snug">
                               {item.particulars}
                             </span>
                             <span className="text-[10px] sm:text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 sm:hidden">
-                              Audited · Official PDF
+                              {item.link.toLowerCase().includes(".mp4") ? "Official · MP4 Video" : "Audited · Official PDF"}
                             </span>
                           </div>
                         </div>
