@@ -589,7 +589,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
 
   const isDefaultView = !query && sort === "desc";
   const flagshipItem = isDefaultView && sortedData.length > 0 ? sortedData[0] : null;
-  const gridItems = isDefaultView ? sortedData.slice(1) : sortedData;
+  const gridItems = sortedData;
 
   return (
     <section className="py-10 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#071321] transition-colors relative">
@@ -1007,7 +1007,7 @@ function GenericInvestorListingInner({
 
   const isDefaultView = !query && sort === "desc";
   const flagshipItem = isDefaultView && sortedItems.length > 0 ? sortedItems[0] : null;
-  const gridItems = isDefaultView ? sortedItems.slice(1) : sortedItems;
+  const gridItems = sortedItems;
 
   return (
     <section className="py-10 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#071321] transition-colors relative">

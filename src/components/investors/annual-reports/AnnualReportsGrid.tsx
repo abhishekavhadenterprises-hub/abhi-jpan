@@ -92,7 +92,7 @@ function AnnualReportsGridInner() {
   // Determine if we should spotlight the first card (only in Grid mode and if we have at least 1 report)
   const isDefaultView = !query && selectedYear === "all" && sort === "desc";
   const flagshipReport = isDefaultView ? sortedReports[0] : null;
-  const gridReports = isDefaultView ? sortedReports.slice(1) : sortedReports;
+  const gridReports = sortedReports;
 
   return (
     <section className="py-10 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-[#071321] transition-colors relative">
