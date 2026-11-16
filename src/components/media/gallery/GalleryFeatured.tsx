@@ -101,16 +101,16 @@ export function GalleryFeatured() {
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black transition-colors">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 md:mb-20">
-          <div className="mb-4 overflow-visible">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 md:mb-20 flex flex-col items-center">
+          <div className="mb-4 overflow-visible flex flex-col items-center w-full">
             <ScrollWipeHeading
               as="h2"
-              className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block"
+              className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.22] block mx-auto text-center"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
             >
-              Featured <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0]">Highlights</span>
+              Featured <span className="font-serif italic font-normal text-[#2E5E99] dark:text-[#7BA4D0] pr-1">Highlights</span>
             </ScrollWipeHeading>
           </div>
         </div>

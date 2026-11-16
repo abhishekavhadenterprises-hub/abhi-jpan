@@ -108,17 +108,17 @@ export function CareersCTA() {
           >
             {/* Left Content */}
             <motion.div variants={itemVariants} className="lg:col-span-6">
-              <div className="mb-6 overflow-visible">
+              <div className="mb-6 overflow-visible text-left">
                 <ScrollWipeHeading
                   as="h2"
-                  className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block"
+                  className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-[#0D2440] dark:text-white leading-[1.15] tracking-tight block text-left"
                   revealedColor="currentColor"
                   wipingColor="#2E5E99"
                   unrevealedColor="rgba(148, 163, 184, 0.4)"
                 >
                   Shape Your
                 </ScrollWipeHeading>
-                <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#1B365D] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl font-heading tracking-tight">
+                <div className="pt-1 pb-2 pr-6 overflow-visible inline-block bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#1B365D] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-4xl md:text-5xl font-heading tracking-tight text-left">
                   Future With Us
                 </div>
               </div>

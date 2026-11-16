@@ -212,35 +212,35 @@ export function ProductShowcase() {
                   {/* Left Column: Technical Dossier */}
                   <div className="lg:col-span-6 flex flex-col justify-between p-4 sm:p-6 lg:p-7 z-10 relative">
                     <div>
-                      <span className="block text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.2em] text-[#2E5E99] dark:text-cyan-400 font-bold mb-1">
+                      <span className="block text-[9px] sm:text-[10px] font-sans uppercase tracking-[0.2em] text-[#2E5E99] dark:text-[#7BA4D0] font-extrabold mb-1.5">
                         {product.eyebrowCategory}
                       </span>
-                      <h3 className="text-lg sm:text-2xl lg:text-[1.65rem] font-light text-[#111] dark:text-white leading-[1.15] mb-2 sm:mb-2.5 tracking-tight">
+                      <h3 className="text-lg sm:text-2xl lg:text-[1.65rem] font-heading font-bold text-[#0D2440] dark:text-white leading-[1.2] mb-2 sm:mb-2.5 tracking-tight">
                         {product.title}
                       </h3>
 
-                      <p className="text-[#555] dark:text-[#AAA] text-xs sm:text-[13px] font-light leading-relaxed mb-3 max-w-xl">
+                      <p className="text-[#0D2440]/75 dark:text-white/70 text-xs sm:text-sm font-normal leading-relaxed mb-3.5 max-w-xl">
                         {product.description}
                       </p>
 
                       {/* Key Spec Highlights */}
-                      <div className="space-y-1.5 sm:space-y-2 pt-2.5 sm:pt-3 border-t border-[#111]/10 dark:border-white/10">
+                      <div className="space-y-2 sm:space-y-2.5 pt-2.5 sm:pt-3 border-t border-[#0D2440]/10 dark:border-white/10">
                         {product.specDetails.map((spec, i) => (
                           <div
                             key={i}
-                            className="flex items-center gap-2.5 sm:gap-3 text-xs font-mono text-[#666] dark:text-[#999]"
+                            className="flex items-center gap-2.5 sm:gap-3 text-xs font-sans text-[#0D2440]/85 dark:text-white/85"
                           >
-                            <div className="w-4 h-4 rounded-full bg-[#111]/5 dark:bg-white/5 flex items-center justify-center shrink-0">
-                              <Icon className="w-2.5 h-2.5 text-[#111] dark:text-white" />
+                            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/15 flex items-center justify-center shrink-0">
+                              <Icon className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#2E5E99] dark:text-[#7BA4D0]" />
                             </div>
-                            <span className="tracking-wide text-[10px] sm:text-xs">{spec}</span>
+                            <span className="font-medium text-[11px] sm:text-xs text-[#0D2440]/85 dark:text-white/85">{spec}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     {/* Bottom Action */}
-                    <div className="pt-2.5 sm:pt-3 mt-3 border-t border-[#111]/10 dark:border-white/10 flex justify-end">
+                    <div className="pt-2.5 sm:pt-3 mt-3 border-t border-[#0D2440]/10 dark:border-white/10 flex justify-end">
                       <Link
                         href="/products"
                         className="relative overflow-hidden group/btn px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#2E5E99] hover:bg-[#1E3A8A] text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest transition-all duration-300 inline-flex items-center justify-center gap-2 shadow-md hover:shadow-[0_10px_20px_rgba(46,94,153,0.3)] hover:scale-105 z-20 text-center"

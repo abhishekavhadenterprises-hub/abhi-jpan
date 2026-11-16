@@ -81,18 +81,18 @@ export function ExhibitionHighlights() {
       className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC]/50 dark:bg-black/50 transition-colors border-y border-[#7BA4D0]/15 relative overflow-hidden"
     >
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16">
-          <div className="mb-2 overflow-visible">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16 flex flex-col items-center">
+          <div className="mb-2 overflow-visible flex flex-col items-center w-full">
             <ScrollWipeHeading
               as="h2"
-              className="text-2xl sm:text-3xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block"
+              className="text-2xl sm:text-3xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.18] tracking-tight block mx-auto text-center"
               revealedColor="currentColor"
               wipingColor="#2E5E99"
               unrevealedColor="rgba(148, 163, 184, 0.4)"
             >
               Global Trade
             </ScrollWipeHeading>
-            <div className="pt-1 pb-2 bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-5xl font-heading tracking-tight">
+            <div className="pt-1 pb-2 px-4 pr-6 overflow-visible inline-block bg-gradient-to-r from-[#0D2440] via-[#2E5E99] to-[#7BA4D0] dark:from-white dark:via-blue-200 dark:to-[#7BA4D0] bg-clip-text text-transparent italic font-light text-2xl sm:text-3xl md:text-5xl font-heading tracking-tight text-center">
               Show Presence & Expos
             </div>
           </div>
