@@ -82,44 +82,36 @@ export function AnnualReportsDetailModal({ report, isOpen, onClose }: AnnualRepo
               <Download className="w-4 h-4" />
               Download Official PDF
             </a>
+            <a 
+              href={downloadLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-xs"
+            >
+              <ExternalLink className="w-4 h-4 text-[#2E5E99]" />
+              Open in Full Viewer
+            </a>
             <button 
               onClick={() => {
                 if (navigator.clipboard) {
                   navigator.clipboard.writeText(window.location.href);
                 }
               }}
-              className="w-full bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5"
+              className="w-full bg-transparent border border-slate-200 dark:border-white/10 hover:border-[#7BA4D0]/50 text-slate-600 dark:text-slate-300 px-5 py-2.5 rounded-xl font-medium text-xs transition-all flex items-center justify-center gap-2"
             >
-              <Share2 className="w-4 h-4 text-[#2E5E99]" />
+              <Share2 className="w-3.5 h-3.5" />
               Share Link
             </button>
           </div>
         </div>
 
         {/* Main Content: PDF Preview Panel */}
-        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col items-center justify-center p-5 sm:p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="relative z-10 max-w-md">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-md text-[#2E5E99] dark:text-[#7BA4D0]">
-              <FileText className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-[#0D2440] dark:text-white mb-2 sm:mb-3">
-              Official Disclosure Document
-            </h3>
-            <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/70 leading-relaxed mb-6 sm:mb-8">
-              Full statutory accounts, governance disclosures, audit verifications, and notes to financial statements for the fiscal cycle {displayYear}.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a 
-                href={downloadLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#2E5E99] hover:bg-[#0D2440] text-white text-xs font-semibold transition-all shadow-md"
-              >
-                Open in Full Viewer <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-
+        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col relative overflow-hidden min-h-[460px] md:min-h-[580px] w-full">
+          <iframe
+            src={`${downloadLink}#view=FitH`}
+            className="w-full h-full min-h-[460px] md:min-h-[580px] border-0 flex-grow"
+            title={displayTitle}
+          />
           {/* Bottom Security Bar */}
           <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99]" />
         </div>

@@ -11,37 +11,19 @@ const reports = [
     id: 1,
     date: "2025-2026",
     particulars: "J Pan- Annual Report",
-    link: "/sample-report.pdf"
+    link: "/documents/annual-report-2025-26.pdf"
   },
   {
     id: 2,
     date: "2024-2025",
     particulars: "J Pan- Annual Report",
-    link: "/sample-report.pdf"
+    link: "/documents/annual-report-2024-25.pdf"
   },
   {
     id: 3,
     date: "2023-2024",
     particulars: "J Pan- Annual Report",
-    link: "/sample-report.pdf"
-  },
-  {
-    id: 4,
-    date: "2022-2023",
-    particulars: "J Pan- Annual Report",
-    link: "/sample-report.pdf"
-  },
-  {
-    id: 5,
-    date: "2021-2022",
-    particulars: "J Pan- Annual Report",
-    link: "/sample-report.pdf"
-  },
-  {
-    id: 6,
-    date: "2020-2021",
-    particulars: "J Pan- Annual Report",
-    link: "/sample-report.pdf"
+    link: "/documents/annual-report-2023-24.pdf"
   }
 ];
 

@@ -4,12 +4,9 @@ import React from "react";
 import { GenericInvestorHero, GenericInvestorTable, GenericInvestorFilter } from "@/components/investors/shared/GenericInvestorComponents";
 
 const data = [
-  { id: 1, date: "2025-2026", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/sample-report.pdf" },
-  { id: 2, date: "2024-2025", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/sample-report.pdf" },
-  { id: 3, date: "2023-2024", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/sample-report.pdf" },
-  { id: 4, date: "2022-2023", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/sample-report.pdf" },
-  { id: 5, date: "2021-2022", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/sample-report.pdf" },
-  { id: 6, date: "2020-2021", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/sample-report.pdf" },
+  { id: 1, date: "2025-2026", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/documents/annual-return-2025-26.pdf" },
+  { id: 2, date: "2024-2025", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/documents/annual-return-2024-25.pdf" },
+  { id: 3, date: "2023-2024", particulars: "J Pan Tubular Components Limited - Annual Return", link: "/documents/annual-return-2023-24.pdf" },
 ];
 
 export default function AnnualReturnPage() {
