@@ -128,6 +128,7 @@ export function ProductShowcase() {
   return (
     <section
       ref={sectionRef}
+      data-spec="home-product-showcase"
       className="relative h-[220vh] bg-[#FAFAFA] dark:bg-[#030303] text-[#111] dark:text-white transition-colors duration-700 border-b border-[#111]/10 dark:border-white/10"
     >
       {/* Sticky container that remains pinned while scrolling through all products */}
@@ -165,7 +166,7 @@ export function ProductShowcase() {
 
           {/* Premium Tab Selector Bar with Scroll Sync */}
           <div className="flex items-center gap-3 mb-3.5 sm:mb-4">
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-full bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] w-fit shadow-sm relative z-20">
+            <div data-spec="home-product-tabs" className="flex flex-wrap items-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl sm:rounded-full bg-white dark:bg-[#111] border border-[#E5E5E5] dark:border-[#222] w-fit shadow-sm relative z-20">
               {capabilities.map((item, idx) => {
                 const isActive = activeTab === idx;
                 return (
@@ -194,7 +195,7 @@ export function ProductShowcase() {
           </div>
 
           {/* Active Product Detailed Dossier (Stacked CSS Grid: Zero layout shifts, instant silky crossfades) */}
-          <div className="relative w-full grid grid-cols-1 grid-rows-1">
+          <div data-spec="home-product-dossier" className="relative w-full grid grid-cols-1 grid-rows-1">
             {capabilities.map((product, idx) => {
               const isActive = activeTab === idx;
               const Icon = product.icon;

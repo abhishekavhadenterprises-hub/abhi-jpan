@@ -17,7 +17,7 @@ const certifications = [
       "APQP & PPAP Level 3 Qualified",
       "Inline Laser SPC (Cpk ≥ 1.67)",
       "100% Mass-Spec Helium Tested",
-      "Full Raw-to-Part Traceability",
+      "Full Raw-to-Part Traceability", 
     ],
   },
   {

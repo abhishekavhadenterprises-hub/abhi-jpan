@@ -99,7 +99,7 @@ export function AboutSnapshot() {
   const activeModule = capabilityModules[activeModuleIndex];
 
   return (
-    <section className="px-4 md:px-8 py-8 sm:py-12 relative overflow-hidden bg-[#FAFAFA] dark:bg-[#091A2E] min-h-[75vh] flex flex-col justify-center">
+    <section data-spec="home-about-snapshot" className="px-4 md:px-8 py-8 sm:py-12 relative overflow-hidden bg-[#FAFAFA] dark:bg-[#091A2E] min-h-[75vh] flex flex-col justify-center">
       {/* Ambient background glow */}
       <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-gradient-to-l from-[#586854]/10 to-transparent blur-[100px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[800px] h-[800px] bg-gradient-to-r from-[#2E5E99]/5 to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
@@ -128,7 +128,7 @@ export function AboutSnapshot() {
         </div>
 
         {/* Dynamic Capability Showcase Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch mb-8">
+        <div data-spec="home-capabilities-showcase" className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch mb-8">
 
           <div className="lg:col-span-5 flex flex-col justify-center space-y-2 relative z-10">
             {capabilityModules.map((mod, idx) => {
@@ -184,7 +184,7 @@ export function AboutSnapshot() {
         </div>
 
         {/* Premium Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+        <div data-spec="home-stats-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {stats.map((stat, idx) => {
             const StatIcon = stat.icon;
             return (

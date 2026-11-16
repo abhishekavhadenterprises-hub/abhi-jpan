@@ -31,7 +31,29 @@ export const createLocalStorageAdapter = (
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          const defaultMap = new Map(ALL_DEFAULT_PINS.map((p) => [p.id, p]));
+          const updated = parsed.map((p: DesignSpecPin) => {
+            const def = defaultMap.get(p.id);
+            if (def && (!p.change_request_count || p.change_request_count === 0)) {
+              return {
+                ...def,
+                ...p,
+                title: def.title,
+                description: def.description,
+                how_it_works: def.how_it_works,
+                selector: def.selector,
+                element_text: def.element_text,
+                module_name: def.module_name,
+                sub_module_name: def.sub_module_name,
+              };
+            }
+            return p;
+          });
+          const existingIds = new Set(updated.map((p) => p.id));
+          const missingDefaults = ALL_DEFAULT_PINS.filter((d) => !existingIds.has(d.id));
+          const merged = [...updated, ...missingDefaults];
+          writeStorage(merged);
+          return merged;
         }
       }
       writeStorage(ALL_DEFAULT_PINS);

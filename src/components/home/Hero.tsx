@@ -52,6 +52,7 @@ export function Hero() {
 
       <section
         ref={heroRef}
+        data-spec="home-hero"
         onMouseMove={handleHeroMouseMove}
         onMouseEnter={() => {
           setIsHovered(true);
@@ -128,6 +129,7 @@ export function Hero() {
                 initial={{ x: -50, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+                data-spec="home-hero-narrative"
                 className="mt-3 sm:mt-4 p-4 sm:p-5 md:p-6 rounded-2xl md:rounded-[1.75rem] bg-white/20 dark:bg-white/10 backdrop-blur-md border border-white/25 dark:border-white/15 max-w-2xl xl:max-w-3xl shadow-md shadow-black/5"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl font-heading italic text-[#0D2440] dark:text-white font-semibold tracking-wide mb-1.5 sm:mb-2">
@@ -143,6 +145,7 @@ export function Hero() {
                 initial={{ x: -40, opacity: 0 }}
                 animate={isRevealed ? { x: 0, opacity: 1 } : { x: -40, opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
+                data-spec="home-hero-cta"
                 className="mt-4 sm:mt-5 flex flex-wrap items-center gap-3.5"
               >
                 {/* Primary Pill: Executive Royal Navy */}

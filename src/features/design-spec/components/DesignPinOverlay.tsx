@@ -47,7 +47,7 @@ const getShowAllPinsStorageKey = (key: string) => `design_spec_show_all_pins_${k
 const getShowCardsStorageKey = (key: string) => `design_spec_show_cards_${key}`;
 
 const readShowAllPinsPreference = (projectKey: string): boolean => {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") return true;
   try {
     const raw =
       localStorage.getItem(getShowAllPinsStorageKey(projectKey)) ??
@@ -58,7 +58,7 @@ const readShowAllPinsPreference = (projectKey: string): boolean => {
   } catch (e) {
     console.warn("Failed to read showAllPins preference from localStorage", e);
   }
-  return false;
+  return true;
 };
 
 const saveShowAllPinsPreference = (projectKey: string, value: boolean) => {
@@ -72,7 +72,7 @@ const saveShowAllPinsPreference = (projectKey: string, value: boolean) => {
 };
 
 const readShowCardsPreference = (projectKey: string): boolean => {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") return true;
   try {
     const raw =
       localStorage.getItem(getShowCardsStorageKey(projectKey)) ??
@@ -83,7 +83,7 @@ const readShowCardsPreference = (projectKey: string): boolean => {
   } catch (e) {
     console.warn("Failed to read showDescriptionsAlways preference from localStorage", e);
   }
-  return false;
+  return true;
 };
 
 const saveShowCardsPreference = (projectKey: string, value: boolean) => {
@@ -293,7 +293,11 @@ const findElementForPin = (pin: DesignSpecPin): HTMLElement | null => {
 
   const isGlobalHeaderPin =
     pin.module_name?.toLowerCase().includes("global navbar") ||
-    pin.selector.includes("[data-global-header]");
+    pin.module_name?.toLowerCase().includes("navigation") ||
+    pin.sub_module_name?.toLowerCase().includes("navigation") ||
+    pin.selector.includes("[data-global-header]") ||
+    pin.selector.includes('[data-spec="home-nav"]') ||
+    pin.selector.includes("nav");
 
   // Strict scope isolation: Page pins search within <main> and any active open dialogs/sheets/portals
   const roots: HTMLElement[] = [];
@@ -590,9 +594,9 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [isMultiMarkMode, setIsMultiMarkMode] = useState(false);
 
-  // 2. Visibility toggles: Global Visibility of pins & descriptions (hydrated & persisted in localStorage, OFF by default)
-  const [showAllPins, setShowAllPins] = useState<boolean>(false);
-  const [showDescriptionsAlways, setShowDescriptionsAlways] = useState<boolean>(false);
+  // 2. Visibility toggles: Global Visibility of pins & descriptions (hydrated & persisted in localStorage, ON by default)
+  const [showAllPins, setShowAllPins] = useState<boolean>(true);
+  const [showDescriptionsAlways, setShowDescriptionsAlways] = useState<boolean>(true);
 
   // Sync initial visibility preferences from localStorage on client mount
   useEffect(() => {
