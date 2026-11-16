@@ -94,6 +94,9 @@ const pillarBoxes: PillarBox[] = [
     items: [
       { id: "material-docs", title: "Material Contracts", href: "/material-documents-contracts", icon: Icon3DOtherInfo },
       { id: "credit-rating", title: "Credit Rating", href: "/credit-rating", icon: Icon3DCreditScore },
+      { id: "industry-report", title: "Industry Report", href: "/industry-report", icon: Icon3DNewspaper },
+      { id: "material-creditors", title: "Material Creditors", href: "/material-creditors", icon: Icon3DScales },
+      { id: "initial-public-offer", title: "Initial Public Offer", href: "/initial-public-offer", icon: Icon3DPresentation },
     ],
   },
 ];

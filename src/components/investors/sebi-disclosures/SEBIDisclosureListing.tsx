@@ -1,51 +1,128 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Download, Eye, ShieldCheck, ArrowUpRight, Bookmark, FileSpreadsheet, RotateCcw, FileText } from "lucide-react";
-import { SEBIDisclosureDetailModal } from "./SEBIDisclosureDetailModal";
+import { Download, Eye, ShieldCheck, ArrowUpRight, Bookmark, RotateCcw, FileText } from "lucide-react";
+import { SEBIDisclosureDetailModal, DisclosureItem } from "./SEBIDisclosureDetailModal";
 import { motion } from "framer-motion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-const disclosures = [
-  {
-    id: 1,
-    reg: "Regulation 30",
-    title: "Disclosure of Material Event - New Production Line Commissioning",
-    date: "Jan 24, 2025",
-    desc: "Intimation regarding the successful commissioning of a high-precision automotive tubing facility.",
-    status: "Verified"
-  },
+export const disclosures: DisclosureItem[] = [
   {
     id: 2,
-    reg: "Regulation 33",
-    title: "Quarterly Audited Financial Results - Q3 FY 2024-25",
-    date: "Jan 18, 2025",
-    desc: "Statement of standalone and consolidated financial results for the quarter ended Dec 31, 2024.",
-    status: "Official"
+    reg: "Regulation 46(2)",
+    title: "Memorandum of Association and Articles of Association",
+    date: "July 2026",
+    desc: "Constitutional charter, foundational objectives, legal framework, and internal governance regulations of J Pan Tubular Components Limited.",
+    status: "Verified",
+    link: "/documents/memorandum-of-association-and-articles-of-association.pdf"
   },
   {
     id: 3,
-    reg: "Regulation 46",
-    title: "Website Disclosures - Updated Investor Information Portfolio",
-    date: "Jan 10, 2025",
-    desc: "Verification of all mandatory disclosures on the functional website as per SEBI (LODR) requirements.",
-    status: "Verified"
+    reg: "Regulation 46(2)",
+    title: "Brief profile of board of directors including directorship and full-time positions in body corporates",
+    date: "July 2026",
+    desc: "Professional background, directorships, committee memberships, and full-time executive positions held by the Board of Directors.",
+    status: "Verified",
+    link: "/documents/brief-profile-of-board-of-directors-including-directorship-and-full-time-positions-in-body-corporates.pdf"
   },
   {
     id: 4,
-    reg: "Regulation 30",
-    title: "Outcome of Board Meeting - Strategic Expansion Approval",
-    date: "Oct 28, 2024",
-    desc: "Intimation regarding board approval for strategic manufacturing expansion into Southeast Asian markets.",
-    status: "Verified"
+    reg: "Regulation 46(2)",
+    title: "Terms and conditions of appointment of independent directors",
+    date: "June 2026",
+    desc: "Statutory terms, tenure expectations, fiduciary duties, code of conduct compliance, and remuneration framework for Independent Directors.",
+    status: "Verified",
+    link: "/documents/terms-and-conditions-of-appointment-of-independent-directors.pdf"
   },
   {
     id: 5,
-    reg: "Regulation 44",
-    title: "Voting Results - Annual General Meeting 2024",
-    date: "Sept 12, 2024",
-    desc: "Disclosure of voting results and Scrutinizer's report for the resolutions passed at the 2024 AGM.",
-    status: "Verified"
+    reg: "Regulation 46(2)",
+    title: "Composition of various committees of board of directors",
+    date: "July 2026",
+    desc: "Detailed charter, statutory membership composition, and committee leadership for Audit, NRC, Stakeholders, and CSR Committees.",
+    status: "Verified",
+    link: "/documents/composition-of-various-committees-of-board-of-directors.pdf"
+  },
+  {
+    id: 6,
+    reg: "Regulation 46(2)",
+    title: "Code of conduct of board of directors and senior management personnel",
+    date: "June 2026",
+    desc: "Mandatory corporate governance charter defining ethical leadership, professional integrity, and compliance standards for Directors and Senior Management.",
+    status: "Verified",
+    link: "/documents/code-of-conduct-of-board-of-directors-and-senior-management-personnel.pdf"
+  },
+  {
+    id: 7,
+    reg: "Regulation 46(2)",
+    title: "Details of establishment of vigil mechanism/ Whistle Blower policy",
+    date: "June 2026",
+    desc: "Confidential reporting framework enabling employees and stakeholders to report genuine concerns or unethical conduct with complete whistleblower protection.",
+    status: "Verified",
+    link: "/documents/details-of-establishment-of-vigil-mechanism-whistle-blower-policy.pdf"
+  },
+  {
+    id: 8,
+    reg: "Regulation 46(2)",
+    title: "Criteria of making payments to non-executive directors",
+    date: "June 2026",
+    desc: "Structured criteria, sitting fees, and statutory compensation parameters for Non-Executive and Independent Directors.",
+    status: "Verified",
+    link: "/documents/criteria-of-making-payments-to-non-executive-directors.pdf"
+  },
+  {
+    id: 9,
+    reg: "Regulation 46(2)",
+    title: "Policy on dealing with related party transactions",
+    date: "June 2026",
+    desc: "Protocols for identification, arm's length evaluation, omnibus committee approvals, and statutory reporting of related party transactions.",
+    status: "Verified",
+    link: "/documents/policy-on-dealing-with-related-party-transactions.pdf"
+  },
+  {
+    id: 10,
+    reg: "Regulation 46(2)",
+    title: "Policy for determining 'material' subsidiaries",
+    date: "June 2026",
+    desc: "Threshold criteria and governance guidelines for identifying and monitoring material subsidiary entities under SEBI (LODR) Regulations.",
+    status: "Verified",
+    link: "/documents/policy-for-determining-material-subsidiaries.pdf"
+  },
+  {
+    id: 11,
+    reg: "Regulation 46(2)",
+    title: "Details of familiarization programmes imparted to independent directors",
+    date: "June 2026",
+    desc: "Structured orientation, factory visits, regulatory updates, and strategic briefings conducted for Independent Directors.",
+    status: "Verified",
+    link: "/documents/details-of-familiarization-programmes-imparted-to-independent-directors.pdf"
+  },
+  {
+    id: 12,
+    reg: "Regulation 46(2)",
+    title: "Email address for grievance redressal and other relevant details",
+    date: "July 2026",
+    desc: "Official contact details and designated email channel for investor grievance redressal and shareholder communications.",
+    status: "Verified",
+    link: "/documents/email-address-for-grievance-redressal-and-other-relevant-details.pdf"
+  },
+  {
+    id: 24,
+    reg: "Regulation 30(4)",
+    title: "Materiality Policy as per Regulation 30(4)",
+    date: "June 2026",
+    desc: "Quantitative and qualitative criteria for determining the materiality of events or information for prompt disclosure to stock exchanges.",
+    status: "Verified",
+    link: "/documents/materiality-policy-as-per-regulation-30-4.pdf"
+  },
+  {
+    id: 28,
+    reg: "Regulation 43A(1)",
+    title: "Dividend distribution policy as per Regulation 43A(1)",
+    date: "June 2026",
+    desc: "Financial parameters, capital allocation guidelines, retained earnings criteria, and internal/external factors governing dividend distribution.",
+    status: "Verified",
+    link: "/documents/dividend-distribution-policy-as-per-regulation-43a-1.pdf"
   }
 ];
 
@@ -58,18 +135,18 @@ export function SEBIDisclosureListing() {
 }
 
 function SEBIDisclosureListingInner() {
-  const [selectedDisclosure, setSelectedDisclosure] = useState<null | typeof disclosures[0]>(null);
+  const [selectedDisclosure, setSelectedDisclosure] = useState<null | DisclosureItem>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const sort = searchParams.get("sort") || "desc";
+  const sort = searchParams.get("sort") || "asc";
   const query = (searchParams.get("q") || "").toLowerCase().trim();
   const viewMode = searchParams.get("view") || "grid";
 
-  const handleView = (disclosure: typeof disclosures[0]) => {
+  const handleView = (disclosure: DisclosureItem) => {
     setSelectedDisclosure(disclosure);
     setIsModalOpen(true);
   };
@@ -85,22 +162,20 @@ function SEBIDisclosureListingInner() {
         (item) =>
           item.title.toLowerCase().includes(query) ||
           item.reg.toLowerCase().includes(query) ||
-          item.date.toLowerCase().includes(query)
+          item.desc.toLowerCase().includes(query)
       );
     }
     return list.sort((a, b) => {
-      const dateA = new Date(a.date).getTime();
-      const dateB = new Date(b.date).getTime();
-      if (!isNaN(dateA) && !isNaN(dateB)) {
-        return sort === "desc" ? dateB - dateA : dateA - dateB;
+      if (sort === "desc") {
+        return b.id - a.id;
       }
-      return sort === "desc" ? -1 : 1;
+      return a.id - b.id;
     });
   }, [sort, query]);
 
-  const isDefaultView = !query && sort === "desc";
+  const isDefaultView = !query && sort === "asc";
   const flagshipDisclosure = isDefaultView && sortedDisclosures.length > 0 ? sortedDisclosures[0] : null;
-  const gridDisclosures = isDefaultView ? sortedDisclosures.slice(1) : sortedDisclosures;
+  const gridDisclosures = sortedDisclosures;
 
   return (
     <>
@@ -141,7 +216,7 @@ function SEBIDisclosureListingInner() {
               className="text-center py-16 sm:py-20 px-5 sm:px-6 rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
             >
               <div className="w-16 h-16 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto mb-5 text-[#2E5E99]">
-                <FileSpreadsheet className="w-8 h-8" />
+                <FileText className="w-8 h-8" />
               </div>
               <h3 className="text-lg sm:text-xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                 No SEBI Filings Found
@@ -151,7 +226,7 @@ function SEBIDisclosureListingInner() {
               </p>
               <button
                 onClick={clearFilters}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold transition-all shadow-md min-h-[42px]"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold transition-all shadow-md min-h-[42px] cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Reset Search
               </button>
@@ -179,7 +254,7 @@ function SEBIDisclosureListingInner() {
                     <div className="lg:col-span-7 space-y-4 sm:space-y-6">
                       <div className="flex flex-wrap items-center gap-3">
                         <span className="text-xs font-heading font-bold text-[#0D2440]/65 dark:text-white/65 tracking-wider">
-                          {flagshipDisclosure.date} · {flagshipDisclosure.reg}
+                          Item #{String(flagshipDisclosure.id).padStart(2, "0")} · {flagshipDisclosure.reg}
                         </span>
                       </div>
 
@@ -188,7 +263,7 @@ function SEBIDisclosureListingInner() {
                           {flagshipDisclosure.title}
                         </h3>
                         <p className="text-lg sm:text-2xl font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight">
-                          {flagshipDisclosure.reg}
+                          {flagshipDisclosure.reg} Disclosure
                         </p>
                       </div>
 
@@ -207,9 +282,9 @@ function SEBIDisclosureListingInner() {
 
                       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-3">
                         <a
-                          href="/sample-report.pdf"
+                          href={flagshipDisclosure.link}
                           download
-                          className="px-6 sm:px-8 py-3.5 min-h-[44px] rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98]"
+                          className="px-6 sm:px-8 py-3.5 min-h-[44px] rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                         >
                           <Download className="w-4 h-4 text-white group-hover/btn:translate-y-0.5 transition-transform" />
                           Download Official Filing
@@ -217,7 +292,7 @@ function SEBIDisclosureListingInner() {
 
                         <button
                           onClick={() => handleView(flagshipDisclosure)}
-                          className="px-6 py-3.5 min-h-[44px] rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                          className="px-6 py-3.5 min-h-[44px] rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                         >
                           <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                           Document Preview
@@ -252,10 +327,10 @@ function SEBIDisclosureListingInner() {
                             <ShieldCheck className="w-8 h-8" />
                           </div>
                           <p className="text-2xl sm:text-3xl font-heading font-black text-[#0D2440] tracking-tight pt-2">
-                            {flagshipDisclosure.reg}
+                            Item #{String(flagshipDisclosure.id).padStart(2, "0")}
                           </p>
                           <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-[#0D2440]/55">
-                            {flagshipDisclosure.date}
+                            {flagshipDisclosure.reg}
                           </p>
                         </div>
 
@@ -272,7 +347,7 @@ function SEBIDisclosureListingInner() {
                 </motion.div>
               )}
 
-              {/* Archival Bento Grid */}
+              {/* Archival Bento Grid with all 13 official Disclosures */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {gridDisclosures.map((item, idx) => (
                   <motion.div
@@ -280,11 +355,11 @@ function SEBIDisclosureListingInner() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ delay: (idx % 6) * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
                   >
                     <div className="absolute top-5 right-6 text-4xl sm:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
-                      0{item.id}
+                      {String(item.id).padStart(2, "0")}
                     </div>
 
                     <div>
@@ -298,7 +373,7 @@ function SEBIDisclosureListingInner() {
                       </div>
 
                       <div className="space-y-1.5 sm:space-y-2 mb-5 sm:mb-6">
-                        <h4 className="text-base sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug">
+                        <h4 className="text-base sm:text-xl font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors leading-snug line-clamp-2">
                           {item.title}
                         </h4>
                         <p className="text-xs text-[#0D2440]/60 dark:text-white/60 line-clamp-2 leading-relaxed">
@@ -310,16 +385,16 @@ function SEBIDisclosureListingInner() {
                     <div className="pt-4 sm:pt-5 border-t border-[#7BA4D0]/15 flex items-center justify-between gap-2.5 sm:gap-3">
                       <button
                         onClick={() => handleView(item)}
-                        className="flex-1 sm:flex-initial px-3.5 py-2.5 min-h-[40px] rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center justify-center gap-1.5"
+                        className="flex-1 sm:flex-initial px-3.5 py-2.5 min-h-[40px] rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <Eye className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
                         Preview
                       </button>
 
                       <a
-                        href="/sample-report.pdf"
+                        href={item.link}
                         download
-                        className="flex-1 sm:flex-initial px-4 py-2.5 min-h-[40px] rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-2 shadow-xs group/btn"
+                        className="flex-1 sm:flex-initial px-4 py-2.5 min-h-[40px] rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-2 shadow-xs group/btn cursor-pointer"
                       >
                         <Download className="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
                         Download PDF
@@ -344,6 +419,7 @@ function SEBIDisclosureListingInner() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#0D2440]/80 text-[11px] font-heading font-bold text-[#0D2440]/70 dark:text-white/70 uppercase tracking-wider">
+                      <th className="py-4 px-6">#</th>
                       <th className="py-4 px-6">Regulation</th>
                       <th className="py-4 px-6">Filing Description</th>
                       <th className="py-4 px-6 hidden sm:table-cell">Date</th>
@@ -357,7 +433,11 @@ function SEBIDisclosureListingInner() {
                         key={item.id}
                         className="hover:bg-[#F1F6FB] dark:hover:bg-white/5 transition-colors group"
                       >
-                        <td className="py-4 px-6 font-heading font-black text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">
+                        <td className="py-4 px-6 font-heading font-black text-xs text-[#2E5E99] dark:text-[#7BA4D0]">
+                          {String(item.id).padStart(2, "0")}
+                        </td>
+
+                        <td className="py-4 px-6 font-heading font-black text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide whitespace-nowrap">
                           {item.reg}
                         </td>
 
@@ -377,7 +457,7 @@ function SEBIDisclosureListingInner() {
                           </div>
                         </td>
 
-                        <td className="py-4 px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
+                        <td className="py-4 px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70 whitespace-nowrap">
                           {item.date}
                         </td>
 
@@ -391,16 +471,16 @@ function SEBIDisclosureListingInner() {
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => handleView(item)}
-                              className="p-2 rounded-lg bg-white dark:bg-white/10 border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white transition-all"
+                              className="p-2 rounded-lg bg-white dark:bg-white/10 border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white transition-all cursor-pointer"
                               title="Preview Document"
                               aria-label={`Preview ${item.title}`}
                             >
                               <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                             </button>
                             <a
-                              href="/sample-report.pdf"
+                              href={item.link}
                               download
-                              className="px-3.5 py-2 rounded-lg bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs transition-all flex items-center gap-1.5"
+                              className="px-3.5 py-2 rounded-lg bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                             >
                               <Download className="w-3.5 h-3.5" />
                               <span className="hidden sm:inline">PDF</span>

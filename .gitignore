@@ -43,4 +43,6 @@ next-env.d.ts
 # ide & local artifacts
 .vscode/
 *.zip
+*.mp4
+/public/videos/
 dark_mode_scanner_results.json
