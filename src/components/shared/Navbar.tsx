@@ -292,6 +292,9 @@ export function Navbar() {
                       <Link href="/investor-grievance" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Investor Grievance</Link>
                       <Link href="/policies" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Corporate Policies</Link>
                       <Link href="/material-documents-contracts" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Material Contracts</Link>
+                      <Link href="/industry-report" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Industry Report</Link>
+                      <Link href="/material-creditors" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Material Creditors</Link>
+                      <Link href="/initial-public-offer" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Initial Public Offer</Link>
                     </div>
                   )}
                 </>
