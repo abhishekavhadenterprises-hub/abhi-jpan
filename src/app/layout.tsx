@@ -8,6 +8,7 @@ import { Footer } from "@/components/shared/Footer";
 import { SmoothScroll } from "@/components/shared/SmoothScroll";
 import { ScrollRestoration } from "@/components/shared/ScrollRestoration";
 import { Agentation } from "agentation";
+import { DesignSpecOverlay } from "@/features/design-spec";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-heading' });
@@ -51,6 +52,7 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <Agentation />
+          <DesignSpecOverlay />
         </ThemeProvider>
       </body>
     </html>
