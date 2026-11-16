@@ -1,15 +1,12 @@
-﻿import type {
+import { axiosClient } from "@/lib/api/axios-client";
+import type {
   DesignSpecPin,
   CreateDesignPinPayload,
   UpdateDesignPinPayload,
   DesignHistoryResponse,
-  ModuleAuditSummary,
-  DesignPinChangeRequest,
-  PinSummaryItem,
-} from '../types/designSpec.types';
-import { createLocalStorageAdapter } from '../adapters/localStorageAdapter';
+} from "../types/designSpec.types";
 
-const defaultAdapter = createLocalStorageAdapter('jpan_portal');
+const DEFAULT_PROJECT_KEY = process.env.NEXT_PUBLIC_PROJECT_KEY || "jpan_portal";
 
 export const designSpecService = {
   /**
@@ -17,11 +14,18 @@ export const designSpecService = {
    */
   async getPins(
     routeKey?: string,
-    projectKey = 'jpan_portal'
+    projectKey = DEFAULT_PROJECT_KEY,
+    label?: string
   ): Promise<{ data: DesignSpecPin[]; message: string }> {
-    const adapter = projectKey === 'jpan_portal' ? defaultAdapter : createLocalStorageAdapter(projectKey);
-    const pins = await adapter.getPins(routeKey);
-    return { data: pins, message: 'Pins retrieved successfully' };
+    let url = `/design-spec/pins?projectKey=${encodeURIComponent(projectKey)}`;
+    if (routeKey) {
+      url += `&routeKey=${encodeURIComponent(routeKey)}`;
+    }
+    if (label && label !== "all") {
+      url += `&label=${encodeURIComponent(label)}`;
+    }
+    const response = await axiosClient.get<{ data: DesignSpecPin[]; message: string }>(url);
+    return response.data;
   },
 
   /**
@@ -30,22 +34,29 @@ export const designSpecService = {
   async createPin(
     payload: CreateDesignPinPayload
   ): Promise<{ data: DesignSpecPin; message: string }> {
-    const pin = await defaultAdapter.createPin(payload);
-    return { data: pin, message: 'Design pin created successfully' };
+    const finalPayload = {
+      projectKey: DEFAULT_PROJECT_KEY,
+      ...payload,
+    };
+    const response = await axiosClient.post<{ data: DesignSpecPin; message: string }>(
+      "/design-spec/pins",
+      finalPayload
+    );
+    return response.data;
   },
 
   /**
-   * Update a pinned design spec's text
+   * Update a pinned design spec's text or labels (captures change in history)
    */
   async updatePin(
     pinId: string,
     payload: UpdateDesignPinPayload
   ): Promise<{ data: DesignSpecPin; message: string }> {
-    if (!defaultAdapter.updatePin) {
-      throw new Error('updatePin not supported');
-    }
-    const pin = await defaultAdapter.updatePin(pinId, payload);
-    return { data: pin, message: 'Design pin updated successfully' };
+    const response = await axiosClient.patch<{ data: DesignSpecPin; message: string }>(
+      `/design-spec/pins/${pinId}`,
+      payload
+    );
+    return response.data;
   },
 
   /**
@@ -55,27 +66,35 @@ export const designSpecService = {
     pinId: string,
     payload: { approvedByName: string; approvalNotes?: string }
   ): Promise<{ data: DesignSpecPin; message: string }> {
-    const pin = await defaultAdapter.approvePin(pinId, payload);
-    return { data: pin, message: 'Design pin approved successfully' };
+    const response = await axiosClient.post<{ data: DesignSpecPin; message: string }>(
+      `/design-spec/pins/${pinId}/approve`,
+      payload
+    );
+    return response.data;
   },
 
   /**
-   * Client request change
+   * Client request change (logs timestamp, increments count)
    */
   async requestChange(
     pinId: string,
     payload: { requestedBy: string; requestNotes: string; screenshotUrl?: string }
   ): Promise<{ data: DesignSpecPin; message: string }> {
-    const pin = await defaultAdapter.requestChange(pinId, payload);
-    return { data: pin, message: 'Change request submitted successfully' };
+    const response = await axiosClient.post<{ data: DesignSpecPin; message: string }>(
+      `/design-spec/pins/${pinId}/change-request`,
+      payload
+    );
+    return response.data;
   },
 
   /**
    * Delete a pin
    */
   async deletePin(pinId: string): Promise<{ data: { id: string }; message: string }> {
-    const res = await defaultAdapter.deletePin(pinId);
-    return { data: res, message: 'Design pin removed successfully' };
+    const response = await axiosClient.delete<{ data: { id: string }; message: string }>(
+      `/design-spec/pins/${pinId}`
+    );
+    return response.data;
   },
 
   /**
@@ -87,153 +106,77 @@ export const designSpecService = {
     projectKey?: string;
     author?: string;
     pinId?: string;
+    mention?: string;
+    hasMentions?: boolean;
     recordType?: string;
+    label?: string;
   }): Promise<{ data: DesignHistoryResponse; message: string }> {
-    const adapter = params?.projectKey ? createLocalStorageAdapter(params.projectKey) : defaultAdapter;
-    const allPins = await adapter.getAllPins();
-    let rawAuditLogs = await adapter.getAuditLogs();
-
-    // Collect all authors
-    const authorSet = new Set<string>();
-    rawAuditLogs.forEach((log) => {
-      if (log.requested_by) authorSet.add(log.requested_by);
-      if (log.feature_owner_name) authorSet.add(log.feature_owner_name);
-    });
-    allPins.forEach((pin) => {
-      if (pin.feature_owner_name) authorSet.add(pin.feature_owner_name);
-      if (pin.approved_by_name) authorSet.add(pin.approved_by_name);
-    });
-
-    // Summary of all pins
-    const pinSummaries: PinSummaryItem[] = allPins.map((p) => ({
-      id: p.id,
-      title: p.title,
-      module_name: p.module_name,
-      screen_name: p.screen_name,
-      route_key: p.route_key,
-    }));
-
-    // Group pins & logs into modules
-    const moduleMap = new Map<string, {
-      screensCount: Set<string>;
-      pinsCount: number;
-      changesCount: number;
-      lastChangeAt: string | null;
-      screens: Record<string, {
-        screenName: string;
-        routeKey: string;
-        pinsCount: number;
-        changesCount: number;
-      }>;
-    }>();
-
-    allPins.forEach((pin) => {
-      const modName = pin.module_name || 'General';
-      const screenName = pin.screen_name || pin.route_key || 'Default Screen';
-      const routeKey = pin.route_key || '/';
-
-      if (!moduleMap.has(modName)) {
-        moduleMap.set(modName, {
-          screensCount: new Set(),
-          pinsCount: 0,
-          changesCount: 0,
-          lastChangeAt: null,
-          screens: {},
-        });
-      }
-
-      const mod = moduleMap.get(modName)!;
-      mod.pinsCount += 1;
-      mod.screensCount.add(screenName);
-
-      if (!mod.screens[screenName]) {
-        mod.screens[screenName] = {
-          screenName,
-          routeKey,
-          pinsCount: 0,
-          changesCount: 0,
-        };
-      }
-      mod.screens[screenName].pinsCount += 1;
-    });
-
-    rawAuditLogs.forEach((log) => {
-      const modName = log.module_name || 'General';
-      const screenName = log.screen_name || log.route_key || 'Default Screen';
-      const routeKey = log.route_key || '/';
-
-      if (!moduleMap.has(modName)) {
-        moduleMap.set(modName, {
-          screensCount: new Set(),
-          pinsCount: 0,
-          changesCount: 0,
-          lastChangeAt: null,
-          screens: {},
-        });
-      }
-
-      const mod = moduleMap.get(modName)!;
-      mod.changesCount += 1;
-      mod.screensCount.add(screenName);
-
-      if (!mod.lastChangeAt || new Date(log.created_at) > new Date(mod.lastChangeAt)) {
-        mod.lastChangeAt = log.created_at;
-      }
-
-      if (!mod.screens[screenName]) {
-        mod.screens[screenName] = {
-          screenName,
-          routeKey,
-          pinsCount: 0,
-          changesCount: 0,
-        };
-      }
-      mod.screens[screenName].changesCount += 1;
-    });
-
-    const moduleSummaries: ModuleAuditSummary[] = Array.from(moduleMap.entries()).map(
-      ([moduleName, data]) => ({
-        moduleName,
-        screensCount: data.screensCount.size,
-        pinsCount: data.pinsCount,
-        changesCount: data.changesCount,
-        lastChangeAt: data.lastChangeAt,
-        screens: data.screens,
-      })
-    );
-
-    let filteredLogs = rawAuditLogs;
-    if (params?.module && params.module !== 'all') {
-      filteredLogs = filteredLogs.filter(
-        (l) => l.module_name?.toLowerCase() === params.module?.toLowerCase()
-      );
+    let url = `/design-spec/history?projectKey=${encodeURIComponent(params?.projectKey || DEFAULT_PROJECT_KEY)}`;
+    if (params?.module) {
+      url += `&module=${encodeURIComponent(params.module)}`;
     }
-    if (params?.author && params.author !== 'all') {
-      const qAuthor = params.author.toLowerCase();
-      filteredLogs = filteredLogs.filter(
-        (l) =>
-          l.requested_by?.toLowerCase() === qAuthor ||
-          l.feature_owner_name?.toLowerCase() === qAuthor
-      );
+    if (params?.screen) {
+      url += `&screen=${encodeURIComponent(params.screen)}`;
     }
-    if (params?.pinId && params.pinId !== 'all') {
-      filteredLogs = filteredLogs.filter((l) => l.pin_id === params.pinId);
+    if (params?.author && params.author !== "all") {
+      url += `&author=${encodeURIComponent(params.author)}`;
     }
-    if (params?.recordType && params.recordType !== 'all') {
-      filteredLogs = filteredLogs.filter((l) => l.record_type === params.recordType);
+    if (params?.pinId && params.pinId !== "all") {
+      url += `&pinId=${encodeURIComponent(params.pinId)}`;
+    }
+    if (params?.mention) {
+      url += `&mention=${encodeURIComponent(params.mention)}`;
+    }
+    if (params?.hasMentions) {
+      url += `&hasMentions=true`;
+    }
+    if (params?.recordType && params.recordType !== "all") {
+      url += `&recordType=${encodeURIComponent(params.recordType)}`;
+    }
+    if (params?.label && params.label !== "all") {
+      url += `&label=${encodeURIComponent(params.label)}`;
+    }
+    const response = await axiosClient.get<{ data: DesignHistoryResponse; message: string }>(url);
+    return response.data;
+  },
+
+  /**
+   * Seed / batch create default design specs to the backend database
+   */
+  async seedRouteSpecs(
+    payloads: CreateDesignPinPayload[],
+    projectKey = DEFAULT_PROJECT_KEY
+  ): Promise<{ created: number; skipped: number; errors: number }> {
+    let created = 0;
+    let skipped = 0;
+    let errors = 0;
+
+    let existingPins: DesignSpecPin[] = [];
+    try {
+      const res = await this.getPins(payloads[0]?.routeKey, projectKey);
+      existingPins = res.data || [];
+    } catch {
+      // Continue even if getPins fails
     }
 
-    return {
-      data: {
-        modules: moduleSummaries,
-        auditLogs: filteredLogs,
-        totalChanges: rawAuditLogs.length,
-        totalPins: allPins.length,
-        totalMentions: 0,
-        allAuthors: Array.from(authorSet),
-        allPins: pinSummaries,
-      },
-      message: 'Design history retrieved successfully',
-    };
+    const existingTitles = new Set(existingPins.map((p) => p.title.trim().toLowerCase()));
+
+    for (const item of payloads) {
+      if (existingTitles.has(item.title.trim().toLowerCase())) {
+        skipped++;
+        continue;
+      }
+      try {
+        await this.createPin({ ...item, projectKey });
+        created++;
+      } catch (err) {
+        console.error(`Failed to seed pin "${item.title}":`, err);
+        errors++;
+      }
+    }
+
+    return { created, skipped, errors };
   },
 };
+
+export default designSpecService;

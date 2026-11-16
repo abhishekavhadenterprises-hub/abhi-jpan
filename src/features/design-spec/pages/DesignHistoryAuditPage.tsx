@@ -26,6 +26,7 @@ import {
   RefreshCw,
   Eye,
   AlertTriangle,
+  Tag,
 } from 'lucide-react';
 import { designSpecService } from '../services/designSpecService';
 import type {
@@ -48,6 +49,7 @@ export const DesignHistoryAuditPage: React.FC = () => {
   const [totalPins, setTotalPins] = useState(0);
   const [totalChanges, setTotalChanges] = useState(0);
   const [allAuthors, setAllAuthors] = useState<string[]>([]);
+  const [allLabels, setAllLabels] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Filters
@@ -55,6 +57,7 @@ export const DesignHistoryAuditPage: React.FC = () => {
   const [selectedModule, setSelectedModule] = useState<string>('all');
   const [selectedAuthor, setSelectedAuthor] = useState<string>('all');
   const [selectedPinId, setSelectedPinId] = useState<string>('all');
+  const [selectedLabel, setSelectedLabel] = useState<string>('all');
   const [activityType, setActivityType] = useState<string>('all');
 
   // Image Preview Lightbox State
@@ -85,6 +88,7 @@ export const DesignHistoryAuditPage: React.FC = () => {
         module: selectedModule !== 'all' ? selectedModule : undefined,
         author: selectedAuthor !== 'all' ? selectedAuthor : undefined,
         pinId: selectedPinId !== 'all' ? selectedPinId : undefined,
+        label: selectedLabel !== 'all' ? selectedLabel : undefined,
         recordType: ['spec_created', 'change_requested', 'spec_updated', 'approved'].includes(
           activityType
         )
@@ -96,6 +100,7 @@ export const DesignHistoryAuditPage: React.FC = () => {
       setTotalPins(res.data?.totalPins || 0);
       setTotalChanges(res.data?.totalChanges || 0);
       setAllAuthors(res.data?.allAuthors || []);
+      setAllLabels(res.data?.allLabels || []);
       if (res.data?.allPins) {
         setAllPins(res.data.allPins);
       }
@@ -108,7 +113,7 @@ export const DesignHistoryAuditPage: React.FC = () => {
 
   useEffect(() => {
     fetchHistory();
-  }, [selectedModule, selectedAuthor, selectedPinId, activityType]);
+  }, [selectedModule, selectedAuthor, selectedPinId, selectedLabel, activityType]);
 
   // Sync viewMode with query param
   const switchViewMode = (mode: 'grid' | 'list') => {
@@ -156,6 +161,14 @@ export const DesignHistoryAuditPage: React.FC = () => {
       if (log.record_type !== activityType) return false;
     }
 
+    if (selectedLabel !== 'all') {
+      const qLabel = selectedLabel.toLowerCase();
+      const match =
+        Array.isArray(log.labels) &&
+        log.labels.some((l) => l.toLowerCase() === qLabel || l.toLowerCase().includes(qLabel));
+      if (!match) return false;
+    }
+
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
@@ -165,7 +178,8 @@ export const DesignHistoryAuditPage: React.FC = () => {
         log.feature_owner_name?.toLowerCase().includes(q) ||
         log.module_name?.toLowerCase().includes(q) ||
         log.screen_name?.toLowerCase().includes(q) ||
-        log.element_text?.toLowerCase().includes(q);
+        log.element_text?.toLowerCase().includes(q) ||
+        (Array.isArray(log.labels) && log.labels.some((l) => l.toLowerCase().includes(q)));
       if (!matchesSearch) return false;
     }
 
@@ -374,6 +388,20 @@ export const DesignHistoryAuditPage: React.FC = () => {
               ))}
             </select>
 
+            {/* Label / Tag Filter */}
+            <select
+              value={selectedLabel}
+              onChange={(e) => setSelectedLabel(e.target.value)}
+              className="w-full md:w-40 py-2 px-3 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Labels ({allLabels.length})</option>
+              {allLabels.map((lbl) => (
+                <option key={lbl} value={lbl}>
+                  #{lbl}
+                </option>
+              ))}
+            </select>
+
             {/* Pinned Element Filter */}
             <select
               value={selectedPinId}
@@ -534,6 +562,20 @@ export const DesignHistoryAuditPage: React.FC = () => {
                               <span className="font-mono text-[11px] text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 rounded">
                                 {log.route_key}
                               </span>
+                            )}
+
+                            {/* Label Badges */}
+                            {Array.isArray(log.labels) && log.labels.length > 0 && (
+                              <div className="flex flex-wrap items-center gap-1.5 ml-auto">
+                                {log.labels.map((lbl, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 dark:bg-indigo-950/70 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/60"
+                                  >
+                                    #{lbl}
+                                  </span>
+                                ))}
+                              </div>
                             )}
                           </div>
                         </div>

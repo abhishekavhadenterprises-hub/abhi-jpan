@@ -675,6 +675,8 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
   const [formDesc, setFormDesc] = useState("");
   const [formHowItWorks, setFormHowItWorks] = useState("");
   const [formOwnerName, setFormOwnerName] = useState(currentUser?.name || "Feature Owner");
+  const [formLabels, setFormLabels] = useState<string[]>([]);
+  const [labelInput, setLabelInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Client Actions inside View Dialog
@@ -688,6 +690,8 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editHowItWorks, setEditHowItWorks] = useState("");
+  const [editLabels, setEditLabels] = useState<string[]>([]);
+  const [editLabelInput, setEditLabelInput] = useState("");
 
   // Toggle for the Side Rail (Feed of all pin specification boxes)
   const [showPinRail, setShowPinRail] = useState(false);
@@ -930,6 +934,8 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
       setFormTitle(inferredTitle);
       setFormDesc(`Design specification for ${inferredTitle}`);
       setFormHowItWorks(`Interactive ${targetEl.tagName.toLowerCase()} element in ${screenName}.`);
+      setFormLabels([]);
+      setLabelInput("");
 
       if (isSelectMode) {
         setIsSelectMode(false);
@@ -1255,6 +1261,7 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
         howItWorks: formHowItWorks,
         featureOwnerName: formOwnerName || currentUser?.name || "Feature Owner",
         featureOwnerRole: currentUser?.role || "Feature Owner",
+        labels: formLabels,
       };
 
       const created = await adapter.createPin(payload);
@@ -1277,6 +1284,8 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
       setFormTitle("");
       setFormDesc("");
       setFormHowItWorks("");
+      setFormLabels([]);
+      setLabelInput("");
       setSelectedElement(null);
     } catch (err: any) {
       notify("error", err.message || "Failed to pin design spec");
@@ -1345,6 +1354,8 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
     setEditTitle(pin.title);
     setEditDescription(pin.description);
     setEditHowItWorks(pin.how_it_works);
+    setEditLabels(Array.isArray(pin.labels) ? [...pin.labels] : []);
+    setEditLabelInput("");
     setIsEditingPin(true);
     setShowChangeRequestInput(false);
   };
@@ -1367,6 +1378,7 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
         description: editDescription.trim(),
         howItWorks: editHowItWorks.trim(),
         featureOwnerName: currentUser?.name,
+        labels: editLabels,
       });
 
       setPins((prev) => prev.map((p) => (p.id === pinId ? updated : p)));
@@ -1908,6 +1920,25 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
                           {pin.how_it_works}
                         </p>
                       </div>
+
+                      {/* Labels / Tags Pills */}
+                      {pin.labels && pin.labels.length > 0 && (
+                        <div className="flex flex-wrap gap-1 pt-0.5">
+                          {pin.labels.slice(0, 3).map((l, i) => (
+                            <span
+                              key={i}
+                              className="text-[9px] font-semibold px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200/50"
+                            >
+                              #{l}
+                            </span>
+                          ))}
+                          {pin.labels.length > 3 && (
+                            <span className="text-[9px] text-slate-400 font-mono">
+                              +{pin.labels.length - 3}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
 
                     {/* Footer Prompt */}
@@ -2230,6 +2261,91 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
                   className="w-full text-sm px-3.5 py-2.5 border rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
+
+              {/* Labels / Tags Input & Selection */}
+              <div>
+                <label className="text-sm font-semibold block mb-1 text-slate-900 dark:text-slate-100">
+                  Labels / Tags <span className="text-xs font-normal text-slate-400">(Categorize or tag this spec)</span>
+                </label>
+                <div className="flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    placeholder="Type a label (e.g. Navigation, Hero, Form, UI) & press Enter"
+                    value={labelInput}
+                    onChange={(e) => setLabelInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        const trimmed = labelInput.trim();
+                        if (trimmed && !formLabels.includes(trimmed)) {
+                          setFormLabels([...formLabels, trimmed]);
+                          setLabelInput("");
+                        }
+                      }
+                    }}
+                    className="flex-1 text-sm px-3.5 py-2 border rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const trimmed = labelInput.trim();
+                      if (trimmed && !formLabels.includes(trimmed)) {
+                        setFormLabels([...formLabels, trimmed]);
+                        setLabelInput("");
+                      }
+                    }}
+                    className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:hover:bg-indigo-900 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 cursor-pointer transition-colors"
+                  >
+                    + Add
+                  </button>
+                </div>
+                {formLabels.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-2.5">
+                    {formLabels.map((lbl) => (
+                      <span
+                        key={lbl}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+                      >
+                        #{lbl}
+                        <button
+                          type="button"
+                          onClick={() => setFormLabels(formLabels.filter((l) => l !== lbl))}
+                          className="hover:text-rose-600 cursor-pointer font-bold ml-1 text-xs"
+                          title="Remove label"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[11px] font-medium text-slate-400">Suggestions:</span>
+                  {["UI", "Navigation", "Hero", "Button", "Form", "Mobile", "Critical", "Workflow"].map((sug) => {
+                    const isAdded = formLabels.includes(sug);
+                    return (
+                      <button
+                        key={sug}
+                        type="button"
+                        onClick={() => {
+                          if (isAdded) {
+                            setFormLabels(formLabels.filter((l) => l !== sug));
+                          } else {
+                            setFormLabels([...formLabels, sug]);
+                          }
+                        }}
+                        className={`text-[11px] px-2 py-0.5 rounded-md border cursor-pointer transition-colors ${
+                          isAdded
+                            ? "bg-indigo-600 text-white border-indigo-600"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-indigo-400"
+                        }`}
+                      >
+                        {isAdded ? `✓ ${sug}` : `+ ${sug}`}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center justify-between pt-3 border-t gap-2 flex-wrap">
@@ -2392,6 +2508,62 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
                   />
                 </div>
 
+                {/* Edit Labels / Tags */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-slate-900 dark:text-slate-100">Labels / Tags:</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Add a label & Enter..."
+                      value={editLabelInput}
+                      onChange={(e) => setEditLabelInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          const val = editLabelInput.trim();
+                          if (val && !editLabels.includes(val)) {
+                            setEditLabels([...editLabels, val]);
+                            setEditLabelInput("");
+                          }
+                        }
+                      }}
+                      className="flex-1 h-8 px-2.5 rounded-lg border bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const val = editLabelInput.trim();
+                        if (val && !editLabels.includes(val)) {
+                          setEditLabels([...editLabels, val]);
+                          setEditLabelInput("");
+                        }
+                      }}
+                      className="px-3 h-8 text-xs font-semibold rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 cursor-pointer"
+                    >
+                      + Add
+                    </button>
+                  </div>
+                  {editLabels.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {editLabels.map((lbl) => (
+                        <span
+                          key={lbl}
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+                        >
+                          #{lbl}
+                          <button
+                            type="button"
+                            onClick={() => setEditLabels(editLabels.filter((l) => l !== lbl))}
+                            className="hover:text-rose-600 font-bold ml-1 cursor-pointer"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 <div className="flex items-center justify-end gap-2 pt-2 border-t">
                   <button
                     type="button"
@@ -2412,6 +2584,25 @@ export const DesignPinOverlay: React.FC<DesignPinOverlayProps> = ({
               </div>
             ) : (
               <div className="space-y-3.5">
+                {/* Labels View Display */}
+                {activePinForView.labels && activePinForView.labels.length > 0 && (
+                  <div className="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1.5">
+                      Labels / Tags:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {activePinForView.labels.map((lbl, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+                        >
+                          #{lbl}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-1">
                   <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                     What this is:
