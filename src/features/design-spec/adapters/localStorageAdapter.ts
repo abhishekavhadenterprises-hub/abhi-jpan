@@ -32,7 +32,14 @@ export const createLocalStorageAdapter = (
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
           const defaultMap = new Map(ALL_DEFAULT_PINS.map((p) => [p.id, p]));
-          const updated = parsed.map((p: DesignSpecPin) => {
+          // Remove default pins that are no longer part of ALL_DEFAULT_PINS
+          const cleaned = parsed.filter((p: DesignSpecPin) => {
+            if (p.id.startsWith('home-') && !defaultMap.has(p.id) && (!p.change_request_count || p.change_request_count === 0)) {
+              return false;
+            }
+            return true;
+          });
+          const updated = cleaned.map((p: DesignSpecPin) => {
             const def = defaultMap.get(p.id);
             if (def && (!p.change_request_count || p.change_request_count === 0)) {
               return {

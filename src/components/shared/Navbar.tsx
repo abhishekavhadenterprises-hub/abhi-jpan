@@ -112,7 +112,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav data-spec="home-nav" className="fixed left-0 right-0 top-0 z-50 flex justify-center pointer-events-none">
+    <nav className="fixed left-0 right-0 top-0 z-50 flex justify-center pointer-events-none">
       {/* Floating Island Capsule with Scroll Shrink Animation (Design 100% Untouched) */}
       <div
         ref={navRef}

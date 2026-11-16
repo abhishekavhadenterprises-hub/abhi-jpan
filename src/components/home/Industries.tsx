@@ -59,7 +59,7 @@ export function Industries() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section data-spec="home-industries" className="relative py-20 sm:py-24 md:py-28 bg-[#EEF5FC] dark:bg-[#081220] transition-colors duration-500 overflow-hidden border-y border-slate-200/70 dark:border-white/5">
+    <section className="relative py-20 sm:py-24 md:py-28 bg-[#EEF5FC] dark:bg-[#081220] transition-colors duration-500 overflow-hidden border-y border-slate-200/70 dark:border-white/5">
       {/* 1. Dynamic Section Background Image on Card Hover */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {industries.map((ind, idx) => (
@@ -157,7 +157,7 @@ export function Industries() {
         {/* =========================================================================
            4 SECTOR CARDS: Clean White Cards with D-Shape Curving Right Edge on Hover
            ========================================================================= */}
-        <div data-spec="home-industries-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
           {industries.map((ind, idx) => {
             const Icon = ind.icon;
             const isHovered = hoveredIdx === idx;

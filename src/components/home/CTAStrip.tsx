@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export function CTAStrip() {
   return (
-    <section data-spec="home-cta-strip" className="relative py-8 md:py-10 flex flex-col justify-center bg-transparent text-[#0D2440] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
+    <section className="relative py-8 md:py-10 flex flex-col justify-center bg-transparent text-[#0D2440] dark:text-white transition-colors duration-500 overflow-hidden border-b border-[#E5E5E5] dark:border-[#222]">
 
       {/* Subtle Ambient Glow */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-center z-0">
@@ -54,7 +54,6 @@ export function CTAStrip() {
             {/* Right Column: Pill Actions Suite */}
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }}
-              data-spec="home-cta-actions"
               className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col items-stretch gap-3 sm:gap-4 justify-center"
             >
               {/* Primary Action Button */}

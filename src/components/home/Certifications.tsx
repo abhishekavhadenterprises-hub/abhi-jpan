@@ -138,7 +138,6 @@ export function Certifications() {
     <section
       id="awards-recognition"
       ref={targetRef}
-      data-spec="home-certifications"
       className="relative h-[295vh] bg-transparent text-[#111] dark:text-white"
     >
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden border-b border-[#E5E5E5]/50 dark:border-[#222]/50">
@@ -154,7 +153,7 @@ export function Certifications() {
         </motion.div>
 
         {/* Horizontal Scrolling Track */}
-        <div data-spec="home-testimonials-stream" className="relative w-full overflow-hidden flex items-center">
+        <div className="relative w-full overflow-hidden flex items-center">
           <motion.div style={{ x }} className="flex gap-4 sm:gap-6 md:gap-10 px-4 sm:px-[10vw] md:px-[20vw] pr-[28vw]">
             {allStreamItems.map((item, idx) => (
               <div
