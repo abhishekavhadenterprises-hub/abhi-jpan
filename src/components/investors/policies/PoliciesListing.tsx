@@ -1,59 +1,183 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Download, Eye, ShieldCheck, ArrowUpRight, Lock, Globe, Clock, FileSpreadsheet, RotateCcw, FileText } from "lucide-react";
+import { Download, Eye, ShieldCheck, ArrowUpRight, RotateCcw, FileText } from "lucide-react";
 import { PoliciesDetailModal } from "./PoliciesDetailModal";
 import { motion } from "framer-motion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-const policies = [
+export interface PolicyItem {
+  id: number;
+  title: string;
+  category: "Governance" | "Compliance" | "HR Policies";
+  description: string;
+  lastUpdated: string;
+  access: "Statutory" | "Public" | "Internal";
+  link: string;
+}
+
+export const policies: PolicyItem[] = [
   {
     id: 1,
-    title: "Anti-Corruption Policy",
-    category: "Compliance",
-    description: "Guidelines on preventing bribery and corruption in all business dealings and interactions.",
-    lastUpdated: "March 2025",
-    access: "Public"
+    title: "Code of Conduct for Board of Directors and Senior Management",
+    category: "Governance",
+    description: "Guidelines on professional integrity, ethical standards, fiduciary obligations, and compliance duties for Board members and Senior Executives.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/code-of-conduct-for-the-board-of-directors-and-senior-management.pdf"
   },
   {
     id: 2,
-    title: "Data Privacy Policy",
+    title: "Code of Practices and Procedures for Fair Disclosure of UPSI",
     category: "Compliance",
-    description: "Framework for the collection, processing, and protection of personal and sensitive data.",
-    lastUpdated: "Jan 2025",
-    access: "Public"
+    description: "Policy and procedures ensuring prompt, uniform, and universal disclosure of Unpublished Price Sensitive Information (UPSI) and handling leak inquiries.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/code-of-practices-and-procedures-for-fair-disclosure-and-inquiry-in-case-of-leak-or-suspected-leak-of-unpublished-price-sensitive-information-upsi.pdf"
   },
   {
     id: 3,
-    title: "Insider Trading Code",
+    title: "Corporate Social Responsibility (CSR) Policy",
     category: "Governance",
-    description: "Provisions for the prevention of insider trading and ensuring transparency in security dealings.",
-    lastUpdated: "Feb 2025",
-    access: "Statutory"
+    description: "Strategic policy governing corporate social responsibility commitments, sustainable community initiatives, and CSR Committee responsibilities.",
+    lastUpdated: "May 2026",
+    access: "Public",
+    link: "/documents/corporate-social-responsibility-policy.pdf"
   },
   {
     id: 4,
-    title: "Health & Safety Policy",
-    category: "HR Policies",
-    description: "Comprehensive guidelines ensuring a safe and secure working environment for all employees.",
-    lastUpdated: "Dec 2024",
-    access: "Internal"
+    title: "Dividend Distribution Policy",
+    category: "Governance",
+    description: "Framework laying down financial criteria, internal and external factors, retained earnings targets, and parameters for dividend distribution.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/dividend-distribution-policy.pdf"
   },
   {
     id: 5,
-    title: "CSR Policy",
+    title: "Nomination and Remuneration Policy",
     category: "Governance",
-    description: "Our approach to Corporate Social Responsibility and sustainable community development.",
-    lastUpdated: "Nov 2024",
-    access: "Public"
+    description: "Criteria for appointment, evaluation, performance assessment, and remuneration of Directors, Key Managerial Personnel (KMP), and Senior Management.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/nomination-and-remuneration-policy.pdf"
   },
   {
     id: 6,
-    title: "Environmental Policy",
+    title: "Policy for Determination of Materiality of Events or Information",
     category: "Compliance",
-    description: "Commitment to minimizing our ecological footprint and promoting sustainable manufacturing.",
-    lastUpdated: "Oct 2024",
-    access: "Public"
+    description: "Criteria and thresholds for determining materiality of corporate events and regulatory reporting protocols to stock exchanges.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/policy-for-determination-of-materiality-of-events-or-information.pdf"
+  },
+  {
+    id: 7,
+    title: "Policy for Determining Material Subsidiaries",
+    category: "Governance",
+    description: "Governance guidelines and investment/turnover thresholds for identifying, managing, and overseeing material subsidiary entities.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/policy-for-determining-material-subsidiaries.pdf"
+  },
+  {
+    id: 8,
+    title: "Policy for Evaluation of Performance of Board of Directors",
+    category: "Governance",
+    description: "Structured evaluation process assessing performance of the Board as a whole, its committees, individual Directors, and the Chairperson.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/policy-for-evaluation-of-the-performance-of-the-board-of-directors.pdf"
+  },
+  {
+    id: 9,
+    title: "Policy on Diversity of Board of Directors",
+    category: "Governance",
+    description: "Commitment to broad diversity in skills, professional expertise, regional experience, industry perspectives, and gender representation across the Board.",
+    lastUpdated: "May 2026",
+    access: "Public",
+    link: "/documents/policy-on-diversity-of-the-board-of-directors.pdf"
+  },
+  {
+    id: 10,
+    title: "Policy on Familiarisation Programme for Independent Directors",
+    category: "Governance",
+    description: "Structured orientation, factory visits, regulatory updates, and strategic briefings to keep Independent Directors fully abreast of operations.",
+    lastUpdated: "May 2026",
+    access: "Public",
+    link: "/documents/policy-on-familiarization-programme-for-independent-directors.pdf"
+  },
+  {
+    id: 11,
+    title: "Policy on Identification of Group Companies, Material Creditors & Litigations",
+    category: "Compliance",
+    description: "Standards and quantitative benchmarks for identifying group companies, material outstanding creditors, and reportable material litigations.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/policy-on-identification-of-group-companies-material-creditors-and-material-litigations.pdf"
+  },
+  {
+    id: 12,
+    title: "Policy on Preservation and Archival of Documents",
+    category: "Compliance",
+    description: "Statutory schedules and procedures for preservation, retention periods, and archival of electronic and physical corporate records.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/policy-on-preservation-of-documents-and-archival-of-documents.pdf"
+  },
+  {
+    id: 13,
+    title: "Policy on Prevention of Sexual Harassment of Women at Workplace (POSH)",
+    category: "HR Policies",
+    description: "Zero-tolerance framework, redressal mechanisms, and Internal Complaints Committee (ICC) procedures ensuring a safe, respectful working environment.",
+    lastUpdated: "May 2026",
+    access: "Public",
+    link: "/documents/policy-on-prevention-of-sexual-harassment-of-women-at-workplace.pdf"
+  },
+  {
+    id: 14,
+    title: "Policy on Related Party Transactions",
+    category: "Compliance",
+    description: "Procedures for identification, prior approval, omnibus limits, and disclosure of transactions with related parties on an arm's length basis.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/policy-on-related-party-transactions.pdf"
+  },
+  {
+    id: 15,
+    title: "Risk Management Policy",
+    category: "Governance",
+    description: "Enterprise framework for identifying, assessing, mitigating, and monitoring operational, strategic, financial, and environmental risks.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/risk-management-policy.pdf"
+  },
+  {
+    id: 16,
+    title: "Succession Planning Policy for Board and Senior Management",
+    category: "Governance",
+    description: "Strategic plan for timely identification, development, and seamless succession of leadership talent for the Board and Senior Management.",
+    lastUpdated: "May 2026",
+    access: "Internal",
+    link: "/documents/succession-planning-policy-for-the-board-of-directors-and-senior-management.pdf"
+  },
+  {
+    id: 17,
+    title: "Terms and Conditions of Appointment of Independent Directors",
+    category: "Governance",
+    description: "Formal letter terms, fiduciary roles, statutory responsibilities, code of conduct compliance, and remuneration details for Independent Directors.",
+    lastUpdated: "May 2026",
+    access: "Public",
+    link: "/documents/terms-and-conditions-of-appointment-of-independent-directors.pdf"
+  },
+  {
+    id: 18,
+    title: "Vigil Mechanism / Whistle Blower Policy",
+    category: "Compliance",
+    description: "Confidential whistleblowing mechanism allowing employees and stakeholders to report genuine concerns or unethical conduct with complete protection.",
+    lastUpdated: "May 2026",
+    access: "Statutory",
+    link: "/documents/vigil-mechanism-whistle-blower-policy.pdf"
   }
 ];
 
@@ -66,18 +190,19 @@ export function PoliciesListing() {
 }
 
 function PoliciesListingInner() {
-  const [selectedPolicy, setSelectedPolicy] = useState<null | typeof policies[0]>(null);
+  const [selectedPolicy, setSelectedPolicy] = useState<null | PolicyItem>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const sort = searchParams.get("sort") || "desc";
+  const sort = searchParams.get("sort") || "asc";
   const query = (searchParams.get("q") || "").toLowerCase().trim();
+  const categoryParam = (searchParams.get("category") || searchParams.get("cat") || "all").toLowerCase().trim();
   const viewMode = searchParams.get("view") || "grid";
 
-  const handleView = (policy: typeof policies[0]) => {
+  const handleView = (policy: PolicyItem) => {
     setSelectedPolicy(policy);
     setIsModalOpen(true);
   };
@@ -88,6 +213,14 @@ function PoliciesListingInner() {
 
   const sortedPolicies = useMemo(() => {
     let list = [...policies];
+    if (categoryParam && categoryParam !== "all") {
+      list = list.filter((p) => {
+        if (categoryParam === "governance") return p.category.toLowerCase() === "governance";
+        if (categoryParam === "hr") return p.category.toLowerCase().includes("hr");
+        if (categoryParam === "compliance") return p.category.toLowerCase() === "compliance";
+        return p.category.toLowerCase().includes(categoryParam);
+      });
+    }
     if (query) {
       list = list.filter(
         (p) =>
@@ -98,15 +231,15 @@ function PoliciesListingInner() {
     }
     return list.sort((a, b) => {
       if (sort === "asc") {
-        return a.title.localeCompare(b.title);
+        return a.id - b.id;
       }
-      return b.title.localeCompare(a.title);
+      return b.id - a.id;
     });
-  }, [sort, query]);
+  }, [sort, query, categoryParam]);
 
-  const isDefaultView = !query && sort === "desc";
+  const isDefaultView = !query && categoryParam === "all";
   const flagshipPolicy = isDefaultView && sortedPolicies.length > 0 ? sortedPolicies[0] : null;
-  const gridPolicies = isDefaultView ? sortedPolicies.slice(1) : sortedPolicies;
+  const gridPolicies = sortedPolicies;
 
   return (
     <>
@@ -127,7 +260,7 @@ function PoliciesListingInner() {
                 </span>
               </div>
               <p className="text-xs text-[#0D2440]/60 dark:text-white/60 font-medium mt-0.5">
-                Official codes, directives, and governance charters for J Pan
+                Official codes, statutory directives, and governance charters for J Pan
               </p>
             </div>
 
@@ -147,7 +280,7 @@ function PoliciesListingInner() {
               className="text-center py-12 sm:py-20 px-4 sm:px-6 rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/40 border border-[#7BA4D0]/20 max-w-xl mx-auto my-8"
             >
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mx-auto mb-4 sm:mb-5 text-[#2E5E99]">
-                <FileSpreadsheet className="w-7 h-7 sm:w-8 sm:h-8" />
+                <FileText className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
               <h3 className="text-lg sm:text-xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
                 No Policies Found
@@ -213,9 +346,9 @@ function PoliciesListingInner() {
 
                       <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 sm:pt-4">
                         <a
-                          href="/sample-report.pdf"
+                          href={flagshipPolicy.link}
                           download
-                          className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98] min-h-[44px]"
+                          className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl sm:rounded-2xl bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs sm:text-sm font-heading font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg group/btn hover:scale-[1.02] active:scale-[0.98] min-h-[44px] cursor-pointer"
                         >
                           <Download className="w-4 h-4 text-white group-hover/btn:translate-y-0.5 transition-transform shrink-0" />
                           <span>Download Policy PDF</span>
@@ -223,7 +356,7 @@ function PoliciesListingInner() {
 
                         <button
                           onClick={() => handleView(flagshipPolicy)}
-                          className="w-full sm:w-auto px-6 py-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] min-h-[44px]"
+                          className="w-full sm:w-auto px-6 py-3.5 rounded-xl sm:rounded-2xl bg-white hover:bg-[#F4F8FD] dark:bg-[#0D2440] dark:hover:bg-white/10 border border-[#7BA4D0]/40 dark:border-white/20 text-[#0D2440] dark:text-white text-xs sm:text-sm font-heading font-bold transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] min-h-[44px] cursor-pointer"
                         >
                           <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
                           <span>Document Preview</span>
@@ -278,7 +411,7 @@ function PoliciesListingInner() {
                 </motion.div>
               )}
 
-              {/* Archival Bento Grid */}
+              {/* Archival Bento Grid with all 18 Policies */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {gridPolicies.map((item, idx) => (
                   <motion.div
@@ -286,11 +419,11 @@ function PoliciesListingInner() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ delay: (idx % 6) * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
                   >
                     <div className="absolute top-5 right-6 text-5xl sm:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
-                      0{item.id}
+                      {String(item.id).padStart(2, "0")}
                     </div>
 
                     <div>
@@ -316,16 +449,16 @@ function PoliciesListingInner() {
                     <div className="pt-5 border-t border-[#7BA4D0]/15 flex items-center justify-between gap-3">
                       <button
                         onClick={() => handleView(item)}
-                        className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center gap-1.5"
+                        className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-white dark:bg-white/5 hover:bg-[#E7F0FA] dark:hover:bg-white/15 border border-[#7BA4D0]/30 transition-all flex items-center gap-1.5 cursor-pointer"
                       >
                         <Eye className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
                         Preview
                       </button>
 
                       <a
-                        href="/sample-report.pdf"
+                        href={item.link}
                         download
-                        className="px-4 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center gap-2 shadow-xs group/btn"
+                        className="px-4 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center gap-2 shadow-xs group/btn cursor-pointer"
                       >
                         <Download className="w-3.5 h-3.5 group-hover/btn:translate-y-0.5 transition-transform" />
                         PDF
@@ -397,16 +530,16 @@ function PoliciesListingInner() {
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => handleView(item)}
-                              className="p-2 rounded-lg bg-white dark:bg-white/10 border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white transition-all"
+                              className="p-2 rounded-lg bg-white dark:bg-white/10 border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white transition-all cursor-pointer"
                               title="Preview Policy"
                               aria-label={`Preview ${item.title}`}
                             >
                               <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                             </button>
                             <a
-                              href="/sample-report.pdf"
+                              href={item.link}
                               download
-                              className="px-3.5 py-2 rounded-lg bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs transition-all flex items-center gap-1.5"
+                              className="px-3.5 py-2 rounded-lg bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                             >
                               <Download className="w-3.5 h-3.5" />
                               <span className="hidden sm:inline">PDF</span>
