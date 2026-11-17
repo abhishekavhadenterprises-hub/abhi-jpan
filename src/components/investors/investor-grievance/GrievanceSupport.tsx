@@ -1,205 +1,459 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Mail, Phone, MapPin, User, ShieldCheck, ExternalLink, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { 
+  User, 
+  Building2, 
+  Phone, 
+  Mail, 
+  Globe, 
+  MapPin, 
+  ShieldCheck, 
+  ExternalLink 
+} from "lucide-react";
 
 export function GrievanceSupport() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+      transition: { 
+        staggerChildren: 0.12, 
+        delayChildren: 0.1 
+      }
     }
   };
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 4 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
+      {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 md:mb-16 gap-6 sm:gap-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl"
-          >
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
-              Direct <br />
-              <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
-                Investor Support
-              </span>
-            </h2>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center"
-          >
-            <div className="px-4 sm:px-6 py-2.5 sm:py-3.5 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-3.5 shadow-xs">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-[#071321] flex items-center justify-center border border-[#7BA4D0]/30 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0]">
-                <ShieldCheck className="w-4 h-4" />
+        {/* ========================================================================= */}
+        {/* SECTION 1: INVESTOR GRIEVANCES OFFICER (2 Cards Layout)                  */}
+        {/* ========================================================================= */}
+        <div className="mb-14 sm:mb-20">
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-6 sm:gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-2xl"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-bold uppercase tracking-wider mb-3.5">
+                Key Institutional Contacts
               </div>
-              <span className="text-[11px] sm:text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
-                Nodal Officer Verified
-              </span>
-            </div>
-          </motion.div>
-        </div>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
+                Investor Grievances <br />
+                <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
+                  Officer Desk
+                </span>
+              </h2>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex items-center"
+            >
+              <div className="px-4 sm:px-6 py-2.5 sm:py-3.5 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-3.5 shadow-xs">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-[#071321] flex items-center justify-center border border-[#7BA4D0]/30 shrink-0 text-[#2E5E99] dark:text-[#7BA4D0]">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <span className="text-[11px] sm:text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
+                  Compliance Officers
+                </span>
+              </div>
+            </motion.div>
+          </div>
 
-        {/* 4 Support Channels Grid */}
-        <div className="flex flex-col justify-between w-full">
+          {/* Two Officers Cards Grid */}
           <motion.div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
           >
-            {/* Nodal Officer - Hero Card */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 hover:bg-gradient-to-br hover:from-[#E7F0FA] hover:via-[#F2F7FD] hover:to-[#E7F0FA] dark:hover:from-[#0D2440] dark:hover:via-[#102D50] dark:hover:to-[#0D2440] border border-[#7BA4D0]/30 hover:border-[#2E5E99] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group transition-all duration-300 relative overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:-translate-y-1">
+            {/* Card 1: Ishan Yadav */}
+            <motion.div 
+              variants={cardVariants}
+              className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group"
+            >
               <div>
-                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-white dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <User className="w-5 h-5 sm:w-6 sm:h-6" />
+                {/* Officer Profile Header */}
+                <div className="flex items-start gap-4 sm:gap-4.5 mb-5 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                    <User className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
+                      Ishan Yadav
+                    </h3>
+                    <p className="text-xs sm:text-sm font-medium text-[#2E5E99] dark:text-[#7BA4D0] mt-0.5">
+                      Company Secretary & Compliance Officer
+                    </p>
+                  </div>
                 </div>
-                <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
-                  Nodal Officer
-                </h4>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
-                  Sunil Mehra
-                </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
-                  Chief Financial Officer & Nodal Officer for Grievances
-                </p>
-              </div>
-              
-              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
-                <Link href="/contact" className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider group/btn hover:text-[#2E5E99] transition-colors min-h-[36px]">
-                  <span>View Profile</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                </Link>
+
+                {/* Divider */}
+                <div className="border-t border-[#7BA4D0]/20 mb-5 sm:mb-6" />
+
+                {/* Contact & Company Details */}
+                <div className="space-y-4 sm:space-y-5">
+                  {/* Company & Office */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white">
+                        J Pan Tubular Components Limited
+                      </h4>
+                      <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mt-0.5 font-normal">
+                        B-2/31, 32 & 42, Site-B, Surajpur Industrial Area, Greater Noida, Gautam Buddha Nagar – 201306, Uttar Pradesh, India.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Telephone */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block">
+                        Telephone
+                      </span>
+                      <a 
+                        href="tel:+911202560586"
+                        className="text-xs sm:text-sm font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] dark:hover:text-[#7BA4D0] transition-colors"
+                      >
+                        +91-120-2560 586
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block">
+                        Email
+                      </span>
+                      <a 
+                        href="mailto:cs@jpantubular.com" 
+                        className="text-xs sm:text-sm font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline break-all"
+                      >
+                        cs@jpantubular.com
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Website */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block">
+                        Website
+                      </span>
+                      <a 
+                        href="https://www.jpantubular.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-xs sm:text-sm font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>www.jpantubular.com</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
-            {/* Email Support */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
+            {/* Card 2: Navneet Bhardwaj */}
+            <motion.div 
+              variants={cardVariants}
+              className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group"
+            >
               <div>
-                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
+                {/* Officer Profile Header */}
+                <div className="flex items-start gap-4 sm:gap-4.5 mb-5 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                    <User className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-xl sm:text-2xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
+                      Navneet Bhardwaj
+                    </h3>
+                    <p className="text-xs sm:text-sm font-medium text-[#2E5E99] dark:text-[#7BA4D0] mt-0.5">
+                      Chief Financial Officer
+                    </p>
+                  </div>
                 </div>
-                <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
-                  Email Channel
-                </h4>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
-                  Grievance Desk
-                </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
-                  Dedicated digital channel for concern submission
-                </p>
-              </div>
-              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20">
-                <a href="mailto:enquiry@jpantubular.com" className="text-xs font-heading font-bold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline block break-all min-h-[36px] flex items-center">
-                  enquiry@jpantubular.com
-                </a>
-              </div>
-            </motion.div>
 
-            {/* Phone Support */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
-              <div>
-                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
-                  Voice Channel
-                </h4>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
-                  Support Helpline
-                </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
-                  Monday to Friday (10:00 AM – 6:00 PM IST)
-                </p>
-              </div>
-              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20">
-                <p className="text-xs font-heading font-bold text-[#0D2440] dark:text-white min-h-[36px] flex items-center">
-                  +91-120-2560586
-                </p>
-              </div>
-            </motion.div>
+                {/* Divider */}
+                <div className="border-t border-[#7BA4D0]/20 mb-5 sm:mb-6" />
 
-            {/* Office Address */}
-            <motion.div variants={cardVariants} className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl group hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between w-full min-w-full sm:min-w-[280px] md:min-w-0 md:w-full shrink-0 snap-center shadow-sm hover:shadow-xl shadow-[#2E5E99]/5">
-              <div>
-                <div className="w-11 h-11 sm:w-13 sm:h-13 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl mb-4 sm:mb-6 transition-all duration-300 group-hover:bg-[#2E5E99] text-[#2E5E99] dark:text-[#7BA4D0] group-hover:text-white shadow-xs">
-                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
+                {/* Contact & Company Details */}
+                <div className="space-y-4 sm:space-y-5">
+                  {/* Company & Office */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white">
+                        J Pan Tubular Components Limited
+                      </h4>
+                      <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mt-0.5 font-normal">
+                        B-2/31, 32 & 42, Site-B, Surajpur Industrial Area, Greater Noida, Gautam Buddha Nagar – 201306, Uttar Pradesh, India.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Telephone */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block">
+                        Telephone
+                      </span>
+                      <a 
+                        href="tel:+911202560586"
+                        className="text-xs sm:text-sm font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] dark:hover:text-[#7BA4D0] transition-colors"
+                      >
+                        +91-120-2560 586
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block">
+                        Email
+                      </span>
+                      <a 
+                        href="mailto:cfo@jpantubular.com" 
+                        className="text-xs sm:text-sm font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline break-all"
+                      >
+                        cfo@jpantubular.com
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Website */}
+                  <div className="flex items-start gap-3 sm:gap-3.5">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                      <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block">
+                        Website
+                      </span>
+                      <a 
+                        href="https://www.jpantubular.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-xs sm:text-sm font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>www.jpantubular.com</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-widest mb-1.5">
-                  Physical Desk
-                </h4>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white mb-2">
-                  Registered Office
-                </h3>
-                <p className="text-xs text-[#0D2440]/70 dark:text-white/65 leading-relaxed mb-4 sm:mb-6 font-normal">
-                  Nodal Officer Reception, Greater Noida
-                </p>
-              </div>
-              <div className="pt-3 sm:pt-4 border-t border-[#7BA4D0]/20">
-                <p className="text-xs font-heading font-bold text-[#0D2440] dark:text-white min-h-[36px] flex items-center">
-                  Greater Noida, UP 201306, India
-                </p>
               </div>
             </motion.div>
           </motion.div>
+        </div>
 
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-5 sm:mt-6 z-10">
-            {[0, 1, 2, 3].map((i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current) {
-                    cardsRef.current.scrollTo({
-                      left: i * cardsRef.current.clientWidth,
-                      behavior: "smooth"
-                    });
-                  }
-                }}
-                className={`h-1.5 transition-all duration-300 rounded-full ${
-                  activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
-                }`}
-                aria-label={`Go to channel ${i + 1}`}
-              />
-            ))}
+        {/* ========================================================================= */}
+        {/* SECTION 2: REGISTRAR & SHARE TRANSFER AGENT (RTA)                         */}
+        {/* ========================================================================= */}
+        <div>
+          {/* Header */}
+          <div className="mb-8 sm:mb-10 text-center sm:text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-bold uppercase tracking-wider mb-3.5">
+                Statutory Agency
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.15] tracking-tight">
+                Registrar & Share Transfer Agent{" "}
+                <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
+                  (RTA)
+                </span>
+              </h2>
+            </motion.div>
           </div>
+
+          {/* RTA Wide Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 group"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              
+              {/* Left Column: Entity & Physical Address */}
+              <div className="lg:col-span-6 space-y-6">
+                {/* Agency Name & Official Header */}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#071321] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                    <Building2 className="w-6 h-6 sm:w-6.5 sm:h-6.5" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
+                      Bigshare Services Private Limited
+                    </h3>
+                    <p className="text-xs sm:text-sm font-medium text-[#0D2440]/80 dark:text-white/80 mt-0.5">
+                      (Mr. Babu Raphael C.)
+                    </p>
+                    <span className="inline-block text-[11px] font-heading font-bold uppercase tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] mt-1">
+                      Registrar & Transfer Agent
+                    </span>
+                  </div>
+                </div>
+
+                <div className="border-t border-[#7BA4D0]/20" />
+
+                {/* Address */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block mb-1">
+                      Address
+                    </span>
+                    <p className="text-xs sm:text-sm text-[#0D2440]/75 dark:text-white/70 leading-relaxed font-normal">
+                      S6-2, 6th Floor, Pinnacle Business Park, Next to Ahura Centre, Mahakali Caves Road, Andheri (East) Mumbai – 400093, Maharashtra, India.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Telephone & Fax, Email Support, Website */}
+              <div className="lg:col-span-6 space-y-5 lg:pl-4 lg:border-l lg:border-[#7BA4D0]/20">
+                {/* Telephone & Fax */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block mb-0.5">
+                      Telephone & Fax
+                    </span>
+                    <div className="space-y-0.5">
+                      <p className="text-xs sm:text-sm text-[#0D2440]/80 dark:text-white/75 font-normal">
+                        Tel:{" "}
+                        <a 
+                          href="tel:+912262638200" 
+                          className="font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] dark:hover:text-[#7BA4D0] transition-colors"
+                        >
+                          +91-22-6263 8200
+                        </a>
+                      </p>
+                      <p className="text-xs sm:text-sm text-[#0D2440]/80 dark:text-white/75 font-normal">
+                        Fax:{" "}
+                        <span className="font-semibold text-[#0D2440] dark:text-white">
+                          +91-22-6263 8299
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Email Support */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block mb-0.5">
+                      Email Support
+                    </span>
+                    <div className="space-y-0.5">
+                      <p className="text-xs sm:text-sm text-[#0D2440]/80 dark:text-white/75 font-normal">
+                        E-mail:{" "}
+                        <a 
+                          href="mailto:ipo@bigshareonline.com" 
+                          className="font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline"
+                        >
+                          ipo@bigshareonline.com
+                        </a>
+                      </p>
+                      <p className="text-xs sm:text-sm text-[#0D2440]/80 dark:text-white/75 font-normal">
+                        Investor grievance e-mail:{" "}
+                        <a 
+                          href="mailto:investor@bigshareonline.com" 
+                          className="font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline"
+                        >
+                          investor@bigshareonline.com
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Website */}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA]/70 dark:bg-[#071321]/70 border border-[#7BA4D0]/20 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5">
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-wider block mb-0.5">
+                      Website
+                    </span>
+                    <a 
+                      href="https://www.bigshareonline.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-xs sm:text-sm font-semibold text-[#2E5E99] dark:text-[#7BA4D0] hover:underline inline-flex items-center gap-1"
+                    >
+                      <span>www.bigshareonline.com</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </motion.div>
         </div>
 
       </div>
