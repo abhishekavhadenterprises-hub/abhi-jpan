@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -11,9 +11,13 @@ import {
   MapPin, 
   Eye, 
   Download, 
-  X, 
-  Search, 
-  FileCheck 
+  X,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  ChevronLeft,
+  ChevronRight,
+  Move
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -174,7 +178,6 @@ export const certificatesList: CertificateData[] = [
 ];
 
 const locations = [
-  "All Locations",
   "Greater Noida",
   "Maharashtra",
   "Bangalore",
@@ -182,37 +185,153 @@ const locations = [
   "Sanand"
 ] as const;
 
-const categories = [
-  "All Standards",
-  "Quality",
-  "Environmental",
-  "Safety",
-  "Zero Defect"
-] as const;
-
 export function CertificationsGrid() {
-  const [selectedLocation, setSelectedLocation] = useState<string>("All Locations");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All Standards");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedLocation, setSelectedLocation] = useState<string>("Greater Noida");
   const [previewCert, setPreviewCert] = useState<CertificateData | null>(null);
 
-  // Filter logic
-  const filteredCertificates = useMemo(() => {
-    return certificatesList.filter((cert) => {
-      const matchesLocation =
-        selectedLocation === "All Locations" || cert.location === selectedLocation;
-      const matchesCategory =
-        selectedCategory === "All Standards" || cert.category === selectedCategory;
-      const matchesSearch =
-        !searchQuery.trim() ||
-        cert.standard.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cert.unit.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cert.location.toLowerCase().includes(searchQuery.toLowerCase());
+  // High-Resolution Interactive Zoom & Pan State
+  const [zoom, setZoom] = useState<number>(1);
+  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const panStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const hasMovedRef = useRef<boolean>(false);
 
-      return matchesLocation && matchesCategory && matchesSearch;
+  // Filter only by location
+  const filteredCertificates = useMemo(() => {
+    return certificatesList.filter((cert) => cert.location === selectedLocation);
+  }, [selectedLocation]);
+
+  const handleSelectCert = useCallback((cert: CertificateData) => {
+    setPreviewCert(cert);
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setPreviewCert(null);
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }, []);
+
+  const currentCertIndex = useMemo(() => {
+    if (!previewCert) return -1;
+    return filteredCertificates.findIndex((c) => c.id === previewCert.id);
+  }, [previewCert, filteredCertificates]);
+
+  const handlePrevCert = useCallback(() => {
+    if (currentCertIndex > 0) {
+      handleSelectCert(filteredCertificates[currentCertIndex - 1]);
+    }
+  }, [currentCertIndex, filteredCertificates, handleSelectCert]);
+
+  const handleNextCert = useCallback(() => {
+    if (currentCertIndex < filteredCertificates.length - 1) {
+      handleSelectCert(filteredCertificates[currentCertIndex + 1]);
+    }
+  }, [currentCertIndex, filteredCertificates, handleSelectCert]);
+
+  const handleZoomIn = useCallback(() => {
+    setZoom((prev) => Math.min(Number((prev + 0.5).toFixed(2)), 3.5));
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    setZoom((prev) => {
+      const next = Math.max(Number((prev - 0.5).toFixed(2)), 1);
+      if (next === 1) setPan({ x: 0, y: 0 });
+      return next;
     });
-  }, [selectedLocation, selectedCategory, searchQuery]);
+  }, []);
+
+  const handleResetZoom = useCallback(() => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  }, []);
+
+  // Mouse Wheel Zoom
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      setZoom((prev) => Math.min(Number((prev + 0.25).toFixed(2)), 3.5));
+    } else if (e.deltaY > 0) {
+      setZoom((prev) => {
+        const next = Math.max(Number((prev - 0.25).toFixed(2)), 1);
+        if (next === 1) setPan({ x: 0, y: 0 });
+        return next;
+      });
+    }
+  };
+
+  // Pointer Drag Handlers (with smooth boundaries)
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    setIsDragging(true);
+    hasMovedRef.current = false;
+    dragStartRef.current = { x: e.clientX, y: e.clientY };
+    panStartRef.current = { ...pan };
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      hasMovedRef.current = true;
+    }
+    if (zoom > 1) {
+      const maxBoundX = 400 * (zoom - 1);
+      const maxBoundY = 500 * (zoom - 1);
+      const newX = Math.max(-maxBoundX, Math.min(maxBoundX, panStartRef.current.x + dx));
+      const newY = Math.max(-maxBoundY, Math.min(maxBoundY, panStartRef.current.y + dy));
+      setPan({ x: newX, y: newY });
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {}
+
+    // Click toggle zoom if not dragged
+    if (!hasMovedRef.current) {
+      if (zoom === 1) {
+        setZoom(2.2);
+      } else {
+        setZoom(1);
+        setPan({ x: 0, y: 0 });
+      }
+    }
+  };
+
+  // Keyboard navigation & zoom shortcuts
+  useEffect(() => {
+    if (!previewCert) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      } else if (e.key === "+" || e.key === "=") {
+        e.preventDefault();
+        handleZoomIn();
+      } else if (e.key === "-") {
+        e.preventDefault();
+        handleZoomOut();
+      } else if (e.key === "0") {
+        e.preventDefault();
+        handleResetZoom();
+      } else if (e.key === "ArrowLeft" && zoom === 1) {
+        handlePrevCert();
+      } else if (e.key === "ArrowRight" && zoom === 1) {
+        handleNextCert();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [previewCert, zoom, handleCloseModal, handleZoomIn, handleZoomOut, handleResetZoom, handlePrevCert, handleNextCert]);
 
   const getCategoryBadge = (category: CertificateData["category"]) => {
     switch (category) {
@@ -251,7 +370,7 @@ export function CertificationsGrid() {
       <div className="container-custom relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-12 gap-6">
+        <div className="mb-8 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -259,9 +378,6 @@ export function CertificationsGrid() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0] text-[11px] font-heading font-bold uppercase tracking-wider mb-3">
-              Institutional Compliance
-            </div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-[1.12] tracking-tight">
               Certified Manufacturing <br />
               <span className="text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -269,47 +385,21 @@ export function CertificationsGrid() {
               </span>
             </h2>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center gap-3"
-          >
-            <div className="px-4 py-2.5 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center gap-3 shadow-xs">
-              <div className="w-8 h-8 rounded-lg bg-[#E7F0FA] dark:bg-[#071321] flex items-center justify-center border border-[#7BA4D0]/30 text-[#2E5E99] dark:text-[#7BA4D0]">
-                <FileCheck className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-heading font-black text-[#0D2440] dark:text-white uppercase tracking-wider block">
-                  12 Official Accreditations
-                </span>
-                <span className="text-[11px] text-[#0D2440]/60 dark:text-white/60">
-                  5 Manufacturing Hubs
-                </span>
-              </div>
-            </div>
-          </motion.div>
         </div>
 
-        {/* Filter Controls Bar */}
-        <div className="space-y-4 mb-10 sm:mb-12">
-          {/* Location Tabs */}
+        {/* Location Tabs Only */}
+        <div className="mb-8 sm:mb-12">
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {locations.map((loc) => {
               const isActive = selectedLocation === loc;
-              const count =
-                loc === "All Locations"
-                  ? certificatesList.length
-                  : certificatesList.filter((c) => c.location === loc).length;
+              const count = certificatesList.filter((c) => c.location === loc).length;
 
               return (
                 <button
                   key={loc}
                   onClick={() => setSelectedLocation(loc)}
                   className={cn(
-                    "px-4 py-2 rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 shrink-0 flex items-center gap-2 cursor-pointer",
+                    "px-4.5 py-2.5 rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 shrink-0 flex items-center gap-2 cursor-pointer",
                     isActive
                       ? "bg-[#2E5E99] text-white shadow-md shadow-[#2E5E99]/20"
                       : "bg-white dark:bg-[#0D2440]/50 text-[#0D2440]/80 dark:text-white/80 border border-[#7BA4D0]/25 hover:border-[#2E5E99] hover:bg-[#E7F0FA] dark:hover:bg-[#0D2440]"
@@ -319,7 +409,7 @@ export function CertificationsGrid() {
                   <span>{loc}</span>
                   <span
                     className={cn(
-                      "px-1.5 py-0.2 rounded-md text-[10px]",
+                      "px-2 py-0.5 rounded-md text-[10px]",
                       isActive
                         ? "bg-white/20 text-white"
                         : "bg-[#7BA4D0]/15 text-[#2E5E99] dark:text-[#7BA4D0]"
@@ -331,178 +421,122 @@ export function CertificationsGrid() {
               );
             })}
           </div>
-
-          {/* Secondary Controls: Search & Standards Filter */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
-            {/* Standards Chips */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-              {categories.map((cat) => {
-                const isActive = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={cn(
-                      "px-3 py-1.5 rounded-lg text-[11px] font-heading font-bold transition-all shrink-0 cursor-pointer",
-                      isActive
-                        ? "bg-[#0D2440] text-white dark:bg-white dark:text-[#0D2440]"
-                        : "bg-white dark:bg-[#0D2440]/40 text-[#0D2440]/70 dark:text-white/70 border border-[#7BA4D0]/20 hover:text-[#0D2440] dark:hover:text-white"
-                    )}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Search Input */}
-            <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#7BA4D0]" />
-              <input
-                type="text"
-                placeholder="Search certificate or plant..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 rounded-xl text-xs font-sans bg-white dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25 text-[#0D2440] dark:text-white placeholder-[#0D2440]/45 dark:placeholder-white/40 focus:outline-none focus:border-[#2E5E99] dark:focus:border-[#7BA4D0] transition-colors"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#0D2440]/50 hover:text-[#0D2440]"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-          </div>
         </div>
 
         {/* Certificate Cards Grid */}
-        {filteredCertificates.length === 0 ? (
-          <div className="py-16 text-center bg-white dark:bg-[#0D2440]/30 rounded-3xl border border-[#7BA4D0]/25 p-8 max-w-lg mx-auto">
-            <Award className="w-12 h-12 text-[#7BA4D0] mx-auto mb-3 opacity-60" />
-            <h3 className="text-lg font-heading font-black text-[#0D2440] dark:text-white">
-              No Certificates Found
-            </h3>
-            <p className="text-xs text-[#0D2440]/70 dark:text-white/70 mt-1">
-              Try adjusting your search query or location filter to see our accreditations.
-            </p>
-          </div>
-        ) : (
-          <motion.div 
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7"
-          >
-            {filteredCertificates.map((cert) => {
-              const badge = getCategoryBadge(cert.category);
-              const BadgeIcon = badge.icon;
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7"
+        >
+          {filteredCertificates.map((cert) => {
+            const badge = getCategoryBadge(cert.category);
+            const BadgeIcon = badge.icon;
 
-              return (
-                <motion.div
-                  layout
-                  key={cert.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-5.5 flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
-                >
+            return (
+              <motion.div
+                layout
+                key={cert.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="group bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-5.5 flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+              >
+                <div>
+                  {/* Top Metadata Badge & Location */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span
+                      className={cn(
+                        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-heading font-bold uppercase tracking-wider border",
+                        badge.color
+                      )}
+                    >
+                      <BadgeIcon className="w-3 h-3" />
+                      <span>{badge.label}</span>
+                    </span>
+
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0D2440]/70 dark:text-white/70">
+                      <MapPin className="w-3 h-3 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                      <span>{cert.location}</span>
+                    </span>
+                  </div>
+
+                  {/* Certificate Thumbnail Preview Container */}
+                  <div 
+                    onClick={() => handleSelectCert(cert)}
+                    className="relative w-full aspect-[3/4] bg-[#F1F5F9] dark:bg-[#071321] rounded-xl sm:rounded-2xl overflow-hidden border border-[#7BA4D0]/20 mb-4 cursor-pointer group/img"
+                  >
+                    <Image
+                      src={cert.image}
+                      alt={`${cert.standard} - ${cert.unit}`}
+                      fill
+                      className="object-contain p-2 group-hover/img:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-[#0D2440]/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[2px]">
+                      <span className="px-3.5 py-1.5 rounded-lg bg-white text-[#0D2440] font-heading font-bold text-xs flex items-center gap-1.5 shadow-md">
+                        <ZoomIn className="w-3.5 h-3.5 text-[#2E5E99]" />
+                        View & Zoom
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Standard & Unit Details */}
                   <div>
-                    {/* Top Metadata Badge & Location */}
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span
-                        className={cn(
-                          "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-heading font-bold uppercase tracking-wider border",
-                          badge.color
-                        )}
-                      >
-                        <BadgeIcon className="w-3 h-3" />
-                        <span>{badge.label}</span>
-                      </span>
-
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0D2440]/70 dark:text-white/70">
-                        <MapPin className="w-3 h-3 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                        <span>{cert.location}</span>
-                      </span>
-                    </div>
-
-                    {/* Certificate Thumbnail Preview Container */}
-                    <div 
-                      onClick={() => setPreviewCert(cert)}
-                      className="relative w-full aspect-[3/4] bg-[#F1F5F9] dark:bg-[#071321] rounded-xl sm:rounded-2xl overflow-hidden border border-[#7BA4D0]/20 mb-4 cursor-pointer group/img"
-                    >
-                      <Image
-                        src={cert.image}
-                        alt={`${cert.standard} - ${cert.unit}`}
-                        fill
-                        className="object-contain p-2 group-hover/img:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      />
-                      
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-[#0D2440]/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[2px]">
-                        <span className="px-3 py-1.5 rounded-lg bg-white text-[#0D2440] font-heading font-bold text-xs flex items-center gap-1.5 shadow-md">
-                          <Eye className="w-3.5 h-3.5" />
-                          View Full
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Standard & Unit Details */}
-                    <div>
-                      <h3 className="text-base sm:text-lg font-heading font-black text-[#0D2440] dark:text-white leading-snug tracking-tight">
-                        {cert.standard}
-                      </h3>
-                      <p className="text-xs font-semibold text-[#2E5E99] dark:text-[#7BA4D0] mt-0.5">
-                        {cert.unit}
-                      </p>
-                      <p className="text-[11px] text-[#0D2440]/70 dark:text-white/65 mt-1 leading-relaxed line-clamp-2">
-                        {cert.scope}
-                      </p>
-                    </div>
+                    <h3 className="text-base sm:text-lg font-heading font-black text-[#0D2440] dark:text-white leading-snug tracking-tight">
+                      {cert.standard}
+                    </h3>
+                    <p className="text-xs font-semibold text-[#2E5E99] dark:text-[#7BA4D0] mt-0.5">
+                      {cert.unit}
+                    </p>
+                    <p className="text-[11px] text-[#0D2440]/70 dark:text-white/65 mt-1 leading-relaxed line-clamp-2">
+                      {cert.scope}
+                    </p>
                   </div>
+                </div>
 
-                  {/* Actions Footer */}
-                  <div className="pt-4 mt-4 border-t border-[#7BA4D0]/15 flex items-center justify-between gap-2">
-                    <button
-                      onClick={() => setPreviewCert(cert)}
-                      className="flex-1 px-3 py-2 rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-slate-100 dark:bg-white/10 hover:bg-[#E7F0FA] dark:hover:bg-white/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      <Eye className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-                      <span>Preview</span>
-                    </button>
+                {/* Actions Footer */}
+                <div className="pt-4 mt-4 border-t border-[#7BA4D0]/15 flex items-center justify-between gap-2">
+                  <button
+                    onClick={() => handleSelectCert(cert)}
+                    className="flex-1 px-3 py-2 rounded-xl text-xs font-heading font-bold text-[#0D2440] dark:text-white bg-slate-100 dark:bg-white/10 hover:bg-[#E7F0FA] dark:hover:bg-white/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <ZoomIn className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                    <span>View & Zoom</span>
+                  </button>
 
-                    <a
-                      href={cert.image}
-                      download
-                      className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-1.5 shadow-xs"
-                      title="Download Certificate"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Save</span>
-                    </a>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        )}
+                  <a
+                    href={cert.image}
+                    download
+                    className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#0D2440] hover:bg-[#2E5E99] transition-all flex items-center justify-center gap-1.5 shadow-xs"
+                    title="Download Certificate"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Save</span>
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
 
       </div>
 
-      {/* High-Resolution Certificate Lightbox Modal */}
+      {/* High-Resolution Certificate Lightbox Modal with Full Zoom & Pan Controls */}
       <AnimatePresence>
         {previewCert && (
           <div 
             data-lenis-prevent="true"
-            className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-5 md:p-8"
+            className="fixed inset-0 z-[120] flex items-center justify-center p-2 sm:p-4 md:p-6"
           >
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setPreviewCert(null)}
+              onClick={handleCloseModal}
               className="absolute inset-0 bg-[#0D2440]/85 dark:bg-black/92 backdrop-blur-md"
             />
 
@@ -513,10 +547,10 @@ export function CertificationsGrid() {
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               data-lenis-prevent="true"
-              className="relative z-10 w-full max-w-4xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+              className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[96vh]"
             >
               {/* Header */}
-              <div className="p-4 sm:p-5 border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#071321] flex items-center justify-between gap-4 shrink-0">
+              <div className="p-3.5 sm:p-4.5 border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#071321] flex items-center justify-between gap-3 sm:gap-4 shrink-0">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
                     <span className="px-2 py-0.5 rounded text-[10px] font-heading font-bold uppercase tracking-wider bg-[#E7F0FA] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -532,17 +566,53 @@ export function CertificationsGrid() {
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
+                  {/* Quick Zoom Buttons in Header */}
+                  <div className="hidden sm:flex items-center gap-1 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl px-2 py-1 shadow-xs">
+                    <button
+                      onClick={handleZoomOut}
+                      disabled={zoom <= 1}
+                      className="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                      title="Zoom Out (-)"
+                    >
+                      <ZoomOut className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                    </button>
+                    <button
+                      onClick={handleResetZoom}
+                      className="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded hover:bg-[#2E5E99]/10 text-[#0D2440] dark:text-white transition-colors cursor-pointer"
+                      title="Reset Zoom"
+                    >
+                      {Math.round(zoom * 100)}%
+                    </button>
+                    <button
+                      onClick={handleZoomIn}
+                      disabled={zoom >= 3.5}
+                      className="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                      title="Zoom In (+)"
+                    >
+                      <ZoomIn className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                    </button>
+                    {zoom > 1 && (
+                      <button
+                        onClick={handleResetZoom}
+                        className="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 hover:text-[#0D2440] dark:hover:text-white transition-colors cursor-pointer ml-0.5 border-l border-slate-200 dark:border-white/15 pl-1.5"
+                        title="Reset to Fit (0)"
+                      >
+                        <RotateCcw className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
+
                   <a
                     href={previewCert.image}
                     download
-                    className="px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#2E5E99] hover:bg-[#1D3E66] transition-colors flex items-center gap-1.5 shadow-xs"
+                    className="px-3 sm:px-3.5 py-2 rounded-xl text-xs font-heading font-bold text-white bg-[#2E5E99] hover:bg-[#1D3E66] transition-colors flex items-center gap-1.5 shadow-xs"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span className="hidden sm:inline">Download</span>
                   </a>
                   
                   <button
-                    onClick={() => setPreviewCert(null)}
+                    onClick={handleCloseModal}
                     className="p-2 rounded-xl text-[#0D2440]/60 dark:text-white/60 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
                     aria-label="Close certificate lightbox"
                   >
@@ -551,24 +621,123 @@ export function CertificationsGrid() {
                 </div>
               </div>
 
-              {/* Certificate Image Canvas */}
+              {/* Certificate Image Canvas with Interactive Pan & Zoom */}
               <div 
                 data-lenis-prevent="true"
-                className="p-4 sm:p-6 bg-[#EBF3FC]/40 dark:bg-black/50 overflow-y-auto flex-grow flex items-center justify-center max-h-[78vh]"
+                onWheel={handleWheel}
+                className="relative p-2 sm:p-4 md:p-6 bg-[#EBF3FC]/50 dark:bg-black/60 overflow-hidden flex-grow flex justify-center items-center min-h-[460px] max-h-[75vh] select-none"
               >
-                <div className="relative w-full max-w-2xl aspect-[3/4] shadow-2xl rounded-xl overflow-hidden bg-white">
-                  <Image
+                {/* Floating Left / Right Certificate Navigation Buttons */}
+                {currentCertIndex > 0 && (
+                  <button
+                    onClick={handlePrevCert}
+                    aria-label="Previous certificate"
+                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-2.5 rounded-full bg-white/90 dark:bg-[#0D2440]/90 text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 shadow-lg hover:scale-110 active:scale-95 transition-all cursor-pointer backdrop-blur-md"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                )}
+
+                {currentCertIndex < filteredCertificates.length - 1 && (
+                  <button
+                    onClick={handleNextCert}
+                    aria-label="Next certificate"
+                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-2.5 rounded-full bg-white/90 dark:bg-[#0D2440]/90 text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 shadow-lg hover:scale-110 active:scale-95 transition-all cursor-pointer backdrop-blur-md"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                )}
+
+                {/* Draggable & Scalable Certificate Image */}
+                <div 
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={handlePointerUp}
+                  onPointerCancel={handlePointerUp}
+                  className={cn(
+                    "relative flex justify-center items-center py-1 sm:py-2 touch-none select-none max-h-full max-w-full",
+                    zoom === 1 ? "cursor-zoom-in" : isDragging ? "cursor-grabbing" : "cursor-grab"
+                  )}
+                >
+                  <img
                     src={previewCert.image}
                     alt={`${previewCert.standard} - ${previewCert.unit}`}
-                    fill
-                    className="object-contain p-2"
-                    priority
+                    draggable={false}
+                    style={{
+                      transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                      transformOrigin: "center center",
+                      transition: isDragging ? "none" : "transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)",
+                    }}
+                    className="w-auto h-auto max-h-[68vh] max-w-full object-contain rounded-xl shadow-2xl bg-white p-2 sm:p-3 border border-[#7BA4D0]/20 pointer-events-none select-none"
                   />
+                </div>
+
+                {/* Floating Bottom Zoom & Navigation Control Bar */}
+                <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-xl border border-[#7BA4D0]/35 shadow-xl text-xs text-[#0D2440] dark:text-white">
+                  {/* Zoom Out Button */}
+                  <button
+                    onClick={handleZoomOut}
+                    disabled={zoom <= 1}
+                    className="p-1 sm:p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 disabled:opacity-35 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                    title="Zoom Out (-)"
+                  >
+                    <ZoomOut className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                  </button>
+
+                  {/* Zoom Percentage / Reset Pill */}
+                  <button
+                    onClick={handleResetZoom}
+                    className="px-2 py-0.5 rounded-md font-mono font-bold text-[11px] sm:text-xs hover:bg-[#2E5E99]/10 text-[#0D2440] dark:text-white transition-colors cursor-pointer"
+                    title="Click to Reset Zoom (100%)"
+                  >
+                    {Math.round(zoom * 100)}%
+                  </button>
+
+                  {/* Zoom In Button */}
+                  <button
+                    onClick={handleZoomIn}
+                    disabled={zoom >= 3.5}
+                    className="p-1 sm:p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 disabled:opacity-35 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                    title="Zoom In (+)"
+                  >
+                    <ZoomIn className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                  </button>
+
+                  {/* Reset Icon Button */}
+                  {zoom > 1 && (
+                    <button
+                      onClick={handleResetZoom}
+                      className="p-1 sm:p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 hover:text-[#0D2440] dark:hover:text-white transition-colors cursor-pointer"
+                      title="Reset to Fit (0)"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+
+                  <div className="w-[1px] h-3.5 bg-slate-300 dark:bg-white/20 mx-0.5 sm:mx-1" />
+
+                  {/* Certificate index badge */}
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                    {currentCertIndex + 1} / {filteredCertificates.length}
+                  </span>
+
+                  {/* Helpful Interaction Tip */}
+                  <span className="hidden md:inline-flex items-center gap-1 text-[10px] text-slate-400 dark:text-slate-500 pl-1 border-l border-slate-200 dark:border-white/10">
+                    {zoom > 1 ? (
+                      <>
+                        <Move className="w-2.5 h-2.5" /> Drag to pan
+                      </>
+                    ) : (
+                      <>
+                        <ZoomIn className="w-2.5 h-2.5" /> Click or scroll to zoom
+                      </>
+                    )}
+                  </span>
                 </div>
               </div>
 
               {/* Footer Scope Info */}
-              <div className="p-3.5 sm:p-4 border-t border-[#7BA4D0]/15 bg-white dark:bg-[#0D2440] text-center text-xs text-[#0D2440]/70 dark:text-white/70">
+              <div className="p-3 sm:p-3.5 border-t border-[#7BA4D0]/15 bg-white dark:bg-[#0D2440] text-center text-xs text-[#0D2440]/70 dark:text-white/70 shrink-0">
                 <span className="font-semibold text-[#0D2440] dark:text-white">Scope: </span>
                 {previewCert.scope}
               </div>
