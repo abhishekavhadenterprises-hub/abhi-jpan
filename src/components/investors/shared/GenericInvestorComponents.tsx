@@ -22,7 +22,8 @@ import {
   FileSpreadsheet,
   Video,
   Play,
-  ArrowLeft
+  ArrowLeft,
+  AlertCircle
 } from "lucide-react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -406,6 +407,15 @@ interface ModalItem {
   type?: string;
 }
 
+function getYouTubeEmbedUrl(url: string): string | null {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11
+    ? `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`
+    : null;
+}
+
 function GenericDocumentModal({
   item,
   isOpen,
@@ -415,6 +425,8 @@ function GenericDocumentModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const [videoError, setVideoError] = useState(false);
+
   useEffect(() => {
     if (!isOpen) return;
     const originalOverflow = document.body.style.overflow;
@@ -438,7 +450,9 @@ function GenericDocumentModal({
   const displayDate = item.period || item.date || "";
   const displayTitle = item.particulars || item.title || "Statutory Document";
   const downloadLink = item.downloadUrl || item.link || "/sample-report.pdf";
-  const isVideo = downloadLink.toLowerCase().includes(".mp4");
+  const youtubeEmbedUrl = getYouTubeEmbedUrl(downloadLink);
+  const isYouTube = !!youtubeEmbedUrl;
+  const isVideo = isYouTube || downloadLink.toLowerCase().includes(".mp4") || downloadLink.toLowerCase().includes(".webm");
 
   return (
     <div className="fixed inset-0 z-[100] w-screen h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#071321] animate-in fade-in duration-200 overflow-hidden">
@@ -536,17 +550,60 @@ function GenericDocumentModal({
 
       {/* Main Fullpage Document Canvas */}
       <div className="flex-1 w-full h-[calc(100vh-64px)] relative bg-[#EBF3FC]/30 dark:bg-black/90 flex flex-col overflow-hidden">
-        {isVideo ? (
+        {isYouTube ? (
+          <div className="w-full h-full flex items-center justify-center bg-black p-2 sm:p-6 md:p-8">
+            <div className="w-full h-full max-w-6xl max-h-[85vh] aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <iframe
+                src={youtubeEmbedUrl!}
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                title={displayTitle}
+              />
+            </div>
+          </div>
+        ) : isVideo ? (
           <div className="w-full h-full flex items-center justify-center bg-black p-4 sm:p-8">
-            <video
-              controls
-              autoPlay
-              playsInline
-              className="w-full h-full max-h-full max-w-6xl object-contain rounded-xl shadow-2xl"
-              src={downloadLink}
-            >
-              Your browser does not support video playback.
-            </video>
+            {videoError ? (
+              <div className="text-center p-8 max-w-lg bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md shadow-2xl animate-in zoom-in-95 duration-200">
+                <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mx-auto mb-4">
+                  <AlertCircle className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-heading font-black text-white mb-2">
+                  Video Stream Unavailable on Host
+                </h3>
+                <p className="text-xs text-white/70 leading-relaxed mb-6 font-normal">
+                  The video file (<code className="text-amber-300 font-mono text-[11px] bg-black/40 px-1.5 py-0.5 rounded">{downloadLink}</code>) was not found on the web server (HTTP 404). Files over 1 GB are excluded from the Git repository due to GitHub/Vercel size limits.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={downloadLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2.5 rounded-xl bg-[#2E5E99] hover:bg-[#7BA4D0] text-white text-xs font-heading font-bold uppercase tracking-wider transition-all"
+                  >
+                    Open Direct Link
+                  </a>
+                  <button
+                    onClick={() => setVideoError(false)}
+                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-heading font-bold uppercase tracking-wider transition-all"
+                  >
+                    Retry Playback
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <video
+                controls
+                autoPlay
+                playsInline
+                onError={() => setVideoError(true)}
+                className="w-full h-full max-h-full max-w-6xl object-contain rounded-xl shadow-2xl"
+                src={downloadLink}
+              >
+                Your browser does not support video playback.
+              </video>
+            )}
           </div>
         ) : (
           <iframe
