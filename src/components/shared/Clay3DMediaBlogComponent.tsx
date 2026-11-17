@@ -47,25 +47,11 @@ export function Clay3DMediaBlogComponent({
     return (scene, blueLineMaterial) => {
       const { bodyMaterial, accentMaterial, ringMaterial } = createClayMaterials();
 
-      // Custom bright clay paper material
-      const paperWhiteMaterial = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#CBD5E1"),
-        roughness: 0.65,
-        metalness: 0.04,
-        clearcoat: 0.2,
-        sheen: 0.4,
-        sheenColor: new THREE.Color("#F8FAFC"),
-      });
+      // Luxury white porcelain paper material
+      const paperWhiteMaterial = bodyMaterial.clone();
 
-      // Medium grey back paper material
-      const paperBackMaterial = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#94A3B8"),
-        roughness: 0.68,
-        metalness: 0.05,
-        clearcoat: 0.15,
-        sheen: 0.3,
-        sheenColor: new THREE.Color("#E2E8F0"),
-      });
+      // Satin titanium back paper material
+      const paperBackMaterial = accentMaterial.clone();
 
       const modelGroup = new THREE.Group();
       // Straight, centered isometric orientation

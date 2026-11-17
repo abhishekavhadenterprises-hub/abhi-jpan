@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import * as THREE from "three";
-import { useClayModel, createClayMaterials, StaticClayView, BuildSceneFn } from "./clay3d-engine";
+import { useClayModel, createLuxuryWhiteMaterials, StaticClayView, BuildSceneFn } from "./clay3d-engine";
 
 interface Clay3DSteelComponentProps {
   isHovered?: boolean;
@@ -24,7 +24,7 @@ export function Clay3DSteelComponent({
 }: Clay3DSteelComponentProps) {
   const buildScene: BuildSceneFn = useMemo(() => {
     return (scene, blueLineMaterial) => {
-      const { bodyMaterial, accentMaterial, ringMaterial } = createClayMaterials();
+      const { bodyMaterial, accentMaterial, ringMaterial } = createLuxuryWhiteMaterials();
 
       const modelGroup = new THREE.Group();
       // Straight, aligned, centered upright pose
@@ -140,7 +140,7 @@ export function Clay3DSteelComponent({
     };
   }, []);
 
-  const { base, hover } = useClayModel("steel-strainer", buildScene, size);
+  const { base, hover } = useClayModel("steel-strainer-white-luxury", buildScene, size);
 
   return (
     <StaticClayView
