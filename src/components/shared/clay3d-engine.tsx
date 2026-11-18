@@ -48,7 +48,7 @@ export function renderClayPair(
   buildScene: BuildSceneFn,
   size = 115
 ): { base: string; hover: string } {
-  const cacheKey = `${key}_${size}`;
+  const cacheKey = `lux_white_${key}_${size}`;
   const cached = renderCache.get(cacheKey);
   if (cached) return cached;
 
@@ -142,7 +142,7 @@ export function renderClayPair(
  */
 export function useClayModel(key: string, buildScene: BuildSceneFn, size = 115) {
   const [data, setData] = useState<{ base: string; hover: string }>(() => {
-    const cacheKey = `${key}_${size}`;
+    const cacheKey = `lux_white_${key}_${size}`;
     return renderCache.get(cacheKey) || { base: "", hover: "" };
   });
 
@@ -157,35 +157,41 @@ export function useClayModel(key: string, buildScene: BuildSceneFn, size = 115) 
 }
 
 /**
- * Standard Materials for Grey Clay Procedural Geometry
+ * Standard Materials for Luxury Studio White Porcelain & Precision Metallic Geometry
  */
 export function createClayMaterials() {
-  const greyBody = new THREE.Color("#8E9CAE");
-  const greyAccent = new THREE.Color("#475569");
-  const greyRing = new THREE.Color("#64748B");
+  return createLuxuryWhiteMaterials();
+}
 
+/**
+ * Luxury Studio White Porcelain & Precision Machined Metallic Materials
+ */
+export function createLuxuryWhiteMaterials() {
   const bodyMaterial = new THREE.MeshPhysicalMaterial({
-    color: greyBody,
-    roughness: 0.62,
-    metalness: 0.06,
-    clearcoat: 0.2,
-    sheen: 0.35,
-    sheenColor: new THREE.Color("#E2E8F0"),
+    color: new THREE.Color("#FFFFFF"),
+    roughness: 0.18,
+    metalness: 0.05,
+    clearcoat: 0.95,
+    clearcoatRoughness: 0.1,
+    sheen: 0.5,
+    sheenColor: new THREE.Color("#F1F5F9"),
+    ior: 1.52,
   });
 
   const accentMaterial = new THREE.MeshPhysicalMaterial({
-    color: greyAccent,
-    roughness: 0.55,
-    metalness: 0.1,
-    clearcoat: 0.25,
-    sheen: 0.3,
+    color: new THREE.Color("#CBD5E1"),
+    roughness: 0.22,
+    metalness: 0.65,
+    clearcoat: 0.75,
+    clearcoatRoughness: 0.12,
   });
 
   const ringMaterial = new THREE.MeshPhysicalMaterial({
-    color: greyRing,
-    roughness: 0.5,
-    metalness: 0.12,
-    clearcoat: 0.3,
+    color: new THREE.Color("#94A3B8"),
+    roughness: 0.15,
+    metalness: 0.8,
+    clearcoat: 0.85,
+    clearcoatRoughness: 0.1,
   });
 
   return { bodyMaterial, accentMaterial, ringMaterial };

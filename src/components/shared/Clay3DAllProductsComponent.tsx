@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import * as THREE from "three";
-import { useClayModel, createClayMaterials, StaticClayView, BuildSceneFn } from "./clay3d-engine";
+import { useClayModel, createLuxuryWhiteMaterials, StaticClayView, BuildSceneFn } from "./clay3d-engine";
 
 interface Clay3DAllProductsComponentProps {
   isHovered?: boolean;
@@ -24,7 +24,7 @@ export function Clay3DAllProductsComponent({
 }: Clay3DAllProductsComponentProps) {
   const buildScene: BuildSceneFn = useMemo(() => {
     return (scene, blueLineMaterial) => {
-      const { bodyMaterial, accentMaterial, ringMaterial } = createClayMaterials();
+      const { bodyMaterial, accentMaterial, ringMaterial } = createLuxuryWhiteMaterials();
 
       const modelGroup = new THREE.Group();
       // Straight, aligned, centered upright pose
@@ -136,7 +136,7 @@ export function Clay3DAllProductsComponent({
     };
   }, []);
 
-  const { base, hover } = useClayModel("all-products-cluster", buildScene, size);
+  const { base, hover } = useClayModel("all-products-cluster-white-luxury", buildScene, size);
 
   return (
     <StaticClayView

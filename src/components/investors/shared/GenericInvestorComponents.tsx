@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { 
@@ -21,10 +21,14 @@ import {
   RotateCcw,
   FileSpreadsheet,
   Video,
-  Play
+  Play,
+  ArrowLeft,
+  AlertCircle
 } from "lucide-react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { DrhpDisclaimerModal } from "./DrhpDisclaimerModal";
 
 /* =========================================================================
    1. CINEMATIC HERO COMPONENT (PREMIUM HERO ANIMATIONS)
@@ -403,6 +407,15 @@ interface ModalItem {
   type?: string;
 }
 
+function getYouTubeEmbedUrl(url: string): string | null {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11
+    ? `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`
+    : null;
+}
+
 function GenericDocumentModal({
   item,
   isOpen,
@@ -412,118 +425,194 @@ function GenericDocumentModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen || !item) return null;
 
   const displayDate = item.period || item.date || "";
   const displayTitle = item.particulars || item.title || "Statutory Document";
   const downloadLink = item.downloadUrl || item.link || "/sample-report.pdf";
+  const youtubeEmbedUrl = getYouTubeEmbedUrl(downloadLink);
+  const isYouTube = !!youtubeEmbedUrl;
+  const isVideo = isYouTube || downloadLink.toLowerCase().includes(".mp4") || downloadLink.toLowerCase().includes(".webm");
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-8">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-[#0D2440]/80 dark:bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
-        onClick={onClose}
-      />
-      
-      {/* Modal Dialog */}
-      <div className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl md:rounded-3xl flex flex-col md:flex-row overflow-y-auto md:overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 max-h-[92vh] sm:max-h-[85vh]">
-        
-        {/* Left Sidebar Metadata */}
-        <div className="w-full md:w-80 p-4 sm:p-6 md:p-8 bg-[#F8FAFC] dark:bg-black/30 border-b md:border-b-0 md:border-r border-[#7BA4D0]/20 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4 sm:mb-6">
-              <div className="flex items-center gap-2">
-                <div className="h-0.5 w-6 bg-[#2E5E99]" />
-                <span className="text-[#2E5E99] font-heading font-black uppercase tracking-widest text-[9px] sm:text-[10px]">
-                  Investor Filing
-                </span>
-              </div>
-              <button 
-                onClick={onClose}
-                className="p-1.5 hover:bg-[#7BA4D0]/10 rounded-full transition-colors text-[#0D2440] dark:text-white"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+    <div className="fixed inset-0 z-[100] w-screen h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#071321] animate-in fade-in duration-200 overflow-hidden">
+      {/* Top Header Bar */}
+      <header className="h-16 sm:h-18 px-3 sm:px-6 md:px-8 border-b border-[#7BA4D0]/20 bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md flex items-center justify-between z-20 shrink-0 gap-3">
+        {/* Left Section: Back button + Title & Status */}
+        <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
+          <button
+            onClick={onClose}
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-xl bg-[#E7F0FA] dark:bg-[#071321] hover:bg-[#2E5E99] hover:text-white dark:hover:bg-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shrink-0 shadow-xs"
+            title="Back to Filings (Esc)"
+            aria-label="Back to Filings"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">Back</span>
+          </button>
 
-            <div className="mb-4 sm:mb-6">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-heading font-black text-[#0D2440] dark:text-white mb-1.5 sm:mb-2 block tracking-tight">
-                {displayDate}
-              </span>
-              <h2 className="text-sm sm:text-base font-heading font-semibold text-[#0D2440]/85 dark:text-white/85 leading-snug">
-                {displayTitle}
-              </h2>
-            </div>
+          <div className="h-6 w-px bg-[#7BA4D0]/25 hidden sm:block shrink-0" />
 
-            <div className="space-y-3 sm:space-y-4">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                <p className="text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440] dark:text-white uppercase tracking-wider">
-                  Audited & Verified
-                </p>
-              </div>
-              <p className="text-xs text-[#0D2440]/60 dark:text-white/60 leading-relaxed">
-                Official statutory filing prepared in accordance with applicable regulatory disclosure standards.
-              </p>
-            </div>
-          </div>
-
-          <div className="pt-6 sm:pt-8 space-y-2.5 sm:space-y-3">
-            <a 
-              href={downloadLink}
-              download
-              className="w-full bg-[#0D2440] hover:bg-[#2E5E99] text-white px-5 py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-md"
-            >
-              <Download className="w-4 h-4" />
-              {downloadLink.toLowerCase().includes(".mp4") ? "Download Video (MP4)" : "Download Official PDF"}
-            </a>
-            <a 
-              href={downloadLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white px-5 py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-xs"
-            >
-              <ExternalLink className="w-4 h-4 text-[#2E5E99]" />
-              {downloadLink.toLowerCase().includes(".mp4") ? "Watch in New Tab" : "Open in Full Viewer"}
-            </a>
-            <button 
-              onClick={() => {
-                if (navigator.clipboard) {
-                  navigator.clipboard.writeText(window.location.href);
-                }
-              }}
-              className="w-full bg-transparent border border-slate-200 dark:border-white/10 hover:border-[#7BA4D0]/50 text-slate-600 dark:text-slate-300 px-5 py-2.5 rounded-xl font-medium text-xs transition-all flex items-center justify-center gap-2"
-            >
-              <Share2 className="w-3.5 h-3.5" />
-              Share Link
-            </button>
-          </div>
-        </div>
-
-        {/* Right Preview Panel */}
-        <div className="flex-grow bg-[#EBF3FC]/40 dark:bg-black/50 flex flex-col relative overflow-hidden min-h-[460px] md:min-h-[580px] w-full">
-          {downloadLink.toLowerCase().includes(".mp4") ? (
-            <video
-              controls
-              autoPlay
-              playsInline
-              className="w-full h-full min-h-[460px] md:min-h-[580px] bg-black object-contain flex-grow"
-              src={downloadLink}
-            >
-              Your browser does not support video playback.
-            </video>
-          ) : (
-            <iframe
-              src={`${downloadLink}#view=FitH`}
-              className="w-full h-full min-h-[460px] md:min-h-[580px] border-0 flex-grow"
-              title={displayTitle}
-            />
+          {displayDate && (
+            <span className="px-2.5 py-1 rounded-lg bg-[#E7F0FA] dark:bg-[#071321] text-[#2E5E99] dark:text-[#7BA4D0] font-heading font-black text-xs shrink-0 border border-[#7BA4D0]/20">
+              {displayDate}
+            </span>
           )}
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99]" />
+
+          <div className="min-w-0">
+            <h1 className="text-xs sm:text-sm md:text-base font-heading font-black text-[#0D2440] dark:text-white truncate" title={displayTitle}>
+              {displayTitle}
+            </h1>
+            <div className="flex items-center gap-2 mt-0.5">
+              <span className="text-[10px] font-heading uppercase tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] font-bold">
+                {isVideo ? "Official Audio-Visual Filing" : "Statutory PDF Filing"}
+              </span>
+              <span className="text-[#7BA4D0]/40 text-xs hidden md:inline">•</span>
+              <span className="hidden md:inline-flex items-center gap-1 text-[10px] font-heading font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                <ShieldCheck className="w-3 h-3 text-emerald-500" />
+                Audited & Verified
+              </span>
+            </div>
+          </div>
         </div>
 
+        {/* Right Section: Action Controls */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          <a
+            href={downloadLink}
+            download
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl bg-[#0D2440] dark:bg-[#2E5E99] hover:bg-[#2E5E99] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] text-white transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0"
+            title={isVideo ? "Download Video" : "Download PDF"}
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span className="hidden md:inline">
+              {isVideo ? "Download Video" : "Download PDF"}
+            </span>
+          </a>
+
+          <a
+            href={downloadLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-xl bg-white dark:bg-[#0D2440] hover:border-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0"
+            title="Open in external viewer"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+            <span className="hidden lg:inline">Open in Tab</span>
+          </a>
+
+          <button
+            onClick={() => {
+              if (typeof window !== "undefined" && navigator.clipboard) {
+                const fullUrl = downloadLink.startsWith("http") 
+                  ? downloadLink 
+                  : `${window.location.origin}${downloadLink}`;
+                navigator.clipboard.writeText(fullUrl);
+                toast.success("Document link copied to clipboard!");
+              }
+            }}
+            className="p-2 sm:px-3 sm:py-2 rounded-xl bg-white dark:bg-[#0D2440] hover:border-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0 inline-flex items-center gap-1.5"
+            title="Copy document link"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            <span className="hidden xl:inline">Share</span>
+          </button>
+
+          <button
+            onClick={onClose}
+            className="p-2 rounded-xl text-[#0D2440]/70 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-[#E7F0FA] dark:hover:bg-white/10 transition-colors shrink-0"
+            aria-label="Close Viewer"
+            title="Close (Esc)"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+      </header>
+
+      {/* Main Fullpage Document Canvas */}
+      <div className="flex-1 w-full h-[calc(100vh-64px)] relative bg-[#EBF3FC]/30 dark:bg-black/90 flex flex-col overflow-hidden">
+        {isYouTube ? (
+          <div className="w-full h-full flex items-center justify-center bg-black p-2 sm:p-6 md:p-8">
+            <div className="w-full h-full max-w-6xl max-h-[85vh] aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <iframe
+                src={youtubeEmbedUrl!}
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                title={displayTitle}
+              />
+            </div>
+          </div>
+        ) : isVideo ? (
+          <div className="w-full h-full flex items-center justify-center bg-black p-4 sm:p-8">
+            {videoError ? (
+              <div className="text-center p-8 max-w-lg bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md shadow-2xl animate-in zoom-in-95 duration-200">
+                <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mx-auto mb-4">
+                  <AlertCircle className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-heading font-black text-white mb-2">
+                  Video Stream Unavailable on Host
+                </h3>
+                <p className="text-xs text-white/70 leading-relaxed mb-6 font-normal">
+                  The video file (<code className="text-amber-300 font-mono text-[11px] bg-black/40 px-1.5 py-0.5 rounded">{downloadLink}</code>) was not found on the web server (HTTP 404). Files over 1 GB are excluded from the Git repository due to GitHub/Vercel size limits.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={downloadLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2.5 rounded-xl bg-[#2E5E99] hover:bg-[#7BA4D0] text-white text-xs font-heading font-bold uppercase tracking-wider transition-all"
+                  >
+                    Open Direct Link
+                  </a>
+                  <button
+                    onClick={() => setVideoError(false)}
+                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-heading font-bold uppercase tracking-wider transition-all"
+                  >
+                    Retry Playback
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <video
+                controls
+                autoPlay
+                playsInline
+                onError={() => setVideoError(true)}
+                className="w-full h-full max-h-full max-w-6xl object-contain rounded-xl shadow-2xl"
+                src={downloadLink}
+              >
+                Your browser does not support video playback.
+              </video>
+            )}
+          </div>
+        ) : (
+          <iframe
+            src={`${downloadLink}#view=FitH`}
+            className="w-full h-full border-0 flex-grow"
+            title={displayTitle}
+          />
+        )}
+        <div className="h-1 w-full bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99] shrink-0" />
       </div>
     </div>
   );
@@ -563,10 +652,38 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
 
   const [activeModalItem, setActiveModalItem] = useState<TableItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pendingDisclaimerItem, setPendingDisclaimerItem] = useState<TableItem | null>(null);
+  const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+
+  const isDrhpAudioVisualItem = (item: TableItem | null) => {
+    if (!item?.particulars) return false;
+    const lower = item.particulars.toLowerCase();
+    return lower.includes("drhp audio-visual") || lower.includes("drhp audio visual");
+  };
 
   const handleOpenModal = (item: TableItem) => {
+    if (isDrhpAudioVisualItem(item)) {
+      setPendingDisclaimerItem(item);
+      setIsDisclaimerOpen(true);
+      return;
+    }
     setActiveModalItem(item);
     setIsModalOpen(true);
+  };
+
+  const handleDisclaimerConfirm = () => {
+    if (pendingDisclaimerItem) {
+      setActiveModalItem(pendingDisclaimerItem);
+      setIsModalOpen(true);
+    }
+    setIsDisclaimerOpen(false);
+    setPendingDisclaimerItem(null);
+  };
+
+  const handleDisclaimerCancel = () => {
+    setIsDisclaimerOpen(false);
+    setPendingDisclaimerItem(null);
+    toast.error("Access Restricted: Statutory confirmation is required to view DRHP Audio-Visual materials.");
   };
 
   const handleCloseModal = () => {
@@ -931,6 +1048,13 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
 
       </div>
 
+      <DrhpDisclaimerModal
+        isOpen={isDisclaimerOpen}
+        onConfirm={handleDisclaimerConfirm}
+        onCancel={handleDisclaimerCancel}
+        targetTitle={pendingDisclaimerItem?.particulars}
+      />
+
       <GenericDocumentModal
         item={activeModalItem}
         isOpen={isModalOpen}
@@ -988,10 +1112,38 @@ function GenericInvestorListingInner({
 
   const [activeModalItem, setActiveModalItem] = useState<ListingItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pendingDisclaimerItem, setPendingDisclaimerItem] = useState<ListingItem | null>(null);
+  const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
+
+  const isDrhpAudioVisualItem = (item: ListingItem | null) => {
+    if (!item?.title) return false;
+    const lower = item.title.toLowerCase();
+    return lower.includes("drhp audio-visual") || lower.includes("drhp audio visual");
+  };
 
   const handleOpenModal = (item: ListingItem) => {
+    if (isDrhpAudioVisualItem(item)) {
+      setPendingDisclaimerItem(item);
+      setIsDisclaimerOpen(true);
+      return;
+    }
     setActiveModalItem(item);
     setIsModalOpen(true);
+  };
+
+  const handleDisclaimerConfirm = () => {
+    if (pendingDisclaimerItem) {
+      setActiveModalItem(pendingDisclaimerItem);
+      setIsModalOpen(true);
+    }
+    setIsDisclaimerOpen(false);
+    setPendingDisclaimerItem(null);
+  };
+
+  const handleDisclaimerCancel = () => {
+    setIsDisclaimerOpen(false);
+    setPendingDisclaimerItem(null);
+    toast.error("Access Restricted: Statutory confirmation is required to view DRHP Audio-Visual materials.");
   };
 
   const handleCloseModal = () => {
@@ -1348,6 +1500,13 @@ function GenericInvestorListingInner({
         )}
 
       </div>
+
+      <DrhpDisclaimerModal
+        isOpen={isDisclaimerOpen}
+        onConfirm={handleDisclaimerConfirm}
+        onCancel={handleDisclaimerCancel}
+        targetTitle={pendingDisclaimerItem?.title}
+      />
 
       <GenericDocumentModal
         item={activeModalItem}

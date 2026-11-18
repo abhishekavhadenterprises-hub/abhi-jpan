@@ -38,7 +38,7 @@ const data = [
     link: "/videos/drhp-audio-visual-english.mp4",
     category: "Audio-Visual Presentation",
     status: "Official Media",
-    fileSize: "1.13 GB"
+    fileSize: "36.0 MB"
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const data = [
     link: "/videos/drhp-audio-visual-hindi.mp4",
     category: "Audio-Visual Presentation",
     status: "Official Media",
-    fileSize: "1.68 GB"
+    fileSize: "37.1 MB"
   }
 ];
 

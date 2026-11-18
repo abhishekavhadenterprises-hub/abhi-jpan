@@ -69,10 +69,11 @@ export function Clay3DMediaGalleryComponent({
 
       const glassGeo = new THREE.SphereGeometry(0.55, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
       const glassMat = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#475569"),
-        roughness: 0.15,
-        metalness: 0.1,
-        clearcoat: 0.9,
+        color: new THREE.Color("#CBD5E1"),
+        roughness: 0.08,
+        metalness: 0.35,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05,
       });
       const glassMesh = new THREE.Mesh(glassGeo, glassMat);
       glassMesh.rotation.x = Math.PI / 2;

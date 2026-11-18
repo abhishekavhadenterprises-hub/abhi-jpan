@@ -29,15 +29,8 @@ export function Clay3DMediaEventsComponent({
     return (scene, blueLineMaterial) => {
       const { bodyMaterial, accentMaterial, ringMaterial } = createClayMaterials();
 
-      // Custom pristine stage white clay
-      const stageWhiteMaterial = new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#CBD5E1"),
-        roughness: 0.58,
-        metalness: 0.05,
-        clearcoat: 0.25,
-        sheen: 0.35,
-        sheenColor: new THREE.Color("#F1F5F9"),
-      });
+      // Luxury white porcelain stage floor
+      const stageWhiteMaterial = bodyMaterial.clone();
 
       const modelGroup = new THREE.Group();
       // Straight, aligned, centered pose

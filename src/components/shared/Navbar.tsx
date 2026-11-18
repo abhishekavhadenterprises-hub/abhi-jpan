@@ -313,6 +313,7 @@ export function Navbar() {
                       <Link href="/events" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Events & Exhibitions</Link>
                       <Link href="/blog" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Industrial Blog</Link>
                       <Link href="/gallery" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Media Gallery</Link>
+                      <Link href="/certifications" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Certifications</Link>
                     </div>
                   )}
                 </>

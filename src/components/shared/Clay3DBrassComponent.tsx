@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import * as THREE from "three";
-import { useClayModel, createClayMaterials, StaticClayView, BuildSceneFn } from "./clay3d-engine";
+import { useClayModel, createLuxuryWhiteMaterials, StaticClayView, BuildSceneFn } from "./clay3d-engine";
 
 interface Clay3DBrassComponentProps {
   isHovered?: boolean;
@@ -24,7 +24,7 @@ export function Clay3DBrassComponent({
 }: Clay3DBrassComponentProps) {
   const buildScene: BuildSceneFn = useMemo(() => {
     return (scene, blueLineMaterial) => {
-      const { bodyMaterial, accentMaterial, ringMaterial } = createClayMaterials();
+      const { bodyMaterial, accentMaterial, ringMaterial } = createLuxuryWhiteMaterials();
 
       const modelGroup = new THREE.Group();
       // Straight, aligned, centered upright pose
@@ -155,7 +155,7 @@ export function Clay3DBrassComponent({
     };
   }, []);
 
-  const { base, hover } = useClayModel("brass-manifold", buildScene, size);
+  const { base, hover } = useClayModel("brass-manifold-white-luxury", buildScene, size);
 
   return (
     <StaticClayView

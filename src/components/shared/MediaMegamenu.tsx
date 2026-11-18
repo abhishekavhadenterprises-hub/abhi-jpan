@@ -9,6 +9,7 @@ import {
   Icon3DMediaEvents,
   Icon3DMediaBlog,
   Icon3DMediaGallery,
+  Icon3DWaxSeal,
 } from "./Premium3DIcons";
 
 const mediaCards = [
@@ -35,6 +36,12 @@ const mediaCards = [
     title: "Media Gallery",
     href: "/gallery",
     icon: Icon3DMediaGallery,
+  },
+  {
+    id: "certifications",
+    title: "Certifications",
+    href: "/certifications",
+    icon: Icon3DWaxSeal,
   },
 ];
 
@@ -69,8 +76,8 @@ export function MediaMegamenu({
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="w-full rounded-[28px] sm:rounded-[32px] bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/10 shadow-[0_20px_60px_rgba(13,36,64,0.12)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.8)] p-6 sm:p-7 overflow-hidden transform-gpu"
           >
-            {/* 4 Prominent Premium 3D Media Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-stretch">
+            {/* Prominent Premium 3D Media Cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 items-stretch">
               {mediaCards.map((media) => {
                 const IconComponent = media.icon;
                 const isHovered = hoveredCardId === media.id;
@@ -83,24 +90,24 @@ export function MediaMegamenu({
                     onMouseEnter={() => setHoveredCardId(media.id)}
                     onMouseLeave={() => setHoveredCardId(null)}
                     className={cn(
-                      "group/card relative p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[160px]",
+                      "group/card relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[145px]",
                       isHovered
-                        ? "bg-white dark:bg-[#0D2440] border-[#2563EB]/50 dark:border-[#3B82F6]/50 shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
+                        ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
                         : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                     )}
                   >
                     {/* 3D Component Icon */}
-                    <div className="flex-1 flex items-center justify-center my-1 w-full">
+                    <div className="mb-3 flex items-center justify-center">
                       <IconComponent isHovered={isHovered} />
                     </div>
 
                     {/* Clean Bold Title */}
                     <h3
                       className={cn(
-                        "text-xs sm:text-[13px] font-bold tracking-tight transition-colors text-center leading-snug mt-2",
+                        "text-xs sm:text-[13px] font-bold tracking-tight transition-colors text-center leading-snug",
                         isHovered
-                          ? "text-[#1D4ED8] dark:text-[#93C5FD]"
-                          : "text-slate-700 dark:text-slate-300"
+                          ? "text-[#0D2440] dark:text-white"
+                          : "text-slate-700 dark:text-slate-200"
                       )}
                     >
                       {media.title}
