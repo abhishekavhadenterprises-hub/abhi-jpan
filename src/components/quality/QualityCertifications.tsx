@@ -5,6 +5,7 @@ import { Shield, FileCheck, Globe, Award, CheckCircle2, Clock } from "lucide-rea
 import { motion, useInView, useMotionValue, useMotionTemplate, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const certifications = [
   {
@@ -39,6 +40,7 @@ const certifications = [
 
 function CertificationCard({ cert, itemVariants }: { cert: typeof certifications[0]; itemVariants: Variants }) {
   const boundingRef = useRef<HTMLDivElement>(null);
+  const { hoverDuration, hoverClass } = useLaptopPacing();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -59,9 +61,9 @@ function CertificationCard({ cert, itemVariants }: { cert: typeof certifications
       onMouseMove={handleMouseMove}
       whileHover={{ 
         y: -6, 
-        transition: { duration: 0.25, ease: "easeOut" } 
+        transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
       }}
-      className="group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default h-full"
+      className={cn("group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default h-full", hoverClass("duration-300"))}
     >
       {/* Dynamic Spotlight Background (From OurStory) */}
       <motion.div
@@ -118,6 +120,7 @@ export function QualityCertifications() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay } = useLaptopPacing();
 
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
@@ -135,7 +138,7 @@ export function QualityCertifications() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: staggerDelay(0.15),
         delayChildren: 0.1,
       },
     },
@@ -155,7 +158,7 @@ export function QualityCertifications() {
       scale: 1,
       filter: "blur(0px)",
       transition: { 
-        duration: 0.85, 
+        duration: revealDuration(0.85), 
         ease: [0.16, 1, 0.3, 1] 
       },
     },

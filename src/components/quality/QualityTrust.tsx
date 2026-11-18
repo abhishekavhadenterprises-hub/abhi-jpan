@@ -5,6 +5,7 @@ import { motion, useInView, useScroll, useTransform, useSpring } from "framer-mo
 import { ShieldCheck, Heart, Zap, History, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const pillars = [
   {
@@ -38,6 +39,7 @@ export function QualityTrust() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   // Scroll Horizon Wave & Parallax Depth Hooks
   const { scrollYProgress } = useScroll({
@@ -110,12 +112,12 @@ export function QualityTrust() {
                 key={idx}
                 initial={{ opacity: 0, scale: 0.94, y: 20 }}
                 animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.94, y: 20 }}
-                transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: revealDuration(0.7), delay: idx * staggerDelay(0.1), ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ 
                   y: -6, 
-                  transition: { duration: 0.25, ease: "easeOut" } 
+                  transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                 }}
-                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 transition-all duration-300 overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className={cn("group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 transition-all overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default", hoverClass("duration-300"))}
               >
                 {/* Icon Box */}
                 <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] relative z-10 shrink-0 shadow-xs">

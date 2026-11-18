@@ -12,14 +12,16 @@ import {
   ShieldCheck, 
   ExternalLink 
 } from "lucide-react";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export function GrievanceSupport() {
+  const { revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.12, 
+        staggerChildren: staggerDelay(0.12), 
         delayChildren: 0.1 
       }
     }
@@ -30,7 +32,7 @@ export function GrievanceSupport() {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: revealDuration(0.6), ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
@@ -94,7 +96,7 @@ export function GrievanceSupport() {
             {/* Card 1: Ishan Yadav */}
             <motion.div 
               variants={cardVariants}
-              className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group"
+              className={`bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all ${hoverClass("duration-300")} hover:-translate-y-1 flex flex-col justify-between group`}
             >
               <div>
                 {/* Officer Profile Header */}
@@ -195,7 +197,7 @@ export function GrievanceSupport() {
             {/* Card 2: Navneet Bhardwaj */}
             <motion.div 
               variants={cardVariants}
-              className="bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group"
+              className={`bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all ${hoverClass("duration-300")} hover:-translate-y-1 flex flex-col justify-between group`}
             >
               <div>
                 {/* Officer Profile Header */}

@@ -6,6 +6,7 @@ import { Microscope, Zap, FileText, CheckCircle2 } from "lucide-react";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const facilities = [
   {
@@ -30,6 +31,7 @@ export function TestingFacilities() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   const handleMobileScroll = () => {
     if (!scrollRef.current) return;
@@ -47,7 +49,7 @@ export function TestingFacilities() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: staggerDelay(0.12),
         delayChildren: 0.1,
       },
     },
@@ -58,7 +60,7 @@ export function TestingFacilities() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: revealDuration(0.7), ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -113,12 +115,12 @@ export function TestingFacilities() {
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: revealDuration(0.7), delay: idx * staggerDelay(0.15), ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ 
                       y: -6, 
-                      transition: { duration: 0.25, ease: "easeOut" } 
+                      transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                     }}
-                    className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 w-full min-w-full md:min-w-0 rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/6 overflow-hidden shrink-0 snap-center cursor-default"
+                    className={cn("group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all w-full min-w-full md:min-w-0 rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/6 overflow-hidden shrink-0 snap-center cursor-default", hoverClass("duration-300"))}
                   >
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl shrink-0 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] transition-all duration-300 shadow-xs">
                       <f.icon className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />

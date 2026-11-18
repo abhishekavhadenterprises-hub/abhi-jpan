@@ -5,6 +5,7 @@ import { Search, Cog, Gauge, ClipboardCheck, Truck } from "lucide-react";
 import { motion, useInView, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const steps = [
   {
@@ -44,6 +45,7 @@ export function QualityProcess() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -84,7 +86,7 @@ export function QualityProcess() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.14,
+        staggerChildren: staggerDelay(0.14),
       },
     },
   };
@@ -94,7 +96,7 @@ export function QualityProcess() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -157,9 +159,9 @@ export function QualityProcess() {
                   variants={itemVariants}
                   whileHover={{ 
                     y: -6, 
-                    transition: { duration: 0.25, ease: "easeOut" } 
+                    transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                   }}
-                  className="group relative flex flex-col items-center text-center p-4 sm:p-5 md:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center transition-all duration-300 shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 cursor-default h-full"
+                  className={cn("group relative flex flex-col items-center text-center p-4 sm:p-5 md:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center transition-all shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/8 cursor-default h-full", hoverClass("duration-300"))}
                 >
                   {/* Journey Node with Scroll Threshold Activation */}
                   <div className="relative mb-3.5 sm:mb-5">

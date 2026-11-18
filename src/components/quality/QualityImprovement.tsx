@@ -5,6 +5,7 @@ import { GraduationCap, Lightbulb, TrendingUp, Cpu, ArrowRight } from "lucide-re
 import { motion, useInView, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const initiatives = [
   {
@@ -35,6 +36,7 @@ const initiatives = [
 
 function ImprovementCard({ item, idx }: { item: typeof initiatives[0]; idx: number }) {
   const boundingRef = useRef<HTMLDivElement>(null);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -54,13 +56,13 @@ function ImprovementCard({ item, idx }: { item: typeof initiatives[0]; idx: numb
       initial={{ opacity: 0, x: 25, y: 15 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: revealDuration(0.7), delay: idx * staggerDelay(0.12), ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
       whileHover={{ 
         y: -6, 
-        transition: { duration: 0.25, ease: "easeOut" } 
+        transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
       }}
-      className="group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default h-full"
+      className={cn("group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default h-full", hoverClass("duration-300"))}
     >
       {/* Dynamic Spotlight Background (From OurStory) */}
       <motion.div

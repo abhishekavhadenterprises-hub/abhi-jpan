@@ -43,6 +43,8 @@ const CALIBRATED_LAPTOP_ROUTES = [
   "/industry-report",
   "/material-creditors",
   "/initial-public-offer",
+  // Quality
+  "/quality",
 ];
 
 function isCalibratedLaptopRoute(pathname: string): boolean {

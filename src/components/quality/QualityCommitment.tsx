@@ -5,21 +5,21 @@ import { ShieldCheck, Target, Users, CheckCircle2 } from "lucide-react";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export function QualityCommitment() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: staggerDelay(0.12),
       },
     },
   };
@@ -29,7 +29,7 @@ export function QualityCommitment() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -75,7 +75,7 @@ export function QualityCommitment() {
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col"
           >
             <div className="mb-6 overflow-visible">
@@ -133,12 +133,12 @@ export function QualityCommitment() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: revealDuration(0.7), delay: idx * staggerDelay(0.15), ease: [0.16, 1, 0.3, 1] }}
                   whileHover={{ 
                     y: -6,
-                    transition: { duration: 0.25, ease: "easeOut" } 
+                    transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                   }}
-                  className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 md:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default"
+                  className={cn("group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 md:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default", hoverClass("duration-300"))}
                 >
                   <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
                     <feature.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />

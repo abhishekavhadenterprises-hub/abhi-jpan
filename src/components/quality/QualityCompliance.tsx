@@ -5,6 +5,7 @@ import { ShieldAlert, Leaf, CheckCircle, Scale, Sun } from "lucide-react";
 import { motion, useInView, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const standards = [
   {
@@ -35,6 +36,7 @@ export function QualityCompliance() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   // Sticky Counter-Parallax Hooks
   const { scrollYProgress } = useScroll({
@@ -53,7 +55,7 @@ export function QualityCompliance() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: staggerDelay(0.12),
         delayChildren: 0.15,
       },
     },
@@ -66,7 +68,7 @@ export function QualityCompliance() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: revealDuration(0.75), ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -134,10 +136,11 @@ export function QualityCompliance() {
                   variants={itemVariants}
                   whileHover={{ 
                     y: -6, 
-                    transition: { duration: 0.25, ease: "easeOut" } 
+                    transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                   }}
                   className={cn(
-                    "group relative p-5 sm:p-6 md:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all duration-300 overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
+                    "group relative p-5 sm:p-6 md:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
+                    hoverClass("duration-300"),
                     s.pointer && "border-[#2E5E99]/40 bg-gradient-to-b from-white/90 via-[#F8FAFC] to-[#EBF3FC]/80 dark:from-[#091A2E]/90 dark:to-[#0D2440]/80"
                   )}
                 >

@@ -5,6 +5,7 @@ import { Download, Eye, ShieldCheck, ArrowUpRight, Bookmark, FileSpreadsheet, Ro
 import { MaterialDetailModal } from "./MaterialDetailModal";
 import { motion } from "framer-motion";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const materialDocs = [
   {
@@ -72,6 +73,7 @@ function MaterialListingInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   const sort = searchParams.get("sort") || "desc";
   const query = (searchParams.get("q") || "").toLowerCase().trim();
@@ -289,8 +291,8 @@ function MaterialListingInner() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
+                    transition={{ delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.05) : idx * 0.05, duration: revealDuration(0.5), ease: [0.16, 1, 0.3, 1] }}
+                    className={`group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all ${hoverClass("duration-300")} hover:-translate-y-1 hover:shadow-xl shadow-xs`}
                   >
                     <div className="absolute top-5 right-6 text-4xl sm:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
                       0{item.id}
