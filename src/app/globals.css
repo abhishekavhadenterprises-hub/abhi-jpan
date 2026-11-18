@@ -403,3 +403,35 @@
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* =========================================================================
+   STRICTLY LAPTOP-ONLY GPU SCROLL OPTIMIZATIONS (1024px–1599px fine pointer)
+   Eliminates Retina laptop frame drops, repaint stutter & scroll jerking
+   Leaves Phone/Mobile and Large Desktop PC (>=1600px) 100% untouched
+   ========================================================================= */
+html.laptop-scroll-opt {
+  scroll-behavior: auto !important;
+}
+
+/* Cap extreme 40px-64px full-surface backdrop blurs to crisp GPU-friendly 8px-10px on laptop */
+html.laptop-scroll-opt .backdrop-blur-3xl,
+html.laptop-scroll-opt .backdrop-blur-2xl,
+html.laptop-scroll-opt .backdrop-blur-xl {
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Prevent full-page section wrappers from re-blurring fixed background layers on every scroll frame */
+html.laptop-scroll-opt main > div > div.backdrop-blur-md,
+html.laptop-scroll-opt main > div > div > div.backdrop-blur-md {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Cap giant 120px-130px ambient blur orbs to GPU-friendly 48px on laptop with layer promotion */
+html.laptop-scroll-opt .blur-\[130px\],
+html.laptop-scroll-opt .blur-\[120px\],
+html.laptop-scroll-opt .blur-3xl {
+  filter: blur(48px) !important;
+  transform: translateZ(0);
+}

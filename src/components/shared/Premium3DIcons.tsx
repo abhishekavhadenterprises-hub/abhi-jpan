@@ -31,7 +31,7 @@ import {
 interface IconProps {
   className?: string;
   isHovered?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
 }
 
 type ColorVariant = "blue" | "copper" | "brass" | "steel" | "emerald" | "purple";
@@ -41,7 +41,7 @@ interface SquircleBadgeProps {
   className?: string;
   isHovered?: boolean;
   variant?: ColorVariant;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
 }
 
 const variantStyles: Record<ColorVariant, { base: string; hovered: string; icon: string }> = {
@@ -98,6 +98,7 @@ export function SquircleIconBadge({
   const styles = variantStyles[variant];
 
   const sizeClasses = {
+    xs: "w-8 h-8 rounded-[10px]",
     sm: "w-10 h-10 rounded-[14px]",
     md: "w-12 h-12 sm:w-13 sm:h-13 rounded-[18px]",
     lg: "w-14 h-14 rounded-2xl",
@@ -137,7 +138,7 @@ import { Clay3DOtherInfoComponent } from "./Clay3DOtherInfoComponent";
 
 /** 1. Annual Reports 3D Claymorphic Component */
 export function Icon3DAnnualReport({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 48 : size === "sm" ? 75 : 95;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DAnnualReportsComponent isHovered={isHovered} size={pixelSize} />
@@ -147,7 +148,7 @@ export function Icon3DAnnualReport({ isHovered, size = "md" }: IconProps) {
 
 /** 2. Financial Information / Results 3D Claymorphic Component */
 export function Icon3DFinancialResults({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 48 : size === "sm" ? 75 : 95;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DFinancialInfoComponent isHovered={isHovered} size={pixelSize} />
@@ -157,7 +158,7 @@ export function Icon3DFinancialResults({ isHovered, size = "md" }: IconProps) {
 
 /** 3. Investor Grievance 3D Claymorphic Component */
 export function Icon3DGrievance({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 48 : size === "sm" ? 75 : 95;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DGrievanceComponent isHovered={isHovered} size={pixelSize} />
@@ -167,7 +168,7 @@ export function Icon3DGrievance({ isHovered, size = "md" }: IconProps) {
 
 /** 4. Corporate Governance 3D Claymorphic Component */
 export function Icon3DGovernance({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 48 : size === "sm" ? 75 : 95;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DGovernanceComponent isHovered={isHovered} size={pixelSize} />
@@ -177,7 +178,7 @@ export function Icon3DGovernance({ isHovered, size = "md" }: IconProps) {
 
 /** 5. Other Information / Contracts 3D Claymorphic Component */
 export function Icon3DOtherInfo({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 75 : 95;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 48 : size === "sm" ? 75 : 95;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DOtherInfoComponent isHovered={isHovered} size={pixelSize} />
@@ -202,7 +203,7 @@ import { Clay3DCreditScoreComponent } from "./Clay3DCreditScoreComponent";
 
 /** Document / Generic Statutory Filing 3D Clay Component */
 export function Icon3DDocument({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DDocumentComponent isHovered={isHovered} size={pixelSize} />
@@ -212,7 +213,7 @@ export function Icon3DDocument({ isHovered, size = "sm" }: IconProps) {
 
 /** Call Audio Recording 3D Clay Component */
 export function Icon3DAudio({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DAudioComponent isHovered={isHovered} size={pixelSize} />
@@ -222,7 +223,7 @@ export function Icon3DAudio({ isHovered, size = "sm" }: IconProps) {
 
 /** Presentation / Keynote 3D Clay Component */
 export function Icon3DPresentation({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DPresentationComponent isHovered={isHovered} size={pixelSize} />
@@ -232,7 +233,7 @@ export function Icon3DPresentation({ isHovered, size = "sm" }: IconProps) {
 
 /** Shareholding Donut Chart 3D Clay Component */
 export function Icon3DChart({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DChartComponent isHovered={isHovered} size={pixelSize} />
@@ -242,7 +243,7 @@ export function Icon3DChart({ isHovered, size = "sm" }: IconProps) {
 
 /** Statement of Deviations Scales 3D Clay Component */
 export function Icon3DScales({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DScalesComponent isHovered={isHovered} size={pixelSize} />
@@ -252,7 +253,7 @@ export function Icon3DScales({ isHovered, size = "sm" }: IconProps) {
 
 /** Board Meeting Calendar 3D Clay Component */
 export function Icon3DCalendar({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DCalendarComponent isHovered={isHovered} size={pixelSize} />
@@ -262,7 +263,7 @@ export function Icon3DCalendar({ isHovered, size = "sm" }: IconProps) {
 
 /** General Meeting Assembly 3D Clay Component */
 export function Icon3DAssembly({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DAssemblyComponent isHovered={isHovered} size={pixelSize} />
@@ -272,7 +273,7 @@ export function Icon3DAssembly({ isHovered, size = "sm" }: IconProps) {
 
 /** Secretarial Compliance Wax Seal 3D Clay Component */
 export function Icon3DWaxSeal({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DWaxSealComponent isHovered={isHovered} size={pixelSize} />
@@ -282,7 +283,7 @@ export function Icon3DWaxSeal({ isHovered, size = "sm" }: IconProps) {
 
 /** Newspaper Publications 3D Clay Component */
 export function Icon3DNewspaper({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DNewspaperComponent isHovered={isHovered} size={pixelSize} />
@@ -292,7 +293,7 @@ export function Icon3DNewspaper({ isHovered, size = "sm" }: IconProps) {
 
 /** Credit Rating Gauge 3D Clay Component */
 export function Icon3DCreditScore({ isHovered, size = "sm" }: IconProps) {
-  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : 75;
+  const pixelSize = size === "lg" ? 95 : size === "md" ? 85 : size === "xs" ? 48 : 75;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DCreditScoreComponent isHovered={isHovered} size={pixelSize} />
@@ -318,7 +319,7 @@ import { Clay3DAllProductsComponent } from "./Clay3DAllProductsComponent";
 
 /** All Products Catalog Claymorphic 3D Component */
 export function Icon3DAllProducts({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DAllProductsComponent isHovered={isHovered} size={pixelSize} />
@@ -328,7 +329,7 @@ export function Icon3DAllProducts({ isHovered, size = "md" }: IconProps) {
 
 /** Copper Components Claymorphic 3D Component */
 export function Icon3DCopper({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DCopperComponent isHovered={isHovered} size={pixelSize} />
@@ -338,7 +339,7 @@ export function Icon3DCopper({ isHovered, size = "md" }: IconProps) {
 
 /** Brass Components Claymorphic 3D Component */
 export function Icon3DBrass({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DBrassComponent isHovered={isHovered} size={pixelSize} />
@@ -348,7 +349,7 @@ export function Icon3DBrass({ isHovered, size = "md" }: IconProps) {
 
 /** Steel Components Claymorphic 3D Component */
 export function Icon3DSteel({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DSteelComponent isHovered={isHovered} size={pixelSize} />
@@ -367,7 +368,7 @@ import { Clay3DMediaGalleryComponent } from "./Clay3DMediaGalleryComponent";
 
 /** Press Releases 3D Claymorphic Component */
 export function Icon3DMediaPress({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DMediaPressComponent isHovered={isHovered} size={pixelSize} />
@@ -377,7 +378,7 @@ export function Icon3DMediaPress({ isHovered, size = "md" }: IconProps) {
 
 /** Events & Exhibitions 3D Claymorphic Component */
 export function Icon3DMediaEvents({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DMediaEventsComponent isHovered={isHovered} size={pixelSize} />
@@ -387,7 +388,7 @@ export function Icon3DMediaEvents({ isHovered, size = "md" }: IconProps) {
 
 /** Industrial Blog 3D Claymorphic Component */
 export function Icon3DMediaBlog({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DMediaBlogComponent isHovered={isHovered} size={pixelSize} />
@@ -397,7 +398,7 @@ export function Icon3DMediaBlog({ isHovered, size = "md" }: IconProps) {
 
 /** Media Gallery 3D Claymorphic Component */
 export function Icon3DMediaGallery({ isHovered, size = "md" }: IconProps) {
-  const pixelSize = size === "lg" ? 115 : size === "sm" ? 80 : 100;
+  const pixelSize = size === "lg" ? 115 : size === "xs" ? 54 : size === "sm" ? 80 : 100;
   return (
     <div className="flex items-center justify-center -my-1">
       <Clay3DMediaGalleryComponent isHovered={isHovered} size={pixelSize} />

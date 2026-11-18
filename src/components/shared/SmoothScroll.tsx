@@ -57,12 +57,47 @@ const CALIBRATED_LAPTOP_ROUTES = [
   "/careers",
   // Contact
   "/contact",
+  // Secondary / Footer Pages
+  "/industries",
+  "/customers",
+  "/presence",
+  "/privacy",
+  "/terms",
+  "/sitemap",
+  "/design-history",
 ];
 
 function isCalibratedLaptopRoute(pathname: string): boolean {
   return CALIBRATED_LAPTOP_ROUTES.some((route) =>
     route === "/" ? pathname === "/" : pathname === route || pathname.startsWith(`${route}/`)
   );
+}
+
+const DESKTOP_EASING = (t: number) => 1 - Math.pow(1 - t, 4);
+
+function applyLenisProfile(lenis: Lenis, useLaptopProfile: boolean) {
+  const opts = lenis.options as {
+    lerp?: number;
+    duration?: number;
+    easing?: (t: number) => number;
+  };
+
+  if (useLaptopProfile) {
+    // Pure frame-rate-independent exponential damping (lerp) on laptop:
+    // Eliminates sawtooth velocity resets caused by duration+easing on 60Hz/120Hz trackpads
+    opts.lerp = 0.1;
+    delete opts.duration;
+    delete opts.easing;
+  } else {
+    // Original Desktop PC / Mobile config (100% untouched)
+    delete opts.lerp;
+    opts.duration = 1.15;
+    opts.easing = DESKTOP_EASING;
+  }
+
+  if (typeof document !== "undefined") {
+    document.documentElement.classList.toggle("laptop-scroll-opt", useLaptopProfile);
+  }
 }
 
 export function SmoothScroll() {
@@ -72,11 +107,19 @@ export function SmoothScroll() {
 
   useEffect(() => {
     pathnameRef.current = pathname;
-    // Dynamically switch Lenis settle duration (1.0s on calibrated laptop pages, 1.15s everywhere else)
     if (lenisRef.current) {
       const useLaptopProfile =
         isCalibratedLaptopRoute(pathname) && isLaptopScreen();
-      lenisRef.current.options.duration = useLaptopProfile ? 1.0 : 1.15;
+      applyLenisProfile(lenisRef.current, useLaptopProfile);
+
+      // Recalculate scroll limits immediately on route transitions to prevent stale-height scroll glitches
+      const lenis = lenisRef.current;
+      const rafResize = requestAnimationFrame(() => lenis.resize());
+      const settledResize = setTimeout(() => lenis.resize(), 300);
+      return () => {
+        cancelAnimationFrame(rafResize);
+        clearTimeout(settledResize);
+      };
     }
   }, [pathname]);
 
@@ -84,10 +127,16 @@ export function SmoothScroll() {
     const initialLaptopProfile =
       isCalibratedLaptopRoute(pathnameRef.current) && isLaptopScreen();
 
-    // Ultra-smooth, cinematic scrolling with authentic physical drag & weighted deceleration
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.toggle("laptop-scroll-opt", initialLaptopProfile);
+    }
+
+    // Laptop uses pure exponential lerp (zero sawtooth trackpad jitter on 60Hz/120Hz displays)
+    // Desktop PC & Phone retain exact original quartic duration profile
     const lenis = new Lenis({
-      duration: initialLaptopProfile ? 1.0 : 1.15,
-      easing: (t: number) => 1 - Math.pow(1 - t, 4), // Quartic drag curve: natural viscous friction and silky settle
+      ...(initialLaptopProfile
+        ? { lerp: 0.1 }
+        : { duration: 1.15, easing: DESKTOP_EASING }),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -95,23 +144,19 @@ export function SmoothScroll() {
       touchMultiplier: 1.2, // Base multiplier for Phone/Touch (kept untouched)
       infinite: false,
       virtualScroll: (data) => {
-        // Apply moderate laptop-only damping ONLY on calibrated pages & laptop screens
+        // Apply smooth continuous laptop-only damping ONLY on calibrated pages & laptop screens
         if (
           data.event instanceof WheelEvent &&
           isCalibratedLaptopRoute(pathnameRef.current) &&
           isLaptopScreen()
         ) {
-          // Bring effective multiplier from 1.25 -> ~0.75 (moderate: not too fast, not too slow)
-          let scaled = data.deltaY * 0.6;
-
-          // Softly compress extreme MacBook/Windows trackpad inertia bursts (> 95px per tick)
-          // while keeping gentle & normal scrolling completely linear and natural
-          const abs = Math.abs(scaled);
-          if (abs > 95) {
-            scaled = Math.sign(scaled) * (95 + (abs - 95) * 0.35);
-          }
-
-          data.deltaY = scaled;
+          // Smooth C-infinity tanh compression:
+          // - Gentle/moderate scrolling stays linear (~0.75x effective pace, never sluggish)
+          // - Extreme MacBook/Windows trackpad inertia spikes taper smoothly with ZERO kink or jerk
+          const linear = data.deltaY * 0.62;
+          const maxStep = 115;
+          data.deltaY =
+            Math.sign(linear) * maxStep * Math.tanh(Math.abs(linear) / maxStep);
         }
         return true;
       },
@@ -122,7 +167,8 @@ export function SmoothScroll() {
     const handleResize = () => {
       const useLaptopProfile =
         isCalibratedLaptopRoute(pathnameRef.current) && isLaptopScreen();
-      lenis.options.duration = useLaptopProfile ? 1.0 : 1.15;
+      applyLenisProfile(lenis, useLaptopProfile);
+      lenis.resize();
     };
     window.addEventListener("resize", handleResize, { passive: true });
 
@@ -145,6 +191,9 @@ export function SmoothScroll() {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof document !== "undefined") {
+        document.documentElement.classList.remove("laptop-scroll-opt");
+      }
       if (typeof window !== "undefined") {
         delete (window as unknown as { __lenis?: Lenis }).__lenis;
       }

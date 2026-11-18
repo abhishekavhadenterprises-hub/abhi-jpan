@@ -10,6 +10,31 @@ import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { InvestorMegamenu } from "./InvestorMegamenu";
 import { ProductsMegamenu } from "./ProductsMegamenu";
 import { MediaMegamenu } from "./MediaMegamenu";
+import {
+  Icon3DAllProducts,
+  Icon3DCopper,
+  Icon3DBrass,
+  Icon3DSteel,
+  Icon3DAnnualReport,
+  Icon3DFinancialResults,
+  Icon3DGrievance,
+  Icon3DGovernance,
+  Icon3DOtherInfo,
+  Icon3DDocument,
+  Icon3DAudio,
+  Icon3DPresentation,
+  Icon3DChart,
+  Icon3DScales,
+  Icon3DCalendar,
+  Icon3DAssembly,
+  Icon3DWaxSeal,
+  Icon3DNewspaper,
+  Icon3DCreditScore,
+  Icon3DMediaPress,
+  Icon3DMediaEvents,
+  Icon3DMediaBlog,
+  Icon3DMediaGallery,
+} from "./Premium3DIcons";
 
 interface NavLinkItem {
   name: string;
@@ -64,62 +89,91 @@ const MEDIA_ROUTES = [
   "/newsletter",
 ];
 
+type MobileIconComponent = (props: { isHovered?: boolean; size?: "xs" | "sm" | "md" | "lg" }) => React.JSX.Element;
+
+interface MobileMenuLinkItem {
+  href: string;
+  label: string;
+  icon: MobileIconComponent;
+}
+
 interface MobileInvestorGroup {
   id: string;
   title: string;
   href?: string;
-  items?: { href: string; label: string }[];
+  icon: MobileIconComponent;
+  items?: MobileMenuLinkItem[];
 }
+
+const MOBILE_PRODUCTS_ITEMS: MobileMenuLinkItem[] = [
+  { href: "/products", label: "All Products", icon: Icon3DAllProducts },
+  { href: "/products?category=Copper%20Components", label: "Copper Components", icon: Icon3DCopper },
+  { href: "/products?category=Brass%20Components", label: "Brass Components", icon: Icon3DBrass },
+  { href: "/products?category=Steel%20Components", label: "Steel Components", icon: Icon3DSteel },
+];
+
+const MOBILE_MEDIA_ITEMS: MobileMenuLinkItem[] = [
+  { href: "/press-releases", label: "Press Releases", icon: Icon3DMediaPress },
+  { href: "/events", label: "Events & Exhibitions", icon: Icon3DMediaEvents },
+  { href: "/blog", label: "Industrial Blog", icon: Icon3DMediaBlog },
+  { href: "/gallery", label: "Media Gallery", icon: Icon3DMediaGallery },
+  { href: "/certifications", label: "Certifications", icon: Icon3DWaxSeal },
+];
 
 const MOBILE_INVESTOR_GROUPS: MobileInvestorGroup[] = [
   {
     id: "annual-reports",
     title: "Annual Reports",
+    icon: Icon3DAnnualReport,
     items: [
-      { href: "/annual-reports", label: "Annual Reports" },
-      { href: "/annual-return", label: "Annual Return" },
-      { href: "/board-meeting-notices", label: "Notice of Board Meeting" },
-      { href: "/general-meeting", label: "General Meeting Notices" },
-      { href: "/secretarial-compliance", label: "Secretarial Compliance" },
+      { href: "/annual-reports", label: "Annual Reports", icon: Icon3DAnnualReport },
+      { href: "/annual-return", label: "Annual Return", icon: Icon3DDocument },
+      { href: "/board-meeting-notices", label: "Notice of Board Meeting", icon: Icon3DCalendar },
+      { href: "/general-meeting", label: "General Meeting Notices", icon: Icon3DAssembly },
+      { href: "/secretarial-compliance", label: "Secretarial Compliance", icon: Icon3DWaxSeal },
     ],
   },
   {
     id: "financial-info",
     title: "Financial Information",
+    icon: Icon3DFinancialResults,
     items: [
-      { href: "/financial-results", label: "Financial Results" },
-      { href: "/investor-meet-intimation", label: "Investor Meet Intimation" },
-      { href: "/investor-presentation", label: "Investor Presentation" },
-      { href: "/call-audio-recordings", label: "Call Audio Recordings" },
-      { href: "/call-transcripts", label: "Call Transcripts" },
-      { href: "/newspaper-publication", label: "Newspaper Publications" },
-      { href: "/shareholding-pattern", label: "Shareholding Pattern" },
-      { href: "/unclaimed-unpaid", label: "Unclaimed & Unpaid" },
-      { href: "/statement-of-deviations", label: "Statement of Deviations" },
+      { href: "/financial-results", label: "Financial Results", icon: Icon3DFinancialResults },
+      { href: "/investor-meet-intimation", label: "Investor Meet Intimation", icon: Icon3DPresentation },
+      { href: "/investor-presentation", label: "Investor Presentation", icon: Icon3DPresentation },
+      { href: "/call-audio-recordings", label: "Call Audio Recordings", icon: Icon3DAudio },
+      { href: "/call-transcripts", label: "Call Transcripts", icon: Icon3DDocument },
+      { href: "/newspaper-publication", label: "Newspaper Publications", icon: Icon3DNewspaper },
+      { href: "/shareholding-pattern", label: "Shareholding Pattern", icon: Icon3DChart },
+      { href: "/unclaimed-unpaid", label: "Unclaimed & Unpaid", icon: Icon3DOtherInfo },
+      { href: "/statement-of-deviations", label: "Statement of Deviations", icon: Icon3DScales },
     ],
   },
   {
     id: "investor-grievance",
     title: "Investor Grievance",
     href: "/investor-grievance",
+    icon: Icon3DGrievance,
   },
   {
     id: "corporate-governance",
     title: "Corporate Governance",
+    icon: Icon3DGovernance,
     items: [
-      { href: "/policies", label: "Corporate Policies" },
-      { href: "/sebi-disclosures", label: "SEBI LODR Disclosures" },
+      { href: "/policies", label: "Corporate Policies", icon: Icon3DGovernance },
+      { href: "/sebi-disclosures", label: "SEBI LODR Disclosures", icon: Icon3DDocument },
     ],
   },
   {
     id: "other-information",
     title: "Other Information",
+    icon: Icon3DOtherInfo,
     items: [
-      { href: "/material-documents-contracts", label: "Material Contracts" },
-      { href: "/credit-rating", label: "Credit Rating" },
-      { href: "/industry-report", label: "Industry Report" },
-      { href: "/material-creditors", label: "Material Creditors" },
-      { href: "/initial-public-offer", label: "Initial Public Offer" },
+      { href: "/material-documents-contracts", label: "Material Contracts", icon: Icon3DOtherInfo },
+      { href: "/credit-rating", label: "Credit Rating", icon: Icon3DCreditScore },
+      { href: "/industry-report", label: "Industry Report", icon: Icon3DNewspaper },
+      { href: "/material-creditors", label: "Material Creditors", icon: Icon3DScales },
+      { href: "/initial-public-offer", label: "Initial Public Offer", icon: Icon3DPresentation },
     ],
   },
 ];
@@ -496,11 +550,35 @@ export function Navbar() {
                         <ChevronDown className={cn("w-4 h-4 transition-transform shrink-0", mobileDropdown === "Products" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
                       </button>
                       {mobileDropdown === "Products" && (
-                        <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                          <Link href="/products" onClick={closeMobileMenu} className={cn("block py-2 px-2.5 rounded-lg transition-colors", isRouteMatch("/products") ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold" : "hover:text-[#2563EB]")}>All Products</Link>
-                          <Link href="/products?category=Copper%20Components" onClick={closeMobileMenu} className="block py-2 px-2.5 rounded-lg hover:text-[#2563EB]">Copper Components</Link>
-                          <Link href="/products?category=Brass%20Components" onClick={closeMobileMenu} className="block py-2 px-2.5 rounded-lg hover:text-[#2563EB]">Brass Components</Link>
-                          <Link href="/products?category=Steel%20Components" onClick={closeMobileMenu} className="block py-2 px-2.5 rounded-lg hover:text-[#2563EB]">Steel Components</Link>
+                        <div className="p-2.5 bg-slate-50/90 dark:bg-white/[0.04] rounded-2xl my-1.5 border border-slate-200/70 dark:border-white/10">
+                          <div className="grid grid-cols-2 gap-2">
+                            {MOBILE_PRODUCTS_ITEMS.map((item) => {
+                              const ItemIcon = item.icon;
+                              const isItemActive =
+                                item.href === "/products"
+                                  ? pathname === "/products"
+                                  : false;
+
+                              return (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={closeMobileMenu}
+                                  className={cn(
+                                    "flex flex-col items-center justify-center text-center gap-1.5 p-2.5 rounded-xl border transition-all",
+                                    isItemActive
+                                      ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                      : "bg-white dark:bg-[#0D2440]/40 border-slate-200/80 dark:border-white/10 text-[#0D2440] dark:text-white/90 hover:border-[#2563EB]/40"
+                                  )}
+                                >
+                                  <ItemIcon isHovered={isItemActive} size="xs" />
+                                  <span className="text-[11px] font-semibold leading-tight">
+                                    {item.label}
+                                  </span>
+                                </Link>
+                              );
+                            })}
+                          </div>
                         </div>
                       )}
                     </>
@@ -522,8 +600,9 @@ export function Navbar() {
                         <ChevronDown className={cn("w-4 h-4 transition-transform shrink-0", mobileDropdown === "Investor Relation" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
                       </button>
                       {mobileDropdown === "Investor Relation" && (
-                        <div className="pl-2.5 pr-2 py-2 space-y-1.5 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                        <div className="p-2.5 space-y-2 bg-slate-50/90 dark:bg-white/[0.04] rounded-2xl my-1.5 border border-slate-200/70 dark:border-white/10 text-xs">
                           {MOBILE_INVESTOR_GROUPS.map((group) => {
+                            const GroupIcon = group.icon;
                             const isGroupActive = group.href
                               ? isRouteMatch(group.href)
                               : Boolean(group.items?.some((sub) => isRouteMatch(sub.href)));
@@ -536,13 +615,16 @@ export function Navbar() {
                                   href={group.href}
                                   onClick={closeMobileMenu}
                                   className={cn(
-                                    "block py-2 px-2.5 rounded-lg font-semibold transition-colors",
+                                    "flex items-center gap-3 p-2 rounded-xl border font-semibold transition-all",
                                     isGroupActive
-                                      ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
-                                      : "text-[#0D2440] dark:text-white/90 hover:text-[#2563EB]"
+                                      ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                      : "bg-white dark:bg-[#0D2440]/40 border-slate-200/80 dark:border-white/10 text-[#0D2440] dark:text-white/90 hover:border-[#2563EB]/40"
                                   )}
                                 >
-                                  {group.title}
+                                  <div className="shrink-0">
+                                    <GroupIcon isHovered={isGroupActive} size="xs" />
+                                  </div>
+                                  <span className="text-xs font-bold leading-snug">{group.title}</span>
                                 </Link>
                               );
                             }
@@ -555,37 +637,52 @@ export function Navbar() {
                                     setMobileInvestorGroup(isGroupExpanded ? null : group.id)
                                   }
                                   className={cn(
-                                    "flex items-center justify-between py-2 px-2.5 rounded-lg font-semibold transition-colors w-full text-left cursor-pointer",
+                                    "flex items-center justify-between gap-2 p-2 rounded-xl border font-semibold transition-all w-full text-left cursor-pointer",
                                     isGroupActive || isGroupExpanded
-                                      ? "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold"
-                                      : "text-[#0D2440] dark:text-white/90 hover:bg-slate-100 dark:hover:bg-white/10"
+                                      ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                      : "bg-white dark:bg-[#0D2440]/40 border-slate-200/80 dark:border-white/10 text-[#0D2440] dark:text-white/90 hover:border-[#2563EB]/40"
                                   )}
                                 >
-                                  <span>{group.title}</span>
+                                  <div className="flex items-center gap-3 min-w-0">
+                                    <div className="shrink-0">
+                                      <GroupIcon isHovered={isGroupActive || isGroupExpanded} size="xs" />
+                                    </div>
+                                    <span className="text-xs font-bold leading-snug truncate">
+                                      {group.title}
+                                    </span>
+                                  </div>
                                   <ChevronDown
                                     className={cn(
-                                      "w-3.5 h-3.5 transition-transform shrink-0",
+                                      "w-4 h-4 transition-transform shrink-0 mr-1",
                                       isGroupExpanded && "rotate-180 text-[#2563EB] dark:text-[#93C5FD]"
                                     )}
                                   />
                                 </button>
                                 {isGroupExpanded && group.items && (
-                                  <div className="ml-3 pl-2.5 mt-1 mb-1 space-y-0.5 border-l-2 border-[#2E5E99]/25 dark:border-[#7BA4D0]/30">
-                                    {group.items.map((item) => (
-                                      <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        onClick={closeMobileMenu}
-                                        className={cn(
-                                          "block py-2 px-2.5 rounded-lg transition-colors",
-                                          isRouteMatch(item.href)
-                                            ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
-                                            : "text-[#0D2440]/85 dark:text-white/80 hover:text-[#2563EB] dark:hover:text-[#93C5FD]"
-                                        )}
-                                      >
-                                        {item.label}
-                                      </Link>
-                                    ))}
+                                  <div className="grid grid-cols-2 gap-2 pt-2 pb-1 px-0.5">
+                                    {group.items.map((item) => {
+                                      const SubIcon = item.icon;
+                                      const isSubActive = isRouteMatch(item.href);
+
+                                      return (
+                                        <Link
+                                          key={item.href}
+                                          href={item.href}
+                                          onClick={closeMobileMenu}
+                                          className={cn(
+                                            "flex flex-col items-center justify-center text-center gap-1.5 p-2.5 rounded-xl border transition-all",
+                                            isSubActive
+                                              ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                              : "bg-white dark:bg-[#0D2440]/50 border-slate-200/80 dark:border-white/10 text-[#0D2440]/90 dark:text-white/85 hover:border-[#2563EB]/40"
+                                          )}
+                                        >
+                                          <SubIcon isHovered={isSubActive} size="xs" />
+                                          <span className="text-[11px] font-semibold leading-tight line-clamp-2">
+                                            {item.label}
+                                          </span>
+                                        </Link>
+                                      );
+                                    })}
                                   </div>
                                 )}
                               </div>
@@ -611,28 +708,32 @@ export function Navbar() {
                         <ChevronDown className={cn("w-4 h-4 transition-transform shrink-0", mobileDropdown === "Media" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
                       </button>
                       {mobileDropdown === "Media" && (
-                        <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                          {[
-                            { href: "/press-releases", label: "Press Releases" },
-                            { href: "/events", label: "Events & Exhibitions" },
-                            { href: "/blog", label: "Industrial Blog" },
-                            { href: "/gallery", label: "Media Gallery" },
-                            { href: "/certifications", label: "Certifications" },
-                          ].map((item) => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              onClick={closeMobileMenu}
-                              className={cn(
-                                "block py-2 px-2.5 rounded-lg transition-colors",
-                                isRouteMatch(item.href)
-                                  ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
-                                  : "hover:text-[#2563EB]"
-                              )}
-                            >
-                              {item.label}
-                            </Link>
-                          ))}
+                        <div className="p-2.5 bg-slate-50/90 dark:bg-white/[0.04] rounded-2xl my-1.5 border border-slate-200/70 dark:border-white/10">
+                          <div className="grid grid-cols-2 gap-2">
+                            {MOBILE_MEDIA_ITEMS.map((item) => {
+                              const ItemIcon = item.icon;
+                              const isItemActive = isRouteMatch(item.href);
+
+                              return (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={closeMobileMenu}
+                                  className={cn(
+                                    "flex flex-col items-center justify-center text-center gap-1.5 p-2.5 rounded-xl border transition-all",
+                                    isItemActive
+                                      ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                      : "bg-white dark:bg-[#0D2440]/40 border-slate-200/80 dark:border-white/10 text-[#0D2440] dark:text-white/90 hover:border-[#2563EB]/40"
+                                  )}
+                                >
+                                  <ItemIcon isHovered={isItemActive} size="xs" />
+                                  <span className="text-[11px] font-semibold leading-tight">
+                                    {item.label}
+                                  </span>
+                                </Link>
+                              );
+                            })}
+                          </div>
                         </div>
                       )}
                     </>
