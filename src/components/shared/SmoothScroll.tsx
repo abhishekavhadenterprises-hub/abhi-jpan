@@ -45,6 +45,14 @@ const CALIBRATED_LAPTOP_ROUTES = [
   "/initial-public-offer",
   // Quality
   "/quality",
+  // Media Dropdown Pages
+  "/press-releases",
+  "/events",
+  "/blog",
+  "/gallery",
+  "/certifications",
+  "/certificate",
+  "/newsletter",
 ];
 
 function isCalibratedLaptopRoute(pathname: string): boolean {

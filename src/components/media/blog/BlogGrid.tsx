@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, Calendar, Clock, SearchX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export const articles = [
   {
@@ -103,6 +104,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
@@ -163,7 +165,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.45, delay: idx * 0.05 }}
+                    transition={{ duration: revealDuration(0.45), delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.05) : idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
                     onClick={() => onReadMore({
                       title: article.title,
                       date: article.date,
@@ -173,7 +175,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                       image: article.image,
                       content: article.content
                     })}
-                    className="group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-400 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1"
+                    className={cn("group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1", hoverClass("duration-400"))}
                   >
                     <div>
                       {/* Image with Category Squircle Overlay */}

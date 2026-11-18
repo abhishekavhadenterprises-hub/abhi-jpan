@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, Maximize2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const galleryItems = [
   { id: 1, category: "Manufacturing", title: "Automated Brazing Line", image: "/images/about-manufacturing.png" },
@@ -26,6 +27,7 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   // Reset scroll and activeIndex when category filter changes
   useEffect(() => {
@@ -64,8 +66,8 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.45, delay: idx * 0.04 }}
-                className="group relative aspect-[4/3] sm:aspect-square w-full md:w-auto shrink-0 md:shrink snap-center bg-slate-50 dark:bg-[#070b14] border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                transition={{ duration: revealDuration(0.45), delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.04) : idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                className={cn("group relative aspect-[4/3] sm:aspect-square w-full md:w-auto shrink-0 md:shrink snap-center bg-slate-50 dark:bg-[#070b14] border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all", hoverClass("duration-500"))}
                 onClick={() => setSelectedImage(item.image)}
               >
                 <Image

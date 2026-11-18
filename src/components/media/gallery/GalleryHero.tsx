@@ -10,6 +10,7 @@ export function GalleryHero() {
       subtitle="Visual Showcase"
       description="A visual journey across our automated manufacturing facilities, precision metallurgical engineering, and 28+ years of mission-critical tubular excellence."
       imageSrc="/images/about-manufacturing.png"
+      laptopOptimized
     />
   );
 }

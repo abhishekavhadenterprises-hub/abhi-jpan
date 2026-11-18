@@ -10,6 +10,7 @@ export function CertificationsHero() {
       subtitle="Certifications."
       description="Official ISO and national statutory accreditations validating our precision tubular engineering, environmental management, occupational safety, and zero-defect manufacturing across all 5 operational facilities."
       imageSrc="/images/quality-hero-cinematic.jpg"
+      laptopOptimized
     />
   );
 }

@@ -6,6 +6,7 @@ import { motion, useInView, useScroll, useTransform, useSpring, Variants } from 
 import { MapPin, ArrowRight, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const pastEvents = [
   {
@@ -47,6 +48,7 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   // Alternating Column Parallax Hooks
   const { scrollYProgress } = useScroll({
@@ -78,13 +80,13 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
-      transition: { staggerChildren: 0.12, delayChildren: 0.1 } 
+      transition: { staggerChildren: staggerDelay(0.12), delayChildren: 0.1 } 
     }
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: revealDuration(0.7), ease: [0.16, 1, 0.3, 1] } }
   };
 
   return (
@@ -136,7 +138,7 @@ export function PastEvents({ onViewDetails }: PastEventsProps) {
                   y: -7, 
                   transition: { type: "spring", stiffness: 350, damping: 25 } 
                 }}
-                className="group flex flex-col bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl overflow-hidden transition-colors duration-300 h-full relative w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className={cn("group flex flex-col bg-[#F8FAFC] dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl overflow-hidden transition-colors h-full relative w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default", hoverClass("duration-300"))}
               >
                 {/* Image Container - Crisp, Vibrant Frame */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-[#0D2440]">

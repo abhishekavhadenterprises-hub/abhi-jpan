@@ -20,6 +20,7 @@ import {
   Move
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export interface CertificateData {
   id: string;
@@ -188,6 +189,7 @@ const locations = [
 export function CertificationsGrid() {
   const [selectedLocation, setSelectedLocation] = useState<string>("Greater Noida");
   const [previewCert, setPreviewCert] = useState<CertificateData | null>(null);
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   // High-Resolution Interactive Zoom & Pan State
   const [zoom, setZoom] = useState<number>(1);
@@ -428,7 +430,7 @@ export function CertificationsGrid() {
           layout
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7"
         >
-          {filteredCertificates.map((cert) => {
+          {filteredCertificates.map((cert, idx) => {
             const badge = getCategoryBadge(cert.category);
             const BadgeIcon = badge.icon;
 
@@ -439,8 +441,8 @@ export function CertificationsGrid() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="group bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-5.5 flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                transition={{ duration: revealDuration(0.5), delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0) : 0, ease: [0.16, 1, 0.3, 1] }}
+                className={cn("group bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-5.5 flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 transition-all hover:-translate-y-1 relative overflow-hidden", hoverClass("duration-300"))}
               >
                 <div>
                   {/* Top Metadata Badge & Location */}
