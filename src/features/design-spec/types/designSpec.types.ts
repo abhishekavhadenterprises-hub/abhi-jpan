@@ -28,6 +28,7 @@ export interface DesignSpecPin {
   agreement_hash?: string | null;
   change_request_count: number;
   last_change_requested_at?: string | null;
+  labels?: string[];
   created_at: string;
   updated_at: string;
   changeRequests?: DesignPinChangeRequest[];
@@ -55,6 +56,7 @@ export interface DesignPinChangeRequest {
   element_tag?: string;
   element_text?: string;
   pin_screenshot_url?: string;
+  labels?: string[];
   mentions?: string[];
 }
 
@@ -78,6 +80,7 @@ export interface PinSummaryItem {
   module_name?: string | null;
   screen_name?: string | null;
   route_key?: string;
+  labels?: string[];
 }
 
 export interface DesignHistoryResponse {
@@ -88,6 +91,7 @@ export interface DesignHistoryResponse {
   totalMentions?: number;
   allAuthors?: string[];
   allMentions?: string[];
+  allLabels?: string[];
   allPins?: PinSummaryItem[];
 }
 
@@ -116,6 +120,7 @@ export interface CreateDesignPinPayload {
   howItWorks: string;
   featureOwnerName: string;
   featureOwnerRole?: string;
+  labels?: string[];
   mentions?: string[];
 }
 
@@ -124,6 +129,7 @@ export interface UpdateDesignPinPayload {
   description?: string;
   howItWorks?: string;
   featureOwnerName?: string;
+  labels?: string[];
 }
 
 /**

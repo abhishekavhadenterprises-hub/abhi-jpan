@@ -1,4 +1,4 @@
-﻿import type {
+import type {
   DesignPinAdapter,
   DesignSpecPin,
   CreateDesignPinPayload,
@@ -193,6 +193,7 @@ export const createLocalStorageAdapter = (
         last_change_requested_at: null,
         created_at: now,
         updated_at: now,
+        labels: payload.labels || [],
         changeRequests: [],
         mentions: payload.mentions || [],
       };
@@ -236,6 +237,7 @@ export const createLocalStorageAdapter = (
         description: payload.description ?? existing.description,
         how_it_works: payload.howItWorks ?? existing.how_it_works,
         feature_owner_name: payload.featureOwnerName ?? existing.feature_owner_name,
+        labels: payload.labels !== undefined ? payload.labels : existing.labels,
         updated_at: now,
       };
 

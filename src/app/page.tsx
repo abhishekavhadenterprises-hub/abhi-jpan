@@ -12,6 +12,7 @@ export default function Home() {
     'OEM', 'TIER-1', 'BENDING', 'ROBOTIC', 'LASER', 'PRECISION', 'TUBULAR'
   ];
 
+
   return (
     <div className="relative w-full">
       {/* Global Fixed Background Grid (4 lines as requested) */}

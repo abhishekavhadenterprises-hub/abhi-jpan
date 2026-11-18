@@ -1,14 +1,16 @@
-﻿"use client";
+"use client";
 
 import React, { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 import { DesignPinOverlay } from './DesignPinOverlay';
-import { createLocalStorageAdapter } from '../adapters/localStorageAdapter';
+import { jpanApiAdapter } from '../adapters/jpanApiAdapter';
+
+const PROJECT_KEY = process.env.NEXT_PUBLIC_PROJECT_KEY || 'jpan_portal';
 
 /**
  * JPan Portal wrapper for the reusable DesignPinOverlay.
- * Automatically injects the active Next.js App Router pathname, localStorage adapter,
+ * Automatically injects the active Next.js App Router pathname, jpanApiAdapter with DB sync,
  * user identity, and toast notifications.
  */
 export const DesignSpecOverlay: React.FC = () => {
@@ -21,17 +23,13 @@ export const DesignSpecOverlay: React.FC = () => {
     };
   }, []);
 
-  const adapter = useMemo(() => {
-    return createLocalStorageAdapter('jpan_portal');
-  }, []);
-
   const currentRoute = pathname || '/';
 
   return (
     <DesignPinOverlay
-      projectKey="jpan_portal"
+      projectKey={PROJECT_KEY}
       currentRoute={currentRoute}
-      adapter={adapter}
+      adapter={jpanApiAdapter}
       currentUser={currentUser}
       onNotify={(type, msg) => {
         if (type === 'error') {
