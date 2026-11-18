@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -51,7 +52,25 @@ export function ProductsMegamenu({
   onMouseEnter,
   onMouseLeave,
 }: ProductsMegamenuProps) {
+  const pathname = usePathname() || "/";
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      setActiveCategory(params.get("category"));
+    }
+  }, [pathname, isOpen]);
+
+  const isProductCardActive = (id: string) => {
+    if (pathname !== "/products" && !pathname.startsWith("/products/")) return false;
+    if (id === "all-products") return !activeCategory;
+    if (id === "copper-components") return activeCategory === "Copper Components";
+    if (id === "brass-components") return activeCategory === "Brass Components";
+    if (id === "steel-components") return activeCategory === "Steel Components";
+    return false;
+  };
 
   return (
     <AnimatePresence>
@@ -74,6 +93,7 @@ export function ProductsMegamenu({
               {productCards.map((product) => {
                 const IconComponent = product.icon;
                 const isHovered = hoveredCardId === product.id;
+                const isActive = isProductCardActive(product.id);
 
                 return (
                   <Link
@@ -84,23 +104,27 @@ export function ProductsMegamenu({
                     onMouseLeave={() => setHoveredCardId(null)}
                     className={cn(
                       "group/card relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[145px]",
-                      isHovered
-                        ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
-                        : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
+                      isActive
+                        ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#2563EB] dark:border-[#60A5FA] shadow-[0_0_20px_rgba(37,99,235,0.18)] dark:shadow-[0_0_22px_rgba(59,130,246,0.3)]"
+                        : isHovered
+                          ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
+                          : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                     )}
                   >
                     {/* 3D Component Icon */}
                     <div className="mb-3 flex items-center justify-center">
-                      <IconComponent isHovered={isHovered} />
+                      <IconComponent isHovered={isHovered || isActive} />
                     </div>
 
                     {/* Clean Bold Title */}
                     <h3
                       className={cn(
                         "text-xs sm:text-[13px] font-bold tracking-tight transition-colors text-center leading-snug",
-                        isHovered
-                          ? "text-[#0D2440] dark:text-white"
-                          : "text-slate-700 dark:text-slate-200"
+                        isActive
+                          ? "text-[#2563EB] dark:text-[#93C5FD]"
+                          : isHovered
+                            ? "text-[#0D2440] dark:text-white"
+                            : "text-slate-700 dark:text-slate-200"
                       )}
                     >
                       {product.title}

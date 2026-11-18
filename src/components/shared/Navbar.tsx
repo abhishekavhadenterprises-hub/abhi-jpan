@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { InvestorMegamenu } from "./InvestorMegamenu";
@@ -26,12 +28,71 @@ const navLinks: NavLinkItem[] = [
   { name: "Contact", href: "/contact" },
 ];
 
+const INVESTOR_ROUTES = [
+  "/annual-reports",
+  "/annual-return",
+  "/board-meeting-notices",
+  "/general-meeting",
+  "/secretarial-compliance",
+  "/financial-results",
+  "/investor-meet-intimation",
+  "/investor-presentation",
+  "/call-audio-recordings",
+  "/call-transcripts",
+  "/newspaper-publication",
+  "/shareholding-pattern",
+  "/unclaimed-unpaid",
+  "/statement-of-deviations",
+  "/investor-grievance",
+  "/investor-contact",
+  "/policies",
+  "/sebi-disclosures",
+  "/material-documents-contracts",
+  "/credit-rating",
+  "/industry-report",
+  "/material-creditors",
+  "/initial-public-offer",
+];
+
+const MEDIA_ROUTES = [
+  "/press-releases",
+  "/events",
+  "/blog",
+  "/gallery",
+  "/certifications",
+  "/certificate",
+  "/newsletter",
+];
+
 export function Navbar() {
+  const pathname = usePathname() || "/";
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const isRouteMatch = (route: string) =>
+    pathname === route || pathname.startsWith(`${route}/`);
+
+  const isNavActive = (link: NavLinkItem): boolean => {
+    if (link.name === "Home") {
+      return pathname === "/";
+    }
+    if (link.name === "Products") {
+      return isRouteMatch("/products");
+    }
+    if (link.name === "Investor Relation") {
+      return INVESTOR_ROUTES.some(isRouteMatch);
+    }
+    if (link.name === "Media") {
+      return MEDIA_ROUTES.some(isRouteMatch);
+    }
+    if (link.href) {
+      return isRouteMatch(link.href);
+    }
+    return false;
+  };
 
   // Throttled scroll listener
   useEffect(() => {
@@ -146,9 +207,10 @@ export function Navbar() {
         </Link>
 
         {/* Center/Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+        <div className="hidden lg:flex items-center gap-1 xl:gap-1.5">
           {navLinks.map((link) => {
             const isDropdownActive = activeDropdown === link.name;
+            const isActive = isNavActive(link);
 
             return (
               <div
@@ -175,19 +237,31 @@ export function Navbar() {
                       }
                     }}
                     className={cn(
-                      "text-xs xl:text-sm font-semibold transition-colors flex items-center gap-1.5 py-1 px-1 cursor-pointer select-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0",
-                      isDropdownActive
-                        ? "text-[#2E5E99] dark:text-[#7BA4D0]"
-                        : "text-[#0D2440]/85 dark:text-white/85 hover:text-[#2E5E99] dark:hover:text-[#7BA4D0]"
+                      "relative z-10 text-xs xl:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 py-1.5 px-2.5 xl:px-3.5 rounded-xl cursor-pointer select-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0",
+                      isActive
+                        ? "text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                        : isDropdownActive
+                          ? "text-[#2563EB] dark:text-[#7BA4D0] bg-slate-100/80 dark:bg-white/[0.06]"
+                          : "text-[#0D2440]/85 dark:text-white/85 hover:text-[#2563EB] dark:hover:text-[#7BA4D0] hover:bg-slate-100/70 dark:hover:bg-white/[0.05]"
                     )}
                     aria-expanded={isDropdownActive}
                     aria-haspopup="true"
                   >
+                    {isActive && (
+                      <motion.span
+                        layoutId="navbar-active-highlight"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute inset-0 rounded-xl bg-[#EFF6FF] dark:bg-[#2563EB]/20 border border-[#BFDBFE]/90 dark:border-[#60A5FA]/40 shadow-[0_0_16px_rgba(37,99,235,0.18)] dark:shadow-[0_0_20px_rgba(59,130,246,0.3)] -z-10 pointer-events-none"
+                      />
+                    )}
                     <span>{link.name}</span>
                     <ChevronDown
                       className={cn(
-                        "w-3.5 h-3.5 text-[#0D2440]/60 dark:text-white/60 transition-transform duration-200",
-                        isDropdownActive && "rotate-180 text-[#2E5E99] dark:text-[#7BA4D0]"
+                        "w-3.5 h-3.5 transition-transform duration-200",
+                        isActive || isDropdownActive
+                          ? "text-[#2563EB] dark:text-[#93C5FD]"
+                          : "text-[#0D2440]/60 dark:text-white/60",
+                        isDropdownActive && "rotate-180"
                       )}
                     />
                   </button>
@@ -195,9 +269,21 @@ export function Navbar() {
                   <Link
                     href={link.href || "#"}
                     onClick={closeDropdowns}
-                    className="text-xs xl:text-sm font-semibold text-[#0D2440]/85 dark:text-white/85 hover:text-[#2E5E99] dark:hover:text-[#7BA4D0] transition-colors block py-1 px-1 outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 select-none"
+                    className={cn(
+                      "relative z-10 text-xs xl:text-sm font-semibold transition-all duration-200 block py-1.5 px-2.5 xl:px-3.5 rounded-xl outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 select-none",
+                      isActive
+                        ? "text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                        : "text-[#0D2440]/85 dark:text-white/85 hover:text-[#2563EB] dark:hover:text-[#7BA4D0] hover:bg-slate-100/70 dark:hover:bg-white/[0.05]"
+                    )}
                   >
-                    {link.name}
+                    {isActive && (
+                      <motion.span
+                        layoutId="navbar-active-highlight"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute inset-0 rounded-xl bg-[#EFF6FF] dark:bg-[#2563EB]/20 border border-[#BFDBFE]/90 dark:border-[#60A5FA]/40 shadow-[0_0_16px_rgba(37,99,235,0.18)] dark:shadow-[0_0_20px_rgba(59,130,246,0.3)] -z-10 pointer-events-none"
+                      />
+                    )}
+                    <span>{link.name}</span>
                   </Link>
                 )}
               </div>
@@ -255,79 +341,131 @@ export function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       {isOpen && (
-        <div className="pointer-events-auto lg:hidden fixed left-3 sm:left-6 right-3 sm:right-6 top-20 sm:top-24 bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-3xl p-5 text-[#0D2440] dark:text-white shadow-2xl flex flex-col gap-2 max-h-[75vh] overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-          {navLinks.map((link) => (
-            <div key={link.name} className="flex flex-col">
-              {link.name === "Products" ? (
-                <>
-                  <button
-                    className="flex items-center justify-between py-2.5 text-sm font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] border-b border-slate-200/70 dark:border-white/10"
-                    onClick={() => setActiveDropdown(activeDropdown === "Products" ? null : "Products")}
+        <div className="pointer-events-auto lg:hidden fixed left-3 sm:left-6 right-3 sm:right-6 top-20 sm:top-24 bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-3xl p-5 text-[#0D2440] dark:text-white shadow-2xl flex flex-col gap-1.5 max-h-[75vh] overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+          {navLinks.map((link) => {
+            const isActive = isNavActive(link);
+            const activeItemClass =
+              "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold border border-[#BFDBFE]/90 dark:border-[#60A5FA]/40 shadow-[0_0_12px_rgba(37,99,235,0.14)] rounded-xl px-3.5";
+            const inactiveItemClass =
+              "text-[#0D2440] dark:text-white hover:text-[#2563EB] dark:hover:text-[#93C5FD] border-b border-slate-200/70 dark:border-white/10 px-2";
+
+            return (
+              <div key={link.name} className="flex flex-col">
+                {link.name === "Products" ? (
+                  <>
+                    <button
+                      className={cn(
+                        "flex items-center justify-between py-2.5 text-sm font-semibold transition-all",
+                        isActive ? activeItemClass : inactiveItemClass
+                      )}
+                      onClick={() => setActiveDropdown(activeDropdown === "Products" ? null : "Products")}
+                    >
+                      <span>Products</span>
+                      <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Products" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
+                    </button>
+                    {activeDropdown === "Products" && (
+                      <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                        <Link href="/products" onClick={() => setIsOpen(false)} className={cn("block py-1.5 px-2.5 rounded-lg transition-colors", isRouteMatch("/products") ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold" : "hover:text-[#2563EB]")}>All Products</Link>
+                        <Link href="/products?category=Copper%20Components" onClick={() => setIsOpen(false)} className="block py-1.5 px-2.5 rounded-lg hover:text-[#2563EB]">Copper Components</Link>
+                        <Link href="/products?category=Brass%20Components" onClick={() => setIsOpen(false)} className="block py-1.5 px-2.5 rounded-lg hover:text-[#2563EB]">Brass Components</Link>
+                        <Link href="/products?category=Steel%20Components" onClick={() => setIsOpen(false)} className="block py-1.5 px-2.5 rounded-lg hover:text-[#2563EB]">Steel Components</Link>
+                      </div>
+                    )}
+                  </>
+                ) : link.name === "Investor Relation" ? (
+                  <>
+                    <button
+                      className={cn(
+                        "flex items-center justify-between py-2.5 text-sm font-semibold transition-all",
+                        isActive ? activeItemClass : inactiveItemClass
+                      )}
+                      onClick={() => setActiveDropdown(activeDropdown === "Investor Relation" ? null : "Investor Relation")}
+                    >
+                      <span>Investor Relation</span>
+                      <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Investor Relation" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
+                    </button>
+                    {activeDropdown === "Investor Relation" && (
+                      <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                        {[
+                          { href: "/annual-reports", label: "Annual Reports" },
+                          { href: "/financial-results", label: "Financial Results" },
+                          { href: "/investor-grievance", label: "Investor Grievance" },
+                          { href: "/policies", label: "Corporate Policies" },
+                          { href: "/material-documents-contracts", label: "Material Contracts" },
+                          { href: "/industry-report", label: "Industry Report" },
+                          { href: "/material-creditors", label: "Material Creditors" },
+                          { href: "/initial-public-offer", label: "Initial Public Offer" },
+                        ].map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "block py-1.5 px-2.5 rounded-lg transition-colors",
+                              isRouteMatch(item.href)
+                                ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                : "hover:text-[#2563EB]"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : link.name === "Media" ? (
+                  <>
+                    <button
+                      className={cn(
+                        "flex items-center justify-between py-2.5 text-sm font-semibold transition-all",
+                        isActive ? activeItemClass : inactiveItemClass
+                      )}
+                      onClick={() => setActiveDropdown(activeDropdown === "Media" ? null : "Media")}
+                    >
+                      <span>Media</span>
+                      <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Media" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
+                    </button>
+                    {activeDropdown === "Media" && (
+                      <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                        {[
+                          { href: "/press-releases", label: "Press Releases" },
+                          { href: "/events", label: "Events & Exhibitions" },
+                          { href: "/blog", label: "Industrial Blog" },
+                          { href: "/gallery", label: "Media Gallery" },
+                          { href: "/certifications", label: "Certifications" },
+                        ].map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "block py-1.5 px-2.5 rounded-lg transition-colors",
+                              isRouteMatch(item.href)
+                                ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                : "hover:text-[#2563EB]"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={link.href || "#"}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "py-2.5 text-sm font-semibold transition-all",
+                      isActive ? activeItemClass : inactiveItemClass
+                    )}
                   >
-                    <span>Products</span>
-                    <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Products" && "rotate-180 text-[#2E5E99]")} />
-                  </button>
-                  {activeDropdown === "Products" && (
-                    <div className="pl-3 py-2 space-y-1.5 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                      <Link href="/products" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">All Products</Link>
-                      <Link href="/products?category=Copper%20Components" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Copper Components</Link>
-                      <Link href="/products?category=Brass%20Components" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Brass Components</Link>
-                      <Link href="/products?category=Steel%20Components" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Steel Components</Link>
-                    </div>
-                  )}
-                </>
-              ) : link.name === "Investor Relation" ? (
-                <>
-                  <button
-                    className="flex items-center justify-between py-2.5 text-sm font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] border-b border-slate-200/70 dark:border-white/10"
-                    onClick={() => setActiveDropdown(activeDropdown === "Investor Relation" ? null : "Investor Relation")}
-                  >
-                    <span>Investor Relation</span>
-                    <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Investor Relation" && "rotate-180 text-[#2E5E99]")} />
-                  </button>
-                  {activeDropdown === "Investor Relation" && (
-                    <div className="pl-3 py-2 space-y-1.5 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                      <Link href="/annual-reports" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Annual Reports</Link>
-                      <Link href="/financial-results" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Financial Results</Link>
-                      <Link href="/investor-grievance" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Investor Grievance</Link>
-                      <Link href="/policies" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Corporate Policies</Link>
-                      <Link href="/material-documents-contracts" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Material Contracts</Link>
-                      <Link href="/industry-report" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Industry Report</Link>
-                      <Link href="/material-creditors" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Material Creditors</Link>
-                      <Link href="/initial-public-offer" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Initial Public Offer</Link>
-                    </div>
-                  )}
-                </>
-              ) : link.name === "Media" ? (
-                <>
-                  <button
-                    className="flex items-center justify-between py-2.5 text-sm font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] border-b border-slate-200/70 dark:border-white/10"
-                    onClick={() => setActiveDropdown(activeDropdown === "Media" ? null : "Media")}
-                  >
-                    <span>Media</span>
-                    <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Media" && "rotate-180 text-[#2E5E99]")} />
-                  </button>
-                  {activeDropdown === "Media" && (
-                    <div className="pl-3 py-2 space-y-1.5 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                      <Link href="/press-releases" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Press Releases</Link>
-                      <Link href="/events" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Events & Exhibitions</Link>
-                      <Link href="/blog" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Industrial Blog</Link>
-                      <Link href="/gallery" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Media Gallery</Link>
-                      <Link href="/certifications" onClick={() => setIsOpen(false)} className="block py-1 hover:text-[#2E5E99]">Certifications</Link>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link
-                  href={link.href || "#"}
-                  onClick={() => setIsOpen(false)}
-                  className="py-2.5 text-sm font-semibold text-[#0D2440] dark:text-white hover:text-[#2E5E99] border-b border-slate-200/70 dark:border-white/10"
-                >
-                  {link.name}
-                </Link>
-              )}
-            </div>
-          ))}
+                    {link.name}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
 
           {/* Mobile Action Button */}
           <Link

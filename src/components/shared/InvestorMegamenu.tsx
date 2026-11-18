@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -114,10 +115,19 @@ export function InvestorMegamenu({
   onMouseEnter,
   onMouseLeave,
 }: InvestorMegamenuProps) {
+  const pathname = usePathname() || "/";
   // Always start collapsed with NO sub-grid open by default
   const [expandedPillarId, setExpandedPillarId] = useState<string | null>(null);
   const [hoveredPillarId, setHoveredPillarId] = useState<string | null>(null);
   const [hoveredSubCardId, setHoveredSubCardId] = useState<string | null>(null);
+
+  const isRouteActive = (href?: string) =>
+    Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
+
+  const isPillarActive = (box: PillarBox) => {
+    if (box.directHref && isRouteActive(box.directHref)) return true;
+    return Boolean(box.items?.some((item) => isRouteActive(item.href)));
+  };
 
   // Critical Fix: Automatically reset expansion state whenever menu closes
   useEffect(() => {
@@ -152,6 +162,7 @@ export function InvestorMegamenu({
                 const IconComponent = box.icon;
                 const isHovered = hoveredPillarId === box.id;
                 const isExpanded = expandedPillarId === box.id;
+                const isCurrentPillar = isPillarActive(box);
 
                 const CardWrapper: React.ElementType = box.directHref ? Link : "div";
                 const wrapperProps = box.directHref
@@ -178,26 +189,30 @@ export function InvestorMegamenu({
                     }}
                     className={cn(
                       "group/box relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[145px]",
-                      isExpanded
-                        ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
-                        : isHovered
-                          ? "bg-white dark:bg-[#0D2440]/60 border-[#2563EB]/40 dark:border-[#3B82F6]/40 shadow-[0_8px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.4)] -translate-y-0.5"
-                          : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
+                      isCurrentPillar
+                        ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#2563EB] dark:border-[#60A5FA] shadow-[0_0_20px_rgba(37,99,235,0.18)] dark:shadow-[0_0_22px_rgba(59,130,246,0.3)]"
+                        : isExpanded
+                          ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
+                          : isHovered
+                            ? "bg-white dark:bg-[#0D2440]/60 border-[#2563EB]/40 dark:border-[#3B82F6]/40 shadow-[0_8px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.4)] -translate-y-0.5"
+                            : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                     )}
                   >
 
                     {/* 3D Component Icon */}
                     <div className="mb-3 flex items-center justify-center">
-                      <IconComponent isHovered={isHovered || isExpanded} />
+                      <IconComponent isHovered={isHovered || isExpanded || isCurrentPillar} />
                     </div>
 
                     {/* Clean Bold Title */}
                     <h3
                       className={cn(
                         "text-xs sm:text-[13px] font-bold tracking-tight transition-colors text-center leading-snug",
-                        isExpanded || isHovered
-                          ? "text-[#0D2440] dark:text-white"
-                          : "text-slate-700 dark:text-slate-200"
+                        isCurrentPillar
+                          ? "text-[#2563EB] dark:text-[#93C5FD]"
+                          : isExpanded || isHovered
+                            ? "text-[#0D2440] dark:text-white"
+                            : "text-slate-700 dark:text-slate-200"
                       )}
                     >
                       {box.title}
@@ -231,6 +246,7 @@ export function InvestorMegamenu({
                     {activePillar.items.map((subItem) => {
                       const SubIcon = subItem.icon;
                       const isSubHovered = hoveredSubCardId === subItem.id;
+                      const isSubActive = isRouteActive(subItem.href);
 
                       return (
                         <Link
@@ -241,22 +257,26 @@ export function InvestorMegamenu({
                           onMouseLeave={() => setHoveredSubCardId(null)}
                           className={cn(
                             "group/subcard relative p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none overflow-hidden min-h-[115px]",
-                            isSubHovered
-                              ? "bg-white dark:bg-[#0D2440] border-[#2563EB]/50 dark:border-[#3B82F6]/50 shadow-[0_6px_18px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.4)] -translate-y-0.5"
-                              : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
+                            isSubActive
+                              ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#2563EB] dark:border-[#60A5FA] shadow-[0_0_18px_rgba(37,99,235,0.18)] dark:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                              : isSubHovered
+                                ? "bg-white dark:bg-[#0D2440] border-[#2563EB]/50 dark:border-[#3B82F6]/50 shadow-[0_6px_18px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.4)] -translate-y-0.5"
+                                : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
                           )}
                         >
 
                           <div className="mb-2 flex items-center justify-center">
-                            <SubIcon isHovered={isSubHovered} />
+                            <SubIcon isHovered={isSubHovered || isSubActive} />
                           </div>
 
                           <h4
                             className={cn(
                               "text-xs font-bold tracking-tight transition-colors text-center leading-snug line-clamp-2",
-                              isSubHovered
-                                ? "text-[#0D2440] dark:text-white"
-                                : "text-slate-800 dark:text-slate-200"
+                              isSubActive
+                                ? "text-[#2563EB] dark:text-[#93C5FD]"
+                                : isSubHovered
+                                  ? "text-[#0D2440] dark:text-white"
+                                  : "text-slate-800 dark:text-slate-200"
                             )}
                           >
                             {subItem.title}
