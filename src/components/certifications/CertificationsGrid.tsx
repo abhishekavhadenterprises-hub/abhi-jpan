@@ -391,7 +391,7 @@ export function CertificationsGrid() {
 
         {/* Location Tabs Only */}
         <div className="mb-8 sm:mb-12">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
             {locations.map((loc) => {
               const isActive = selectedLocation === loc;
               const count = certificatesList.filter((c) => c.location === loc).length;
@@ -399,19 +399,20 @@ export function CertificationsGrid() {
               return (
                 <button
                   key={loc}
+                  type="button"
                   onClick={() => setSelectedLocation(loc)}
                   className={cn(
-                    "px-4.5 py-2.5 rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 shrink-0 flex items-center gap-2 cursor-pointer",
+                    "px-3 py-2 sm:px-4.5 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 sm:gap-2 cursor-pointer",
                     isActive
                       ? "bg-[#2E5E99] text-white shadow-md shadow-[#2E5E99]/20"
                       : "bg-white dark:bg-[#0D2440]/50 text-[#0D2440]/80 dark:text-white/80 border border-[#7BA4D0]/25 hover:border-[#2E5E99] hover:bg-[#E7F0FA] dark:hover:bg-[#0D2440]"
                   )}
                 >
-                  <MapPin className={cn("w-3.5 h-3.5", isActive ? "text-white" : "text-[#2E5E99] dark:text-[#7BA4D0]")} />
+                  <MapPin className={cn("w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0", isActive ? "text-white" : "text-[#2E5E99] dark:text-[#7BA4D0]")} />
                   <span>{loc}</span>
                   <span
                     className={cn(
-                      "px-2 py-0.5 rounded-md text-[10px]",
+                      "px-1.5 sm:px-2 py-0.5 rounded-md text-[10px]",
                       isActive
                         ? "bg-white/20 text-white"
                         : "bg-[#7BA4D0]/15 text-[#2E5E99] dark:text-[#7BA4D0]"

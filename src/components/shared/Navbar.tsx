@@ -64,10 +64,72 @@ const MEDIA_ROUTES = [
   "/newsletter",
 ];
 
+interface MobileInvestorGroup {
+  id: string;
+  title: string;
+  href?: string;
+  items?: { href: string; label: string }[];
+}
+
+const MOBILE_INVESTOR_GROUPS: MobileInvestorGroup[] = [
+  {
+    id: "annual-reports",
+    title: "Annual Reports",
+    items: [
+      { href: "/annual-reports", label: "Annual Reports" },
+      { href: "/annual-return", label: "Annual Return" },
+      { href: "/board-meeting-notices", label: "Notice of Board Meeting" },
+      { href: "/general-meeting", label: "General Meeting Notices" },
+      { href: "/secretarial-compliance", label: "Secretarial Compliance" },
+    ],
+  },
+  {
+    id: "financial-info",
+    title: "Financial Information",
+    items: [
+      { href: "/financial-results", label: "Financial Results" },
+      { href: "/investor-meet-intimation", label: "Investor Meet Intimation" },
+      { href: "/investor-presentation", label: "Investor Presentation" },
+      { href: "/call-audio-recordings", label: "Call Audio Recordings" },
+      { href: "/call-transcripts", label: "Call Transcripts" },
+      { href: "/newspaper-publication", label: "Newspaper Publications" },
+      { href: "/shareholding-pattern", label: "Shareholding Pattern" },
+      { href: "/unclaimed-unpaid", label: "Unclaimed & Unpaid" },
+      { href: "/statement-of-deviations", label: "Statement of Deviations" },
+    ],
+  },
+  {
+    id: "investor-grievance",
+    title: "Investor Grievance",
+    href: "/investor-grievance",
+  },
+  {
+    id: "corporate-governance",
+    title: "Corporate Governance",
+    items: [
+      { href: "/policies", label: "Corporate Policies" },
+      { href: "/sebi-disclosures", label: "SEBI LODR Disclosures" },
+    ],
+  },
+  {
+    id: "other-information",
+    title: "Other Information",
+    items: [
+      { href: "/material-documents-contracts", label: "Material Contracts" },
+      { href: "/credit-rating", label: "Credit Rating" },
+      { href: "/industry-report", label: "Industry Report" },
+      { href: "/material-creditors", label: "Material Creditors" },
+      { href: "/initial-public-offer", label: "Initial Public Offer" },
+    ],
+  },
+];
+
 export function Navbar() {
   const pathname = usePathname() || "/";
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
+  const [mobileInvestorGroup, setMobileInvestorGroup] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -137,6 +199,45 @@ export function Navbar() {
     setActiveDropdown(null);
   };
 
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+    setMobileDropdown(null);
+    setMobileInvestorGroup(null);
+    closeDropdowns();
+  };
+
+  // Auto-close menus whenever route changes (guarantees phone drawer closes on navigation)
+  useEffect(() => {
+    setIsOpen(false);
+    setMobileDropdown(null);
+    setMobileInvestorGroup(null);
+    setActiveDropdown(null);
+  }, [pathname]);
+
+  // Lock background scroll & pause Lenis while mobile drawer is open so phone touch-scrolling works cleanly inside drawer
+  useEffect(() => {
+    const lenis = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      if (lenis && typeof lenis.stop === "function") {
+        lenis.stop();
+      }
+    } else {
+      document.body.style.overflow = "";
+      if (lenis && typeof lenis.start === "function") {
+        lenis.start();
+      }
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      if (lenis && typeof lenis.start === "function") {
+        lenis.start();
+      }
+    };
+  }, [isOpen]);
+
   // Close dropdowns on outside click or escape
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -146,8 +247,7 @@ export function Navbar() {
     };
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeDropdowns();
-        setIsOpen(false);
+        closeMobileMenu();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -166,6 +266,8 @@ export function Navbar() {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsOpen(false);
+        setMobileDropdown(null);
+        setMobileInvestorGroup(null);
       }
     };
     window.addEventListener("resize", handleResize);
@@ -178,14 +280,14 @@ export function Navbar() {
       <div
         ref={navRef}
         className={cn(
-          "pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border-slate-200/90 dark:border-white/10 shadow-[0_12px_40px_rgba(13,36,64,0.08)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.6)] transform-gpu will-change-[width,max-width,margin,border-radius]",
+          "relative z-50 pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border-slate-200/90 dark:border-white/10 shadow-[0_12px_40px_rgba(13,36,64,0.08)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.6)] transform-gpu will-change-[width,max-width,margin,border-radius]",
           isScrolled
             ? "w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-6xl xl:max-w-7xl h-14 sm:h-[60px] px-4 sm:px-6 rounded-xl sm:rounded-2xl mt-2.5 sm:mt-3 border shadow-[0_16px_45px_rgba(13,36,64,0.12)]"
             : "w-full max-w-full h-16 sm:h-[72px] px-5 sm:px-8 xl:px-12 rounded-none border-b border-x-0 border-t-0 mt-0"
         )}
       >
         {/* Left: Official Brand Logo Mark */}
-        <Link href="/" className="flex items-center group shrink-0" onClick={closeDropdowns}>
+        <Link href="/" className="flex items-center group shrink-0" onClick={closeMobileMenu}>
           <div className="relative w-28 sm:w-36 h-9 sm:h-11">
             <Image
               src="/images/jpan-logo.png"
@@ -306,177 +408,261 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle Button */}
           <button
+            type="button"
             className="lg:hidden text-[#0D2440] dark:text-white hover:text-[#2E5E99] p-2 transition-colors cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              if (isOpen) {
+                closeMobileMenu();
+              } else {
+                closeDropdowns();
+                setIsOpen(true);
+              }
+            }}
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* 1. Products Megamenu */}
-      <ProductsMegamenu
-        isOpen={activeDropdown === "Products"}
-        onClose={closeDropdowns}
-        onMouseEnter={() => handleMouseEnter("Products")}
-        onMouseLeave={handleMouseLeave}
-      />
+      {/* Desktop Megamenus Only (Hidden on Phone/Tablet so they never collide with Mobile Drawer) */}
+      <div className="hidden lg:block">
+        {/* 1. Products Megamenu */}
+        <ProductsMegamenu
+          isOpen={activeDropdown === "Products"}
+          onClose={closeDropdowns}
+          onMouseEnter={() => handleMouseEnter("Products")}
+          onMouseLeave={handleMouseLeave}
+        />
 
-      {/* 2. Investor Relations Megamenu */}
-      <InvestorMegamenu
-        isOpen={activeDropdown === "Investor Relation"}
-        onClose={closeDropdowns}
-        onMouseEnter={() => handleMouseEnter("Investor Relation")}
-        onMouseLeave={handleMouseLeave}
-      />
+        {/* 2. Investor Relations Megamenu */}
+        <InvestorMegamenu
+          isOpen={activeDropdown === "Investor Relation"}
+          onClose={closeDropdowns}
+          onMouseEnter={() => handleMouseEnter("Investor Relation")}
+          onMouseLeave={handleMouseLeave}
+        />
 
-      {/* 3. Media Megamenu */}
-      <MediaMegamenu
-        isOpen={activeDropdown === "Media"}
-        onClose={closeDropdowns}
-        onMouseEnter={() => handleMouseEnter("Media")}
-        onMouseLeave={handleMouseLeave}
-      />
+        {/* 3. Media Megamenu */}
+        <MediaMegamenu
+          isOpen={activeDropdown === "Media"}
+          onClose={closeDropdowns}
+          onMouseEnter={() => handleMouseEnter("Media")}
+          onMouseLeave={handleMouseLeave}
+        />
+      </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Drawer & Backdrop (Phone/Tablet Only) */}
       {isOpen && (
-        <div className="pointer-events-auto lg:hidden fixed left-3 sm:left-6 right-3 sm:right-6 top-20 sm:top-24 bg-white/95 dark:bg-[#0c1527]/95 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-3xl p-5 text-[#0D2440] dark:text-white shadow-2xl flex flex-col gap-1.5 max-h-[75vh] overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-          {navLinks.map((link) => {
-            const isActive = isNavActive(link);
-            const activeItemClass =
-              "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold rounded-xl px-3.5";
-            const inactiveItemClass =
-              "text-[#0D2440] dark:text-white hover:text-[#2563EB] dark:hover:text-[#93C5FD] border-b border-slate-200/70 dark:border-white/10 px-2";
+        <>
+          {/* Click-outside Backdrop */}
+          <div
+            data-lenis-prevent="true"
+            onClick={closeMobileMenu}
+            className="pointer-events-auto lg:hidden fixed inset-0 bg-[#0D2440]/35 dark:bg-black/55 backdrop-blur-[2px] z-40"
+            aria-hidden="true"
+          />
 
-            return (
-              <div key={link.name} className="flex flex-col">
-                {link.name === "Products" ? (
-                  <>
-                    <button
-                      className={cn(
-                        "flex items-center justify-between py-2.5 text-sm font-semibold transition-all",
-                        isActive ? activeItemClass : inactiveItemClass
-                      )}
-                      onClick={() => setActiveDropdown(activeDropdown === "Products" ? null : "Products")}
-                    >
-                      <span>Products</span>
-                      <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Products" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
-                    </button>
-                    {activeDropdown === "Products" && (
-                      <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                        <Link href="/products" onClick={() => setIsOpen(false)} className={cn("block py-1.5 px-2.5 rounded-lg transition-colors", isRouteMatch("/products") ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold" : "hover:text-[#2563EB]")}>All Products</Link>
-                        <Link href="/products?category=Copper%20Components" onClick={() => setIsOpen(false)} className="block py-1.5 px-2.5 rounded-lg hover:text-[#2563EB]">Copper Components</Link>
-                        <Link href="/products?category=Brass%20Components" onClick={() => setIsOpen(false)} className="block py-1.5 px-2.5 rounded-lg hover:text-[#2563EB]">Brass Components</Link>
-                        <Link href="/products?category=Steel%20Components" onClick={() => setIsOpen(false)} className="block py-1.5 px-2.5 rounded-lg hover:text-[#2563EB]">Steel Components</Link>
-                      </div>
-                    )}
-                  </>
-                ) : link.name === "Investor Relation" ? (
-                  <>
-                    <button
-                      className={cn(
-                        "flex items-center justify-between py-2.5 text-sm font-semibold transition-all",
-                        isActive ? activeItemClass : inactiveItemClass
-                      )}
-                      onClick={() => setActiveDropdown(activeDropdown === "Investor Relation" ? null : "Investor Relation")}
-                    >
-                      <span>Investor Relation</span>
-                      <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Investor Relation" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
-                    </button>
-                    {activeDropdown === "Investor Relation" && (
-                      <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                        {[
-                          { href: "/annual-reports", label: "Annual Reports" },
-                          { href: "/financial-results", label: "Financial Results" },
-                          { href: "/investor-grievance", label: "Investor Grievance" },
-                          { href: "/policies", label: "Corporate Policies" },
-                          { href: "/material-documents-contracts", label: "Material Contracts" },
-                          { href: "/industry-report", label: "Industry Report" },
-                          { href: "/material-creditors", label: "Material Creditors" },
-                          { href: "/initial-public-offer", label: "Initial Public Offer" },
-                        ].map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block py-1.5 px-2.5 rounded-lg transition-colors",
-                              isRouteMatch(item.href)
-                                ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
-                                : "hover:text-[#2563EB]"
-                            )}
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : link.name === "Media" ? (
-                  <>
-                    <button
-                      className={cn(
-                        "flex items-center justify-between py-2.5 text-sm font-semibold transition-all",
-                        isActive ? activeItemClass : inactiveItemClass
-                      )}
-                      onClick={() => setActiveDropdown(activeDropdown === "Media" ? null : "Media")}
-                    >
-                      <span>Media</span>
-                      <ChevronDown className={cn("w-4 h-4 transition-transform", activeDropdown === "Media" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
-                    </button>
-                    {activeDropdown === "Media" && (
-                      <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
-                        {[
-                          { href: "/press-releases", label: "Press Releases" },
-                          { href: "/events", label: "Events & Exhibitions" },
-                          { href: "/blog", label: "Industrial Blog" },
-                          { href: "/gallery", label: "Media Gallery" },
-                          { href: "/certifications", label: "Certifications" },
-                        ].map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block py-1.5 px-2.5 rounded-lg transition-colors",
-                              isRouteMatch(item.href)
-                                ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
-                                : "hover:text-[#2563EB]"
-                            )}
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    href={link.href || "#"}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "py-2.5 text-sm font-semibold transition-all",
-                      isActive ? activeItemClass : inactiveItemClass
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                )}
-              </div>
-            );
-          })}
-
-          {/* Mobile Action Button */}
-          <Link
-            href="/contact#enquiry-form"
-            onClick={() => setIsOpen(false)}
-            className="mt-3 flex items-center justify-center gap-2 bg-[#0D2440] hover:bg-[#2E5E99] text-white font-sans font-bold text-xs uppercase tracking-wider py-3.5 rounded-full transition-colors shadow-md"
+          {/* Scrollable Mobile Drawer */}
+          <div
+            data-lenis-prevent="true"
+            style={{ WebkitOverflowScrolling: "touch" }}
+            className="pointer-events-auto lg:hidden fixed left-3 sm:left-6 right-3 sm:right-6 top-[4.5rem] sm:top-[5.25rem] bg-white/98 dark:bg-[#0c1527]/98 backdrop-blur-2xl border border-slate-200/90 dark:border-white/15 rounded-3xl p-4 sm:p-5 pb-6 text-[#0D2440] dark:text-white shadow-2xl flex flex-col gap-1.5 max-h-[calc(100dvh-5.5rem)] sm:max-h-[calc(100dvh-6.25rem)] overflow-y-auto overscroll-contain touch-pan-y animate-in fade-in slide-in-from-top-2 duration-200 z-50"
           >
-            <span>Get in touch</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+            {navLinks.map((link) => {
+              const isActive = isNavActive(link);
+              const activeItemClass =
+                "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold rounded-xl px-3.5";
+              const inactiveItemClass =
+                "text-[#0D2440] dark:text-white hover:text-[#2563EB] dark:hover:text-[#93C5FD] border-b border-slate-200/70 dark:border-white/10 px-2";
+
+              return (
+                <div key={link.name} className="flex flex-col shrink-0">
+                  {link.name === "Products" ? (
+                    <>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex items-center justify-between py-2.5 text-sm font-semibold transition-all w-full text-left cursor-pointer",
+                          isActive ? activeItemClass : inactiveItemClass
+                        )}
+                        onClick={() => {
+                          setMobileDropdown(mobileDropdown === "Products" ? null : "Products");
+                          setMobileInvestorGroup(null);
+                        }}
+                      >
+                        <span>Products</span>
+                        <ChevronDown className={cn("w-4 h-4 transition-transform shrink-0", mobileDropdown === "Products" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
+                      </button>
+                      {mobileDropdown === "Products" && (
+                        <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                          <Link href="/products" onClick={closeMobileMenu} className={cn("block py-2 px-2.5 rounded-lg transition-colors", isRouteMatch("/products") ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold" : "hover:text-[#2563EB]")}>All Products</Link>
+                          <Link href="/products?category=Copper%20Components" onClick={closeMobileMenu} className="block py-2 px-2.5 rounded-lg hover:text-[#2563EB]">Copper Components</Link>
+                          <Link href="/products?category=Brass%20Components" onClick={closeMobileMenu} className="block py-2 px-2.5 rounded-lg hover:text-[#2563EB]">Brass Components</Link>
+                          <Link href="/products?category=Steel%20Components" onClick={closeMobileMenu} className="block py-2 px-2.5 rounded-lg hover:text-[#2563EB]">Steel Components</Link>
+                        </div>
+                      )}
+                    </>
+                  ) : link.name === "Investor Relation" ? (
+                    <>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex items-center justify-between py-2.5 text-sm font-semibold transition-all w-full text-left cursor-pointer",
+                          isActive ? activeItemClass : inactiveItemClass
+                        )}
+                        onClick={() => {
+                          const next = mobileDropdown === "Investor Relation" ? null : "Investor Relation";
+                          setMobileDropdown(next);
+                          if (!next) setMobileInvestorGroup(null);
+                        }}
+                      >
+                        <span>Investor Relation</span>
+                        <ChevronDown className={cn("w-4 h-4 transition-transform shrink-0", mobileDropdown === "Investor Relation" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
+                      </button>
+                      {mobileDropdown === "Investor Relation" && (
+                        <div className="pl-2.5 pr-2 py-2 space-y-1.5 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                          {MOBILE_INVESTOR_GROUPS.map((group) => {
+                            const isGroupActive = group.href
+                              ? isRouteMatch(group.href)
+                              : Boolean(group.items?.some((sub) => isRouteMatch(sub.href)));
+                            const isGroupExpanded = mobileInvestorGroup === group.id;
+
+                            if (group.href && !group.items) {
+                              return (
+                                <Link
+                                  key={group.id}
+                                  href={group.href}
+                                  onClick={closeMobileMenu}
+                                  className={cn(
+                                    "block py-2 px-2.5 rounded-lg font-semibold transition-colors",
+                                    isGroupActive
+                                      ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                      : "text-[#0D2440] dark:text-white/90 hover:text-[#2563EB]"
+                                  )}
+                                >
+                                  {group.title}
+                                </Link>
+                              );
+                            }
+
+                            return (
+                              <div key={group.id} className="flex flex-col">
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setMobileInvestorGroup(isGroupExpanded ? null : group.id)
+                                  }
+                                  className={cn(
+                                    "flex items-center justify-between py-2 px-2.5 rounded-lg font-semibold transition-colors w-full text-left cursor-pointer",
+                                    isGroupActive || isGroupExpanded
+                                      ? "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                      : "text-[#0D2440] dark:text-white/90 hover:bg-slate-100 dark:hover:bg-white/10"
+                                  )}
+                                >
+                                  <span>{group.title}</span>
+                                  <ChevronDown
+                                    className={cn(
+                                      "w-3.5 h-3.5 transition-transform shrink-0",
+                                      isGroupExpanded && "rotate-180 text-[#2563EB] dark:text-[#93C5FD]"
+                                    )}
+                                  />
+                                </button>
+                                {isGroupExpanded && group.items && (
+                                  <div className="ml-3 pl-2.5 mt-1 mb-1 space-y-0.5 border-l-2 border-[#2E5E99]/25 dark:border-[#7BA4D0]/30">
+                                    {group.items.map((item) => (
+                                      <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        onClick={closeMobileMenu}
+                                        className={cn(
+                                          "block py-2 px-2.5 rounded-lg transition-colors",
+                                          isRouteMatch(item.href)
+                                            ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                            : "text-[#0D2440]/85 dark:text-white/80 hover:text-[#2563EB] dark:hover:text-[#93C5FD]"
+                                        )}
+                                      >
+                                        {item.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </>
+                  ) : link.name === "Media" ? (
+                    <>
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex items-center justify-between py-2.5 text-sm font-semibold transition-all w-full text-left cursor-pointer",
+                          isActive ? activeItemClass : inactiveItemClass
+                        )}
+                        onClick={() => {
+                          setMobileDropdown(mobileDropdown === "Media" ? null : "Media");
+                          setMobileInvestorGroup(null);
+                        }}
+                      >
+                        <span>Media</span>
+                        <ChevronDown className={cn("w-4 h-4 transition-transform shrink-0", mobileDropdown === "Media" && "rotate-180 text-[#2563EB]", isActive && "text-[#2563EB] dark:text-[#93C5FD]")} />
+                      </button>
+                      {mobileDropdown === "Media" && (
+                        <div className="pl-3 pr-2 py-2 space-y-1 bg-slate-50 dark:bg-white/5 rounded-xl my-1 text-xs">
+                          {[
+                            { href: "/press-releases", label: "Press Releases" },
+                            { href: "/events", label: "Events & Exhibitions" },
+                            { href: "/blog", label: "Industrial Blog" },
+                            { href: "/gallery", label: "Media Gallery" },
+                            { href: "/certifications", label: "Certifications" },
+                          ].map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={closeMobileMenu}
+                              className={cn(
+                                "block py-2 px-2.5 rounded-lg transition-colors",
+                                isRouteMatch(item.href)
+                                  ? "bg-[#EFF6FF] dark:bg-[#2563EB]/25 text-[#2563EB] dark:text-[#93C5FD] font-bold"
+                                  : "hover:text-[#2563EB]"
+                              )}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={link.href || "#"}
+                      onClick={closeMobileMenu}
+                      className={cn(
+                        "py-2.5 text-sm font-semibold transition-all",
+                        isActive ? activeItemClass : inactiveItemClass
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Mobile Action Button */}
+            <Link
+              href="/contact#enquiry-form"
+              onClick={closeMobileMenu}
+              className="mt-3 shrink-0 flex items-center justify-center gap-2 bg-[#0D2440] hover:bg-[#2E5E99] text-white font-sans font-bold text-xs uppercase tracking-wider py-3.5 rounded-full transition-colors shadow-md"
+            >
+              <span>Get in touch</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </>
       )}
     </nav>
   );
