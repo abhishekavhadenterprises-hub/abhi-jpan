@@ -190,7 +190,7 @@ export function InvestorMegamenu({
                     className={cn(
                       "group/box relative p-4 sm:p-5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none min-h-[145px]",
                       isCurrentPillar
-                        ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#2563EB] dark:border-[#60A5FA] shadow-[0_0_20px_rgba(37,99,235,0.18)] dark:shadow-[0_0_22px_rgba(59,130,246,0.3)]"
+                        ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50"
                         : isExpanded
                           ? "bg-white dark:bg-[#0D2440] border-[#2563EB] dark:border-[#3B82F6] shadow-[0_10px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_28px_rgba(0,0,0,0.45)] -translate-y-1"
                           : isHovered
@@ -258,7 +258,7 @@ export function InvestorMegamenu({
                           className={cn(
                             "group/subcard relative p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center justify-between cursor-pointer select-none overflow-hidden min-h-[115px]",
                             isSubActive
-                              ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#2563EB] dark:border-[#60A5FA] shadow-[0_0_18px_rgba(37,99,235,0.18)] dark:shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                              ? "bg-[#EFF6FF] dark:bg-[#0D2440] border-[#BFDBFE] dark:border-[#3B82F6]/50"
                               : isSubHovered
                                 ? "bg-white dark:bg-[#0D2440] border-[#2563EB]/50 dark:border-[#3B82F6]/50 shadow-[0_6px_18px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_20px_rgba(0,0,0,0.4)] -translate-y-0.5"
                                 : "bg-[#EEF1F5] dark:bg-white/[0.035] border-slate-200/90 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"

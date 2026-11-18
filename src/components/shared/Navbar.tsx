@@ -251,7 +251,7 @@ export function Navbar() {
                       <motion.span
                         layoutId="navbar-active-highlight"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                        className="absolute inset-0 rounded-xl bg-[#EFF6FF] dark:bg-[#2563EB]/20 border border-[#BFDBFE]/90 dark:border-[#60A5FA]/40 shadow-[0_0_16px_rgba(37,99,235,0.18)] dark:shadow-[0_0_20px_rgba(59,130,246,0.3)] -z-10 pointer-events-none"
+                        className="absolute inset-0 rounded-xl bg-[#EFF6FF] dark:bg-[#2563EB]/20 -z-10 pointer-events-none"
                       />
                     )}
                     <span>{link.name}</span>
@@ -280,7 +280,7 @@ export function Navbar() {
                       <motion.span
                         layoutId="navbar-active-highlight"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                        className="absolute inset-0 rounded-xl bg-[#EFF6FF] dark:bg-[#2563EB]/20 border border-[#BFDBFE]/90 dark:border-[#60A5FA]/40 shadow-[0_0_16px_rgba(37,99,235,0.18)] dark:shadow-[0_0_20px_rgba(59,130,246,0.3)] -z-10 pointer-events-none"
+                        className="absolute inset-0 rounded-xl bg-[#EFF6FF] dark:bg-[#2563EB]/20 -z-10 pointer-events-none"
                       />
                     )}
                     <span>{link.name}</span>
@@ -345,7 +345,7 @@ export function Navbar() {
           {navLinks.map((link) => {
             const isActive = isNavActive(link);
             const activeItemClass =
-              "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold border border-[#BFDBFE]/90 dark:border-[#60A5FA]/40 shadow-[0_0_12px_rgba(37,99,235,0.14)] rounded-xl px-3.5";
+              "bg-[#EFF6FF] dark:bg-[#2563EB]/20 text-[#2563EB] dark:text-[#93C5FD] font-bold rounded-xl px-3.5";
             const inactiveItemClass =
               "text-[#0D2440] dark:text-white hover:text-[#2563EB] dark:hover:text-[#93C5FD] border-b border-slate-200/70 dark:border-white/10 px-2";
 
