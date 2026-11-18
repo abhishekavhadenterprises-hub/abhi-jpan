@@ -51,13 +51,13 @@ const pillars = [
     desc: "6 integrated manufacturing plants across Greater Noida, Pune, Sanand, Neemrana, and Bengaluru, supporting JIT deliveries along primary industrial corridors.",
     image: "/quality_precision.png",
     facility: "PAN-INDIA CLUSTER // 6 FACILITIES",
-    stat: "65,000 MT Annual Output",
+    stat: "35,000 MT Annual Output",
     icon: Factory,
   },
 ];
 
 const highlights = [
-  { value: "65,000", unit: "MT", label: "Annual Output", sub: "Copper, brass & stainless steel volume" },
+  { value: "35,000", unit: "MT", label: "Annual Output", sub: "Copper, brass & stainless steel volume" },
   { value: "±0.01", unit: "mm", label: "CNC Tolerance", sub: "Laser-guided closed-loop bending" },
   { value: "< 10⁻⁸", unit: "mbar·l/s", label: "Leak Integrity", sub: "100% helium mass-spec verification" },
   { value: "6", unit: "Plants", label: "Integrated Hubs", sub: "Pan-India strategic corridor presence" },

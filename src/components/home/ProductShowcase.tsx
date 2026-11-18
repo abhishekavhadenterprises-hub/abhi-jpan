@@ -64,7 +64,7 @@ const capabilities: ProductCapability[] = [
     image: "/product_steel.png",
     icon: Box,
     metricLabel: "ANNUAL CAPACITY",
-    metricValue: "65,000",
+    metricValue: "35,000",
     metricSub: "MT",
     specDetails: ["AISI 304 / 316L Surgical Stainless Steel", "Laser-Guided Robotic TIG/Orbital Welding", "100% Eddy Current Crack Detection Tested"],
   },

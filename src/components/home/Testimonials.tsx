@@ -191,7 +191,7 @@ export function Testimonials() {
                   6 Scale Facilities
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-300/80 font-light leading-relaxed">
-                  65k MT capacity deployed across strategic OEM production hubs.
+                  35k MT capacity deployed across strategic OEM production hubs.
                 </p>
               </motion.div>
             </motion.div>

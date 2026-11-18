@@ -99,7 +99,7 @@ export function Leadership() {
           </div>
 
           <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/75 dark:text-white/75 font-light leading-relaxed max-w-md">
-            Decades of specialized engineering mastery directing over 65,000 MT of annual production capacity across 6 facilities.
+            Decades of specialized engineering mastery directing over 35,000 MT of annual production capacity across 6 facilities.
           </p>
         </motion.div>
 

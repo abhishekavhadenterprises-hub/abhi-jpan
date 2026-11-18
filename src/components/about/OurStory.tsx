@@ -162,7 +162,7 @@ export function OurStory() {
           </ScrollWipeHeading>
 
           <p className="text-xs sm:text-base md:text-lg text-[#0D2440]/75 dark:text-white/75 font-medium leading-relaxed max-w-2xl mx-auto">
-            From a 400 sq. ft. precision workshop to an institutional manufacturing powerhouse producing over 65,000 MT
+            From a 400 sq. ft. precision workshop to an institutional manufacturing powerhouse producing over 35,000 MT
             of mission-critical tubular assemblies annually.
           </p>
         </div>

@@ -12,7 +12,7 @@ const pillars = [
     tag: "QUALITY INTEGRITY",
     title: "Zero-Defect Verification",
     desc: "100% non-destructive helium mass spectrometry vacuum leak testing and automated optical CMM dimensional inspection before customer dispatch.",
-    metric: "100% Helium Tested",
+    metric: "100% Tested",
     detail: "< 1×10⁻⁶ mbar·l/s leak rate",
   },
   {

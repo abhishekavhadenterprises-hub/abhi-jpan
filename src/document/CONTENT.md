@@ -41,7 +41,7 @@ Current known website data includes:
 
 * Established: 1998
 * Manufacturing plants: 6
-* Annual capacity: 65,000 MT
+* Annual capacity: 35,000 MT
 * CNC yield: 99.98%
 * Helium testing capability
 

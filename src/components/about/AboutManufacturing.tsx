@@ -62,7 +62,7 @@ function AnimatedCounter({
 const manufacturingStats = [
   {
     icon: TrendingUp,
-    num: 65000,
+    num: 35000,
     suffix: "",
     decimals: 0,
     unit: "MT",
