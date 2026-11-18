@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 interface LeaderDossier {
   id: string;
@@ -64,6 +65,7 @@ export function Leadership() {
   const containerRef = useRef<HTMLDivElement>(null);
   // Default is null so without hover, no detail data is shown
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const { isLaptop, revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   return (
     <section
@@ -83,7 +85,7 @@ export function Leadership() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(0.65), ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10"
         >
           <div>
@@ -116,12 +118,17 @@ export function Leadership() {
               <motion.div
                 key={leader.id}
                 layout
+                initial={isLaptop ? { opacity: 0, y: 24 } : false}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onClick={() => setHoveredIdx(isHovered ? null : idx)}
                 transition={{
-                  layout: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                  opacity: { duration: revealDuration(0.65), delay: idx * staggerDelay(0.1), ease: [0.16, 1, 0.3, 1] },
+                  y: { duration: revealDuration(0.65), delay: idx * staggerDelay(0.1), ease: [0.16, 1, 0.3, 1] },
+                  layout: { duration: hoverDuration(0.5), ease: [0.16, 1, 0.3, 1] },
                 }}
-                className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 flex flex-col lg:flex-row ${
+                className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all ${hoverClass("duration-500")} flex flex-col lg:flex-row ${
                   isHovered
                     ? "flex-[3.5] lg:flex-[3.8] bg-white dark:bg-[#0A1626] shadow-2xl border-2 border-[#2563EB] dark:border-[#7BA4D0] ring-2 ring-[#2563EB]/15"
                     : isAnyHovered
@@ -182,7 +189,7 @@ export function Leadership() {
                       initial={{ opacity: 0, x: 14 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: hoverDuration(0.35), ease: [0.16, 1, 0.3, 1] }}
                       className="w-full flex flex-col justify-center"
                     >
                       {/* Editorial Directive Headline with Comfortable Scale */}

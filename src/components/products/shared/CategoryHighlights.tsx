@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Layers, Box, Settings, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const mainCategories = [
   {
@@ -41,6 +42,7 @@ const mainCategories = [
 export function CategoryHighlights() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay } = useLaptopPacing();
 
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
@@ -78,7 +80,7 @@ export function CategoryHighlights() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: revealDuration(0.7), delay: staggerDelay(0.15), ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 md:mt-0"
           >
             <p className="text-slate-600 dark:text-white/65 text-xs sm:text-sm max-w-sm font-sans leading-relaxed">
@@ -125,14 +127,15 @@ export function CategoryHighlights() {
 }
 
 function CategoryCard({ category, index }: { category: (typeof mainCategories)[0]; index: number }) {
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
   return (
     <motion.div 
       initial={{ opacity: 0, y: 35 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.65, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -6 }}
-      className="group relative h-[320px] sm:h-[340px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center transition-all duration-500 border border-slate-200/80 dark:border-white/10"
+      transition={{ duration: revealDuration(0.65), delay: index * staggerDelay(0.12), ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -6, transition: { duration: hoverDuration(0.3) } }}
+      className={cn("group relative h-[320px] sm:h-[340px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center transition-all border border-slate-200/80 dark:border-white/10", hoverClass("duration-500"))}
     >
       <Link href={category.link} className="block w-full h-full">
         {/* Background Image with Smooth Zoom and Lighting Animation */}

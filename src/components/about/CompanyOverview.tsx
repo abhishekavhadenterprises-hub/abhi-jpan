@@ -6,6 +6,7 @@ import type { Variants } from "framer-motion";
 import Image from "next/image";
 import { ShieldCheck, Award, Globe, Activity } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 // Fast, energetic count-up counter component
 function AnimatedCounter({
@@ -127,6 +128,18 @@ const cardVariants: Variants[] = [
 
 export function CompanyOverview() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
+  const dynamicCardVariants: Variants[] = cardVariants.map((variant, idx) => ({
+    hidden: variant.hidden,
+    visible: {
+      ...(variant.visible as Record<string, unknown>),
+      transition: {
+        duration: revealDuration(0.55),
+        delay: idx * staggerDelay(0.1),
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  }));
 
   return (
     <section
@@ -181,7 +194,7 @@ export function CompanyOverview() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: revealDuration(0.6), ease: [0.16, 1, 0.3, 1] }}
               className="space-y-3 sm:space-y-4"
             >
               <ScrollWipeHeading as="h2" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white">
@@ -208,13 +221,13 @@ export function CompanyOverview() {
               {highlights.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  variants={cardVariants[idx]}
-                  whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.2 } }}
-                  className="p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-colors duration-300 group flex flex-col justify-between transform-gpu"
+                  variants={dynamicCardVariants[idx]}
+                  whileHover={{ y: -6, scale: 1.02, transition: { duration: hoverDuration(0.2) } }}
+                  className={`p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-colors ${hoverClass("duration-300")} group flex flex-col justify-between transform-gpu`}
                 >
                   <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#E7F0FA] dark:bg-white/10 text-[#2E5E99] dark:text-[#7BA4D0] flex items-center justify-center group-hover:bg-[#2E5E99] group-hover:text-white transition-all ${hoverClass("duration-300")}`}>
                         <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                       <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase text-[#2E5E99] dark:text-[#7BA4D0] tracking-wider">

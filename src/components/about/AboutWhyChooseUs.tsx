@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const pillars = [
   {
@@ -33,6 +34,7 @@ const pillars = [
 ];
 
 export function AboutWhyChooseUs() {
+  const { revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
   return (
     <section
       id="about-why-choose-us"
@@ -62,7 +64,7 @@ export function AboutWhyChooseUs() {
 
             <Link
               href="/contact"
-              className="group relative inline-flex items-center w-fit gap-3 sm:gap-4 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-[#0D2440]/10 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/50 transition-all duration-300 backdrop-blur-md shadow-lg shadow-slate-200/20 dark:shadow-none"
+              className={`group relative inline-flex items-center w-fit gap-3 sm:gap-4 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-[#0D2440]/10 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/50 transition-all ${hoverClass("duration-300")} backdrop-blur-md shadow-lg shadow-slate-200/20 dark:shadow-none`}
             >
               <span className="text-sm sm:text-base font-heading font-bold text-[#0D2440] dark:text-white tracking-wide">
                 Request Technical Audit
@@ -75,14 +77,14 @@ export function AboutWhyChooseUs() {
 
           {/* Right Side: Naturally Scrolling Pillar Cards */}
           <div className="lg:w-7/12 flex flex-col gap-8 sm:gap-12 lg:gap-16 w-full pb-12 sm:pb-16 lg:pb-32">
-            {pillars.map((item) => (
+            {pillars.map((item, idx) => (
               <motion.div
                 key={item.num}
                 initial={{ opacity: 0, y: 50, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full p-6 sm:p-10 lg:p-14 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] bg-white/80 dark:bg-black/40 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-2xl shadow-[#2E5E99]/5 dark:shadow-black/50 flex flex-col group hover:-translate-y-2 transition-transform duration-500"
+                transition={{ duration: revealDuration(0.7), delay: idx * staggerDelay(0), ease: [0.16, 1, 0.3, 1] }}
+                className={`w-full p-6 sm:p-10 lg:p-14 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] bg-white/80 dark:bg-black/40 backdrop-blur-3xl border border-slate-200 dark:border-white/10 shadow-2xl shadow-[#2E5E99]/5 dark:shadow-black/50 flex flex-col group hover:-translate-y-2 transition-transform ${hoverClass("duration-500")}`}
               >
                 <div className="flex items-start mb-6 sm:mb-10 lg:mb-14">
                   <span className="font-heading text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-[#0D2440]/5 dark:text-[#7BA4D0]/10 leading-none -ml-1 sm:-ml-2 -mt-2 sm:-mt-4 group-hover:text-[#2E5E99]/10 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">

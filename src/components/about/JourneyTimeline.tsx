@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring, useTransform, useInView } from "framer-mo
 import { Factory, MapPin, Building2, Workflow, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const units = [
   {
@@ -141,6 +142,7 @@ const units = [
 
 export function JourneyTimeline() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { revealDuration, hoverClass } = useLaptopPacing();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
@@ -215,9 +217,10 @@ export function JourneyTimeline() {
                     initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: revealDuration(0.6), ease: [0.16, 1, 0.3, 1] }}
                     className={cn(
-                      "p-5 sm:p-6 md:p-7 rounded-[2rem] border transition-all duration-300 hover:-translate-y-1.5 group w-full max-w-[480px] shadow-sm hover:shadow-md",
+                      "p-5 sm:p-6 md:p-7 rounded-[2rem] border transition-all hover:-translate-y-1.5 group w-full max-w-[480px] shadow-sm hover:shadow-md",
+                      hoverClass("duration-300"),
                       unit.bgColor,
                       unit.borderColor,
                       unit.hoverBorder

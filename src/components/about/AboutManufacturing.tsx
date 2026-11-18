@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
 import { TrendingUp, Cpu, CheckCircle2, Factory, Sparkles, Activity } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 // High-precision RAF count-up component with exponential easing
 function AnimatedCounter({
@@ -92,6 +93,7 @@ const manufacturingStats = [
 export function AboutManufacturing() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   // Smooth scroll parallax for the facility photo
   const { scrollYProgress } = useScroll({
@@ -120,7 +122,7 @@ export function AboutManufacturing() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(0.65), ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl mb-8 sm:mb-10 md:mb-12"
         >
           <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-4 sm:mb-6">
@@ -147,7 +149,7 @@ export function AboutManufacturing() {
             initial={{ opacity: 0, scale: 0.97, y: 30 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: revealDuration(0.75), ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/30 dark:border-white/15 group h-[360px] sm:h-[460px] lg:h-full min-h-[360px]"
           >
             {/* Parallax Photo Layer */}
@@ -198,13 +200,13 @@ export function AboutManufacturing() {
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: revealDuration(0.55), delay: idx * staggerDelay(0.1), ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{
                   y: -5,
                   scale: 1.01,
-                  transition: { duration: 0.2 },
+                  transition: { duration: hoverDuration(0.2) },
                 }}
-                className="relative p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all duration-300 group flex flex-col justify-between overflow-hidden transform-gpu"
+                className={`relative p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all ${hoverClass("duration-300")} group flex flex-col justify-between overflow-hidden transform-gpu`}
               >
                 {/* Top Row: Icon */}
                 <div>

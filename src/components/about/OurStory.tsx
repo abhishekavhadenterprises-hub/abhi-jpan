@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate, use
 import type { Variants } from "framer-motion";
 import { Target, ShieldCheck, Cpu } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const storyCards = [
   {
@@ -33,8 +34,10 @@ const storyCards = [
   },
 ];
 
-function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
+function GodlySpotlightCard({ card, idx, isLaptop }: { card: any; idx: number; isLaptop: boolean }) {
   const boundingRef = useRef<HTMLDivElement>(null);
+  const hoverDur = isLaptop ? "duration-[400ms]" : "duration-500";
+  const hoverFastDur = isLaptop ? "duration-[400ms]" : "duration-300";
   
   // 1. Hover Coordinates for Spotlight
   const mouseX = useMotionValue(0);
@@ -78,7 +81,7 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
       ref={boundingRef}
       variants={{
         hidden: { opacity: 0, y: 40, scale: 0.95 },
-        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: isLaptop ? 0.7 : 0.8, ease: [0.16, 1, 0.3, 1] } }
       }}
       style={{
         rotateX,
@@ -87,11 +90,11 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-[2rem] bg-white dark:bg-[#091524] border border-slate-200/60 dark:border-white/5 shadow-lg flex flex-col justify-between group cursor-crosshair overflow-visible transition-colors duration-500"
+      className={`relative p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-[2rem] bg-white dark:bg-[#091524] border border-slate-200/60 dark:border-white/5 shadow-lg flex flex-col justify-between group cursor-crosshair overflow-visible transition-colors ${hoverDur}`}
     >
       {/* 1. Dynamic Spotlight Background */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover/opacity-100"
+        className={`pointer-events-none absolute -inset-px rounded-2xl sm:rounded-[2rem] opacity-0 transition-opacity ${hoverDur} group-hover/opacity-100`}
         style={{
           background: bgSpotlight,
         }}
@@ -99,7 +102,7 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
       
       {/* 2. Dynamic Border Glow */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover/opacity-100"
+        className={`pointer-events-none absolute -inset-px rounded-2xl sm:rounded-[2rem] opacity-0 transition-opacity ${hoverDur} group-hover/opacity-100`}
         style={{
           background: bgBorder,
           WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
@@ -111,10 +114,10 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
       <div style={{ transform: "translateZ(30px)" }} className="relative z-10">
         {/* Top Row: Icon + Number */}
         <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/[0.02] text-[#2E5E99] dark:text-[#7BA4D0] border border-slate-200 dark:border-white/10 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white transition-all duration-500 shadow-sm">
+          <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center bg-slate-50 dark:bg-white/[0.02] text-[#2E5E99] dark:text-[#7BA4D0] border border-slate-200 dark:border-white/10 group-hover:bg-[#2E5E99] group-hover:border-[#2E5E99] group-hover:text-white transition-all ${hoverDur} shadow-sm`}>
             <card.icon className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <span className="text-2xl sm:text-3xl font-heading font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors duration-500">
+          <span className={`text-2xl sm:text-3xl font-heading font-black text-slate-200 dark:text-white/5 group-hover:text-[#2E5E99]/20 dark:group-hover:text-[#7BA4D0]/20 transition-colors ${hoverDur}`}>
             {card.num}
           </span>
         </div>
@@ -123,7 +126,7 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
           {card.tag}
         </div>
 
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white mb-2 sm:mb-4 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300">
+        <h3 className={`text-xl sm:text-2xl md:text-3xl font-heading font-black tracking-tight text-[#0D2440] dark:text-white mb-2 sm:mb-4 group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors ${hoverFastDur}`}>
           {card.title}
         </h3>
 
@@ -137,6 +140,7 @@ function GodlySpotlightCard({ card, idx }: { card: any; idx: number }) {
 
 export function OurStory() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, staggerDelay } = useLaptopPacing();
 
   return (
     <section
@@ -174,13 +178,13 @@ export function OurStory() {
           viewport={{ once: true, margin: "-40px" }}
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.15 } }
+            visible: { transition: { staggerChildren: staggerDelay(0.15) } }
           }}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
           style={{ perspective: "1200px" }}
         >
           {storyCards.map((card, idx) => (
-            <GodlySpotlightCard key={card.num} card={card} idx={idx} />
+            <GodlySpotlightCard key={card.num} card={card} idx={idx} isLaptop={isLaptop} />
           ))}
         </motion.div>
       </div>

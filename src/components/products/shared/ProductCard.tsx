@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Product } from "@/data/products";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export interface ProductCardProps {
   product: Product;
@@ -15,6 +16,7 @@ export interface ProductCardProps {
 }
 
 export function ProductCard({ product, idx = 0, className }: ProductCardProps) {
+  const { isLaptop, revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
   const images = product.images && product.images.length > 0 ? product.images : [product.image];
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const hasMultipleImages = images.length > 1;
@@ -46,10 +48,10 @@ export function ProductCard({ product, idx = 0, className }: ProductCardProps) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.98 }}
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -2, transition: { duration: hoverDuration(0.3) } }}
       transition={{
-        duration: 0.5,
-        delay: idx * 0.04,
+        duration: revealDuration(0.5),
+        delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.04) : idx * 0.04,
         ease: [0.16, 1, 0.3, 1], // Apple fluid spring curve
       }}
       className={cn("group w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center overflow-visible", className)}
@@ -59,7 +61,7 @@ export function ProductCard({ product, idx = 0, className }: ProductCardProps) {
         className="block h-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2E5E99] rounded-2xl sm:rounded-3xl"
       >
         {/* Simple & Sober Premium Card Container */}
-        <div className="relative h-full bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-[2rem] overflow-hidden transition-all duration-500 ease-[0.16,1,0.3,1] hover:border-slate-300 dark:hover:border-white/20 hover:shadow-xl dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1 flex flex-col group/card">
+        <div className={cn("relative h-full bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-[2rem] overflow-hidden transition-all ease-[0.16,1,0.3,1] hover:border-slate-300 dark:hover:border-white/20 hover:shadow-xl dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:-translate-y-1 flex flex-col group/card", hoverClass("duration-500"))}>
 
           {/* ========================================================
               TOP IMAGE VIEWPORT: Clean & Minimalist

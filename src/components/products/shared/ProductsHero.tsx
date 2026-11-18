@@ -3,9 +3,11 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export function ProductsHero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, revealDuration, staggerDelay } = useLaptopPacing();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -85,7 +87,7 @@ export function ProductsHero() {
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center justify-center space-y-1 sm:space-y-2 md:space-y-4 w-full"
         >
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[7.5rem] font-heading font-black text-white tracking-tighter leading-[1.05] sm:leading-[0.9]">
@@ -100,7 +102,7 @@ export function ProductsHero() {
         <motion.p 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(1.2), delay: isLaptop ? staggerDelay(0.1) : 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 sm:mt-10 md:mt-12 text-sm sm:text-base md:text-lg lg:text-xl text-white/80 font-light leading-relaxed max-w-2xl mx-auto px-2"
         >
           Zero-defect brass, copper, and steel components engineered with sub-micron precision for automotive, HVAC, and industrial leaders worldwide.
@@ -111,7 +113,7 @@ export function ProductsHero() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.8 }}
+        transition={{ duration: revealDuration(1), delay: isLaptop ? 0.3 : 1.8 }}
         className="absolute bottom-6 sm:bottom-10 md:bottom-16 z-20 flex flex-col items-center gap-2 sm:gap-4 pointer-events-none"
       >
         <span className="text-[9px] sm:text-[10px] font-sans font-bold text-white/50 uppercase tracking-[0.3em] sm:tracking-[0.4em]">Scroll to Explore</span>

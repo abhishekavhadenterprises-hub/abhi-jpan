@@ -29,6 +29,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { DrhpDisclaimerModal } from "./DrhpDisclaimerModal";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 /* =========================================================================
    1. CINEMATIC HERO COMPONENT (PREMIUM HERO ANIMATIONS)
@@ -53,6 +54,7 @@ export function GenericInvestorHero({
   chips
 }: GenericInvestorHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, revealDuration, staggerDelay } = useLaptopPacing();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -88,7 +90,7 @@ export function GenericInvestorHero({
       opacity: 1,
       y: 0,
       rotateX: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -168,7 +170,7 @@ export function GenericInvestorHero({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: revealDuration(0.8), delay: isLaptop ? staggerDelay(0.1) : 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="mb-4 sm:mb-6 md:mb-8 inline-flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/10 dark:bg-black/30 backdrop-blur-md border border-white/20 shadow-md"
           >
             <span className="relative flex h-2 w-2">
@@ -211,7 +213,7 @@ export function GenericInvestorHero({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(0.9), delay: isLaptop ? 0.2 : 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mt-4 sm:mt-6 md:mt-8 text-xs sm:text-base md:text-lg text-white/85 font-normal leading-relaxed max-w-2xl mx-auto px-2"
         >
           {subtitle}
@@ -223,7 +225,7 @@ export function GenericInvestorHero({
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: revealDuration(0.8), delay: isLaptop ? 0.3 : 1 }}
             className="flex flex-wrap items-center justify-center gap-3 pt-6"
           >
             {chips.map((chip, cIdx) => (
@@ -645,6 +647,7 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   const sort = searchParams.get("sort") || "desc";
   const query = (searchParams.get("q") || "").toLowerCase().trim();
@@ -899,16 +902,16 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
+                  transition={{ delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.05) : idx * 0.05, duration: revealDuration(0.5), ease: [0.16, 1, 0.3, 1] }}
+                  className={cn("group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-xl shadow-xs", hoverClass("duration-300"))}
                 >
-                  <div className="absolute top-4 sm:top-5 right-5 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
+                  <div className={cn("absolute top-4 sm:top-5 right-5 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors select-none pointer-events-none", hoverClass("duration-500"))}>
                     0{String(item.id).padStart(1, '0')}
                   </div>
 
                   <div>
                     <div className="flex items-center justify-between mb-4 sm:mb-5">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                      <div className={cn("w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all", hoverClass("duration-300"))}>
                         {item.link.toLowerCase().includes(".mp4") ? (
                           <Video className="w-4 h-4 sm:w-5 sm:h-5" />
                         ) : (
@@ -1105,6 +1108,7 @@ function GenericInvestorListingInner({
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   const sort = searchParams.get("sort") || "desc";
   const query = (searchParams.get("q") || "").toLowerCase().trim();
@@ -1362,16 +1366,16 @@ function GenericInvestorListingInner({
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl shadow-xs"
+                  transition={{ delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.05) : idx * 0.05, duration: revealDuration(0.5), ease: [0.16, 1, 0.3, 1] }}
+                  className={cn("group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/70 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-xl shadow-xs", hoverClass("duration-300"))}
                 >
-                  <div className="absolute top-4 sm:top-5 right-5 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors duration-500 select-none pointer-events-none">
+                  <div className={cn("absolute top-4 sm:top-5 right-5 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/25 transition-colors select-none pointer-events-none", hoverClass("duration-500"))}>
                     0{String(item.id).padStart(1, '0')}
                   </div>
 
                   <div>
                     <div className="flex items-center justify-between mb-4 sm:mb-5">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                      <div className={cn("w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all", hoverClass("duration-300"))}>
                         <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                       <span className="px-2.5 sm:px-3 py-1 rounded-full bg-[#E7F0FA] dark:bg-white/10 text-[11px] sm:text-xs font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide">

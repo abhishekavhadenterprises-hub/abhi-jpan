@@ -6,6 +6,7 @@ import { Thermometer, Car, Home, Factory, ArrowUpRight, CheckCircle2 } from "luc
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const usageSectors = [
   {
@@ -49,6 +50,7 @@ const usageSectors = [
 export function ProductIndustries() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   const handleMobileScroll = () => {
     if (!cardsRef.current) return;
@@ -70,7 +72,7 @@ export function ProductIndustries() {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: 0.1 }}
+            transition={{ duration: revealDuration(0.65), delay: 0.1 }}
             className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black leading-tight tracking-tight text-[#0D2440] dark:text-white"
           >
             Industries <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E5E99] via-[#437ec4] to-[#7BA4D0]">We Serve</span>
@@ -80,7 +82,7 @@ export function ProductIndustries() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: 0.2 }}
+            transition={{ duration: revealDuration(0.65), delay: 0.2 }}
             className="text-slate-600 dark:text-white/65 text-xs sm:text-sm max-w-xl mx-auto font-sans leading-relaxed"
           >
             Delivering mission-critical fluid distribution, heat exchange, and structural tubing engineered for the world&apos;s leading manufacturers.
@@ -100,9 +102,9 @@ export function ProductIndustries() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6 }}
-                className="group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all duration-500 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between cursor-pointer p-3.5 sm:p-5"
+                transition={{ duration: revealDuration(0.6), delay: idx * staggerDelay(0.08), ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -6, transition: { duration: hoverDuration(0.3) } }}
+                className={cn("group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between cursor-pointer p-3.5 sm:p-5", hoverClass("duration-500"))}
               >
                 {/* 100% Crisp Background Image with Zero Wash/Blur */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

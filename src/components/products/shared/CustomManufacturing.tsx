@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { PenTool, Box, RefreshCcw, FileCheck, ArrowRight, ShieldCheck, Cpu } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const features = [
   {
@@ -31,6 +32,7 @@ const features = [
 ];
 
 export function CustomManufacturing() {
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
   return (
     <section className="py-14 sm:py-20 md:py-28 bg-white dark:bg-[#070b14] relative overflow-visible transition-colors duration-500">
       <div className="container-custom relative z-10">
@@ -40,7 +42,7 @@ export function CustomManufacturing() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-5 sm:space-y-6"
           >
             <ScrollWipeHeading 
@@ -58,11 +60,15 @@ export function CustomManufacturing() {
             {/* 2x2 Feature Matrix Cards - with hover lift & shadow */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 pt-2">
               {features.map((f, idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/50 hover:bg-slate-100/60 dark:hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-300 group"
+                  initial={isLaptop ? { opacity: 0, y: 18 } : false}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: revealDuration(0.5), delay: idx * staggerDelay(0), ease: [0.16, 1, 0.3, 1] }}
+                  className={`p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99]/50 hover:bg-slate-100/60 dark:hover:bg-white/[0.06] hover:-translate-y-1 transition-all ${hoverClass("duration-300")} group`}
                 >
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-2.5 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#2E5E99]/10 dark:bg-[#7BA4D0]/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] mb-2.5 sm:mb-3 group-hover:scale-110 transition-transform ${hoverClass("duration-300")}`}>
                     <f.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <h3 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] dark:text-white mb-1">
@@ -71,7 +77,7 @@ export function CustomManufacturing() {
                   <p className="text-xs text-slate-500 dark:text-white/55 leading-relaxed font-sans font-normal">
                     {f.desc}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -79,10 +85,10 @@ export function CustomManufacturing() {
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#0D2440] dark:bg-[#2E5E99] text-white dark:text-white hover:bg-[#2E5E99] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] font-heading font-semibold text-xs sm:text-sm transition-all duration-300 cursor-pointer group w-full sm:w-auto text-center shadow-md shadow-[#0D2440]/10"
+                className={`inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#0D2440] dark:bg-[#2E5E99] text-white dark:text-white hover:bg-[#2E5E99] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] font-heading font-semibold text-xs sm:text-sm transition-all ${hoverClass("duration-300")} cursor-pointer group w-full sm:w-auto text-center shadow-md shadow-[#0D2440]/10`}
               >
                 <span className="truncate">Request Custom Engineering Quote</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 shrink-0" />
+                <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${hoverClass("duration-300")} shrink-0`} />
               </Link>
             </div>
           </motion.div>
@@ -92,7 +98,7 @@ export function CustomManufacturing() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 relative py-4 sm:py-6 px-1 sm:px-4 lg:p-2"
           >
             {/* Main Showcase Card */}

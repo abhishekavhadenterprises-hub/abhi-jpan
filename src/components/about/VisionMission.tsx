@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Compass, Target, CheckCircle2, Sparkles } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const visionPoints = [
   {
@@ -85,11 +86,14 @@ function AwwwardsTiltCard({
   children,
   className = "",
   initialVariant,
+  isLaptop = false,
 }: {
   children: React.ReactNode;
   className?: string;
   initialVariant?: Variants;
+  isLaptop?: boolean;
 }) {
+  const hoverDur = isLaptop ? "duration-[400ms]" : "duration-300";
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -133,11 +137,11 @@ function AwwwardsTiltCard({
       style={{
         transformStyle: "preserve-3d",
       }}
-      className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 transition-colors duration-300 flex flex-col justify-between group transform-gpu cursor-default overflow-hidden ${className}`}
+      className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 dark:border-white/15 transition-colors ${hoverDur} flex flex-col justify-between group transform-gpu cursor-default overflow-hidden ${className}`}
     >
       {/* Specular Radial Spotlight following cursor (Awwwards Signature) */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl transition-opacity duration-300 z-10"
+        className={`pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl transition-opacity ${hoverDur} z-10`}
         style={{
           opacity: isHovered ? 1 : 0,
           background: `radial-gradient(500px circle at ${mousePos.x}px ${mousePos.y}px, rgba(46, 94, 153, 0.16), transparent 75%)`,
@@ -147,7 +151,7 @@ function AwwwardsTiltCard({
 
       {/* Reactive Specular Border Beam */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl transition-opacity duration-300 z-20"
+        className={`pointer-events-none absolute -inset-px rounded-2xl sm:rounded-3xl transition-opacity ${hoverDur} z-20`}
         style={{
           opacity: isHovered ? 1 : 0,
           background: `radial-gradient(350px circle at ${mousePos.x}px ${mousePos.y}px, rgba(123, 164, 208, 0.5), transparent 70%)`,
@@ -170,6 +174,27 @@ function AwwwardsTiltCard({
 
 export function VisionMission() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, revealDuration, staggerDelay } = useLaptopPacing();
+
+  const leftEntrance: Variants = isLaptop
+    ? {
+        hidden: awwwardsEntranceLeft.hidden,
+        visible: {
+          ...(awwwardsEntranceLeft.visible as Record<string, unknown>),
+          transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+        },
+      }
+    : awwwardsEntranceLeft;
+
+  const rightEntrance: Variants = isLaptop
+    ? {
+        hidden: awwwardsEntranceRight.hidden,
+        visible: {
+          ...(awwwardsEntranceRight.visible as Record<string, unknown>),
+          transition: { duration: 0.7, delay: staggerDelay(0.16), ease: [0.16, 1, 0.3, 1] },
+        },
+      }
+    : awwwardsEntranceRight;
 
   return (
     <section
@@ -183,7 +208,7 @@ export function VisionMission() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(0.65), ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mb-8 sm:mb-10 md:mb-12"
         >
           <ScrollWipeHeading as="h2" className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-black tracking-tight leading-[1.08] text-[#0D2440] dark:text-white mb-3 sm:mb-4">
@@ -201,7 +226,7 @@ export function VisionMission() {
         {/* 2 Awwwards-Grade 3D Holographic Perspective Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch [perspective:1400px]">
           {/* Card 1: OUR VISION */}
-          <AwwwardsTiltCard initialVariant={awwwardsEntranceLeft}>
+          <AwwwardsTiltCard initialVariant={leftEntrance} isLaptop={isLaptop}>
             <div>
               {/* Top Row: Icon (Floating at translateZ: 38px) */}
               <div 
@@ -248,7 +273,7 @@ export function VisionMission() {
           </AwwwardsTiltCard>
 
           {/* Card 2: OUR MISSION */}
-          <AwwwardsTiltCard initialVariant={awwwardsEntranceRight}>
+          <AwwwardsTiltCard initialVariant={rightEntrance} isLaptop={isLaptop}>
             <div>
               {/* Top Row: Icon (Floating at translateZ: 38px) */}
               <div 

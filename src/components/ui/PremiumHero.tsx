@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 export interface PremiumHeroProps {
   title: string;
@@ -10,10 +11,13 @@ export interface PremiumHeroProps {
   description: string;
   imageSrc: string;
   badgeText?: string;
+  laptopOptimized?: boolean;
 }
 
-export function PremiumHero({ title, subtitle, description, imageSrc, badgeText }: PremiumHeroProps) {
+export function PremiumHero({ title, subtitle, description, imageSrc, badgeText, laptopOptimized = false }: PremiumHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop } = useLaptopPacing();
+  const useLaptop = laptopOptimized && isLaptop;
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -37,7 +41,7 @@ export function PremiumHero({ title, subtitle, description, imageSrc, badgeText 
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: useLaptop ? 0.1 : 0.08,
         delayChildren: 0.2,
       },
     },
@@ -49,7 +53,7 @@ export function PremiumHero({ title, subtitle, description, imageSrc, badgeText 
       opacity: 1,
       y: 0,
       rotateX: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: useLaptop ? 0.7 : 0.8, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
