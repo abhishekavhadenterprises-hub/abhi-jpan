@@ -6,6 +6,7 @@ import { MapPin, Briefcase, ChevronRight, Building2, ArrowRight } from "lucide-r
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const jobs = [
   {
@@ -72,6 +73,7 @@ export function CareersOpenings() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   // Reset scroll and activeIndex when activeDept changes
   useEffect(() => {
@@ -103,8 +105,8 @@ export function CareersOpenings() {
         opacity: 1, 
         y: 0, 
         transition: { 
-          delay: rowIndex * 0.22 + colIndex * 0.08,
-          duration: 0.75, 
+          delay: isLaptop ? Math.min(i % 6, 5) * staggerDelay(0.1) : rowIndex * 0.22 + colIndex * 0.08,
+          duration: revealDuration(0.75), 
           ease: [0.16, 1, 0.3, 1] 
         } 
       };
@@ -204,7 +206,7 @@ export function CareersOpenings() {
                   exit="exit"
                   className="w-full shrink-0 snap-center md:w-auto md:shrink flex"
                 >
-                  <div className="group relative bg-gradient-to-br from-white via-white to-[#EBF3FC]/60 dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#071321] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#2E5E99]/5 overflow-hidden flex flex-col justify-between w-full cursor-default">
+                  <div className={cn("group relative bg-gradient-to-br from-white via-white to-[#EBF3FC]/60 dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#071321] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all shadow-sm hover:shadow-xl hover:shadow-[#2E5E99]/5 overflow-hidden flex flex-col justify-between w-full cursor-default", hoverClass("duration-300"))}>
                     {/* Specular Radial Gradient on Hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[#2E5E99]/12 via-[#7BA4D0]/6 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl sm:rounded-3xl" />
 

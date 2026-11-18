@@ -53,6 +53,10 @@ const CALIBRATED_LAPTOP_ROUTES = [
   "/certifications",
   "/certificate",
   "/newsletter",
+  // Careers
+  "/careers",
+  // Contact
+  "/contact",
 ];
 
 function isCalibratedLaptopRoute(pathname: string): boolean {

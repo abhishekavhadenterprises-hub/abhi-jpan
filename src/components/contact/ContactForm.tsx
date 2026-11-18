@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import { Send, User, Mail, Phone, MessageSquare, ShieldCheck, CheckCircle2, ChevronDown, Lock } from "lucide-react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 const subjectOptions = [
   { value: "dividend", label: "Dividend Inquiry" },
@@ -28,6 +29,7 @@ export function ContactForm({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const { revealDuration, hoverClass } = useLaptopPacing();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ export function ContactForm({
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] } 
     },
     exit: { 
       opacity: 0, 
@@ -100,7 +102,7 @@ export function ContactForm({
                 
                 <button 
                   onClick={() => setIsSubmitted(false)}
-                  className="px-6 sm:px-8 py-3.5 sm:py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[#0D2440]/15 cursor-pointer"
+                  className={`px-6 sm:px-8 py-3.5 sm:py-4 bg-[#0D2440] hover:bg-[#2E5E99] dark:bg-[#2E5E99] dark:hover:bg-[#1A365D] text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-xl transition-all ${hoverClass("duration-300")} hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[#0D2440]/15 cursor-pointer`}
                 >
                   Send Another Inquiry
                 </button>

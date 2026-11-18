@@ -10,6 +10,7 @@ export function CareersHero() {
       subtitle="In Precision Engineering."
       description="Shape the future of thermal and HVAC tubing with a team dedicated to engineering excellence, continuous innovation, and sustainable industrial growth."
       imageSrc="/images/job-detail-hero.png"
+      laptopOptimized
     />
   );
 }

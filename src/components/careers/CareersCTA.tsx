@@ -5,6 +5,7 @@ import { ArrowRight, Mail, Headphones, UserPlus, ShieldCheck } from "lucide-reac
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
+import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
 // High-precision 3D Gyroscopic Tilt Card (Distinct animation signature for CTA)
 function GyroContactCard({ 
@@ -58,6 +59,7 @@ export function CareersCTA() {
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { revealDuration, staggerDelay } = useLaptopPacing();
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
@@ -71,7 +73,7 @@ export function CareersCTA() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.15 }
+      transition: { staggerChildren: staggerDelay(0.12), delayChildren: 0.15 }
     }
   };
 
@@ -80,7 +82,7 @@ export function CareersCTA() {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
@@ -91,7 +93,7 @@ export function CareersCTA() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.96 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: revealDuration(1.1), ease: [0.16, 1, 0.3, 1] }}
           className="relative rounded-2xl sm:rounded-3xl lg:rounded-[36px] overflow-hidden bg-gradient-to-br from-[#EBF3FC] via-[#F2F7FD] to-[#E2EFFC] dark:from-[#0a182a] dark:via-[#0d223c] dark:to-[#091524] border border-[#7BA4D0]/35 dark:border-white/10 p-6 sm:p-10 lg:p-14 shadow-lg group"
         >
           {/* Subtle architectural background texture */}
