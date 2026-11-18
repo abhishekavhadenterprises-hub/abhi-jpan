@@ -73,31 +73,12 @@ function isCalibratedLaptopRoute(pathname: string): boolean {
   );
 }
 
-const DESKTOP_EASING = (t: number) => 1 - Math.pow(1 - t, 4);
+const QUARTIC_EASING = (t: number) => 1 - Math.pow(1 - t, 4);
 
 function applyLenisProfile(lenis: Lenis, useLaptopProfile: boolean) {
-  const opts = lenis.options as {
-    lerp?: number;
-    duration?: number;
-    easing?: (t: number) => number;
-  };
-
-  if (useLaptopProfile) {
-    // Pure frame-rate-independent exponential damping (lerp) on laptop:
-    // Eliminates sawtooth velocity resets caused by duration+easing on 60Hz/120Hz trackpads
-    opts.lerp = 0.1;
-    delete opts.duration;
-    delete opts.easing;
-  } else {
-    // Original Desktop PC / Mobile config (100% untouched)
-    delete opts.lerp;
-    opts.duration = 1.15;
-    opts.easing = DESKTOP_EASING;
-  }
-
-  if (typeof document !== "undefined") {
-    document.documentElement.classList.toggle("laptop-scroll-opt", useLaptopProfile);
-  }
+  // Exact same PC quartic smoothness on laptop — just slightly more weighted delay (1.35s vs 1.15s)
+  lenis.options.duration = useLaptopProfile ? 1.35 : 1.15;
+  lenis.options.easing = QUARTIC_EASING;
 }
 
 export function SmoothScroll() {
@@ -112,7 +93,7 @@ export function SmoothScroll() {
         isCalibratedLaptopRoute(pathname) && isLaptopScreen();
       applyLenisProfile(lenisRef.current, useLaptopProfile);
 
-      // Recalculate scroll limits immediately on route transitions to prevent stale-height scroll glitches
+      // Keep scroll height bounds accurate after route transitions
       const lenis = lenisRef.current;
       const rafResize = requestAnimationFrame(() => lenis.resize());
       const settledResize = setTimeout(() => lenis.resize(), 300);
@@ -127,36 +108,25 @@ export function SmoothScroll() {
     const initialLaptopProfile =
       isCalibratedLaptopRoute(pathnameRef.current) && isLaptopScreen();
 
-    if (typeof document !== "undefined") {
-      document.documentElement.classList.toggle("laptop-scroll-opt", initialLaptopProfile);
-    }
-
-    // Laptop uses pure exponential lerp (zero sawtooth trackpad jitter on 60Hz/120Hz displays)
-    // Desktop PC & Phone retain exact original quartic duration profile
+    // Exact same PC quartic smoothness across devices; laptop gets a gentle weighted delay (1.35s)
+    // and calmer linear travel (~0.81x) so scrolling is never too fast
     const lenis = new Lenis({
-      ...(initialLaptopProfile
-        ? { lerp: 0.1 }
-        : { duration: 1.15, easing: DESKTOP_EASING }),
+      duration: initialLaptopProfile ? 1.35 : 1.15,
+      easing: QUARTIC_EASING,
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.25, // Base multiplier for Desktop PC (kept untouched)
-      touchMultiplier: 1.2, // Base multiplier for Phone/Touch (kept untouched)
+      wheelMultiplier: 1.25, // Base multiplier for Desktop PC (100% untouched)
+      touchMultiplier: 1.2, // Base multiplier for Phone/Touch (100% untouched)
       infinite: false,
       virtualScroll: (data) => {
-        // Apply smooth continuous laptop-only damping ONLY on calibrated pages & laptop screens
+        // Strictly Laptop-only linear slowdown (brings 1.25 -> ~0.81, pure PC smoothness without distortion)
         if (
           data.event instanceof WheelEvent &&
           isCalibratedLaptopRoute(pathnameRef.current) &&
           isLaptopScreen()
         ) {
-          // Smooth C-infinity tanh compression:
-          // - Gentle/moderate scrolling stays linear (~0.75x effective pace, never sluggish)
-          // - Extreme MacBook/Windows trackpad inertia spikes taper smoothly with ZERO kink or jerk
-          const linear = data.deltaY * 0.62;
-          const maxStep = 115;
-          data.deltaY =
-            Math.sign(linear) * maxStep * Math.tanh(Math.abs(linear) / maxStep);
+          data.deltaY *= 0.65;
         }
         return true;
       },
@@ -191,9 +161,6 @@ export function SmoothScroll() {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
       lenisRef.current = null;
-      if (typeof document !== "undefined") {
-        document.documentElement.classList.remove("laptop-scroll-opt");
-      }
       if (typeof window !== "undefined") {
         delete (window as unknown as { __lenis?: Lenis }).__lenis;
       }
