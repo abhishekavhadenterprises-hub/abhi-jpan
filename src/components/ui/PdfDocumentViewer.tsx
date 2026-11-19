@@ -11,8 +11,10 @@ import {
   Download, 
   Loader2, 
   FileText, 
-  AlertCircle,
-  ExternalLink
+  ExternalLink,
+  Layers,
+  FileCheck2,
+  RefreshCw
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -29,11 +31,14 @@ interface PdfDocumentViewerProps {
   onDownload?: () => void;
 }
 
-// Helper to dynamically load local PDF.js script & worker
+// Dynamically load PDF.js script & worker with fallback
 function loadPdfJs(): Promise<any> {
   if (typeof window === "undefined") return Promise.reject(new Error("Window undefined"));
+  
   if (window.pdfjsLib) {
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+    try {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+    } catch (_) {}
     return Promise.resolve(window.pdfjsLib);
   }
 
@@ -41,11 +46,15 @@ function loadPdfJs(): Promise<any> {
     const existing = document.getElementById("pdfjs-script") as HTMLScriptElement | null;
     if (existing) {
       if (window.pdfjsLib) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+        try {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+        } catch (_) {}
         return resolve(window.pdfjsLib);
       }
       existing.addEventListener("load", () => {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+        try {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+        } catch (_) {}
         resolve(window.pdfjsLib);
       });
       existing.addEventListener("error", reject);
@@ -58,19 +67,23 @@ function loadPdfJs(): Promise<any> {
     script.async = true;
     script.onload = () => {
       if (window.pdfjsLib) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+        try {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js";
+        } catch (_) {}
         resolve(window.pdfjsLib);
       } else {
         reject(new Error("pdfjsLib not found on window"));
       }
     };
     script.onerror = () => {
-      // Fallback to CDN if local fails
+      // CDN Fallback if local vendor script fails
       const fallbackScript = document.createElement("script");
       fallbackScript.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
       fallbackScript.onload = () => {
         if (window.pdfjsLib) {
-          window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+          try {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+          } catch (_) {}
           resolve(window.pdfjsLib);
         } else {
           reject(new Error("Fallback pdfjsLib failed"));
@@ -96,23 +109,30 @@ export function PdfDocumentViewer({
   const [numPages, setNumPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  
+  // View mode: "canvas" for interactive zoomable pages, "native" for embedded browser/iframe viewer
+  const [viewMode, setViewMode] = useState<"canvas" | "native">("canvas");
 
   // Zoom scale (1.0 = 100%)
   const [scale, setScale] = useState<number>(1.0);
   const [fitWidthScale, setFitWidthScale] = useState<number>(1.0);
 
-  // Load PDF Document
+  // Normalise document URL (handle relative vs absolute)
+  const normalizedUrl = React.useMemo(() => {
+    if (!url) return "/sample-report.pdf";
+    return url;
+  }, [url]);
+
+  // Load PDF Document with Canvas renderer
   useEffect(() => {
     let isCancelled = false;
     setLoading(true);
-    setError(null);
 
     loadPdfJs()
       .then((pdfjs) => {
         if (isCancelled) return;
         const loadingTask = pdfjs.getDocument({
-          url,
+          url: normalizedUrl,
           cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/",
           cMapPacked: true,
         });
@@ -129,29 +149,30 @@ export function PdfDocumentViewer({
         doc.getPage(1).then((firstPage: any) => {
           if (isCancelled) return;
           const viewport = firstPage.getViewport({ scale: 1.0 });
-          const containerWidth = containerRef.current?.clientWidth || window.innerWidth;
-          // Leave comfortable padding on sides
-          const targetWidth = Math.max(300, containerWidth - (containerWidth < 640 ? 24 : 64));
+          const containerWidth = containerRef.current?.clientWidth || (typeof window !== "undefined" ? window.innerWidth : 800);
+          const targetWidth = Math.max(280, containerWidth - (containerWidth < 640 ? 24 : 64));
           const calculatedFit = Math.min(2.0, Math.max(0.5, targetWidth / viewport.width));
           setFitWidthScale(calculatedFit);
-          // Default to Fit Width so mobile phones display perfectly from edge to edge
+          // Default to Fit Width so mobile phones display edge-to-edge
           setScale(calculatedFit);
           setLoading(false);
+          setViewMode("canvas");
         }).catch(() => {
           setLoading(false);
         });
       })
       .catch((err) => {
         if (isCancelled) return;
-        console.error("Failed to load PDF:", err);
-        setError("Unable to preview document directly. You can download or view it in an external tab.");
+        console.warn("Interactive PDF.js canvas unavailable on this device; switching to native document embed:", err);
+        // Automatically switch to native embedded viewer so the user ALWAYS sees the document preview without fallback warnings!
+        setViewMode("native");
         setLoading(false);
       });
 
     return () => {
       isCancelled = true;
     };
-  }, [url]);
+  }, [normalizedUrl]);
 
   // Recalculate fit width on window resize
   useEffect(() => {
@@ -160,7 +181,7 @@ export function PdfDocumentViewer({
       pdfDoc.getPage(1).then((firstPage: any) => {
         const viewport = firstPage.getViewport({ scale: 1.0 });
         const containerWidth = containerRef.current?.clientWidth || window.innerWidth;
-        const targetWidth = Math.max(300, containerWidth - (containerWidth < 640 ? 24 : 64));
+        const targetWidth = Math.max(280, containerWidth - (containerWidth < 640 ? 24 : 64));
         const calculatedFit = Math.min(2.0, Math.max(0.5, targetWidth / viewport.width));
         setFitWidthScale(calculatedFit);
       }).catch(() => {});
@@ -219,105 +240,149 @@ export function PdfDocumentViewer({
     <div 
       ref={containerRef}
       className={cn(
-        "relative w-full h-full flex flex-col bg-[#0b1523] text-white select-none overflow-hidden",
+        "relative w-full h-full flex flex-col bg-[#F8FAFC] text-[#0D2440] select-none overflow-hidden",
         className
       )}
     >
-      {/* Top Controls Toolbar */}
-      <div className="z-20 w-full px-3 sm:px-5 py-2.5 bg-[#0D2440]/95 backdrop-blur-md border-b border-[#7BA4D0]/20 flex items-center justify-between gap-2 shrink-0">
-        {/* Left: Document info & Page Counter */}
+      {/* Top Controls Toolbar — Crisp Light Theme */}
+      <div className="z-20 w-full px-3 sm:px-5 py-2.5 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-xs flex items-center justify-between gap-2 shrink-0">
+        
+        {/* Left: Document Info & Status */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <div className="w-7 h-7 rounded-lg bg-[#2563EB]/20 border border-[#2563EB]/40 flex items-center justify-center text-[#7BA4D0] shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#2E5E99]/10 border border-[#2E5E99]/20 flex items-center justify-center text-[#2E5E99] shrink-0">
             <FileText className="w-4 h-4" />
           </div>
           <div className="min-w-0">
-            <h4 className="text-xs sm:text-sm font-heading font-bold text-white truncate max-w-[140px] xs:max-w-[200px] sm:max-w-md">
+            <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0D2440] truncate max-w-[130px] xs:max-w-[180px] sm:max-w-xs md:max-w-md">
               {title}
             </h4>
-            {numPages > 0 && (
-              <span className="text-[10px] font-mono text-[#7BA4D0] block">
-                Page {currentPage} of {numPages}
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              {viewMode === "canvas" && numPages > 0 ? (
+                <span className="text-[10px] font-mono text-slate-500 font-medium">
+                  Page {currentPage} of {numPages}
+                </span>
+              ) : (
+                <span className="text-[10px] font-mono text-emerald-600 font-semibold flex items-center gap-1">
+                  <FileCheck2 className="w-3 h-3" />
+                  Direct Document View
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Right: Zoom & Navigation Toolbar */}
+        {/* Right: Zoom & Navigation Controls */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-          {/* Page Up / Down Quick Nav */}
-          {numPages > 1 && (
-            <div className="hidden xs:flex items-center bg-white/5 border border-white/10 rounded-lg p-0.5 mr-1">
-              <button
-                onClick={() => scrollToPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage <= 1}
-                title="Previous Page"
-                className="p-1 rounded text-white/70 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
-              >
-                <ChevronUp className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => scrollToPage(Math.min(numPages, currentPage + 1))}
-                disabled={currentPage >= numPages}
-                title="Next Page"
-                className="p-1 rounded text-white/70 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
-              >
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
-
-          {/* Zoom Buttons */}
-          <div className="flex items-center bg-white/5 border border-white/10 rounded-lg p-0.5">
+          
+          {/* Mode Switcher Toggle: Canvas vs Native Embed */}
+          <div className="hidden sm:flex items-center bg-slate-100 border border-slate-200/80 rounded-lg p-0.5 mr-1">
             <button
-              onClick={handleZoomOut}
-              title="Zoom Out"
-              aria-label="Zoom Out"
-              className="p-1 sm:p-1.5 rounded text-white/80 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
+              onClick={() => setViewMode("canvas")}
+              title="Interactive Multi-Page View"
+              className={cn(
+                "px-2 py-1 rounded-md text-[11px] font-heading font-bold transition-all",
+                viewMode === "canvas"
+                  ? "bg-white text-[#2E5E99] shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
+              )}
             >
-              <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              Interactive
             </button>
-
-            <span className="px-1.5 text-[11px] font-mono text-[#93C5FD] min-w-[42px] text-center hidden sm:inline-block">
-              {Math.round(scale * 100)}%
-            </span>
-
             <button
-              onClick={handleZoomIn}
-              title="Zoom In"
-              aria-label="Zoom In"
-              className="p-1 sm:p-1.5 rounded text-white/80 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
+              onClick={() => setViewMode("native")}
+              title="Native Document Embed"
+              className={cn(
+                "px-2 py-1 rounded-md text-[11px] font-heading font-bold transition-all",
+                viewMode === "native"
+                  ? "bg-white text-[#2E5E99] shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
+              )}
             >
-              <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              Native PDF
             </button>
           </div>
 
-          {/* Fit Width Button */}
-          <button
-            onClick={handleFitWidth}
-            title="Fit to Width"
-            aria-label="Fit Width"
-            className="p-1.5 sm:p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 hover:text-white active:scale-95 transition-all"
-          >
-            <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-          </button>
+          {/* Interactive Zoom Controls (Active in Canvas Mode) */}
+          {viewMode === "canvas" && (
+            <>
+              {/* Page Up / Down Quick Nav */}
+              {numPages > 1 && (
+                <div className="hidden xs:flex items-center bg-slate-100 border border-slate-200/80 rounded-lg p-0.5">
+                  <button
+                    onClick={() => scrollToPage(Math.max(1, currentPage - 1))}
+                    disabled={currentPage <= 1}
+                    title="Previous Page"
+                    aria-label="Previous Page"
+                    className="p-1 rounded text-slate-600 hover:text-[#0D2440] hover:bg-white disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                  >
+                    <ChevronUp className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => scrollToPage(Math.min(numPages, currentPage + 1))}
+                    disabled={currentPage >= numPages}
+                    title="Next Page"
+                    aria-label="Next Page"
+                    className="p-1 rounded text-slate-600 hover:text-[#0D2440] hover:bg-white disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                  >
+                    <ChevronDown className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
 
-          {/* Reset Zoom Button */}
-          <button
-            onClick={handleResetZoom}
-            title="Reset Scale"
-            aria-label="Reset Scale"
-            className="p-1.5 sm:p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 hover:text-white active:scale-95 transition-all hidden md:flex items-center"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-          </button>
+              {/* Zoom Buttons */}
+              <div className="flex items-center bg-slate-100 border border-slate-200/80 rounded-lg p-0.5">
+                <button
+                  onClick={handleZoomOut}
+                  title="Zoom Out"
+                  aria-label="Zoom Out"
+                  className="p-1 sm:p-1.5 rounded text-slate-700 hover:text-[#0D2440] hover:bg-white active:scale-95 transition-all"
+                >
+                  <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </button>
 
-          {/* Download Button (Optional Action) */}
+                <span className="px-1.5 text-[11px] font-mono text-slate-700 font-semibold min-w-[42px] text-center hidden sm:inline-block">
+                  {Math.round(scale * 100)}%
+                </span>
+
+                <button
+                  onClick={handleZoomIn}
+                  title="Zoom In"
+                  aria-label="Zoom In"
+                  className="p-1 sm:p-1.5 rounded text-slate-700 hover:text-[#0D2440] hover:bg-white active:scale-95 transition-all"
+                >
+                  <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </button>
+              </div>
+
+              {/* Fit to Width Button */}
+              <button
+                onClick={handleFitWidth}
+                title="Fit to Width"
+                aria-label="Fit Width"
+                className="p-1.5 sm:p-2 rounded-lg bg-slate-100 hover:bg-white border border-slate-200/80 text-slate-700 hover:text-[#0D2440] active:scale-95 transition-all"
+              >
+                <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </button>
+
+              {/* Reset Zoom Button */}
+              <button
+                onClick={handleResetZoom}
+                title="Reset Scale"
+                aria-label="Reset Scale"
+                className="p-1.5 sm:p-2 rounded-lg bg-slate-100 hover:bg-white border border-slate-200/80 text-slate-700 hover:text-[#0D2440] active:scale-95 transition-all hidden md:flex items-center"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            </>
+          )}
+
+          {/* Download Button */}
           <a
-            href={url}
+            href={normalizedUrl}
             download
             onClick={onDownload}
-            title="Download Document"
-            className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-heading font-bold flex items-center gap-1.5 transition-all shadow-sm shrink-0 ml-1"
+            title="Download Official Document"
+            className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-[#2E5E99] hover:bg-[#1D4ED8] text-white text-xs font-heading font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 ml-0.5 sm:ml-1"
           >
             <Download className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Download</span>
@@ -325,81 +390,71 @@ export function PdfDocumentViewer({
         </div>
       </div>
 
-      {/* Main Document Canvas Scroll Area */}
-      <div 
-        ref={scrollAreaRef}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        className="flex-1 w-full h-full overflow-y-auto overflow-x-auto p-2 sm:p-4 md:p-6 bg-[#07111e] flex flex-col items-center gap-4 scroll-smooth"
-      >
-        {/* Loading State */}
-        {loading && (
-          <div className="flex-1 w-full min-h-[360px] flex flex-col items-center justify-center p-8 text-center">
-            <Loader2 className="w-9 h-9 text-[#2563EB] animate-spin mb-3" />
-            <p className="text-xs sm:text-sm font-medium text-white/80">Rendering Document Preview...</p>
-            <p className="text-[11px] text-[#7BA4D0] mt-1 font-mono">Zero downloads triggered</p>
-          </div>
-        )}
-
-        {/* Error State */}
-        {error && !loading && (
-          <div className="flex-1 w-full min-h-[360px] flex flex-col items-center justify-center p-8 text-center max-w-md mx-auto">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
-              <AlertCircle className="w-6 h-6" />
+      {/* Main Content Area */}
+      {viewMode === "canvas" ? (
+        /* Multi-Page Canvas Interactive Reading Area */
+        <div 
+          ref={scrollAreaRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="flex-1 w-full h-full overflow-y-auto overflow-x-auto p-2 sm:p-4 md:p-6 bg-[#EEF2F6] flex flex-col items-center gap-4 scroll-smooth"
+        >
+          {/* Loading State */}
+          {loading && (
+            <div className="flex-1 w-full min-h-[380px] flex flex-col items-center justify-center p-8 text-center">
+              <Loader2 className="w-8 h-8 text-[#2E5E99] animate-spin mb-3" />
+              <p className="text-xs sm:text-sm font-bold text-[#0D2440]">Rendering Document Preview...</p>
+              <p className="text-[11px] text-slate-500 mt-1 font-mono">Zero downloads triggered</p>
             </div>
-            <h4 className="text-base font-heading font-bold text-white mb-2">
-              Preview Fallback Notice
-            </h4>
-            <p className="text-xs text-white/70 leading-relaxed mb-6 font-light">
-              {error}
-            </p>
-            <div className="flex items-center gap-3">
-              <a 
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-heading font-bold transition-all flex items-center gap-2"
+          )}
+
+          {/* Multi-Page Canvas Stack */}
+          {!loading && pdfDoc && (
+            <div 
+              className="flex flex-col items-center gap-4 sm:gap-6 py-2 transition-transform duration-100"
+              style={{ width: "100%", maxWidth: "100%" }}
+            >
+              {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
+                <PdfCanvasPage 
+                  key={pageNum}
+                  pdfDoc={pdfDoc}
+                  pageNum={pageNum}
+                  scale={scale}
+                  onVisible={() => setCurrentPage(pageNum)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        /* Native Document Viewer Mode (100% Device Compatibility Fallback) */
+        <div className="flex-1 w-full h-full bg-[#EEF2F6] p-2 sm:p-3 flex flex-col">
+          <div className="w-full h-full rounded-xl overflow-hidden border border-slate-200/90 shadow-md bg-white flex flex-col relative">
+            <iframe
+              src={`${normalizedUrl}#toolbar=1&navpanes=0`}
+              className="w-full h-full flex-grow border-0 bg-white"
+              title={title}
+            />
+            {/* Fallback bar for mobile devices where browser restricts inline PDF iframes */}
+            <div className="sm:hidden px-3 py-2 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-[11px]">
+              <span className="text-slate-600 font-medium">Viewing in Native PDF Mode</span>
+              <button
+                onClick={() => setViewMode("canvas")}
+                className="text-[#2E5E99] font-bold hover:underline"
               >
-                <ExternalLink className="w-3.5 h-3.5" />
-                Open File Directly
-              </a>
-              <a 
-                href={url}
-                download
-                className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-heading font-bold transition-all flex items-center gap-2"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Download PDF
-              </a>
+                Switch to Canvas
+              </button>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Multi-Page Canvas Stack */}
-        {!loading && !error && pdfDoc && (
-          <div 
-            className="flex flex-col items-center gap-4 sm:gap-6 py-2 transition-transform duration-100"
-            style={{ width: "100%", maxWidth: "100%" }}
-          >
-            {Array.from({ length: numPages }, (_, i) => i + 1).map((pageNum) => (
-              <PdfCanvasPage 
-                key={pageNum}
-                pdfDoc={pdfDoc}
-                pageNum={pageNum}
-                scale={scale}
-                onVisible={() => setCurrentPage(pageNum)}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Floating Bottom Status Pill for Mobile */}
-      {numPages > 1 && !loading && !error && (
-        <div className="sm:hidden absolute bottom-3 left-1/2 -translate-x-1/2 z-20 px-3 py-1.5 rounded-full bg-[#0D2440]/90 backdrop-blur-md border border-[#7BA4D0]/30 shadow-lg text-[10px] font-mono text-white/90 flex items-center gap-2">
-          <span>{currentPage} / {numPages}</span>
-          <span className="text-white/30">•</span>
+      {/* Floating Bottom Status Pill for Mobile (Canvas Mode) */}
+      {viewMode === "canvas" && numPages > 1 && !loading && (
+        <div className="sm:hidden absolute bottom-3 left-1/2 -translate-x-1/2 z-20 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-300/80 shadow-md text-[10px] font-mono text-slate-700 flex items-center gap-2">
+          <span className="font-semibold">{currentPage} / {numPages}</span>
+          <span className="text-slate-300">•</span>
           <span>{Math.round(scale * 100)}%</span>
         </div>
       )}
@@ -425,7 +480,7 @@ function PdfCanvasPage({
   const [pageRendered, setPageRendered] = useState(false);
   const [pageLoading, setPageLoading] = useState(false);
 
-  // IntersectionObserver to only render when page is near screen
+  // IntersectionObserver to only render when page is near viewport
   const [isVisible, setIsVisible] = useState(pageNum <= 2);
 
   useEffect(() => {
@@ -473,7 +528,7 @@ function PdfCanvasPage({
       const ctx = canvas.getContext("2d", { alpha: false });
       if (!ctx) return;
 
-      // Handle High DPI / Retina crispness
+      // High-DPI Retina crispness
       const outputScale = typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1;
       canvas.width = Math.floor(viewport.width * outputScale);
       canvas.height = Math.floor(viewport.height * outputScale);
@@ -524,12 +579,12 @@ function PdfCanvasPage({
     <div
       id={`pdf-page-${pageNum}`}
       ref={containerRef}
-      className="relative flex flex-col items-center rounded-lg sm:rounded-xl shadow-2xl bg-white transition-all overflow-hidden border border-white/10"
+      className="relative flex flex-col items-center rounded-lg sm:rounded-xl shadow-md shadow-slate-300/60 bg-white transition-all overflow-hidden border border-slate-200"
       style={{ minHeight: pageRendered ? undefined : "360px", minWidth: "260px" }}
     >
       {pageLoading && !pageRendered && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/60 z-10 backdrop-blur-xs">
-          <Loader2 className="w-6 h-6 text-[#2563EB] animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-100/70 z-10 backdrop-blur-xs">
+          <Loader2 className="w-6 h-6 text-[#2E5E99] animate-spin" />
         </div>
       )}
       <canvas 
