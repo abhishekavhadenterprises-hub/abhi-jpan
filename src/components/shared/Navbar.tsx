@@ -185,6 +185,8 @@ export function Navbar() {
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
   const [mobileInvestorGroup, setMobileInvestorGroup] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollYRef = useRef(0);
   const navRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -210,14 +212,30 @@ export function Navbar() {
     return false;
   };
 
-  // Throttled scroll listener
+  // Throttled scroll listener: handles initial capsule transition & upward hide/reveal
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const scrolled = window.scrollY > 25;
+          const currentScrollY = window.scrollY;
+          const lastScrollY = lastScrollYRef.current;
+          const diff = currentScrollY - lastScrollY;
+
+          // 1. Initial capsule shrink trigger (Design 100% untouched)
+          const scrolled = currentScrollY > 25;
           setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+
+          // 2. Upward Hide / Reveal: as initial animation completes and user scrolls a little further, hide upward
+          if (currentScrollY <= 40) {
+            setIsHidden(false);
+          } else if (currentScrollY > 90 && diff > 8) {
+            setIsHidden(true);
+          } else if (diff < -8) {
+            setIsHidden(false);
+          }
+
+          lastScrollYRef.current = currentScrollY;
           ticking = false;
         });
         ticking = true;
@@ -328,8 +346,15 @@ export function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const shouldHide = isHidden && !isOpen && !activeDropdown;
+
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 flex justify-center pointer-events-none">
+    <nav
+      className={cn(
+        "fixed left-0 right-0 top-0 z-50 flex justify-center pointer-events-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        shouldHide ? "-translate-y-full" : "translate-y-0"
+      )}
+    >
       {/* Floating Island Capsule with Scroll Shrink Animation (Design 100% Untouched) */}
       <div
         ref={navRef}
