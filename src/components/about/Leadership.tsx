@@ -105,10 +105,10 @@ export function Leadership() {
           </p>
         </motion.div>
 
-        {/* 4 Cards Row: Reduced card height matching user's marked bounds */}
+        {/* 4 Cards Row: Responsive Accordion (Mobile: Visible Preview Stack, Desktop: Horizontal Accordion) */}
         <div
           onMouseLeave={() => setHoveredIdx(null)}
-          className="flex flex-col lg:flex-row gap-4 sm:gap-5 min-h-[440px] lg:h-[485px] xl:h-[495px] w-full items-stretch"
+          className="flex flex-col lg:flex-row gap-4 sm:gap-5 w-full items-stretch lg:h-[485px] xl:h-[495px]"
         >
           {leadersData.map((leader, idx) => {
             const isHovered = hoveredIdx === idx;
@@ -130,17 +130,17 @@ export function Leadership() {
                 }}
                 className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all ${hoverClass("duration-500")} flex flex-col lg:flex-row ${
                   isHovered
-                    ? "flex-[3.5] lg:flex-[3.8] bg-white dark:bg-[#0A1626] shadow-2xl border-2 border-[#2563EB] dark:border-[#7BA4D0] ring-2 ring-[#2563EB]/15"
+                    ? "bg-white dark:bg-[#0A1626] shadow-2xl border-2 border-[#2563EB] dark:border-[#7BA4D0] ring-2 ring-[#2563EB]/15 lg:flex-[3.8]"
                     : isAnyHovered
-                    ? "flex-[0.8] lg:flex-[0.85] bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-md group"
-                    : "flex-1 bg-slate-900 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-lg group"
+                    ? "h-[190px] sm:h-[220px] lg:h-auto lg:flex-[0.85] bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-md group"
+                    : "h-[190px] sm:h-[220px] lg:h-auto lg:flex-1 bg-slate-900 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-lg group"
                 }`}
               >
-                {/* 1. LEFT PORTION: EXECUTIVE PORTRAIT (Large Previous Image Card Design) */}
+                {/* 1. PORTRAIT PORTION (On Mobile: Clear Portrait Preview; On Desktop: Left Column) */}
                 <div
                   className={`relative overflow-hidden shrink-0 transition-all duration-500 ${
                     isHovered
-                      ? "w-full lg:w-[280px] xl:w-[320px] h-[280px] sm:h-[320px] lg:h-full rounded-2xl lg:rounded-l-3xl lg:rounded-r-none"
+                      ? "w-full lg:w-[280px] xl:w-[320px] h-[260px] sm:h-[300px] lg:h-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-r-none"
                       : "w-full h-full absolute inset-0"
                   }`}
                 >
@@ -154,33 +154,33 @@ export function Leadership() {
                     }`}
                   />
 
-                  {/* Dark Vignette Overlay for Crisp Typography */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none z-10" />
+                  {/* Dark Vignette Overlay: Gentle at top so face is 100% visible, deeper at bottom for typography */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent pointer-events-none z-10" />
 
                   {/* Bottom Role & Name on Image */}
                   <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 lg:p-6 z-20 flex flex-col justify-end">
-                    <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider uppercase text-[#7BA4D0] block mb-1">
+                    <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider uppercase text-[#7BA4D0] block mb-0.5">
                       {leader.role}
                     </span>
                     <h3 className="text-base sm:text-lg lg:text-xl font-heading font-bold text-white leading-tight drop-shadow-md">
                       {leader.name}
                     </h3>
 
-                    {/* Subtle Hover Cue when card is collapsed */}
+                    {/* Subtle Tap/Hover Cue when card is collapsed */}
                     {!isHovered && (
-                      <div className="mt-2.5 flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-white/70 group-hover:text-white transition-colors">
-                        <span>EXPLORE PROFILE</span>
+                      <div className="mt-2 flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-[#93C5FD] group-hover:text-white transition-colors">
+                        <span>TAP TO VIEW PROFILE</span>
                         <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* 2. RIGHT PORTION (JUST RIGHT TO THE IMAGE): ACCESSIBLE DETAILS ONLY ON HOVER */}
+                {/* 2. RIGHT/BOTTOM PORTION: ACCESSIBLE DETAILS ONLY ON HOVER / TAP */}
                 <div
-                  className={`flex-1 h-full relative z-10 transition-opacity duration-300 ${
+                  className={`flex-1 relative z-10 transition-opacity duration-300 ${
                     isHovered
-                      ? "opacity-100 pointer-events-auto delay-100 px-5 sm:px-7 lg:px-8 py-4 sm:py-5 flex flex-col justify-center overflow-hidden"
+                      ? "opacity-100 pointer-events-auto delay-100 px-5 sm:px-7 lg:px-8 py-5 sm:py-6 flex flex-col justify-center overflow-visible lg:overflow-hidden lg:h-full"
                       : "opacity-0 pointer-events-none hidden lg:block lg:w-0"
                   }`}
                 >

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -40,20 +40,7 @@ const mainCategories = [
 ];
 
 export function CategoryHighlights() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { revealDuration, staggerDelay } = useLaptopPacing();
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < mainCategories.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-slate-50/60 dark:bg-[#070b14] overflow-visible border-t border-slate-200/80 dark:border-white/5 transition-colors duration-500">
@@ -89,37 +76,11 @@ export function CategoryHighlights() {
           </motion.div>
         </div>
 
-        {/* Categories Grid - with ample headroom so hover lift never clips */}
-        <div className="flex flex-col justify-between overflow-visible">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row lg:grid lg:grid-cols-3 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pt-3 pb-8 lg:pt-3 lg:pb-8 px-1 sm:px-3 lg:px-1 gap-4 sm:gap-6 lg:gap-7 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-          >
-            {mainCategories.map((cat, idx) => (
-              <CategoryCard key={idx} category={cat} index={idx} />
-            ))}
-          </div>
-
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex lg:hidden items-center justify-center gap-2 mt-2 z-10">
-            {mainCategories.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#2E5E99]" : "w-1.5 bg-slate-300 dark:bg-white/20"
-                )}
-                aria-label={`Go to category ${i + 1}`}
-              />
-            ))}
-          </div>
+        {/* Categories Stack/Grid (Mobile: One-by-one vertical stack; Desktop: 3 Columns) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 pt-3 pb-4 lg:pt-3 lg:pb-8 gap-5 sm:gap-6 lg:gap-7 w-full overflow-visible">
+          {mainCategories.map((cat, idx) => (
+            <CategoryCard key={idx} category={cat} index={idx} />
+          ))}
         </div>
       </div>
     </section>
@@ -135,7 +96,7 @@ function CategoryCard({ category, index }: { category: (typeof mainCategories)[0
       viewport={{ once: true }}
       transition={{ duration: revealDuration(0.65), delay: index * staggerDelay(0.12), ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6, transition: { duration: hoverDuration(0.3) } }}
-      className={cn("group relative h-[320px] sm:h-[340px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center transition-all border border-slate-200/80 dark:border-white/10", hoverClass("duration-500"))}
+      className={cn("group relative h-[300px] sm:h-[340px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer w-full transition-all border border-slate-200/80 dark:border-white/10 shadow-sm hover:shadow-xl", hoverClass("duration-500"))}
     >
       <Link href={category.link} className="block w-full h-full">
         {/* Background Image with Smooth Zoom and Lighting Animation */}

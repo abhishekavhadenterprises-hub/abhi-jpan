@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Thermometer, Car, Home, Factory, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -48,20 +48,7 @@ const usageSectors = [
 ];
 
 export function ProductIndustries() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < usageSectors.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   return (
     <section className="pt-10 pb-10 sm:pt-12 sm:pb-12 md:pt-16 md:pb-16 bg-slate-50/60 dark:bg-[#070b14] text-[#0D2440] dark:text-white relative overflow-visible border-t border-slate-200/80 dark:border-white/5 transition-colors duration-500">
@@ -89,80 +76,54 @@ export function ProductIndustries() {
           </motion.p>
         </div>
 
-        {/* Sectors Grid with Compact Half-Height Cards */}
-        <div className="flex flex-col justify-between overflow-visible">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:pt-2 md:pb-4 px-1 sm:px-3 md:px-0 gap-3.5 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-          >
-            {usageSectors.map((sector, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: revealDuration(0.6), delay: idx * staggerDelay(0.08), ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6, transition: { duration: hoverDuration(0.3) } }}
-                className={cn("group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between cursor-pointer p-3.5 sm:p-5", hoverClass("duration-500"))}
-              >
-                {/* 100% Crisp Background Image with Zero Wash/Blur */}
-                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                  <Image
-                    src={sector.image}
-                    alt={sector.name}
-                    fill
-                    className="object-cover scale-100 group-hover:scale-108 transition-all duration-700 ease-out"
-                  />
-                  {/* Subtle bottom shadow gradient to ground the text card */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+        {/* Sectors Stack/Grid (Mobile: One-by-one vertical stack; Tablet/Desktop: 2-4 Columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-2 pb-4 gap-3.5 sm:gap-5 w-full overflow-visible">
+          {usageSectors.map((sector, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: revealDuration(0.6), delay: idx * staggerDelay(0.08), ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, transition: { duration: hoverDuration(0.3) } }}
+              className={cn("group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all w-full flex flex-col justify-between cursor-pointer p-3.5 sm:p-5 shadow-sm hover:shadow-xl", hoverClass("duration-500"))}
+            >
+              {/* 100% Crisp Background Image with Zero Wash/Blur */}
+              <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <Image
+                  src={sector.image}
+                  alt={sector.name}
+                  fill
+                  className="object-cover scale-100 group-hover:scale-108 transition-all duration-700 ease-out"
+                />
+                {/* Subtle bottom shadow gradient to ground the text card */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              <Link href={sector.link} className="block w-full h-full relative z-10 flex flex-col justify-between">
+                {/* Top Header: Clean Icon Capsule & Top Arrow Action */}
+                <div className="flex items-center justify-between">
+                  <div className="w-8 h-8 rounded-lg bg-white/95 dark:bg-[#0B1728]/95 border border-slate-200/80 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
+                    <sector.icon className="w-4 h-4" />
+                  </div>
+
+                  <div className="w-7 h-7 rounded-full bg-white/95 dark:bg-[#0B1728]/95 group-hover:bg-[#2E5E99] text-[#0D2440] dark:text-white group-hover:text-white flex items-center justify-center transition-all duration-300 group-hover:scale-105 border border-slate-200/80 dark:border-white/15">
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
 
-                <Link href={sector.link} className="block w-full h-full relative z-10 flex flex-col justify-between">
-                  {/* Top Header: Clean Icon Capsule & Top Arrow Action */}
-                  <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-lg bg-white/95 dark:bg-[#0B1728]/95 border border-slate-200/80 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
-                      <sector.icon className="w-4 h-4" />
-                    </div>
-
-                    <div className="w-7 h-7 rounded-full bg-white/95 dark:bg-[#0B1728]/95 group-hover:bg-[#2E5E99] text-[#0D2440] dark:text-white group-hover:text-white flex items-center justify-center transition-all duration-300 group-hover:scale-105 border border-slate-200/80 dark:border-white/15">
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-
-                  {/* Bottom Content: Crisp Solid Text Card */}
-                  <div className="mt-auto p-2.5 sm:p-3 rounded-xl bg-white/95 dark:bg-[#0B1728]/95 border border-slate-200/80 dark:border-white/10 transition-colors duration-300 group-hover:border-[#2E5E99]/40">
-                    <h3 className="text-sm sm:text-base font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 line-clamp-1">
-                      {sector.name}
-                    </h3>
-                    <p className="text-[11px] text-slate-600 dark:text-white/75 leading-relaxed font-sans font-normal line-clamp-2 mt-0.5">
-                      {sector.desc}
-                    </p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-2 z-10">
-            {usageSectors.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#2E5E99]" : "w-1.5 bg-slate-300 dark:bg-white/20"
-                )}
-                aria-label={`Go to sector card ${i + 1}`}
-              />
-            ))}
-          </div>
+                {/* Bottom Content: Crisp Solid Text Card */}
+                <div className="mt-auto p-2.5 sm:p-3 rounded-xl bg-white/95 dark:bg-[#0B1728]/95 border border-slate-200/80 dark:border-white/10 transition-colors duration-300 group-hover:border-[#2E5E99]/40">
+                  <h3 className="text-sm sm:text-base font-heading font-bold text-[#0D2440] dark:text-white group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors duration-300 line-clamp-1">
+                    {sector.name}
+                  </h3>
+                  <p className="text-[11px] text-slate-600 dark:text-white/75 leading-relaxed font-sans font-normal line-clamp-2 mt-0.5">
+                    {sector.desc}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

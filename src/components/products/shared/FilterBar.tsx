@@ -37,15 +37,15 @@ export function FilterBar({
       <motion.div 
         layout
         className={cn(
-          "pointer-events-auto flex items-center justify-between gap-1.5 sm:gap-4 p-1.5 sm:p-2 rounded-full transition-all duration-500 max-w-full",
-          "bg-white/80 dark:bg-[#070b14]/75 backdrop-blur-2xl",
+          "pointer-events-auto flex items-center justify-between gap-1.5 sm:gap-4 p-2 sm:p-2 rounded-2xl sm:rounded-full transition-all duration-500 max-w-full sm:max-w-fit mx-auto",
+          "bg-white/85 dark:bg-[#070b14]/85 backdrop-blur-2xl",
           "border border-white/60 dark:border-white/10",
           "shadow-[0_8px_32px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
-          scrolled ? "py-1.5 px-2" : "py-1.5 sm:py-2 px-2 sm:px-3"
+          scrolled ? "py-1.5 px-2.5 sm:py-1.5 sm:px-2" : "py-2 px-2.5 sm:py-2 sm:px-3"
         )}
       >
-        {/* Categories (Smooth Rounded Capsule Pills) */}
-        <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden flex-1 min-w-0">
+        {/* Categories (Multi-line wrap on mobile, pill strip on desktop) */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1 sm:gap-2 flex-1 min-w-0">
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
             return (
@@ -53,7 +53,7 @@ export function FilterBar({
                 key={cat}
                 onClick={() => onCategoryChange(cat)}
                 className={cn(
-                  "relative px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-heading font-medium whitespace-nowrap transition-colors duration-300 shrink-0 outline-none",
+                  "relative px-2.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-heading font-medium whitespace-nowrap transition-colors duration-300 outline-none",
                   isActive
                     ? "text-white"
                     : "text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
@@ -76,7 +76,7 @@ export function FilterBar({
         <div className="w-[1px] h-6 sm:h-8 bg-slate-200 dark:bg-white/10 hidden sm:block mx-1 shrink-0" />
 
         {/* Search & Filter Section */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 self-center">
           {/* Expanding Search Bar */}
           <motion.div 
             layout
