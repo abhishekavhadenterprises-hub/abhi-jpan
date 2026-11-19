@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { ShieldCheck, Scale, FileText, CheckCircle2, AlertCircle, ScrollText } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -28,20 +28,6 @@ const deviationCards = [
 ];
 
 export function StatementOfDeviationsNote() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 4 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 overflow-hidden relative transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
@@ -90,11 +76,7 @@ export function StatementOfDeviationsNote() {
 
           {/* Cards Side */}
           <div className="lg:col-span-7 flex flex-col justify-between w-full">
-            <div 
-              ref={cardsRef}
-              onScroll={handleMobileScroll}
-              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pt-2 pb-4 sm:py-0 px-1 sm:px-0 gap-4 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full">
               {deviationCards.map((card, idx) => (
                 <motion.div 
                   key={idx}
@@ -102,7 +84,7 @@ export function StatementOfDeviationsNote() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="group bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-sm hover:shadow-lg shadow-[#2E5E99]/5 flex flex-col justify-between"
+                  className="group bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 w-full shadow-sm hover:shadow-lg shadow-[#2E5E99]/5 flex flex-col justify-between"
                 >
                   <div>
                     <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center mb-4 sm:mb-5 text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shadow-xs">
@@ -123,28 +105,6 @@ export function StatementOfDeviationsNote() {
                     <div className="w-2 h-2 rounded-full bg-[#7BA4D0]/40 group-hover:bg-[#2E5E99] transition-colors" />
                   </div>
                 </motion.div>
-              ))}
-            </div>
-
-            {/* Mobile Pagination Indicator Dots */}
-            <div className="flex sm:hidden items-center justify-center gap-2 mt-5 sm:mt-6 z-10">
-              {deviationCards.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setActiveIndex(i);
-                    if (cardsRef.current) {
-                      cardsRef.current.scrollTo({
-                        left: i * cardsRef.current.clientWidth,
-                        behavior: "smooth"
-                      });
-                    }
-                  }}
-                  className={`h-1.5 transition-all duration-300 rounded-full ${
-                    activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
-                  }`}
-                  aria-label={`Go to card ${i + 1}`}
-                />
               ))}
             </div>
           </div>

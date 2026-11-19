@@ -18,22 +18,22 @@ export function PoliciesFilter() {
       <div className="container-custom">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Category Tabs Wrapper */}
-          <div className="flex items-center gap-3 w-full lg:w-auto">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
             {/* Fixed Label */}
             <div className="flex items-center gap-2 text-[#2E5E99] shrink-0">
               <Filter className="w-4 h-4" />
               <span className="text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">Filter By</span>
             </div>
             
-            {/* Scrollable Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full">
+            {/* Multi-line Wrap Tabs */}
+            <div className="flex flex-wrap items-center gap-2">
               {categories.map((cat) => {
                 const Icon = cat.icon;
                 return (
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`shrink-0 flex items-center gap-2.5 px-4 sm:px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border min-h-[40px] cursor-pointer ${
+                    className={`flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border min-h-[38px] cursor-pointer ${
                       activeCategory === cat.id
                         ? "bg-[#0D2440] text-white border-[#0D2440] "
                         : "bg-[#F8FAFC] dark:bg-charcoal/40 text-muted-foreground border-[#7BA4D0]/25 hover:border-[#2E5E99]/50"

@@ -13,20 +13,20 @@ export function SecretarialComplianceFilter() {
       <div className="container-custom py-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Chronological Discovery Selectors */}
-          <div className="flex items-center gap-6 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full lg:w-auto">
+            <div className="flex items-center gap-2 sm:gap-3 mr-1">
               <Calendar className="w-4 h-4 text-gold shrink-0" />
               <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest whitespace-nowrap">Fiscal Era:</span>
             </div>
-            {years.map((year, index) => (
+            {years.map((year) => (
               <button
                 key={year}
                 onClick={() => setActiveYear(year)}
-                className={`px-6 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
                   activeYear === year
                     ? "bg-deepblue text-white "
                     : "bg-silver/5 text-muted-foreground hover:bg-silver/10 border border-transparent hover:border-border"
-                } ${index === years.length - 1 ? 'mr-8' : ''}`}
+                }`}
               >
                 {year}
               </button>

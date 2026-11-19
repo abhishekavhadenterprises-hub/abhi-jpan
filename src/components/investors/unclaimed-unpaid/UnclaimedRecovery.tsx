@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { ClipboardList, FileCheck, Send, CheckCircle, ArrowRight, ArrowUpRight } from "lucide-react";
@@ -41,20 +41,6 @@ const steps = [
 ];
 
 export function UnclaimedRecovery() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < steps.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
@@ -93,14 +79,10 @@ export function UnclaimedRecovery() {
         {/* 4-Step Interactive Horizontal Flow Ribbon */}
         <div className="relative">
           {/* Subtle Connecting Desktop Track Line */}
-          <div className="hidden lg:block absolute top-[52px] left-[60px] right-[60px] h-[2px] bg-gradient-to-r from-[#2E5E99]/20 via-[#7BA4D0]/40 to-[#2E5E99]/20 z-0" />
+          <div className="hidden lg:block absolute top-[52px] left-[60px] right-[60px] h-[2px] bg-gradient-r from-[#2E5E99]/20 via-[#7BA4D0]/40 to-[#2E5E99]/20 z-0" />
 
           <div className="flex flex-col justify-between w-full relative z-10">
-            <div 
-              ref={cardsRef}
-              onScroll={handleMobileScroll}
-              className="flex flex-row lg:grid lg:grid-cols-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory pt-2 pb-4 lg:py-0 px-1 lg:px-0 gap-4 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
               {steps.map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -108,7 +90,7 @@ export function UnclaimedRecovery() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full sm:min-w-[300px] lg:min-w-0 lg:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
+                  className="group relative bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
                 >
                   {/* Giant Step Numeric Watermark */}
                   <div className="absolute top-3 sm:top-4 right-4 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
@@ -147,28 +129,6 @@ export function UnclaimedRecovery() {
                     </div>
                   </div>
                 </motion.div>
-              ))}
-            </div>
-
-            {/* Mobile Pagination Indicator Dots */}
-            <div className="flex lg:hidden items-center justify-center gap-2 mt-5 sm:mt-6 z-10">
-              {steps.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setActiveIndex(i);
-                    if (cardsRef.current) {
-                      cardsRef.current.scrollTo({
-                        left: i * cardsRef.current.clientWidth,
-                        behavior: "smooth"
-                      });
-                    }
-                  }}
-                  className={`h-1.5 transition-all duration-300 rounded-full ${
-                    activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
-                  }`}
-                  aria-label={`Go to step ${i + 1}`}
-                />
               ))}
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { X, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { X, Calendar, MapPin, CheckCircle2, ArrowLeft } from "lucide-react";
 
 interface EventDetail {
   title: string;
@@ -19,58 +19,86 @@ interface EventDetailModalProps {
 }
 
 export function EventDetailModal({ event, onClose }: EventDetailModalProps) {
+  React.useEffect(() => {
+    if (!event) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [event, onClose]);
+
   if (!event) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-8 animate-in fade-in duration-300">
-      <div 
-        className="absolute inset-0 bg-[#0D2440]/80 dark:bg-black/90 backdrop-blur-md"
-        onClick={onClose}
-      />
-      
-      <div className="relative w-full max-w-5xl max-h-[92vh] bg-white dark:bg-[#070b14] border border-[#7BA4D0]/30 dark:border-[#2E5E99]/30 rounded-2xl md:rounded-3xl shadow-2xl overflow-y-auto md:overflow-hidden flex flex-col md:flex-row animate-in zoom-in-95 duration-400">
+    <div className="fixed inset-0 z-[100] w-full h-full bg-white dark:bg-[#070b14] overflow-y-auto flex flex-col animate-in fade-in duration-300">
+      {/* Sticky Header Navigation Bar */}
+      <header className="sticky top-0 z-30 w-full bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 px-4 sm:px-8 py-3.5 sm:py-4 flex items-center justify-between shadow-xs">
         <button 
-          className="absolute top-3 right-3 sm:top-5 sm:right-5 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white text-slate-700 dark:text-silver flex items-center justify-center transition-all duration-200 z-20"
           onClick={onClose}
-          aria-label="Close modal"
+          className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-600 dark:text-silver hover:text-[#2E5E99] dark:hover:text-[#7BA4D0] transition-colors cursor-pointer group"
         >
-          <X className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+          <span>Back to Events</span>
         </button>
 
-        {/* Content Side */}
-        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-10 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-100 dark:border-white/10">
-          <div className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-lg bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-3 sm:mb-5">
-            Event Spotlight
-          </div>
-          
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-[#0D2440] dark:text-white mb-3 sm:mb-5 leading-tight pr-8 sm:pr-0">
-            {event.title}
-          </h2>
+        <button 
+          className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-[#2E5E99] hover:text-white text-slate-700 dark:text-silver flex items-center gap-1.5 text-xs font-bold transition-all duration-200 cursor-pointer"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          <X className="w-4 h-4" />
+          <span className="hidden sm:inline">Close</span>
+        </button>
+      </header>
 
-          <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-            <div className="flex items-center gap-2.5 sm:gap-3 text-slate-600 dark:text-silver/90 text-xs sm:text-sm">
-              <Calendar className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
-              <span className="font-medium">{event.date}</span>
+      {/* Main Full Page Content */}
+      <div className="max-w-6xl mx-auto w-full py-8 sm:py-12 md:py-16 px-4 sm:px-8 flex flex-col lg:flex-row gap-8 lg:gap-12 flex-1">
+        {/* Left Side: Narrative & Details */}
+        <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#EBF3FC] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0] text-xs font-bold uppercase tracking-wider mb-4">
+              Event Spotlight
             </div>
-            <div className="flex items-center gap-2.5 sm:gap-3 text-slate-600 dark:text-silver/90 text-xs sm:text-sm">
-              <MapPin className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
-              <span className="font-medium">{event.location}</span>
+            
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white leading-tight mb-4">
+              {event.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-slate-600 dark:text-silver text-xs sm:text-sm">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
+                <span className="font-semibold">{event.date}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0" />
+                <span className="font-semibold">{event.location}</span>
+              </div>
             </div>
           </div>
 
-          <div className="mb-8">
+          <div className="border-t border-slate-200 dark:border-white/10 pt-6">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">Event Narrative</h4>
-            <p className="text-slate-600 dark:text-silver/80 text-sm leading-relaxed font-normal">
+            <p className="text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
               {event.desc}
             </p>
           </div>
 
-          <div>
+          <div className="border-t border-slate-200 dark:border-white/10 pt-6">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">Key Highlights</h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {event.highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-slate-700 dark:text-silver/90 font-medium">
-                  <CheckCircle2 className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium">
+                  <CheckCircle2 className="w-5 h-5 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5" />
                   <span>{h}</span>
                 </li>
               ))}
@@ -78,14 +106,15 @@ export function EventDetailModal({ event, onClose }: EventDetailModalProps) {
           </div>
         </div>
 
-        {/* Gallery Side */}
-        <div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto bg-slate-50 dark:bg-black/40">
-          <div className="grid grid-cols-2 gap-3.5">
+        {/* Right Side: Event Gallery Grid */}
+        <div className="w-full lg:w-1/2">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Event Photo Gallery</h4>
+          <div className="grid grid-cols-2 gap-4">
             {event.gallery.map((img, i) => (
-              <div key={i} className={`relative overflow-hidden rounded-xl group border border-slate-200 dark:border-white/10 ${i === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-square'}`}>
+              <div key={i} className={`relative overflow-hidden rounded-2xl group border border-slate-200/80 dark:border-white/10 shadow-sm ${i === 0 ? 'col-span-2 aspect-[16/10]' : 'aspect-square'}`}>
                 <Image
                   src={img}
-                  alt={`Gallery ${i}`}
+                  alt={`Gallery ${i + 1}`}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />

@@ -1,24 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, ArrowRight, ShieldCheck, Scale } from "lucide-react";
 import Link from "next/link";
 
 export function SEBIDisclosureCTA() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 3 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-[#071321] overflow-hidden relative transition-colors">
@@ -69,12 +56,8 @@ export function SEBIDisclosureCTA() {
 
             {/* Right Column: Tactile White Pods */}
             <div className="lg:col-span-6 flex flex-col justify-between w-full">
-              <div 
-                ref={cardsRef}
-                onScroll={handleMobileScroll}
-                className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 sm:py-0 px-1 sm:px-0 gap-4 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-              >
-                <div className="p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full">
+                <div className="p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full shadow-lg">
                   <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] group-hover/card:scale-105 transition-transform">
                     <Mail className="w-6 h-6" />
                   </div>
@@ -86,7 +69,7 @@ export function SEBIDisclosureCTA() {
                   </a>
                 </div>
 
-                <div className="p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
+                <div className="p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full shadow-lg">
                   <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] group-hover/card:scale-105 transition-transform">
                     <Phone className="w-6 h-6" />
                   </div>
@@ -98,7 +81,7 @@ export function SEBIDisclosureCTA() {
                   </p>
                 </div>
 
-                <div className="sm:col-span-2 p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
+                <div className="sm:col-span-2 p-6 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-3xl flex items-center justify-between w-full shadow-lg">
                   <div className="flex items-center gap-4 sm:gap-5">
                     <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center shrink-0 text-[#2E5E99]">
                       <ShieldCheck className="w-6 h-6" />
@@ -113,32 +96,6 @@ export function SEBIDisclosureCTA() {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Mobile Pagination Indicator Dots */}
-              <div className="flex sm:hidden items-center justify-center gap-1.5 mt-4 z-10">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (cardsRef.current) {
-                        cardsRef.current.scrollTo({
-                          left: i * cardsRef.current.clientWidth,
-                          behavior: "smooth"
-                        });
-                      }
-                    }}
-                    className="p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center focus:outline-none"
-                    aria-label={`Go to slide ${i + 1}`}
-                  >
-                    <span
-                      className={`h-1.5 transition-all duration-300 rounded-full block ${
-                        activeIndex === i ? "w-8 bg-white" : "w-2 bg-white/30"
-                      }`}
-                    />
-                  </button>
-                ))}
               </div>
             </div>
 

@@ -13,19 +13,19 @@ export function AnnualReturnFilter() {
       <div className="container-custom py-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Fiscal Selector */}
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 lg:pb-0 w-full lg:w-auto scrollbar-hide">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full lg:w-auto">
             <div className="w-10 h-10 bg-silver/10 flex items-center justify-center rounded-sm mr-2 shrink-0">
               <Landmark className="w-4 h-4 text-gold" />
             </div>
-            {years.map((year, index) => (
+            {years.map((year) => (
               <button
                 key={year}
                 onClick={() => setActiveYear(year)}
-                className={`px-6 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
                   activeYear === year
                     ? "bg-deepblue text-white "
                     : "bg-silver/5 text-muted-foreground hover:bg-silver/10 border border-transparent hover:border-border"
-                } ${index === years.length - 1 ? 'mr-8' : ''}`}
+                }`}
               >
                 {year}
               </button>

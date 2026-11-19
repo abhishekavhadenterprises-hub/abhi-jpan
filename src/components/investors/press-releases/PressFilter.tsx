@@ -15,16 +15,16 @@ export function PressFilter() {
       <div className="container-custom py-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Categories */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 w-full lg:w-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            {categories.map((cat, index) => (
+          <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
                   activeCategory === cat
                     ? "bg-deepblue text-white "
                     : "bg-silver/10 text-muted-foreground hover:bg-silver/20"
-                } ${index === categories.length - 1 ? 'mr-8' : ''}`}
+                }`}
               >
                 {cat}
               </button>
