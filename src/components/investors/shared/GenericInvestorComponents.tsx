@@ -28,6 +28,7 @@ import {
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { PdfDocumentViewer } from "@/components/ui/PdfDocumentViewer";
 import { DrhpDisclaimerModal } from "./DrhpDisclaimerModal";
 import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 
@@ -608,10 +609,10 @@ function GenericDocumentModal({
             )}
           </div>
         ) : (
-          <iframe
-            src={`${downloadLink}#view=FitH`}
-            className="w-full h-full border-0 flex-grow"
+          <PdfDocumentViewer
+            url={downloadLink}
             title={displayTitle}
+            className="w-full h-full flex-grow"
           />
         )}
         <div className="h-1 w-full bg-gradient-to-r from-[#2E5E99] via-[#7BA4D0] to-[#2E5E99] shrink-0" />

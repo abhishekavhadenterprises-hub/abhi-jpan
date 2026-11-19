@@ -1,25 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, ArrowRight, UserCheck, ShieldCheck } from "lucide-react";
+import { Mail, Phone, ArrowRight, UserCheck } from "lucide-react";
 import Link from "next/link";
 
 export function FinancialCTA() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 2 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] relative overflow-hidden transition-colors">
       <div className="container-custom relative z-10">
@@ -65,62 +51,34 @@ export function FinancialCTA() {
               </div>
             </div>
 
-            {/* Right Column: Tactile White Support Pods */}
-            <div className="lg:col-span-5 flex flex-col justify-between w-full">
-              <div 
-                ref={cardsRef}
-                onScroll={handleMobileScroll}
-                className="flex flex-row lg:flex-col overflow-x-auto snap-x snap-mandatory pt-1 pb-3 lg:py-0 px-1 lg:px-0 gap-3 sm:gap-4 lg:space-y-4 lg:gap-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-              >
-                <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl group hover:-translate-y-1 transition-all duration-300 w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center shadow-lg">
-                  <div className="flex items-center gap-3 sm:gap-4 mb-2.5 sm:mb-3">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl shrink-0 text-[#2E5E99] group-hover:scale-105 transition-transform">
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-[#0D2440]">
-                      Shareholder Services
-                    </h4>
+            {/* Right Column: Tactile White Support Pods (Stacked vertically) */}
+            <div className="lg:col-span-5 flex flex-col gap-3.5 sm:gap-4 w-full">
+              <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl group hover:-translate-y-1 transition-all duration-300 w-full shadow-lg">
+                <div className="flex items-center gap-3 sm:gap-4 mb-2.5 sm:mb-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl shrink-0 text-[#2E5E99] group-hover:scale-105 transition-transform">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <a href="mailto:enquiry@jpantubular.com" className="text-[#2E5E99] text-xs sm:text-sm font-heading font-bold hover:underline block break-all pl-1">
-                    enquiry@jpantubular.com
-                  </a>
+                  <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-[#0D2440]">
+                    Shareholder Services
+                  </h4>
                 </div>
-
-                <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl group hover:-translate-y-1 transition-all duration-300 w-full min-w-full lg:min-w-0 lg:w-full shrink-0 snap-center shadow-lg">
-                  <div className="flex items-center gap-3 sm:gap-4 mb-2.5 sm:mb-3">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl shrink-0 text-[#2E5E99] group-hover:scale-105 transition-transform">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-[#0D2440]">
-                      Global Hotline
-                    </h4>
-                  </div>
-                  <p className="text-[#2E5E99] text-xs sm:text-sm font-heading font-bold pl-1">
-                    +91-120-2560586
-                  </p>
-                </div>
+                <a href="mailto:enquiry@jpantubular.com" className="text-[#2E5E99] text-xs sm:text-sm font-heading font-bold hover:underline block break-all pl-1">
+                  enquiry@jpantubular.com
+                </a>
               </div>
 
-              {/* Mobile Pagination Indicator Dots */}
-              <div className="flex lg:hidden items-center justify-center gap-2 mt-4 z-10">
-                {[0, 1].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (cardsRef.current) {
-                        cardsRef.current.scrollTo({
-                          left: i * cardsRef.current.clientWidth,
-                          behavior: "smooth"
-                        });
-                      }
-                    }}
-                    className={`h-1.5 transition-all duration-300 rounded-full ${
-                      activeIndex === i ? "w-8 bg-white" : "w-2 bg-white/30"
-                    }`}
-                    aria-label={`Go to contact card ${i + 1}`}
-                  />
-                ))}
+              <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl group hover:-translate-y-1 transition-all duration-300 w-full shadow-lg">
+                <div className="flex items-center gap-3 sm:gap-4 mb-2.5 sm:mb-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl shrink-0 text-[#2E5E99] group-hover:scale-105 transition-transform">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </div>
+                  <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-[#0D2440]">
+                    Global Hotline
+                  </h4>
+                </div>
+                <p className="text-[#2E5E99] text-xs sm:text-sm font-heading font-bold pl-1">
+                  +91-120-2560586
+                </p>
               </div>
             </div>
 

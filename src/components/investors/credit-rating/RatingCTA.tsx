@@ -1,25 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Headphones, ArrowRight, ShieldCheck, Mail, BarChart3 } from "lucide-react";
 import Link from "next/link";
 
 export function RatingCTA() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 3 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-[#071321] overflow-hidden relative transition-colors">
       <div className="container-custom">
@@ -67,81 +53,48 @@ export function RatingCTA() {
               </div>
             </div>
 
-            {/* Right Column: Tactile White Pods */}
-            <div className="lg:col-span-6 flex flex-col justify-between w-full">
-              <div 
-                ref={cardsRef}
-                onScroll={handleMobileScroll}
-                className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 sm:py-0 px-1 sm:px-0 gap-4 sm:gap-5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-              >
-                <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
-                  <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] group-hover/card:scale-105 transition-transform">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1.5">
-                    Investor Email
-                  </h4>
-                  <a href="mailto:enquiry@jpantubular.com" className="text-[#2E5E99] text-sm font-heading font-bold hover:underline block break-all">
-                    enquiry@jpantubular.com
-                  </a>
+            {/* Right Column: Tactile White Pods (Stacked vertically on mobile, 2 columns on tablet/desktop) */}
+            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full">
+              <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full shadow-lg">
+                <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] group-hover/card:scale-105 transition-transform">
+                  <Mail className="w-6 h-6" />
                 </div>
-
-                <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
-                  <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] group-hover/card:scale-105 transition-transform">
-                    <Headphones className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1.5">
-                    Direct Support
-                  </h4>
-                  <p className="text-[#2E5E99] text-sm font-heading font-bold">
-                    +91-120-2560586
-                  </p>
-                </div>
-
-                <div className="sm:col-span-2 p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-lg">
-                  <div className="flex items-center gap-4 sm:gap-5">
-                    <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center shrink-0 text-[#2E5E99]">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1">
-                        Verified Data
-                      </h4>
-                      <p className="text-[#1F4E79]/80 text-xs sm:text-sm leading-relaxed font-normal">
-                        All credit rating data is independently verified by authorized agencies.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1.5">
+                  Investor Email
+                </h4>
+                <a href="mailto:enquiry@jpantubular.com" className="text-[#2E5E99] text-sm font-heading font-bold hover:underline block break-all">
+                  enquiry@jpantubular.com
+                </a>
               </div>
 
-              {/* Mobile Pagination Indicator Dots */}
-              <div className="flex sm:hidden items-center justify-center gap-1.5 mt-4 z-10">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (cardsRef.current) {
-                        cardsRef.current.scrollTo({
-                          left: i * cardsRef.current.clientWidth,
-                          behavior: "smooth"
-                        });
-                      }
-                    }}
-                    className="p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center"
-                    aria-label={`Go to slide ${i + 1}`}
-                  >
-                    <span 
-                      className={`h-1.5 transition-all duration-300 rounded-full block ${
-                        activeIndex === i ? "w-8 bg-white" : "w-2 bg-white/30"
-                      }`} 
-                    />
-                  </button>
-                ))}
+              <div className="p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl hover:-translate-y-1 transition-all duration-300 group/card w-full shadow-lg">
+                <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center mb-5 text-[#2E5E99] group-hover/card:scale-105 transition-transform">
+                  <Headphones className="w-6 h-6" />
+                </div>
+                <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1.5">
+                  Direct Support
+                </h4>
+                <p className="text-[#2E5E99] text-sm font-heading font-bold">
+                  +91-120-2560586
+                </p>
+              </div>
+
+              <div className="sm:col-span-2 p-5 sm:p-7 bg-white text-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl flex items-center justify-between w-full shadow-lg">
+                <div className="flex items-center gap-4 sm:gap-5">
+                  <div className="w-12 h-12 rounded-2xl bg-[#E7F0FA] border border-[#7BA4D0]/30 flex items-center justify-center shrink-0 text-[#2E5E99]">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-[#0D2440] font-heading font-bold text-xs uppercase tracking-wider mb-1">
+                      Verified Data
+                    </h4>
+                    <p className="text-[#1F4E79]/80 text-xs sm:text-sm leading-relaxed font-normal">
+                      All credit rating data is independently verified by authorized agencies.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-
           </div>
         </motion.div>
       </div>

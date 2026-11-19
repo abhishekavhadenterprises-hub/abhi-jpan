@@ -251,20 +251,75 @@ export function EventPhotos() {
     setSelectedEvent(null);
   };
 
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  // Touch swipe gesture tracking for mobile / phone finger scrolling
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchDeltaXRef = useRef<number>(0);
+  const [dragOffset, setDragOffset] = useState<number>(0);
+  const [isSwiping, setIsSwiping] = useState<boolean>(false);
+  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Automatically keep active thumbnail centered in view on navigation
+  useEffect(() => {
+    if (selectedEvent && thumbnailRefs.current[currentImageIndex]) {
+      thumbnailRefs.current[currentImageIndex]?.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [currentImageIndex, selectedEvent]);
+
+  const nextImage = (e?: React.MouseEvent | React.TouchEvent) => {
+    e?.stopPropagation();
     if (selectedEvent) {
       setCurrentImageIndex((prev) => (prev + 1) % selectedEvent.images.length);
     }
   };
 
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const prevImage = (e?: React.MouseEvent | React.TouchEvent) => {
+    e?.stopPropagation();
     if (selectedEvent) {
       setCurrentImageIndex((prev) => 
         prev === 0 ? selectedEvent.images.length - 1 : prev - 1
       );
     }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+    touchDeltaXRef.current = 0;
+    setIsSwiping(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const deltaX = e.touches[0].clientX - touchStartXRef.current;
+    const deltaY = e.touches[0].clientY - touchStartYRef.current;
+
+    // Detect horizontal swipe gesture
+    if (Math.abs(deltaX) > Math.abs(deltaY) || Math.abs(deltaX) > 10) {
+      touchDeltaXRef.current = deltaX;
+      setDragOffset(deltaX * 0.7);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsSwiping(false);
+    const deltaX = touchDeltaXRef.current;
+    const threshold = 40; // 40px minimum swipe distance
+
+    if (deltaX < -threshold) {
+      nextImage();
+    } else if (deltaX > threshold) {
+      prevImage();
+    }
+
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+    touchDeltaXRef.current = 0;
+    setDragOffset(0);
   };
 
   return (
@@ -381,8 +436,14 @@ export function EventPhotos() {
             </button>
           </div>
 
-          {/* Main Content Area */}
-          <div className="relative flex-1 min-h-0 flex items-center justify-center w-full p-2 sm:p-4 md:p-8">
+          {/* Main Content Area with Touch Finger Swiping */}
+          <div 
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
+            className="relative flex-1 min-h-0 flex items-center justify-center w-full p-2 sm:p-4 md:p-8 touch-pan-y select-none"
+          >
             <button 
               onClick={prevImage}
               className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3.5 md:p-4 bg-black/40 sm:bg-white/5 hover:bg-[#2E5E99] text-white rounded-lg sm:rounded-xl transition-all duration-300 z-50 backdrop-blur-md border border-white/10 hover:border-[#2E5E99]"
@@ -399,13 +460,19 @@ export function EventPhotos() {
               <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8" />
             </button>
 
-            <div className="relative w-full h-full max-w-5xl max-h-full animate-in zoom-in-95 duration-300">
+            <div 
+              style={{
+                transform: dragOffset !== 0 ? `translateX(${dragOffset}px)` : undefined,
+                transition: isSwiping ? "none" : "transform 0.25s ease-out"
+              }}
+              className="relative w-full h-full max-w-5xl max-h-full animate-in zoom-in-95 duration-300 cursor-grab active:cursor-grabbing"
+            >
               <Image
                 src={selectedEvent.images[currentImageIndex]}
                 alt={`${selectedEvent.title} - ${currentImageIndex + 1}`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 1200px"
-                className="object-contain select-none"
+                className="object-contain select-none pointer-events-none"
                 priority
               />
             </div>
@@ -417,6 +484,7 @@ export function EventPhotos() {
               {selectedEvent.images.map((img, idx) => (
                 <button
                   key={idx}
+                  ref={(el) => { thumbnailRefs.current[idx] = el; }}
                   onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
                   className={cn(
                     "relative w-28 h-20 shrink-0 rounded-sm overflow-hidden border-2 transition-all duration-300",

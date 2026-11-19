@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { X, Download, FileText, Share2, Printer, ShieldCheck, ExternalLink, Check } from "lucide-react";
+import { PdfDocumentViewer } from "@/components/ui/PdfDocumentViewer";
 
 export interface Policy {
   id?: number;
@@ -98,18 +99,18 @@ export function PoliciesDetailModal({ policy, isOpen, onClose }: PoliciesDetailM
         </div>
 
         {/* Body */}
-        <div className="flex-grow overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row">
-          {/* Interactive PDF Viewer Panel */}
-          <div className="flex-grow bg-[#F1F5F9] dark:bg-[#08121e] relative group overflow-hidden border-b lg:border-b-0 lg:border-r border-[#7BA4D0]/20 min-h-[460px] md:min-h-[560px] flex flex-col">
-            <iframe
-              src={`${documentUrl}#view=FitH`}
-              className="w-full h-full min-h-[460px] md:min-h-[560px] border-0 flex-grow"
+        <div className="flex-grow overflow-hidden flex flex-col lg:flex-row">
+          {/* Interactive Multi-Page Canvas PDF Viewer */}
+          <div className="flex-grow bg-[#F1F5F9] dark:bg-[#08121e] relative group overflow-hidden border-b lg:border-b-0 lg:border-r border-[#7BA4D0]/20 min-h-0 flex flex-col">
+            <PdfDocumentViewer
+              url={documentUrl}
               title={policy.title}
+              className="w-full h-full flex-grow"
             />
           </div>
 
           {/* Sidebar / Metadata */}
-          <div className="w-full lg:w-80 bg-white dark:bg-[#0D2440] p-6 sm:p-8 overflow-y-auto flex flex-col justify-between shrink-0">
+          <div className="w-full lg:w-80 bg-white dark:bg-[#0D2440] p-4 sm:p-6 lg:p-8 overflow-y-auto max-h-[30vh] lg:max-h-full flex flex-col justify-between shrink-0">
             <div>
               <div className="mb-6 pb-6 border-b border-[#7BA4D0]/15">
                 <h4 className="text-[10px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] mb-4">

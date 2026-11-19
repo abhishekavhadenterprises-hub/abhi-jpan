@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { X, Download, Share2, ExternalLink, Calendar, Bookmark, ShieldCheck, Check } from "lucide-react";
+import { PdfDocumentViewer } from "@/components/ui/PdfDocumentViewer";
 
 export interface DisclosureItem {
   id: number;
@@ -133,23 +134,11 @@ export function SEBIDisclosureDetailModal({ disclosure, isOpen, onClose }: SEBID
         </div>
 
         {/* Main Content: Interactive PDF Viewer */}
-        <div className="flex-grow bg-[#F1F5F9] dark:bg-[#08121e] flex flex-col relative overflow-hidden min-h-[450px]">
-          <div className="hidden md:flex items-center justify-between px-6 py-3 border-b border-[#7BA4D0]/20 bg-white/50 dark:bg-[#0D2440]/30 backdrop-blur-sm">
-            <span className="text-xs font-heading font-bold text-[#0D2440]/70 dark:text-white/70">
-              Interactive Statutory Document Viewer
-            </span>
-            <button 
-              onClick={onClose}
-              className="p-1.5 hover:bg-[#E7F0FA] dark:hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
-              aria-label="Close dialog"
-            >
-              <X className="w-4 h-4 text-[#0D2440] dark:text-white" />
-            </button>
-          </div>
-          <iframe
-            src={`${documentUrl}#view=FitH`}
-            className="w-full h-full min-h-[450px] border-0 flex-grow"
+        <div className="flex-grow bg-[#F1F5F9] dark:bg-[#08121e] flex flex-col relative overflow-hidden min-h-0 h-full">
+          <PdfDocumentViewer
+            url={documentUrl}
             title={disclosure.title}
+            className="w-full h-full flex-grow"
           />
         </div>
       </div>

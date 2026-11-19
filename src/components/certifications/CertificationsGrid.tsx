@@ -297,6 +297,18 @@ export function CertificationsGrid() {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {}
 
+    // Finger swipe left/right between certificates on phone/mobile when not zoomed
+    if (hasMovedRef.current && zoom === 1) {
+      const dx = e.clientX - dragStartRef.current.x;
+      if (dx < -40) {
+        handleNextCert();
+        return;
+      } else if (dx > 40) {
+        handlePrevCert();
+        return;
+      }
+    }
+
     // Click toggle zoom if not dragged
     if (!hasMovedRef.current) {
       if (zoom === 1) {

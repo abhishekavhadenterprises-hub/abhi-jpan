@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { ShieldCheck, Globe, Zap, ArrowRight, Share2 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const communicationPolicies = [
   {

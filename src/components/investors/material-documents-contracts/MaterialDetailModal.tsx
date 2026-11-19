@@ -5,6 +5,7 @@ import {
   X, Download, Share2, FileText, Calendar, 
   ShieldCheck, Bookmark, ZoomIn, ZoomOut, Printer 
 } from "lucide-react";
+import { PdfDocumentViewer } from "@/components/ui/PdfDocumentViewer";
 
 interface MaterialDetailModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface MaterialDetailModalProps {
     ref: string;
     fiscal: string;
     summary?: string;
+    link?: string;
   } | null;
 }
 
@@ -95,67 +97,18 @@ export function MaterialDetailModal({ isOpen, onClose, documentData }: MaterialD
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
-          
-          {/* Main Viewer (PDF Placeholder) */}
-          <div className="flex-grow bg-silver/10 dark:bg-black/40 overflow-y-auto p-4 sm:p-8 md:p-12 scrollbar-thin">
-             <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-                {/* PDF Aesthetic Mockup */}
-                <div className="bg-white dark:bg-charcoal rounded-sm p-12 md:p-20 min-h-[1200px] border border-border relative overflow-hidden">
-                   <div className="absolute top-0 left-0 w-full h-1 bg-gold" />
-                   <div className="flex items-center justify-between mb-20 opacity-40">
-                      <div className="w-24 h-12 border border-border" />
-                      <div className="text-[10px] font-bold uppercase tracking-widest">Confidential / Statutory Disclosure</div>
-                   </div>
-
-                   <div className="space-y-12">
-                      <div className="h-4 w-1/3 bg-silver/5 rounded-sm" />
-                      <h1 className="text-4xl font-heading font-bold text-charcoal dark:text-white leading-tight underline underline-offset-8 decoration-gold/30">
-                         {documentData.title}
-                      </h1>
-                      <div className="flex gap-4">
-                         <div className="h-6 w-32 bg-gold/10 rounded-sm" />
-                         <div className="h-6 w-32 bg-silver/10 rounded-sm" />
-                      </div>
-
-                      <div className="space-y-6 pt-10">
-                         {[...Array(8)].map((_, i) => (
-                            <div key={i} className="space-y-3">
-                               <div className="h-3 w-full bg-silver/5 rounded-sm" />
-                               <div className="h-3 w-5/6 bg-silver/5 rounded-sm" />
-                               <div className="h-3 w-4/6 bg-silver/5 rounded-sm" />
-                            </div>
-                         ))}
-                      </div>
-
-                      <div className="pt-20 border-t border-border/50">
-                         <div className="flex items-center gap-4 text-silver/20 mb-8">
-                            <ShieldCheck className="w-12 h-12" />
-                            <div className="h-px flex-grow bg-silver/5" />
-                         </div>
-                         <div className="grid grid-cols-2 gap-20">
-                            <div className="space-y-4">
-                               <div className="h-10 w-40 border-b border-border" />
-                               <p className="text-[8px] font-bold uppercase tracking-widest text-silver/30 italic">Authorized Signatory</p>
-                            </div>
-                            <div className="space-y-4">
-                               <div className="h-10 w-40 border-b border-border" />
-                               <p className="text-[8px] font-bold uppercase tracking-widest text-silver/30 italic">Compliance Verification</p>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-
-                   {/* Digital Watermark */}
-                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-45deg] pointer-events-none opacity-[0.03]">
-                      <span className="text-[120px] font-bold whitespace-nowrap uppercase tracking-[0.5em]">STATUTORY</span>
-                   </div>
-                </div>
-             </div>
+        <div className="flex-grow flex flex-col lg:flex-row overflow-hidden min-h-0">
+          {/* Main Zero-Download Multi-Page Canvas Viewer */}
+          <div className="flex-grow bg-[#F1F5F9] dark:bg-[#08121e] flex flex-col relative overflow-hidden min-h-0 h-full">
+            <PdfDocumentViewer 
+              url={documentData.link || "/sample-report.pdf"}
+              title={documentData.title}
+              className="w-full h-full flex-grow"
+            />
           </div>
 
           {/* Sidebar Metadata */}
-          <div className="w-full lg:w-96 bg-white dark:bg-charcoal border-l border-border flex flex-col sticky bottom-0 lg:static">
+          <div className="w-full lg:w-96 bg-white dark:bg-charcoal border-l border-border flex flex-col overflow-y-auto max-h-[30vh] lg:max-h-full shrink-0">
              <div className="p-8 space-y-12 overflow-y-auto">
                 <div className="animate-in fade-in slide-in-from-right duration-700 delay-500">
                    <h4 className="text-[10px] font-bold text-gold uppercase tracking-[0.2em] mb-6">Document Summary</h4>

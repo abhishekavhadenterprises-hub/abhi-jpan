@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, ArrowUpRight, DollarSign, Activity, PieChart } from "lucide-react";
 
@@ -44,20 +44,6 @@ const highlights = [
 ];
 
 export function FinancialHighlights() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < highlights.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC] dark:bg-[#050D18] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
@@ -91,83 +77,55 @@ export function FinancialHighlights() {
           </motion.p>
         </div>
 
-        {/* 4-Card Asymmetric Bento Metric Grid */}
-        <div className="flex flex-col justify-between w-full">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-1 pb-4 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-          >
-            {highlights.map((item, idx) => (
-              <motion.div 
-                key={item.id}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
-              >
-                {/* Giant Numeric Watermark */}
-                <div className="absolute top-3 sm:top-4 right-4 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
-                  {item.num}
+        {/* 4-Card Asymmetric Bento Metric Grid (Mobile: Stacked Vertically, Tablet/Desktop: 2-4 Columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
+          {highlights.map((item, idx) => (
+            <motion.div 
+              key={item.id}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative bg-white dark:bg-[#0D2440]/30 hover:bg-[#E7F0FA]/40 dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden w-full"
+            >
+              {/* Giant Numeric Watermark */}
+              <div className="absolute top-3 sm:top-4 right-4 sm:right-6 text-4xl sm:text-5xl md:text-6xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
+                {item.num}
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
+                    <item.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <div className="flex items-center gap-1 text-[10px] sm:text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    {item.growth}
+                  </div>
                 </div>
 
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6 sm:mb-8">
-                    <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 shrink-0 shadow-xs">
-                      <item.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px] sm:text-[11px] font-heading font-black text-[#2E5E99] dark:text-[#7BA4D0] bg-[#E7F0FA] dark:bg-[#0D2440]/60 border border-[#7BA4D0]/25 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                      {item.growth}
-                    </div>
-                  </div>
-
-                  <div className="mb-3">
-                    <p className="text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest mb-1 sm:mb-1.5">
-                      {item.label}
-                    </p>
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
-                      {item.value}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal">
-                    {item.desc}
+                <div className="mb-3">
+                  <p className="text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest mb-1 sm:mb-1.5">
+                    {item.label}
                   </p>
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black text-[#0D2440] dark:text-white tracking-tight">
+                    {item.value}
+                  </h3>
                 </div>
 
-                <div className="relative z-10 mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
-                  <span className="text-[10px] font-heading font-black text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest">
-                    Audited P&L
-                  </span>
-                  <div className="w-2 h-2 rounded-full bg-[#7BA4D0]/40 group-hover:bg-[#2E5E99] transition-colors" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                <p className="text-xs sm:text-sm text-[#0D2440]/70 dark:text-white/65 leading-relaxed font-normal">
+                  {item.desc}
+                </p>
+              </div>
 
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-4 sm:mt-6 z-10">
-            {highlights.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current) {
-                    cardsRef.current.scrollTo({
-                      left: i * cardsRef.current.clientWidth,
-                      behavior: "smooth"
-                    });
-                  }
-                }}
-                className={`h-1.5 transition-all duration-300 rounded-full ${
-                  activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
-                }`}
-                aria-label={`Go to metric ${i + 1}`}
-              />
-            ))}
-          </div>
+              <div className="relative z-10 mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-[#7BA4D0]/20 flex items-center justify-between">
+                <span className="text-[10px] font-heading font-black text-[#0D2440]/60 dark:text-white/60 uppercase tracking-widest">
+                  Audited P&L
+                </span>
+                <div className="w-2 h-2 rounded-full bg-[#7BA4D0]/40 group-hover:bg-[#2E5E99] transition-colors" />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

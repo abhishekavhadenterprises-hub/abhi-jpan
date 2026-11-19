@@ -6,6 +6,7 @@ import {
   ShieldCheck, TrendingUp, ZoomIn, ZoomOut, Printer,
   BarChart3
 } from "lucide-react";
+import { PdfDocumentViewer } from "@/components/ui/PdfDocumentViewer";
 
 interface RatingDetailModalProps {
   isOpen: boolean;
@@ -97,67 +98,18 @@ export function RatingDetailModal({ isOpen, onClose, ratingData }: RatingDetailM
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
-          
-          {/* Main Viewer (PDF Placeholder) */}
-          <div className="flex-grow bg-silver/10 dark:bg-black/40 overflow-y-auto p-4 sm:p-8 md:p-12 scrollbar-thin">
-             <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-                {/* PDF Aesthetic Mockup */}
-                <div className="bg-white dark:bg-charcoal rounded-xl sm:rounded-2xl p-6 sm:p-12 md:p-20 min-h-[700px] sm:min-h-[1100px] border border-border relative overflow-hidden">
-                   <div className="absolute top-0 left-0 w-full h-1 bg-[#2E5E99]" />
-                   <div className="flex items-center justify-between mb-12 sm:mb-20 opacity-40">
-                      <div className="w-20 sm:w-24 h-10 sm:h-12 border border-border flex items-center justify-center font-bold text-[10px]">J Pan</div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest">Confidential / Credit Evaluation</div>
-                   </div>
-
-                   <div className="space-y-8 sm:space-y-12">
-                      <div className="h-4 w-1/3 bg-silver/10 rounded-sm" />
-                      <h1 className="text-2xl sm:text-4xl font-heading font-bold text-charcoal dark:text-white leading-tight underline underline-offset-8 decoration-[#2E5E99]/30">
-                         {ratingData.agency} Rating Rationale
-                      </h1>
-                      <div className="flex gap-4">
-                         <div className="h-6 w-32 bg-[#2E5E99]/10 rounded-sm" />
-                         <div className="h-6 w-32 bg-silver/10 rounded-sm" />
-                      </div>
-
-                      <div className="space-y-6 pt-6 sm:pt-10">
-                         {[...Array(6)].map((_, i) => (
-                            <div key={i} className="space-y-3">
-                               <div className="h-3 w-full bg-silver/10 rounded-sm" />
-                               <div className="h-3 w-5/6 bg-silver/10 rounded-sm" />
-                               <div className="h-3 w-4/6 bg-silver/10 rounded-sm" />
-                            </div>
-                         ))}
-                      </div>
-
-                      <div className="pt-12 sm:pt-20 border-t border-border/50">
-                         <div className="flex items-center gap-4 text-silver/20 mb-8">
-                            <ShieldCheck className="w-10 sm:w-12 h-10 sm:h-12 text-[#2E5E99]/40" />
-                            <div className="h-px flex-grow bg-silver/10" />
-                         </div>
-                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-20">
-                            <div className="space-y-3">
-                               <div className="h-8 sm:h-10 w-40 border-b border-border" />
-                               <p className="text-[8px] font-bold uppercase tracking-widest text-silver/40 italic">Lead Analyst</p>
-                            </div>
-                            <div className="space-y-3">
-                               <div className="h-8 sm:h-10 w-40 border-b border-border" />
-                               <p className="text-[8px] font-bold uppercase tracking-widest text-silver/40 italic">Institutional Authentication</p>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-
-                   {/* Digital Watermark */}
-                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-45deg] pointer-events-none opacity-[0.03]">
-                      <span className="text-[70px] sm:text-[120px] font-bold whitespace-nowrap uppercase tracking-[0.5em]">CONFIDENTIAL</span>
-                   </div>
-                </div>
-             </div>
+        <div className="flex-grow flex flex-col lg:flex-row overflow-hidden min-h-0">
+          {/* Main Zero-Download Multi-Page Canvas Viewer */}
+          <div className="flex-grow bg-[#F1F5F9] dark:bg-[#08121e] flex flex-col relative overflow-hidden min-h-0 h-full">
+            <PdfDocumentViewer 
+              url="/sample-report.pdf"
+              title={`${ratingData.agency} Credit Rating Rationale`}
+              className="w-full h-full flex-grow"
+            />
           </div>
 
           {/* Sidebar Metadata */}
-          <div className="w-full lg:w-96 bg-white dark:bg-[#0A192F] border-t lg:border-t-0 lg:border-l border-border flex flex-col shrink-0">
+          <div className="w-full lg:w-96 bg-white dark:bg-[#0A192F] border-t lg:border-t-0 lg:border-l border-border flex flex-col overflow-y-auto max-h-[30vh] lg:max-h-full shrink-0">
              <div className="p-5 sm:p-8 space-y-8 sm:space-y-12 overflow-y-auto">
                 <div className="animate-in fade-in slide-in-from-right duration-700 delay-500">
                    <h4 className="text-[10px] font-bold text-[#2E5E99] dark:text-[#7BA4D0] uppercase tracking-[0.2em] mb-4 sm:mb-6">Rating Summary</h4>

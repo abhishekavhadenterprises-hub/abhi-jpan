@@ -1,25 +1,11 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Mail, ArrowRight, MessageSquare, Headphones, Radio, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function AudioCTA() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 3 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black overflow-hidden relative">
       <div className="container-custom relative z-10">
@@ -62,71 +48,45 @@ export function AudioCTA() {
               </div>
             </div>
 
-            {/* Support Cards */}
-            <div className="flex flex-col justify-between w-full">
-              <div 
-                ref={cardsRef}
-                onScroll={handleMobileScroll}
-                className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 sm:py-0 px-1 sm:px-0 gap-3.5 sm:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-              >
-                <div className="p-5 sm:p-7 md:p-8 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm border border-[#7BA4D0]/25 rounded-2xl hover:border-[#2E5E99]/40 transition-all group/card w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center mb-4 sm:mb-5 text-[#2E5E99]">
-                    <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-widest mb-1 sm:mb-1.5">
-                    IR Inquiries
-                  </h4>
-                  <p className="text-muted-foreground text-xs font-medium break-all">enquiry@jpantubular.com</p>
+            {/* Support Cards (Stacked vertically on mobile, 2-column grid on desktop) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-6 w-full">
+              <div className="p-5 sm:p-7 md:p-8 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm border border-[#7BA4D0]/25 rounded-2xl hover:border-[#2E5E99]/40 transition-all group/card w-full">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center mb-4 sm:mb-5 text-[#2E5E99]">
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-
-                <div className="p-5 sm:p-7 md:p-8 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm border border-[#7BA4D0]/25 rounded-2xl hover:border-[#2E5E99]/40 transition-all group/card w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center mb-4 sm:mb-5 text-[#2E5E99]">
-                    <Headphones className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-widest mb-1 sm:mb-1.5">
-                    Call Support
-                  </h4>
-                  <p className="text-muted-foreground text-xs font-medium">+91-120-2560586</p>
-                </div>
-
-                <div className="sm:col-span-2 p-5 sm:p-6 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm border border-[#7BA4D0]/25 rounded-2xl flex items-center justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center">
-                  <div className="flex items-center gap-3.5 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center rounded-xl shrink-0 text-[#2E5E99]">
-                      <Radio className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-widest mb-0.5">
-                        Market Disclosure
-                      </h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed">
-                        Access our primary nodal officer for statutory audio disclosure queries.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="hidden sm:flex items-center gap-3">
-                    <MessageSquare className="w-5 h-5 text-[#7BA4D0]" />
-                  </div>
-                </div>
+                <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-widest mb-1 sm:mb-1.5">
+                  IR Inquiries
+                </h4>
+                <p className="text-muted-foreground text-xs font-medium break-all">enquiry@jpantubular.com</p>
               </div>
 
-              {/* Mobile Pagination Indicator Dots */}
-              <div className="flex sm:hidden items-center justify-center gap-2 mt-4 z-10">
-                {[0, 1, 2].map((i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (cardsRef.current && cardsRef.current.children[i]) {
-                        cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                      }
-                    }}
-                    className={cn(
-                      "h-1.5 rounded-full transition-all duration-300",
-                      activeIndex === i ? "w-6 bg-[#2E5E99]" : "w-1.5 bg-[#7BA4D0]/40"
-                    )}
-                    aria-label={`Go to card ${i + 1}`}
-                  />
-                ))}
+              <div className="p-5 sm:p-7 md:p-8 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm border border-[#7BA4D0]/25 rounded-2xl hover:border-[#2E5E99]/40 transition-all group/card w-full">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center mb-4 sm:mb-5 text-[#2E5E99]">
+                  <Headphones className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-widest mb-1 sm:mb-1.5">
+                  Call Support
+                </h4>
+                <p className="text-muted-foreground text-xs font-medium">+91-120-2560586</p>
+              </div>
+
+              <div className="sm:col-span-2 p-5 sm:p-6 bg-white/80 dark:bg-charcoal/80 backdrop-blur-sm border border-[#7BA4D0]/25 rounded-2xl flex items-center justify-between w-full">
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#EBF3FC] dark:bg-[#0D2440]/40 flex items-center justify-center rounded-xl shrink-0 text-[#2E5E99]">
+                    <Radio className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-widest mb-0.5">
+                      Market Disclosure
+                    </h4>
+                    <p className="text-muted-foreground text-xs leading-relaxed">
+                      Access our primary nodal officer for statutory audio disclosure queries.
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden sm:flex items-center gap-3">
+                  <MessageSquare className="w-5 h-5 text-[#7BA4D0]" />
+                </div>
               </div>
             </div>
 
