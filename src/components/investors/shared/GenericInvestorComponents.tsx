@@ -399,7 +399,7 @@ function GenericInvestorFilterInner() {
    3. SHARED DOCUMENT MODAL (FOR INSTANT PREVIEW)
    ========================================================================= */
 
-interface ModalItem {
+export interface ModalItem {
   id?: number | string;
   date?: string;
   period?: string;
@@ -419,7 +419,7 @@ function getYouTubeEmbedUrl(url: string): string | null {
     : null;
 }
 
-function GenericDocumentModal({
+export function GenericDocumentModal({
   item,
   isOpen,
   onClose
@@ -459,95 +459,103 @@ function GenericDocumentModal({
 
   return (
     <div data-lenis-prevent="true" className="fixed inset-0 z-[100] w-screen h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#071321] animate-in fade-in duration-200 overflow-hidden">
-      {/* Top Header Bar */}
-      <header className="h-16 sm:h-18 px-3 sm:px-6 md:px-8 border-b border-[#7BA4D0]/20 bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md flex items-center justify-between z-20 shrink-0 gap-3">
-        {/* Left Section: Back button + Title & Status */}
-        <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
-          <button
-            onClick={onClose}
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-xl bg-[#E7F0FA] dark:bg-[#071321] hover:bg-[#2E5E99] hover:text-white dark:hover:bg-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shrink-0 shadow-xs"
-            title="Back to Filings (Esc)"
-            aria-label="Back to Filings"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">Back</span>
-          </button>
+      {/* Top Header Bar — 2-tier on Mobile to Prevent Button Overlap (Image 2/4 bug solved) */}
+      <header className="border-b border-[#7BA4D0]/20 bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md z-20 shrink-0 px-3 sm:px-6 md:px-8 py-2.5 sm:py-0 sm:h-18 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
+        {/* Tier 1: Left Nav & Actions */}
+        <div className="flex items-center justify-between gap-2 w-full sm:w-auto min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <button
+              onClick={onClose}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-[#E7F0FA] dark:bg-[#071321] hover:bg-[#2E5E99] hover:text-white dark:hover:bg-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shrink-0 shadow-xs cursor-pointer"
+              title="Back to Filings (Esc)"
+              aria-label="Back to Filings"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden sm:inline">Back</span>
+            </button>
 
-          <div className="h-6 w-px bg-[#7BA4D0]/25 hidden sm:block shrink-0" />
-
-          {displayDate && (
-            <span className="px-2.5 py-1 rounded-lg bg-[#E7F0FA] dark:bg-[#071321] text-[#2E5E99] dark:text-[#7BA4D0] font-heading font-black text-xs shrink-0 border border-[#7BA4D0]/20">
-              {displayDate}
-            </span>
-          )}
-
-          <div className="min-w-0">
-            <h1 className="text-xs sm:text-sm md:text-base font-heading font-black text-[#0D2440] dark:text-white truncate" title={displayTitle}>
-              {displayTitle}
-            </h1>
-            <div className="flex items-center gap-2 mt-0.5">
-              <span className="text-[10px] font-heading uppercase tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] font-bold">
-                {isVideo ? "Official Audio-Visual Filing" : "Statutory PDF Filing"}
+            {displayDate && (
+              <span className="px-2 sm:px-2.5 py-1 rounded-lg bg-[#E7F0FA] dark:bg-[#071321] text-[#2E5E99] dark:text-[#7BA4D0] font-heading font-black text-[11px] sm:text-xs shrink-0 border border-[#7BA4D0]/20 whitespace-nowrap">
+                {displayDate}
               </span>
-              <span className="text-[#7BA4D0]/40 text-xs hidden md:inline">•</span>
-              <span className="hidden md:inline-flex items-center gap-1 text-[10px] font-heading font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-                <ShieldCheck className="w-3 h-3 text-emerald-500" />
-                Audited & Verified
-              </span>
+            )}
+
+            {/* Desktop Title Inline */}
+            <div className="min-w-0 hidden sm:block">
+              <h1 className="text-xs sm:text-sm md:text-base font-heading font-black text-[#0D2440] dark:text-white truncate" title={displayTitle}>
+                {displayTitle}
+              </h1>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="text-[10px] font-heading uppercase tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] font-bold">
+                  {isVideo ? "Official Audio-Visual Filing" : "Statutory PDF Filing"}
+                </span>
+                <span className="text-[#7BA4D0]/40 text-xs hidden md:inline">•</span>
+                <span className="hidden md:inline-flex items-center gap-1 text-[10px] font-heading font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                  <ShieldCheck className="w-3 h-3 text-emerald-500" />
+                  Audited & Verified
+                </span>
+              </div>
             </div>
+          </div>
+
+          {/* Right Action Controls */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            <a
+              href={downloadLink}
+              download
+              className="w-8 h-8 sm:w-auto sm:px-4 sm:py-2 rounded-xl bg-[#0D2440] dark:bg-[#2E5E99] hover:bg-[#2E5E99] text-white transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0 flex items-center justify-center gap-1.5"
+              title={isVideo ? "Download Video" : "Download PDF"}
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Download</span>
+            </a>
+
+            <a
+              href={downloadLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 sm:w-auto sm:px-3.5 sm:py-2 rounded-xl bg-white dark:bg-[#0D2440] hover:border-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0 flex items-center justify-center gap-1.5"
+              title="Open in external viewer"
+            >
+              <ExternalLink className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
+              <span className="hidden lg:inline">Open in Tab</span>
+            </a>
+
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined" && navigator.clipboard) {
+                  const fullUrl = downloadLink.startsWith("http") 
+                    ? downloadLink 
+                    : `${window.location.origin}${downloadLink}`;
+                  navigator.clipboard.writeText(fullUrl);
+                  toast.success("Document link copied to clipboard!");
+                }
+              }}
+              className="w-8 h-8 sm:w-auto p-2 sm:px-3 sm:py-2 rounded-xl bg-white dark:bg-[#0D2440] hover:border-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0 flex items-center justify-center gap-1.5 cursor-pointer"
+              title="Copy document link"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">Share</span>
+            </button>
+
+            <button
+              onClick={onClose}
+              className="w-8 h-8 p-1.5 rounded-xl text-[#0D2440]/70 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-[#E7F0FA] dark:hover:bg-white/10 transition-colors shrink-0 flex items-center justify-center cursor-pointer"
+              aria-label="Close viewer"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
-        {/* Right Section: Action Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          <a
-            href={downloadLink}
-            download
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl bg-[#0D2440] dark:bg-[#2E5E99] hover:bg-[#2E5E99] dark:hover:bg-[#7BA4D0] dark:hover:text-[#0D2440] text-white transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0"
-            title={isVideo ? "Download Video" : "Download PDF"}
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">
-              {isVideo ? "Download Video" : "Download PDF"}
-            </span>
-          </a>
-
-          <a
-            href={downloadLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-xl bg-white dark:bg-[#0D2440] hover:border-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0"
-            title="Open in external viewer"
-          >
-            <ExternalLink className="w-3.5 h-3.5 text-[#2E5E99] dark:text-[#7BA4D0]" />
-            <span className="hidden lg:inline">Open in Tab</span>
-          </a>
-
-          <button
-            onClick={() => {
-              if (typeof window !== "undefined" && navigator.clipboard) {
-                const fullUrl = downloadLink.startsWith("http") 
-                  ? downloadLink 
-                  : `${window.location.origin}${downloadLink}`;
-                navigator.clipboard.writeText(fullUrl);
-                toast.success("Document link copied to clipboard!");
-              }
-            }}
-            className="p-2 sm:px-3 sm:py-2 rounded-xl bg-white dark:bg-[#0D2440] hover:border-[#2E5E99] text-[#0D2440] dark:text-white border border-[#7BA4D0]/30 transition-all font-heading font-bold text-xs uppercase tracking-wider shadow-xs shrink-0 inline-flex items-center gap-1.5"
-            title="Copy document link"
-          >
-            <Share2 className="w-3.5 h-3.5" />
-            <span className="hidden xl:inline">Share</span>
-          </button>
-
-          <button
-            onClick={onClose}
-            className="p-2 rounded-xl text-[#0D2440]/70 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-[#E7F0FA] dark:hover:bg-white/10 transition-colors shrink-0"
-            aria-label="Close Viewer"
-            title="Close (Esc)"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        {/* Tier 2 on Phone: Document Title & Statutory Badge (Zero text collision) */}
+        <div className="sm:hidden w-full min-w-0 pt-1 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-2">
+          <h1 className="text-xs font-heading font-bold text-[#0D2440] dark:text-white truncate" title={displayTitle}>
+            {displayTitle}
+          </h1>
+          <span className="text-[9px] font-heading uppercase tracking-wider text-[#2E5E99] dark:text-[#7BA4D0] font-bold shrink-0">
+            {isVideo ? "Audio-Visual" : "Statutory PDF"}
+          </span>
         </div>
       </header>
 
@@ -970,15 +978,15 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
             transition={{ duration: 0.5 }}
             className="rounded-2xl sm:rounded-3xl border border-[#7BA4D0]/25 bg-white dark:bg-[#0D2440]/40 overflow-hidden shadow-sm"
           >
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+            <div className="w-full overflow-hidden">
+              <table className="w-full text-left border-collapse table-fixed sm:table-auto">
                 <thead>
                   <tr className="border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#0D2440]/80 text-[10px] sm:text-[11px] font-heading font-bold text-[#0D2440]/70 dark:text-white/70 uppercase tracking-wider">
-                    <th className="py-3 px-3.5 sm:py-4 sm:px-6">Fiscal Date</th>
-                    <th className="py-3 px-3.5 sm:py-4 sm:px-6">Document Particulars</th>
-                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 hidden sm:table-cell">Classification</th>
-                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 hidden md:table-cell">Status</th>
-                    <th className="py-3 px-3.5 sm:py-4 sm:px-6 text-right">Actions</th>
+                    <th className="py-3 sm:py-4 px-2.5 sm:px-6 w-[28%] sm:w-auto">Fiscal Date</th>
+                    <th className="py-3 sm:py-4 px-2 sm:px-6">Document Particulars</th>
+                    <th className="py-4 px-6 hidden sm:table-cell">Classification</th>
+                    <th className="py-4 px-6 hidden md:table-cell">Status</th>
+                    <th className="py-3 sm:py-4 px-2.5 sm:px-6 text-right w-[26%] sm:w-auto">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#7BA4D0]/15 text-xs text-[#0D2440] dark:text-white">
@@ -987,12 +995,12 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                       key={item.id}
                       className="hover:bg-[#F1F6FB] dark:hover:bg-white/5 transition-colors group"
                     >
-                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 font-heading font-black text-xs sm:text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-wide whitespace-nowrap">
+                      <td className="py-3.5 sm:py-4 px-2.5 sm:px-6 font-heading font-black text-xs sm:text-sm text-[#2E5E99] dark:text-[#7BA4D0] tracking-tight sm:tracking-wide">
                         {item.date}
                       </td>
 
-                      <td className="py-3 px-3.5 sm:py-4 sm:px-6">
-                        <div className="flex items-center gap-2.5 sm:gap-3">
+                      <td className="py-3.5 sm:py-4 px-2 sm:px-6">
+                        <div className="flex items-center gap-2 sm:gap-3">
                           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#E7F0FA] dark:bg-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0">
                             {item.link.toLowerCase().includes(".mp4") ? (
                               <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -1000,42 +1008,42 @@ function GenericInvestorTableInner({ data }: GenericInvestorTableProps) {
                               <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                             )}
                           </div>
-                          <div>
-                            <span className="font-heading font-semibold text-xs sm:text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block leading-snug">
+                          <div className="min-w-0">
+                            <span className="font-heading font-semibold text-xs sm:text-sm group-hover:text-[#2E5E99] dark:group-hover:text-[#7BA4D0] transition-colors block leading-tight truncate sm:whitespace-normal">
                               {item.particulars}
                             </span>
-                            <span className="text-[10px] sm:text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 sm:hidden">
+                            <span className="text-[10px] sm:text-[11px] font-heading text-[#0D2440]/50 dark:text-white/50 block sm:hidden">
                               {item.link.toLowerCase().includes(".mp4") ? "Official · MP4 Video" : "Audited · Official PDF"}
                             </span>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
+                      <td className="py-4 px-6 hidden sm:table-cell font-heading font-semibold text-xs text-[#0D2440]/70 dark:text-white/70">
                         Statutory Filing
                       </td>
 
-                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 hidden md:table-cell">
+                      <td className="py-4 px-6 hidden md:table-cell">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-heading text-[10px] font-bold uppercase tracking-wider">
                           <CheckCircle2 className="w-3 h-3" />
                           Audited
                         </div>
                       </td>
 
-                      <td className="py-3 px-3.5 sm:py-4 sm:px-6 text-right">
-                        <div className="flex items-center justify-end gap-2">
+                      <td className="py-3.5 sm:py-4 px-2.5 sm:px-6 text-right">
+                        <div className="flex items-center justify-end gap-1.5 sm:gap-2">
                           <button
                             onClick={() => handleOpenModal(item)}
-                            className="p-2 rounded-lg bg-white dark:bg-white/10 border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white transition-all"
+                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white dark:bg-white/10 border border-[#7BA4D0]/30 hover:border-[#2E5E99] text-[#0D2440] dark:text-white transition-all flex items-center justify-center shrink-0"
                             title="Preview Document"
                             aria-label={`Preview ${item.particulars}`}
                           >
-                            <Eye className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
+                            <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E5E99] dark:text-[#7BA4D0]" />
                           </button>
                           <a
                             href={item.link}
                             download
-                            className="px-3.5 py-2 rounded-lg bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs transition-all flex items-center gap-1.5"
+                            className="w-7 h-7 sm:w-auto sm:px-3.5 sm:py-2 rounded-lg bg-[#0D2440] hover:bg-[#2E5E99] text-white font-heading font-bold text-xs transition-all flex items-center justify-center gap-1.5 shrink-0"
                           >
                             <Download className="w-3.5 h-3.5" />
                             <span className="hidden sm:inline">PDF</span>

@@ -44,32 +44,91 @@ export function FilterBar({
           scrolled ? "py-1.5 px-2.5 sm:py-1.5 sm:px-2" : "py-2 px-2.5 sm:py-2 sm:px-3"
         )}
       >
-        {/* Categories (Multi-line wrap on mobile, pill strip on desktop, starting from left) */}
-        <div className="flex flex-wrap items-center justify-start gap-1 sm:gap-2 flex-1 min-w-0 text-left">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => onCategoryChange(cat)}
-                className={cn(
-                  "relative px-2.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-heading font-medium whitespace-nowrap transition-colors duration-300 outline-none cursor-pointer text-left",
-                  isActive
-                    ? "text-white"
-                    : "text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
-                )}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeFilterPill"
-                    className="absolute inset-0 bg-[#0D2440] dark:bg-[#2E5E99] rounded-full z-0"
-                    transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{cat}</span>
-              </button>
-            );
-          })}
+        {/* Categories: On mobile, 2 dedicated rows (3 in Row 1, 2 in Row 2); on desktop, single horizontal strip */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-start gap-1 sm:gap-2 flex-1 min-w-0 text-left">
+          {/* Mobile Row 1 (First 3 categories) */}
+          <div className="flex items-center gap-1 sm:hidden w-full">
+            {categories.slice(0, 3).map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => onCategoryChange(cat)}
+                  className={cn(
+                    "relative px-2 py-1 rounded-full text-[11px] font-heading font-medium whitespace-nowrap transition-colors duration-300 outline-none cursor-pointer flex-1 text-center justify-center",
+                    isActive
+                      ? "text-white"
+                      : "text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFilterPillMobile1"
+                      className="absolute inset-0 bg-[#0D2440] dark:bg-[#2E5E99] rounded-full z-0"
+                      transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{cat}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mobile Row 2 (Remaining 2 categories) */}
+          <div className="flex items-center gap-1 sm:hidden w-full">
+            {categories.slice(3).map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => onCategoryChange(cat)}
+                  className={cn(
+                    "relative px-2.5 py-1 rounded-full text-[11px] font-heading font-medium whitespace-nowrap transition-colors duration-300 outline-none cursor-pointer flex-1 text-center justify-center",
+                    isActive
+                      ? "text-white"
+                      : "text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFilterPillMobile2"
+                      className="absolute inset-0 bg-[#0D2440] dark:bg-[#2E5E99] rounded-full z-0"
+                      transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{cat}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop Single Row */}
+          <div className="hidden sm:flex items-center gap-2">
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => onCategoryChange(cat)}
+                  className={cn(
+                    "relative px-4 xl:px-5 py-2 rounded-full text-xs sm:text-sm font-heading font-medium whitespace-nowrap transition-colors duration-300 outline-none cursor-pointer",
+                    isActive
+                      ? "text-white"
+                      : "text-slate-600 dark:text-white/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFilterPillDesktop"
+                      className="absolute inset-0 bg-[#0D2440] dark:bg-[#2E5E99] rounded-full z-0"
+                      transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{cat}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Divider */}

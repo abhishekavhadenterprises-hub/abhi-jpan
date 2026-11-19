@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Link from "next/link";
 import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
 import { ShieldCheck, Heart, Zap, History, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -145,22 +146,13 @@ export function QualityTrust() {
                 Our quality management systems are independently audited and certified to <span className="text-[#2E5E99] dark:text-[#7BA4D0] font-bold">ISO 9001:2015</span> standards for global reliability.
               </p>
             </div>
-            {/* Squircle Action Button with Spring Physics */}
-            <motion.button 
-              whileHover={{ 
-                scale: 1.03, 
-                y: -2, 
-                transition: { type: "spring", stiffness: 400, damping: 25 } 
-              }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                const el = document.getElementById('certifications');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="shrink-0 px-6 sm:px-8 py-3.5 bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold uppercase tracking-[0.18em] rounded-xl sm:rounded-2xl transition-colors duration-300 whitespace-nowrap shadow-sm hover:shadow-lg hover:shadow-[#2E5E99]/20 cursor-pointer w-full md:w-auto text-center"
+            {/* Direct Navigation to Dedicated Certifications Page */}
+            <Link 
+              href="/certifications"
+              className="shrink-0 px-6 sm:px-8 py-3.5 bg-[#0D2440] hover:bg-[#2E5E99] text-white text-xs font-heading font-bold uppercase tracking-[0.18em] rounded-xl sm:rounded-2xl transition-all duration-300 whitespace-nowrap shadow-sm hover:shadow-lg hover:shadow-[#2E5E99]/20 hover:-translate-y-0.5 active:scale-98 cursor-pointer w-full md:w-auto text-center inline-block"
             >
               View Certifications
-            </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>

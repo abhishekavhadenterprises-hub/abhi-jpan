@@ -105,34 +105,43 @@ export function EventDetailModal({ event, onClose }: EventDetailModalProps) {
             </p>
           </div>
 
-          <div className="border-t border-slate-200 dark:border-white/10 pt-6">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">Key Highlights</h4>
-            <ul className="space-y-3">
-              {event.highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium">
-                  <CheckCircle2 className="w-5 h-5 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5" />
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Key Highlights */}
+          {event.highlights && event.highlights.length > 0 && (
+            <div className="border-t border-slate-200 dark:border-white/10 pt-6">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">Key Highlights</h4>
+              <ul className="space-y-3">
+                {event.highlights.map((h, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium">
+                    <CheckCircle2 className="w-5 h-5 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mt-0.5" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
-        {/* Right Side: Event Gallery Grid */}
+        {/* Right Side: Event Photo Gallery Grid */}
         <div className="w-full lg:w-1/2">
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Event Photo Gallery</h4>
-          <div className="grid grid-cols-2 gap-4">
-            {event.gallery.map((img, i) => (
-              <div key={i} className={`relative overflow-hidden rounded-2xl group border border-slate-200/80 dark:border-white/10 shadow-sm ${i === 0 ? 'col-span-2 aspect-[16/10]' : 'aspect-square'}`}>
-                <Image
-                  src={img}
-                  alt={`Gallery ${i + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ))}
-          </div>
+          {event.gallery && event.gallery.length > 0 ? (
+            <div className="grid grid-cols-2 gap-4">
+              {event.gallery.map((img, i) => (
+                <div key={i} className={`relative overflow-hidden rounded-2xl group border border-slate-200/80 dark:border-white/10 shadow-sm ${i === 0 ? 'col-span-2 aspect-[16/10]' : 'aspect-square'}`}>
+                  <Image
+                    src={img}
+                    alt={`Gallery ${i + 1}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-8 rounded-2xl border border-dashed border-slate-200 dark:border-white/10 text-center text-slate-400 text-sm">
+              Official event photographs archived.
+            </div>
+          )}
         </div>
       </div>
     </div>

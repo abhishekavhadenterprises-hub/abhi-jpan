@@ -86,7 +86,7 @@ export function ProductIndustries() {
               viewport={{ once: true }}
               transition={{ duration: revealDuration(0.6), delay: idx * staggerDelay(0.08), ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -6, transition: { duration: hoverDuration(0.3) } }}
-              className={cn("group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all w-full flex flex-col justify-between cursor-pointer p-3.5 sm:p-5 shadow-sm hover:shadow-xl", hoverClass("duration-500"))}
+              className={cn("group relative h-[225px] sm:h-[235px] rounded-2xl sm:rounded-3xl overflow-hidden bg-white dark:bg-[#0B1728] border border-slate-200/90 dark:border-white/10 hover:border-[#2E5E99]/40 dark:hover:border-[#7BA4D0]/50 transition-all w-full flex flex-col justify-between select-none p-3.5 sm:p-5 shadow-sm hover:shadow-xl", hoverClass("duration-500"))}
             >
               {/* 100% Crisp Background Image with Zero Wash/Blur */}
               <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -100,14 +100,15 @@ export function ProductIndustries() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              <Link href={sector.link} className="block w-full h-full relative z-10 flex flex-col justify-between">
-                {/* Top Header: Clean Icon Capsule & Top Arrow Action */}
+              {/* Informational Detached Card Structure */}
+              <div className="w-full h-full relative z-10 flex flex-col justify-between">
+                {/* Top Header: Clean Icon Capsule & Decorative Indicator */}
                 <div className="flex items-center justify-between">
                   <div className="w-8 h-8 rounded-lg bg-white/95 dark:bg-[#0B1728]/95 border border-slate-200/80 dark:border-white/15 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300">
                     <sector.icon className="w-4 h-4" />
                   </div>
 
-                  <div className="w-7 h-7 rounded-full bg-white/95 dark:bg-[#0B1728]/95 group-hover:bg-[#2E5E99] text-[#0D2440] dark:text-white group-hover:text-white flex items-center justify-center transition-all duration-300 group-hover:scale-105 border border-slate-200/80 dark:border-white/15">
+                  <div className="w-7 h-7 rounded-full bg-white/95 dark:bg-[#0B1728]/95 text-[#0D2440]/60 dark:text-white/60 flex items-center justify-center border border-slate-200/80 dark:border-white/15">
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -121,7 +122,7 @@ export function ProductIndustries() {
                     {sector.desc}
                   </p>
                 </div>
-              </Link>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -134,7 +134,7 @@ export function BlogDetailModal({ article, onClose }: BlogDetailModalProps) {
           </div>
 
           <div className="space-y-6 sm:space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed text-base sm:text-lg md:text-xl font-normal font-sans">
-            {article.content.map((para, i) => (
+            {(article.content || []).map((para, i) => (
               <p key={i}>
                 {para}
               </p>

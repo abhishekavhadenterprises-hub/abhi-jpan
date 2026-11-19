@@ -198,6 +198,9 @@ export function CertificationsGrid() {
   const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const panStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const hasMovedRef = useRef<boolean>(false);
+  const pinchStartDistRef = useRef<number | null>(null);
+  const pinchStartZoomRef = useRef<number>(1);
+  const isPinchingRef = useRef<boolean>(false);
 
   // Filter only by location
   const filteredCertificates = useMemo(() => {
@@ -250,6 +253,47 @@ export function CertificationsGrid() {
     setPan({ x: 0, y: 0 });
   }, []);
 
+  // Multi-Touch Two-Finger Pinch-to-Zoom Handlers for Mobile Devices
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 2) {
+      isPinchingRef.current = true;
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      pinchStartDistRef.current = dist;
+      pinchStartZoomRef.current = zoom;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 2 && pinchStartDistRef.current) {
+      isPinchingRef.current = true;
+      const currentDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const scaleFactor = currentDist / pinchStartDistRef.current;
+      const newZoom = Math.min(3.5, Math.max(1, Number((pinchStartZoomRef.current * scaleFactor).toFixed(2))));
+      setZoom(newZoom);
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length < 2) {
+      pinchStartDistRef.current = null;
+      if (isPinchingRef.current) {
+        setTimeout(() => {
+          isPinchingRef.current = false;
+        }, 150);
+      }
+    }
+    if (e.touches.length === 0 && zoom <= 1.05) {
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
+    }
+  };
+
   // Mouse Wheel Zoom
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
@@ -266,7 +310,7 @@ export function CertificationsGrid() {
 
   // Pointer Drag Handlers (with smooth boundaries)
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.button !== 0) return;
+    if (isPinchingRef.current || e.button !== 0) return;
     setIsDragging(true);
     hasMovedRef.current = false;
     dragStartRef.current = { x: e.clientX, y: e.clientY };
@@ -275,7 +319,7 @@ export function CertificationsGrid() {
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+    if (isPinchingRef.current || !isDragging) return;
     const dx = e.clientX - dragStartRef.current.x;
     const dy = e.clientY - dragStartRef.current.y;
     if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
@@ -296,6 +340,8 @@ export function CertificationsGrid() {
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
     } catch {}
+
+    if (isPinchingRef.current) return;
 
     // Finger swipe left/right between certificates on phone/mobile when not zoomed
     if (hasMovedRef.current && zoom === 1) {
@@ -640,7 +686,11 @@ export function CertificationsGrid() {
               <div 
                 data-lenis-prevent="true"
                 onWheel={handleWheel}
-                className="relative p-2 sm:p-3 md:p-4 bg-[#EBF3FC]/50 dark:bg-black/60 overflow-hidden flex-1 min-h-0 w-full h-full flex justify-center items-center select-none"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onTouchCancel={handleTouchEnd}
+                className="relative p-2 sm:p-3 md:p-4 bg-[#EBF3FC]/50 dark:bg-black/60 overflow-hidden flex-1 min-h-0 w-full h-full flex justify-center items-center select-none touch-none"
               >
                 {/* Floating Left / Right Certificate Navigation Buttons */}
                 {currentCertIndex > 0 && (

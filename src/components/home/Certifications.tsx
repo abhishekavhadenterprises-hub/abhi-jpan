@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import Image from "next/image";
 import { Star } from "lucide-react";
@@ -104,15 +104,35 @@ export const allStreamItems: StreamItem[] = [
 
 export function Certifications() {
   const targetRef = useRef<HTMLDivElement>(null);
+  const [maxTravelPercent, setMaxTravelPercent] = useState(-56.5);
+
+  useEffect(() => {
+    const updateTravel = () => {
+      if (typeof window !== "undefined") {
+        if (window.innerWidth < 640) {
+          // On mobile phones, travel is calibrated so the final Daikin card settles into full view
+          setMaxTravelPercent(-82.5);
+        } else if (window.innerWidth < 1024) {
+          setMaxTravelPercent(-68);
+        } else {
+          setMaxTravelPercent(-56.5);
+        }
+      }
+    };
+    updateTravel();
+    window.addEventListener("resize", updateTravel, { passive: true });
+    return () => window.removeEventListener("resize", updateTravel);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"],
   });
 
   // Direct, smooth mapping calibrated across the 8-card section
-  // Glides to -56.5% by scrollYProgress 0.82 so the final Daikin card settles into full view
+  // Glides to maxTravelPercent by scrollYProgress 0.82 so the final Daikin card settles into full view
   // and holds steadily through 1.0 before unpinning to scroll down
-  const rawX = useTransform(scrollYProgress, [0, 0.82, 1], [0, -56.5, -56.5]);
+  const rawX = useTransform(scrollYProgress, [0, 0.82, 1], [0, maxTravelPercent, maxTravelPercent]);
 
   // Cinematic weighted spring: Gentle glide with smooth momentum (calibrated slower for easy reading)
   const smoothX = useSpring(rawX, {

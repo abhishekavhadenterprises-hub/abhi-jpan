@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { ScrollWipeHeading } from "@/components/ui/ScrollWipeHeading";
 import { useLaptopPacing } from "@/hooks/useLaptopPacing";
@@ -105,7 +105,7 @@ export function Leadership() {
           </p>
         </motion.div>
 
-        {/* 4 Cards Row: Responsive Accordion (Mobile: Visible Preview Stack, Desktop: Horizontal Accordion) */}
+        {/* 4 Cards Row: Responsive Accordion (Mobile: Smooth Vertical Dropdown Stack, Desktop: Horizontal Accordion) */}
         <div
           onMouseLeave={() => setHoveredIdx(null)}
           className="flex flex-col lg:flex-row gap-4 sm:gap-5 w-full items-stretch lg:h-[485px] xl:h-[495px]"
@@ -117,7 +117,7 @@ export function Leadership() {
             return (
               <motion.div
                 key={leader.id}
-                layout
+                layout="position"
                 initial={isLaptop ? { opacity: 0, y: 24 } : false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
@@ -126,30 +126,31 @@ export function Leadership() {
                 transition={{
                   opacity: { duration: revealDuration(0.65), delay: idx * staggerDelay(0.1), ease: [0.16, 1, 0.3, 1] },
                   y: { duration: revealDuration(0.65), delay: idx * staggerDelay(0.1), ease: [0.16, 1, 0.3, 1] },
-                  layout: { duration: hoverDuration(0.5), ease: [0.16, 1, 0.3, 1] },
+                  layout: { duration: hoverDuration(0.45), ease: [0.16, 1, 0.3, 1] },
                 }}
-                className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all ${hoverClass("duration-500")} flex flex-col lg:flex-row ${
+                className={`relative rounded-3xl overflow-hidden cursor-pointer transition-colors duration-300 flex flex-col lg:flex-row ${
                   isHovered
-                    ? "bg-white dark:bg-[#0A1626] shadow-2xl border-2 border-[#2563EB] dark:border-[#7BA4D0] ring-2 ring-[#2563EB]/15 lg:flex-[3.8]"
+                    ? "bg-white dark:bg-[#0A1626] shadow-xl border-2 border-[#2563EB] dark:border-[#7BA4D0] ring-2 ring-[#2563EB]/15 lg:flex-[3.8]"
                     : isAnyHovered
-                    ? "h-[190px] sm:h-[220px] lg:h-auto lg:flex-[0.85] bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-md group"
-                    : "h-[190px] sm:h-[220px] lg:h-auto lg:flex-1 bg-slate-900 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-lg group"
+                    ? "bg-slate-900 border border-slate-200/80 dark:border-white/10 shadow-md group lg:flex-[0.85]"
+                    : "bg-slate-900 border border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/25 shadow-lg group lg:flex-1"
                 }`}
               >
-                {/* 1. PORTRAIT PORTION (On Mobile: Clear Portrait Preview; On Desktop: Left Column) */}
+                {/* 1. PORTRAIT PORTION (Fixed stable height on Mobile to avoid layout warping; Full column on Desktop) */}
                 <div
-                  className={`relative overflow-hidden shrink-0 transition-all duration-500 ${
+                  className={`relative overflow-hidden shrink-0 transition-all duration-300 w-full h-[210px] sm:h-[240px] lg:h-full ${
                     isHovered
-                      ? "w-full lg:w-[280px] xl:w-[320px] h-[260px] sm:h-[300px] lg:h-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-r-none"
-                      : "w-full h-full absolute inset-0"
+                      ? "rounded-t-2xl sm:rounded-t-3xl lg:w-[280px] xl:w-[320px] lg:rounded-l-3xl lg:rounded-r-none"
+                      : "rounded-2xl sm:rounded-3xl lg:w-full"
                   }`}
                 >
                   <Image
                     src={leader.image}
                     alt={leader.name}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                     priority={idx === 0}
-                    className={`object-cover object-top filter contrast-105 transition-all duration-700 ease-out ${
+                    className={`object-cover object-top filter contrast-105 transition-all duration-500 ease-out ${
                       isHovered ? "scale-100" : "group-hover:scale-105 group-hover:brightness-95"
                     }`}
                   />
@@ -167,38 +168,30 @@ export function Leadership() {
                     </h3>
 
                     {/* Subtle Tap/Hover Cue when card is collapsed */}
-                    {!isHovered && (
-                      <div className="mt-2 flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-[#93C5FD] group-hover:text-white transition-colors">
-                        <span>TAP TO VIEW PROFILE</span>
-                        <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                      </div>
-                    )}
+                    <div className="mt-2 flex items-center gap-1.5 text-[10px] font-mono tracking-wider text-[#93C5FD] group-hover:text-white transition-colors">
+                      <span>{isHovered ? "COLLAPSE PROFILE" : "TAP TO VIEW PROFILE"}</span>
+                      <ChevronRight className={`w-3 h-3 transition-transform duration-300 ${isHovered ? "rotate-90" : "group-hover:translate-x-0.5"}`} />
+                    </div>
                   </div>
                 </div>
 
                 {/* 2. RIGHT/BOTTOM PORTION: ACCESSIBLE DETAILS ONLY ON HOVER / TAP */}
-                <div
-                  className={`flex-1 relative z-10 transition-opacity duration-300 ${
-                    isHovered
-                      ? "opacity-100 pointer-events-auto delay-100 px-5 sm:px-7 lg:px-8 py-5 sm:py-6 flex flex-col justify-center overflow-visible lg:overflow-hidden lg:h-full"
-                      : "opacity-0 pointer-events-none hidden lg:block lg:w-0"
-                  }`}
-                >
+                <AnimatePresence initial={false}>
                   {isHovered && (
                     <motion.div
-                      initial={{ opacity: 0, x: 14 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: hoverDuration(0.35), ease: [0.16, 1, 0.3, 1] }}
-                      className="w-full flex flex-col justify-center"
+                      className="w-full lg:flex-1 relative z-10 px-5 sm:px-7 lg:px-8 py-5 sm:py-6 flex flex-col justify-center overflow-hidden lg:h-full"
                     >
                       {/* Editorial Directive Headline with Comfortable Scale */}
-                      <h4 className="text-base sm:text-lg lg:text-xl font-heading font-black tracking-tight leading-snug text-slate-900 dark:text-white uppercase mb-3.5">
+                      <h4 className="text-sm sm:text-base lg:text-xl font-heading font-black tracking-tight leading-snug text-slate-900 dark:text-white uppercase mb-3 sm:mb-3.5">
                         {leader.directiveQuote}
                       </h4>
 
                       {/* Detailed Bio Narrative (No text cut-off) */}
-                      <div className="space-y-2.5 text-xs sm:text-[13px] lg:text-[13.5px] text-slate-600 dark:text-slate-300 font-light leading-relaxed mb-4">
+                      <div className="space-y-2 sm:space-y-2.5 text-xs sm:text-[13px] lg:text-[13.5px] text-slate-600 dark:text-slate-300 font-light leading-relaxed mb-4">
                         <p>{leader.bioP1}</p>
                         <p>{leader.bioP2}</p>
                       </div>
@@ -212,7 +205,7 @@ export function Leadership() {
                       </div>
                     </motion.div>
                   )}
-                </div>
+                </AnimatePresence>
               </motion.div>
             );
           })}

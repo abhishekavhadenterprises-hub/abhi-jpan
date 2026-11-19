@@ -354,16 +354,6 @@ export function PdfDocumentViewer({
                 </button>
               </div>
 
-              {/* Fit to Width Button */}
-              <button
-                onClick={handleFitWidth}
-                title="Fit to Width"
-                aria-label="Fit Width"
-                className="p-1.5 sm:p-2 rounded-lg bg-slate-100 hover:bg-white border border-slate-200/80 text-slate-700 hover:text-[#0D2440] active:scale-95 transition-all"
-              >
-                <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </button>
-
               {/* Reset Zoom Button */}
               <button
                 onClick={handleResetZoom}

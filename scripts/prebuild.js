@@ -5,6 +5,18 @@ const { execSync } = require('child_process');
 
 // Pre-build script to ensure a clean build environment on Windows
 try {
+  const outDir = path.join(process.cwd(), 'out');
+  if (fs.existsSync(outDir)) {
+    try {
+      fs.rmSync(outDir, { recursive: true, force: true });
+    } catch (_) {
+      try {
+        const tempOut = path.join(os.tmpdir(), `next_out_${Date.now()}`);
+        execSync(`cmd /c move "${outDir}" "${tempOut}"`, { stdio: 'ignore' });
+      } catch (_) {}
+    }
+  }
+
   const serverDir = path.join(process.cwd(), '.next', 'server');
   if (fs.existsSync(serverDir)) {
     // Check if there are any orphaned or corrupted .segments folders

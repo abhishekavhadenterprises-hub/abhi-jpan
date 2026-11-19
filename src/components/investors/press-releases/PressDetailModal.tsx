@@ -135,7 +135,7 @@ export function PressDetailModal({ article, onClose }: PressDetailModalProps) {
 
         <div className="max-w-4xl mx-auto py-10 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12">
           <div className="space-y-6 sm:space-y-8 text-slate-700 dark:text-slate-300 leading-relaxed text-base sm:text-lg md:text-xl font-normal font-sans">
-            {article.content.map((para, i) => (
+            {(article.content || []).map((para, i) => (
               <p key={i}>
                 {para}
               </p>
