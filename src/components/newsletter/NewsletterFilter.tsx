@@ -17,16 +17,16 @@ export function NewsletterFilter() {
           {/* Year Selector Wrapper */}
           <div className="flex items-center gap-2 lg:gap-4 w-full lg:w-auto">
             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest shrink-0">Year:</span>
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full">
-              {years.map((year, index) => (
+            <div className="flex flex-wrap items-center gap-2 w-full">
+              {years.map((year) => (
                 <button
                   key={year}
                   onClick={() => setActiveYear(year)}
-                  className={`shrink-0 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                  className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${
                     activeYear === year
                       ? "bg-deepblue text-white "
                       : "bg-silver/10 text-muted-foreground hover:bg-silver/20"
-                  } ${index === years.length - 1 ? 'mr-4' : ''}`}
+                  }`}
                 >
                   {year}
                 </button>

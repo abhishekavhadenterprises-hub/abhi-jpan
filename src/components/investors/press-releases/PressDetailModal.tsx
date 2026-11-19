@@ -24,6 +24,12 @@ export function PressDetailModal({ article, onClose }: PressDetailModalProps) {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    // Pause Lenis smooth scroll on the background page while press modal is open
+    const lenis = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+    if (lenis && typeof lenis.stop === "function") {
+      lenis.stop();
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
@@ -34,13 +40,19 @@ export function PressDetailModal({ article, onClose }: PressDetailModalProps) {
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      if (lenis && typeof lenis.start === "function") {
+        lenis.start();
+      }
     };
   }, [article, onClose]);
 
   if (!article) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] w-full h-full bg-white dark:bg-[#070b14] overflow-y-auto flex flex-col animate-in fade-in duration-300">
+    <div 
+      data-lenis-prevent="true"
+      className="fixed inset-0 z-[100] w-full h-full bg-white dark:bg-[#070b14] overflow-y-auto overscroll-contain flex flex-col animate-in fade-in duration-300"
+    >
       {/* Sticky Header Navigation Bar */}
       <header className="sticky top-0 z-30 w-full bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 px-4 sm:px-8 py-3.5 sm:py-4 flex items-center justify-between shadow-xs">
         <button 
@@ -73,7 +85,7 @@ export function PressDetailModal({ article, onClose }: PressDetailModalProps) {
       </header>
 
       {/* Main Full Page Content */}
-      <article className="flex-1 w-full">
+      <article className="w-full flex-grow shrink-0 min-h-0">
         {/* Article Hero Banner */}
         {article.image ? (
           <div className="relative w-full aspect-[21/9] sm:aspect-[24/9] min-h-[280px] sm:min-h-[400px] max-h-[520px]">

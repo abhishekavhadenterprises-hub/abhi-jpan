@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 const related = [
   {
@@ -51,20 +50,6 @@ interface RelatedArticlesProps {
 }
 
 export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < related.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-24 bg-slate-50/70 dark:bg-[#070b14]/60 border-t border-slate-200/70 dark:border-white/5 transition-colors">
       <div className="container-custom">
@@ -84,11 +69,7 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
         </div>
 
         <div className="flex flex-col justify-between w-full">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 lg:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 w-full">
             {related.map((art, idx) => (
               <motion.div 
                 key={idx}
@@ -105,7 +86,7 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
                   image: art.image,
                   content: art.content
                 })}
-                className="group relative bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between hover:-translate-y-1"
+                className="group relative bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer w-full flex flex-col justify-between hover:-translate-y-1"
               >
                 <div>
                   <div className="aspect-video relative overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-900">
@@ -139,26 +120,6 @@ export function RelatedArticles({ onReadMore }: RelatedArticlesProps) {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
-
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-1.5 mt-4 z-10">
-            {related.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#2E5E99] dark:bg-[#7BA4D0]" : "w-2 bg-slate-300 dark:bg-white/20"
-                )}
-                aria-label={`Go to related article card ${i + 1}`}
-              />
             ))}
           </div>
         </div>

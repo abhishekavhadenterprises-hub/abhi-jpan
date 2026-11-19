@@ -62,7 +62,7 @@ function ImprovementCard({ item, idx }: { item: typeof initiatives[0]; idx: numb
         y: -6, 
         transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
       }}
-      className={cn("group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default h-full", hoverClass("duration-300"))}
+      className={cn("group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl transition-all w-full flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default h-full", hoverClass("duration-300"))}
     >
       {/* Dynamic Spotlight Background (From OurStory) */}
       <motion.div
@@ -111,8 +111,6 @@ function ImprovementCard({ item, idx }: { item: typeof initiatives[0]; idx: numb
 export function QualityImprovement() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   // Scroll Momentum & Parallax Hooks
   const { scrollYProgress } = useScroll({
@@ -127,17 +125,6 @@ export function QualityImprovement() {
   });
 
   const notchScaleX = useTransform(smoothProgress, [0, 0.75], [0.25, 1.0]);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < initiatives.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -195,37 +182,15 @@ export function QualityImprovement() {
         {/* Engineering Kaizen Deck: Level 4-Column Bento Grid with Slide-In Right Reveal */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-4 pb-4 px-1 md:px-0 gap-5 lg:gap-6 no-scrollbar w-full"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-4 pb-4 gap-5 lg:gap-6 w-full"
           >
             {initiatives.map((item, idx) => (
               <ImprovementCard key={idx} item={item} idx={idx} />
             ))}
           </motion.div>
-
-          {/* Mobile Pagination Indicator Dots - Squircle */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
-            {initiatives.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                )}
-                aria-label={`Go to initiative card ${i + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

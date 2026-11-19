@@ -71,25 +71,7 @@ export function CareersOpenings() {
   const [activeDept, setActiveDept] = useState("All");
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
-
-  // Reset scroll and activeIndex when activeDept changes
-  useEffect(() => {
-    setActiveIndex(0);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = 0;
-    }
-  }, [activeDept]);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   const filteredJobs = activeDept === "All" 
     ? jobs 
@@ -188,10 +170,8 @@ export function CareersOpenings() {
 
         {/* Job Grid: Industrial Spec-Sheet Dossier Cards (Distinct from all other sections) */}
         <motion.div 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
           layout
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 min-h-[380px] no-scrollbar pb-6 md:pb-0"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 min-h-[380px] w-full"
         >
            <AnimatePresence mode="popLayout">
               {filteredJobs.map((job, idx) => (
@@ -204,7 +184,7 @@ export function CareersOpenings() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.15 }}
                   exit="exit"
-                  className="w-full shrink-0 snap-center md:w-auto md:shrink flex"
+                  className="w-full flex"
                 >
                   <div className={cn("group relative bg-gradient-to-br from-white via-white to-[#EBF3FC]/60 dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#071321] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all shadow-sm hover:shadow-xl hover:shadow-[#2E5E99]/5 overflow-hidden flex flex-col justify-between w-full cursor-default", hoverClass("duration-300"))}>
                     {/* Specular Radial Gradient on Hover */}
@@ -261,32 +241,6 @@ export function CareersOpenings() {
               ))}
            </AnimatePresence>
         </motion.div>
-
-        {/* Mobile Linear Progress Tracker */}
-        {filteredJobs.length > 1 && (
-          <div className="flex items-center justify-center gap-1.5 mt-8 md:hidden">
-            {filteredJobs.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1 rounded-sm transition-all duration-300 cursor-pointer",
-                  activeIndex === index 
-                    ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-8" 
-                    : "bg-slate-300 dark:bg-white/20 w-4"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to job ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
 
         {/* General Inquiry */}
         <motion.div 

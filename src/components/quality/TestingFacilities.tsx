@@ -29,20 +29,7 @@ const facilities = [
 export function TestingFacilities() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
-
-  const handleMobileScroll = () => {
-    if (!scrollRef.current) return;
-    const container = scrollRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < facilities.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -102,12 +89,10 @@ export function TestingFacilities() {
 
             <div className="relative">
               <motion.div 
-                ref={scrollRef}
-                onScroll={handleMobileScroll}
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="flex flex-row md:flex-col overflow-x-auto snap-x snap-mandatory gap-4 md:gap-5 pb-4 md:pb-0 no-scrollbar w-full"
+                className="flex flex-col gap-4 md:gap-5 pb-4 md:pb-0 w-full"
               >
                 {facilities.map((f, idx) => (
                   <motion.div 
@@ -120,7 +105,7 @@ export function TestingFacilities() {
                       y: -6, 
                       transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                     }}
-                    className={cn("group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all w-full min-w-full md:min-w-0 rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/6 overflow-hidden shrink-0 snap-center cursor-default", hoverClass("duration-300"))}
+                    className={cn("group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] transition-all w-full rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/6 overflow-hidden cursor-default", hoverClass("duration-300"))}
                   >
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 flex items-center justify-center rounded-xl sm:rounded-2xl shrink-0 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] transition-all duration-300 shadow-xs">
                       <f.icon className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.75} />
@@ -141,26 +126,6 @@ export function TestingFacilities() {
                   </motion.div>
                 ))}
               </motion.div>
-
-              {/* Mobile Pagination Indicator Dots - Squircle */}
-              <div className="flex md:hidden items-center justify-center gap-2 mt-4">
-                {facilities.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (scrollRef.current && scrollRef.current.children[i]) {
-                        scrollRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                      }
-                    }}
-                    className={cn(
-                      "h-1.5 rounded-sm transition-all duration-300",
-                      activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                    )}
-                    aria-label={`Go to facility ${i + 1}`}
-                  />
-                ))}
-              </div>
             </div>
           </div>
 

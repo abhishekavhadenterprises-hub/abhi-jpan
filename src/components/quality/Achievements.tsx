@@ -44,19 +44,6 @@ const achievements = [
 export function Achievements() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < achievements.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   // Section Transition Reveal
   const containerVariants: Variants = {
@@ -121,12 +108,10 @@ export function Achievements() {
         {/* Trophy Vault Monoliths: Straight Level 2x2 Bento Grid with Blur-to-Clear Reveal */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row md:grid md:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 px-1 md:px-0 gap-4 sm:gap-6 lg:gap-8 md:overflow-visible no-scrollbar w-full"
+            className="grid grid-cols-1 md:grid-cols-2 pt-4 pb-4 gap-4 sm:gap-6 lg:gap-8 w-full"
           >
             {achievements.map((item) => (
               <motion.div
@@ -136,7 +121,7 @@ export function Achievements() {
                   y: -6, 
                   transition: { duration: 0.25, ease: "easeOut" } 
                 }}
-                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-9 transition-all duration-300 overflow-hidden flex flex-col justify-between w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/10 cursor-default"
+                className="group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-9 transition-all duration-300 overflow-hidden flex flex-col justify-between w-full shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/10 cursor-default"
               >
                 {/* Background Gradient on Hover (#21 Background Tint Transition) */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#2E5E99]/10 via-[#7BA4D0]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl sm:rounded-3xl" />
@@ -180,26 +165,6 @@ export function Achievements() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Mobile Pagination Indicator Dots - Squircle */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
-            {achievements.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                )}
-                aria-label={`Go to achievement card ${i + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { TrendingUp, GraduationCap, Users, ShieldCheck, Heart, Zap, CheckCircle2 } from "lucide-react";
 import { motion, useInView, useMotionValue, useMotionTemplate } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -76,7 +76,7 @@ function ValueCard({ value, idx, rowIndex, colIndex }: { value: typeof valueProp
         y: -6, 
         transition: { duration: 0.25, ease: "easeOut" } 
       }}
-      className="group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#2E5E99]/5 overflow-hidden flex flex-col justify-between w-full shrink-0 snap-center md:w-auto md:shrink cursor-default"
+      className="group relative bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#2E5E99]/5 overflow-hidden flex flex-col justify-between w-full cursor-default"
     >
       {/* Dynamic Spotlight Background (From OurStory) */}
       <motion.div
@@ -131,16 +131,6 @@ function ValueCard({ value, idx, rowIndex, colIndex }: { value: typeof valueProp
 export function CareersValues() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   return (
     <section
@@ -183,11 +173,7 @@ export function CareersValues() {
         </motion.div>
 
         {/* 3-Column Investor Relations Card Matrix */}
-        <div
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 no-scrollbar pb-6 md:pb-0"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 w-full">
           {valueProps.map((value, idx) => {
             const rowIndex = Math.floor(idx / 3);
             const colIndex = idx % 3;
@@ -202,32 +188,6 @@ export function CareersValues() {
             );
           })}
         </div>
-
-        {/* Mobile Linear Progress Tracker */}
-        {valueProps.length > 1 && (
-          <div className="flex items-center justify-center gap-1.5 mt-8 md:hidden">
-            {valueProps.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1 rounded-sm transition-all duration-300 cursor-pointer",
-                  activeIndex === index
-                    ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-8"
-                    : "bg-slate-200 dark:bg-white/15 w-4"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to pillar ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

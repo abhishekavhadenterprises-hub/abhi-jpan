@@ -26,16 +26,6 @@ const videos = [
 
 export function GalleryVideo() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-[#F8FAFC]/50 dark:bg-[#070b14]/50 border-y border-[#7BA4D0]/15 dark:border-[#2E5E99]/20 transition-colors">
@@ -60,11 +50,7 @@ export function GalleryVideo() {
         </div>
 
         {/* Video Cards */}
-        <div 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 no-scrollbar pb-4 md:pb-0"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 w-full">
           {videos.map((v, idx) => (
             <motion.div 
               key={v.id}
@@ -72,7 +58,7 @@ export function GalleryVideo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative aspect-video w-full md:w-auto shrink-0 md:shrink snap-center rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-slate-900 border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 shadow-lg hover:shadow-2xl transition-all duration-500"
+              className="group relative aspect-video w-full rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-slate-900 border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 shadow-lg hover:shadow-2xl transition-all duration-500"
               onClick={() => setActiveVideo(v.url)}
             >
               <Image
@@ -110,30 +96,6 @@ export function GalleryVideo() {
             </motion.div>
           ))}
         </div>
-
-        {/* Dot Indicators for Mobile Scroll */}
-        {videos.length > 1 && (
-          <div className="flex justify-center gap-1.5 mt-6 md:hidden">
-            {videos.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === index ? "bg-[#0D2440] dark:bg-[#7BA4D0] w-6" : "bg-[#7BA4D0]/30 dark:bg-white/20 w-2"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Video Modal */}

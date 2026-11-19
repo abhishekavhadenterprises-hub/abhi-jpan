@@ -458,7 +458,7 @@ function GenericDocumentModal({
   const isVideo = isYouTube || downloadLink.toLowerCase().includes(".mp4") || downloadLink.toLowerCase().includes(".webm");
 
   return (
-    <div className="fixed inset-0 z-[100] w-screen h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#071321] animate-in fade-in duration-200 overflow-hidden">
+    <div data-lenis-prevent="true" className="fixed inset-0 z-[100] w-screen h-screen flex flex-col bg-[#F8FAFC] dark:bg-[#071321] animate-in fade-in duration-200 overflow-hidden">
       {/* Top Header Bar */}
       <header className="h-16 sm:h-18 px-3 sm:px-6 md:px-8 border-b border-[#7BA4D0]/20 bg-white/95 dark:bg-[#0D2440]/95 backdrop-blur-md flex items-center justify-between z-20 shrink-0 gap-3">
         {/* Left Section: Back button + Title & Status */}

@@ -32,16 +32,6 @@ const cultureImages = [
 export function CareersCulture() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   const galleryVariants: Variants = {
     hidden: { opacity: 0 },
@@ -122,18 +112,16 @@ export function CareersCulture() {
 
         {/* Premium Minimalist Masonry Gallery */}
         <motion.div 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
           variants={galleryVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:grid-rows-[240px_240px] lg:grid-rows-[340px_340px] gap-4 sm:gap-5 no-scrollbar pb-6 md:pb-0 h-[260px] sm:h-[300px] md:h-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-rows-[240px_240px] lg:grid-rows-[340px_340px] gap-4 sm:gap-5 w-full"
         >
            {cultureImages.map((img, idx) => (
               <motion.div 
                 key={idx}
                 variants={itemVariants}
-                className={cn("relative group overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900 border border-slate-200/80 dark:border-white/10 transition-all duration-500 w-full shrink-0 snap-center h-full md:shrink", img.span)}
+                className={cn("relative group overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900 border border-slate-200/80 dark:border-white/10 transition-all duration-500 w-full min-h-[240px] sm:min-h-0 h-full", img.span)}
               >
                 {/* Crisp Image */}
                 <img
@@ -155,32 +143,6 @@ export function CareersCulture() {
               </motion.div>
            ))}
         </motion.div>
-
-        {/* Mobile Linear Progress Tracker */}
-        {cultureImages.length > 1 && (
-          <div className="flex items-center justify-center gap-1.5 mt-6 md:hidden">
-            {cultureImages.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1 rounded-sm transition-all duration-300 cursor-pointer",
-                  activeIndex === index 
-                    ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-8" 
-                    : "bg-slate-300 dark:bg-white/20 w-4"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to image ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

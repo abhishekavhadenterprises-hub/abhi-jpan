@@ -36,16 +36,6 @@ const benefits = [
 export function CareersBenefits() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   return (
     <section 
@@ -91,11 +81,7 @@ export function CareersBenefits() {
         </div>
 
         {/* 4-Column Simple Clean Card Matrix (Homepage Style) with Alternate Reveal */}
-        <div 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 no-scrollbar pb-6 sm:pb-0"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
           {benefits.map((benefit, idx) => {
             const isEven = idx % 2 === 0;
             return (
@@ -104,7 +90,7 @@ export function CareersBenefits() {
                 initial={{ opacity: 0, x: isEven ? -25 : 25, y: 20 }}
                 animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: isEven ? -25 : 25, y: 20 }}
                 transition={{ duration: 0.75, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full shrink-0 snap-center sm:w-auto sm:shrink flex"
+                className="w-full flex"
               >
                 <div className="group relative bg-gradient-to-br from-white via-white to-[#EBF3FC]/60 dark:from-[#0D2440] dark:via-[#091A2E] dark:to-[#071321] border border-[#7BA4D0]/30 dark:border-white/15 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-6 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#2E5E99]/5 overflow-hidden flex flex-col justify-between w-full cursor-default">
                   {/* Specular Radial Gradient on Hover */}
@@ -141,32 +127,6 @@ export function CareersBenefits() {
             );
           })}
         </div>
-
-        {/* Mobile Linear Progress Tracker */}
-        {benefits.length > 1 && (
-          <div className="flex items-center justify-center gap-1.5 mt-8 sm:hidden">
-            {benefits.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1 rounded-sm transition-all duration-300 cursor-pointer",
-                  activeIndex === index 
-                    ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-8" 
-                    : "bg-slate-200 dark:bg-white/15 w-4"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to benefit ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

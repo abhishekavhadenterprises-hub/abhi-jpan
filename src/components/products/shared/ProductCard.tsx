@@ -54,7 +54,7 @@ export function ProductCard({ product, idx = 0, className }: ProductCardProps) {
         delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.04) : idx * 0.04,
         ease: [0.16, 1, 0.3, 1], // Apple fluid spring curve
       }}
-      className={cn("group w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center overflow-visible", className)}
+      className={cn("group w-full overflow-visible", className)}
     >
       <Link
         href={`/products/${product.id}`}

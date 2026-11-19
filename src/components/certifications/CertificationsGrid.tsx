@@ -282,8 +282,8 @@ export function CertificationsGrid() {
       hasMovedRef.current = true;
     }
     if (zoom > 1) {
-      const maxBoundX = 400 * (zoom - 1);
-      const maxBoundY = 500 * (zoom - 1);
+      const maxBoundX = 600 * (zoom - 1);
+      const maxBoundY = 800 * (zoom - 1);
       const newX = Math.max(-maxBoundX, Math.min(maxBoundX, panStartRef.current.x + dx));
       const newY = Math.max(-maxBoundY, Math.min(maxBoundY, panStartRef.current.y + dy));
       setPan({ x: newX, y: newY });
@@ -544,7 +544,7 @@ export function CertificationsGrid() {
         {previewCert && (
           <div 
             data-lenis-prevent="true"
-            className="fixed inset-0 z-[120] flex items-center justify-center p-2 sm:p-4 md:p-6"
+            className="fixed inset-0 z-[120] flex items-center justify-center p-2 sm:p-3 md:p-4"
           >
             {/* Backdrop */}
             <motion.div
@@ -562,10 +562,10 @@ export function CertificationsGrid() {
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               data-lenis-prevent="true"
-              className="relative z-10 w-full max-w-5xl bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[96vh]"
+              className="relative z-10 w-full max-w-5xl h-[95vh] max-h-[96vh] bg-white dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
             >
               {/* Header */}
-              <div className="p-3.5 sm:p-4.5 border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#071321] flex items-center justify-between gap-3 sm:gap-4 shrink-0">
+              <div className="px-3.5 py-3 sm:px-5 sm:py-3.5 border-b border-[#7BA4D0]/20 bg-[#F8FAFC] dark:bg-[#071321] flex items-center justify-between gap-3 sm:gap-4 shrink-0">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
                     <span className="px-2 py-0.5 rounded text-[10px] font-heading font-bold uppercase tracking-wider bg-[#E7F0FA] dark:bg-[#2E5E99]/20 text-[#2E5E99] dark:text-[#7BA4D0]">
@@ -640,7 +640,7 @@ export function CertificationsGrid() {
               <div 
                 data-lenis-prevent="true"
                 onWheel={handleWheel}
-                className="relative p-2 sm:p-4 md:p-6 bg-[#EBF3FC]/50 dark:bg-black/60 overflow-hidden flex-grow flex justify-center items-center min-h-[460px] max-h-[75vh] select-none"
+                className="relative p-2 sm:p-3 md:p-4 bg-[#EBF3FC]/50 dark:bg-black/60 overflow-hidden flex-1 min-h-0 w-full h-full flex justify-center items-center select-none"
               >
                 {/* Floating Left / Right Certificate Navigation Buttons */}
                 {currentCertIndex > 0 && (
@@ -670,7 +670,7 @@ export function CertificationsGrid() {
                   onPointerUp={handlePointerUp}
                   onPointerCancel={handlePointerUp}
                   className={cn(
-                    "relative flex justify-center items-center py-1 sm:py-2 touch-none select-none max-h-full max-w-full",
+                    "relative flex justify-center items-center h-full w-full max-h-full max-w-full touch-none select-none",
                     zoom === 1 ? "cursor-zoom-in" : isDragging ? "cursor-grabbing" : "cursor-grab"
                   )}
                 >
@@ -683,7 +683,7 @@ export function CertificationsGrid() {
                       transformOrigin: "center center",
                       transition: isDragging ? "none" : "transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)",
                     }}
-                    className="w-auto h-auto max-h-[68vh] max-w-full object-contain rounded-xl shadow-2xl bg-white p-2 sm:p-3 border border-[#7BA4D0]/20 pointer-events-none select-none"
+                    className="max-h-[calc(100%-8px)] max-w-[calc(100%-8px)] w-auto h-auto object-contain rounded-xl shadow-2xl bg-white p-2 sm:p-3 border border-[#7BA4D0]/20 pointer-events-none select-none"
                   />
                 </div>
 

@@ -119,6 +119,16 @@ export function SmoothScroll() {
       wheelMultiplier: 1.25, // Base multiplier for Desktop PC (100% untouched)
       touchMultiplier: 1.2, // Base multiplier for Phone/Touch (100% untouched)
       infinite: false,
+      prevent: (node) => {
+        if (!node || typeof (node as HTMLElement).closest !== "function") return false;
+        const el = node as HTMLElement;
+        return Boolean(
+          el.closest("[data-lenis-prevent]") ||
+          el.closest(".overflow-y-auto") ||
+          el.closest(".overflow-auto") ||
+          el.closest("[role='dialog']")
+        );
+      },
       virtualScroll: (data) => {
         // Strictly Laptop-only linear slowdown (brings 1.25 -> ~0.81, pure PC smoothness without distortion)
         if (

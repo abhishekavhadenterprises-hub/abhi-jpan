@@ -51,7 +51,7 @@ function EventAwardCard({ award, idx, cardFloat }: { award: typeof awards[0]; id
         y: -7, 
         transition: { type: "spring", stiffness: 350, damping: 25 } 
       }}
-      className="group relative flex flex-col justify-between p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 transition-colors duration-300 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+      className="group relative flex flex-col justify-between p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#091524] border border-slate-200/80 dark:border-white/10 transition-colors duration-300 overflow-hidden w-full shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
     >
       {/* Dynamic Spotlight Background (From OurStory) */}
       <motion.div
@@ -107,8 +107,6 @@ function EventAwardCard({ award, idx, cardFloat }: { award: typeof awards[0]; id
 export function EventAwards() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   // Parallax Hooks
   const { scrollYProgress } = useScroll({
@@ -127,17 +125,6 @@ export function EventAwards() {
   const cardFloat2 = useTransform(smoothProgress, [0, 1], [16, -16]);
   const cardFloats = [cardFloat0, cardFloat1, cardFloat2];
   const watermarkY = useTransform(smoothProgress, [0, 1], [-20, 20]);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < awards.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -180,37 +167,15 @@ export function EventAwards() {
         {/* Award Cards: 3-Column Grid on Desktop */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-4 sm:gap-6 lg:gap-8 no-scrollbar w-full"
+            className="grid grid-cols-1 md:grid-cols-3 py-2 gap-4 sm:gap-6 lg:gap-8 w-full"
           >
             {awards.map((award, idx) => (
               <EventAwardCard key={idx} award={award} idx={idx} cardFloat={cardFloats[idx]} />
             ))}
           </motion.div>
-
-          {/* Mobile Pagination Indicator Dots - Squircle */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
-            {awards.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                )}
-                aria-label={`Go to award card ${i + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

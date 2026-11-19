@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Clock, Calendar, ShieldCheck, Mail } from "lucide-react";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -35,16 +35,6 @@ const supportMetrics = [
 export function ContactSupportInfo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-50px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -70,19 +60,17 @@ export function ContactSupportInfo() {
     <section ref={containerRef} className="py-10 sm:py-14 md:py-20 bg-white dark:bg-[#070b14] relative transition-colors duration-500 overflow-visible border-b border-slate-200/70 dark:border-white/5">
       <div className="container-custom relative z-10">
         <motion.div 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-7 no-scrollbar pt-2 pb-6 md:pb-2"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 lg:gap-7 pt-2 pb-2 w-full"
         >
           {supportMetrics.map((metric, idx) => (
             <motion.div 
               key={idx}
               variants={itemVariants}
               whileHover={{ y: -6 }}
-              className="group bg-slate-50/70 dark:bg-[#0c1527] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden transition-all duration-400 hover:border-[#2E5E99]/50 hover:shadow-xl hover:shadow-[#0D2440]/5 w-full shrink-0 snap-center md:w-auto md:shrink flex flex-col justify-between cursor-default"
+              className="group bg-slate-50/70 dark:bg-[#0c1527] border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden transition-all duration-400 hover:border-[#2E5E99]/50 hover:shadow-xl hover:shadow-[#0D2440]/5 w-full flex flex-col justify-between cursor-default"
             >
               {/* Subtle Ambient Hover Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#7BA4D0]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -104,30 +92,6 @@ export function ContactSupportInfo() {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Dot Indicators for Mobile Scroll */}
-        {supportMetrics.length > 1 && (
-          <div className="flex justify-center gap-1.5 mt-4 md:hidden">
-            {supportMetrics.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === index ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-6" : "bg-slate-300 dark:bg-white/20 w-2"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

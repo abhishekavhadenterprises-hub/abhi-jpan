@@ -14,9 +14,9 @@ interface GalleryFilterProps {
 export function GalleryFilter({ activeCategory, onCategoryChange }: GalleryFilterProps) {
   return (
     <div id="gallery-feed" className="relative z-20 bg-white dark:bg-black pt-2 pb-6 sm:pt-4 sm:pb-8 transition-colors">
-      <div className="container-custom overflow-x-auto no-scrollbar">
-        <div className="flex items-center justify-start sm:justify-center min-w-max sm:min-w-0 py-1">
-          <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-[#EBF3FC]/80 dark:bg-[#070b14] border border-[#7BA4D0]/30 dark:border-[#2E5E99]/30 backdrop-blur-md shadow-sm">
+      <div className="container-custom">
+        <div className="flex items-center justify-center py-1">
+          <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-[#EBF3FC]/80 dark:bg-[#070b14] border border-[#7BA4D0]/30 dark:border-[#2E5E99]/30 backdrop-blur-md shadow-sm">
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -24,7 +24,7 @@ export function GalleryFilter({ activeCategory, onCategoryChange }: GalleryFilte
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
                   className={cn(
-                    "relative px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 select-none whitespace-nowrap",
+                    "relative px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 select-none",
                     isActive
                       ? "text-white"
                       : "text-[#0D2440]/70 dark:text-silver/70 hover:text-[#0D2440] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"

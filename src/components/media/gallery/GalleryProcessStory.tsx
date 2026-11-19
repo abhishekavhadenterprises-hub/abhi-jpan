@@ -14,17 +14,6 @@ const steps = [
 ];
 
 export function GalleryProcessStory() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black transition-colors overflow-hidden">
       <div className="container-custom">
@@ -51,11 +40,7 @@ export function GalleryProcessStory() {
           </p>
         </div>
 
-        <div 
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 no-scrollbar pb-4 sm:pb-0"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 w-full">
           {steps.map((s, idx) => (
             <motion.div 
               key={idx}
@@ -63,7 +48,7 @@ export function GalleryProcessStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative w-full sm:w-auto shrink-0 sm:shrink snap-center"
+              className="group relative w-full"
             >
               <div className="aspect-[4/5] relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 bg-slate-50 dark:bg-[#070b14] transition-all duration-500 mb-3 sm:mb-4 shadow-sm group-hover:shadow-xl">
                 <Image
@@ -91,30 +76,6 @@ export function GalleryProcessStory() {
             </motion.div>
           ))}
         </div>
-
-        {/* Dot Indicators for Mobile Scroll */}
-        {steps.length > 1 && (
-          <div className="flex justify-center gap-1.5 mt-6 sm:hidden">
-            {steps.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === index ? "bg-[#0D2440] dark:bg-[#7BA4D0] w-6" : "bg-[#7BA4D0]/30 dark:bg-white/20 w-2"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to step ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

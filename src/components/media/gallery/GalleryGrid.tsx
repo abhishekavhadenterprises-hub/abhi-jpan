@@ -25,8 +25,6 @@ interface GalleryGridProps {
 
 export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
 
   // Touch swipe gesture tracking for full-screen gallery modal
@@ -34,14 +32,6 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
   const touchDeltaXRef = useRef<number>(0);
   const [dragOffset, setDragOffset] = useState<number>(0);
   const [isSwiping, setIsSwiping] = useState<boolean>(false);
-
-  // Reset scroll and activeIndex when category filter changes
-  useEffect(() => {
-    setActiveIndex(0);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = 0;
-    }
-  }, [selectedCategory]);
 
   const filteredItems = selectedCategory === "All" 
     ? galleryItems 
@@ -95,22 +85,12 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
     setDragOffset(0);
   };
 
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
-
   return (
     <section className="pt-2 pb-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-black transition-colors">
       <div className="container-custom">
         <motion.div 
           layout
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 no-scrollbar pb-4 md:pb-0"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 w-full"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, idx) => (
@@ -121,7 +101,7 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: revealDuration(0.45), delay: isLaptop ? Math.min(idx % 6, 5) * staggerDelay(0.04) : idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                className={cn("group relative aspect-[4/3] sm:aspect-square w-full md:w-auto shrink-0 md:shrink snap-center bg-slate-50 dark:bg-[#070b14] border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all", hoverClass("duration-500"))}
+                className={cn("group relative aspect-[4/3] sm:aspect-square w-full bg-slate-50 dark:bg-[#070b14] border border-[#7BA4D0]/25 dark:border-[#2E5E99]/30 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all", hoverClass("duration-500"))}
                 onClick={() => setSelectedIndex(idx)}
               >
                 <Image
@@ -152,30 +132,6 @@ export function GalleryGrid({ selectedCategory }: GalleryGridProps) {
             ))}
           </AnimatePresence>
         </motion.div>
-
-        {/* Dot Indicators for Mobile Scroll */}
-        {filteredItems.length > 1 && (
-          <div className="flex justify-center gap-1.5 mt-6 md:hidden">
-            {filteredItems.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === index ? "bg-[#0D2440] dark:bg-[#7BA4D0] w-6" : "bg-[#7BA4D0]/30 dark:bg-white/20 w-2"
-                )}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    scrollContainerRef.current.scrollTo({
-                      left: index * scrollContainerRef.current.clientWidth,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Lightbox Modal with Finger Swipe Support */}

@@ -10,8 +10,6 @@ import { useLaptopPacing } from "@/hooks/useLaptopPacing";
 export function QualityCommitment() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   const containerVariants: Variants = {
@@ -31,17 +29,6 @@ export function QualityCommitment() {
       x: 0,
       transition: { duration: revealDuration(0.8), ease: [0.16, 1, 0.3, 1] },
     },
-  };
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < features.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
   };
 
   const features = [
@@ -117,15 +104,13 @@ export function QualityCommitment() {
             </div>
           </motion.div>
 
-          {/* Feature Slabs: Clean Bento Stack with Staggered Reveal Animation & Subtle Spring Lift */}
+          {/* Feature Slabs: Vertical Bento Stack */}
           <div className="flex flex-col justify-between w-full">
             <motion.div 
-              ref={cardsRef}
-              onScroll={handleMobileScroll}
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="flex flex-row md:flex-col overflow-x-auto snap-x snap-mandatory py-2 px-1 gap-4 md:space-y-4 md:gap-0 no-scrollbar w-full"
+              className="flex flex-col space-y-4 w-full"
             >
               {features.map((feature, idx) => (
                 <motion.div 
@@ -138,7 +123,7 @@ export function QualityCommitment() {
                     y: -6,
                     transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                   }}
-                  className={cn("group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 md:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center cursor-default", hoverClass("duration-300"))}
+                  className={cn("group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-5 sm:p-6 md:p-7 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all shadow-xs hover:shadow-lg hover:shadow-[#2E5E99]/5 overflow-hidden w-full cursor-default", hoverClass("duration-300"))}
                 >
                   <div className="w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-[#E7F0FA] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white transition-all duration-300 text-[#2E5E99] dark:text-[#7BA4D0] shadow-xs">
                     <feature.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
@@ -160,26 +145,6 @@ export function QualityCommitment() {
                 </motion.div>
               ))}
             </motion.div>
-
-            {/* Mobile Pagination Indicator Dots - Squircle */}
-            <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
-              {features.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setActiveIndex(i);
-                    if (cardsRef.current && cardsRef.current.children[i]) {
-                      cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }
-                  }}
-                  className={cn(
-                    "h-1.5 rounded-sm transition-all duration-300",
-                    activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                  )}
-                  aria-label={`Go to feature card ${i + 1}`}
-                />
-              ))}
-            </div>
           </div>
           
         </div>

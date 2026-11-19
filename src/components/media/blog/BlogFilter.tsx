@@ -24,14 +24,14 @@ export function BlogFilter({
       <div className="container-custom py-4 sm:py-6">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 sm:gap-6">
           {/* Categories Segmented Bar */}
-          <div className="p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-slate-100/90 dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 flex items-center gap-1 sm:gap-1.5 overflow-x-auto w-full lg:w-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-slate-100/90 dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 flex flex-wrap items-center gap-1 sm:gap-1.5 w-full lg:w-auto">
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => onCategoryChange(cat)}
-                  className={`relative px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer select-none ${
+                  className={`relative px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all cursor-pointer select-none ${
                     isActive
                       ? "bg-[#0D2440] dark:bg-[#2E5E99] text-white shadow-md shadow-[#0D2440]/20"
                       : "text-slate-600 dark:text-slate-300 hover:text-[#0D2440] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/5"

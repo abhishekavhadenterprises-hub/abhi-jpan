@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { ArrowRight, Calendar, Clock, SearchX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -102,20 +102,7 @@ interface BlogGridProps {
 
 export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", onReadMore }: BlogGridProps) {
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { isLaptop, revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < filteredArticles.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   const filteredArticles = articles.filter((article) => {
     const matchesCategory = selectedCategory === "All Insights" 
@@ -153,9 +140,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
           <div className="flex flex-col justify-between w-full">
             <motion.div 
               layout
-              ref={cardsRef}
-              onScroll={handleMobileScroll}
-              className="flex flex-row md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto snap-x snap-mandatory pt-2 pb-3 md:py-0 px-1 md:px-0 gap-4 sm:gap-6 lg:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 w-full"
             >
               <AnimatePresence mode="popLayout">
                 {filteredArticles.map((article, idx) => (
@@ -175,7 +160,7 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                       image: article.image,
                       content: article.content
                     })}
-                    className={cn("group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all cursor-pointer w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center justify-between hover:-translate-y-1", hoverClass("duration-400"))}
+                    className={cn("group flex flex-col bg-white dark:bg-[#0c1527] border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#2E5E99]/50 shadow-sm hover:shadow-xl transition-all cursor-pointer w-full justify-between hover:-translate-y-1", hoverClass("duration-400"))}
                   >
                     <div>
                       {/* Image with Category Squircle Overlay */}
@@ -226,28 +211,6 @@ export function BlogGrid({ selectedCategory = "All Insights", searchQuery = "", 
                 ))}
               </AnimatePresence>
             </motion.div>
-
-            {/* Mobile Pagination Indicator Dots */}
-            {filteredArticles.length > 1 && (
-              <div className="flex md:hidden items-center justify-center gap-1.5 mt-4 z-10">
-                {filteredArticles.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setActiveIndex(i);
-                      if (cardsRef.current && cardsRef.current.children[i]) {
-                        cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                      }
-                    }}
-                    className={cn(
-                      "h-1.5 rounded-sm transition-all duration-300",
-                      activeIndex === i ? "w-6 bg-[#2E5E99] dark:bg-[#7BA4D0]" : "w-2 bg-slate-300 dark:bg-white/20"
-                    )}
-                    aria-label={`Go to article card ${i + 1}`}
-                  />
-                ))}
-              </div>
-            )}
           </div>
         )}
       </div>

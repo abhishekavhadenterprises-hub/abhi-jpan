@@ -57,17 +57,7 @@ function GyroContactCard({
 export function CareersCTA() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { revealDuration, staggerDelay } = useLaptopPacing();
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -161,15 +151,13 @@ export function CareersCTA() {
             {/* Right Contact Info: 3D Gyroscopic Floating Plaquettes */}
             <div className="lg:col-span-6 flex flex-col">
               <motion.div 
-                ref={scrollContainerRef}
-                onScroll={handleScroll}
                 variants={itemVariants} 
-                className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 no-scrollbar pb-4 sm:pb-0"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 w-full"
               >
                 {/* Talent Email (3D Gyro Interactive Card) */}
                 <GyroContactCard 
                   href="mailto:enquiry@jpantubular.com"
-                  className="p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl cursor-pointer"
+                  className="p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full block shadow-sm hover:shadow-xl cursor-pointer"
                 >
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2E5E99] to-[#7BA4D0] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                   <div className="flex items-center justify-between mb-4 sm:mb-5">
@@ -188,7 +176,7 @@ export function CareersCTA() {
                 {/* Recruitment Desk (3D Gyro Interactive Card) */}
                 <GyroContactCard 
                   href="tel:+911202560586"
-                  className="p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl cursor-pointer"
+                  className="p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/95 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] border border-[#7BA4D0]/30 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0]/50 backdrop-blur-xl transition-shadow duration-300 group/card relative overflow-hidden w-full block shadow-sm hover:shadow-xl cursor-pointer"
                 >
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2E5E99] to-[#7BA4D0] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                   <div className="flex items-center justify-between mb-4 sm:mb-5">
@@ -205,47 +193,23 @@ export function CareersCTA() {
                 </GyroContactCard>
                 
                 {/* Employer Authority: Zero Badge Pills */}
-                <div className="sm:col-span-2 p-5 sm:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/70 dark:bg-white/[0.04] hover:bg-white/90 dark:hover:bg-white/[0.07] border border-[#7BA4D0]/20 dark:border-white/10 flex items-center gap-3 sm:gap-4 group hover:border-[#2E5E99]/30 transition-all duration-300 w-full shrink-0 snap-center sm:w-auto sm:shrink backdrop-blur-xl">
+                <div className="sm:col-span-2 p-5 sm:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/70 dark:bg-white/[0.04] hover:bg-white/90 dark:hover:bg-white/[0.07] border border-[#7BA4D0]/20 dark:border-white/10 flex items-center gap-3 sm:gap-4 group hover:border-[#2E5E99]/30 transition-all duration-300 w-full backdrop-blur-xl">
                   <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#2E5E99]/10 dark:bg-white/[0.08] border border-[#2E5E99]/15 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 group-hover:scale-105 transition-all">
                     <ShieldCheck className="w-5 h-5" strokeWidth={1.75} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-wider">
-                        Employer Authority
-                      </h4>
-                    </div>
-                    <p className="text-slate-500 dark:text-slate-400 font-normal text-xs leading-relaxed">
-                      J Pan Tubular Components Limited is an equal opportunity employer committed to meritocracy.
-                    </p>
+                    <h4 className="text-[#0D2440] dark:text-white font-bold text-xs uppercase tracking-wider">
+                      Employer Authority
+                    </h4>
                   </div>
+                  <p className="text-slate-500 dark:text-slate-400 font-normal text-xs leading-relaxed">
+                    J Pan Tubular Components Limited is an equal opportunity employer committed to meritocracy.
+                  </p>
                 </div>
-              </motion.div>
-
-              {/* Mobile Linear Progress Tracker */}
-              <div className="flex items-center justify-center gap-1.5 mt-5 sm:hidden">
-                {[0, 1, 2].map((index) => (
-                  <button
-                    key={index}
-                    className={cn(
-                      "h-1 rounded-sm transition-all duration-300 cursor-pointer",
-                      activeIndex === index 
-                        ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-8" 
-                        : "bg-slate-300 dark:bg-white/20 w-4"
-                    )}
-                    onClick={() => {
-                      if (scrollContainerRef.current) {
-                        scrollContainerRef.current.scrollTo({
-                          left: index * scrollContainerRef.current.clientWidth,
-                          behavior: "smooth",
-                        });
-                      }
-                    }}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
               </div>
-            </div>
+            </motion.div>
+          </div>
             
           </motion.div>
         </motion.div>

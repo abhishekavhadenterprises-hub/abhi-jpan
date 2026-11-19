@@ -43,7 +43,7 @@ export function PoliciesDetailModal({ policy, isOpen, onClose }: PoliciesDetailM
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 md:p-8">
+    <div data-lenis-prevent="true" className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 md:p-8">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-[#0D2440]/80 backdrop-blur-md animate-in fade-in duration-300"

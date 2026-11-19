@@ -21,18 +21,18 @@ export function UnclaimedSearch() {
             </div>
 
             {/* Fiscal Year Filter */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-[9px] font-bold text-charcoal dark:text-silver uppercase tracking-widest shrink-0">Fiscal Year:</span>
-              <div className="flex items-center gap-1 overflow-x-auto pb-1 lg:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                {fiscalYears.map((year, index) => (
+              <div className="flex flex-wrap items-center gap-1.5">
+                {fiscalYears.map((year) => (
                   <button
                     key={year}
                     onClick={() => setSelectedYear(year)}
-                    className={`shrink-0 px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-sm transition-all border whitespace-nowrap ${
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all border whitespace-nowrap cursor-pointer ${
                       selectedYear === year
-                        ? "bg-charcoal dark:bg-white text-white dark:text-charcoal border-transparent "
+                        ? "bg-charcoal dark:bg-white text-white dark:text-charcoal border-transparent shadow-sm"
                         : "bg-silver/5 text-charcoal/80 dark:text-silver border-transparent hover:border-border hover:bg-silver/10"
-                    } ${index === fiscalYears.length - 1 ? 'mr-4' : ''}`}
+                    }`}
                   >
                     {year}
                   </button>

@@ -34,8 +34,6 @@ const standards = [
 export function QualityCompliance() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   // Sticky Counter-Parallax Hooks
@@ -72,16 +70,7 @@ export function QualityCompliance() {
     },
   };
 
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < standards.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
+
 
   return (
     <section 
@@ -123,9 +112,7 @@ export function QualityCompliance() {
           {/* Compliance Cards: Level 2x2 Bento Matrix with Fade-Down Reveal */}
           <div className="w-full lg:w-2/3 flex flex-col justify-between">
             <motion.div 
-              ref={cardsRef}
-              onScroll={handleMobileScroll}
-              className="flex flex-row sm:grid sm:grid-cols-2 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 sm:pt-4 sm:pb-4 px-1 sm:px-0 gap-4 sm:gap-5 lg:gap-6 sm:overflow-visible no-scrollbar w-full"
+              className="grid grid-cols-1 sm:grid-cols-2 pt-4 pb-4 gap-4 sm:gap-5 lg:gap-6 w-full"
               variants={containerVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -139,7 +126,7 @@ export function QualityCompliance() {
                     transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                   }}
                   className={cn(
-                    "group relative p-5 sm:p-6 md:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all overflow-hidden w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
+                    "group relative p-5 sm:p-6 md:p-8 bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl transition-all overflow-hidden w-full flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5 cursor-default",
                     hoverClass("duration-300"),
                     s.pointer && "border-[#2E5E99]/40 bg-gradient-to-b from-white/90 via-[#F8FAFC] to-[#EBF3FC]/80 dark:from-[#091A2E]/90 dark:to-[#0D2440]/80"
                   )}
@@ -172,26 +159,6 @@ export function QualityCompliance() {
                 </motion.div>
               ))}
             </motion.div>
-
-            {/* Mobile Pagination Indicator Dots - Squircle */}
-            <div className="flex sm:hidden items-center justify-center gap-2 mt-6 z-10">
-              {standards.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setActiveIndex(i);
-                    if (cardsRef.current && cardsRef.current.children[i]) {
-                      cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }
-                  }}
-                  className={cn(
-                    "h-1.5 rounded-sm transition-all duration-300",
-                    activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                  )}
-                  aria-label={`Go to compliance card ${i + 1}`}
-                />
-              ))}
-            </div>
           </div>
           
         </div>

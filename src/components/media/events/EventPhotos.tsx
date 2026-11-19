@@ -188,19 +188,6 @@ export function EventPhotos() {
   const [selectedEvent, setSelectedEvent] = useState<typeof eventsData[0] | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < eventsData.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   useEffect(() => {
     setMounted(true);
@@ -345,17 +332,13 @@ export function EventPhotos() {
           </p>
         </div>
 
-        {/* Gallery Cards: Single visible card at a time with horizontal scroll on mobile (< sm), 4-column grid on desktop (>= md) */}
+        {/* Gallery Cards: 4-column grid on desktop, 2-column on tablet, single column stack on mobile */}
         <div className="flex flex-col justify-between w-full">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row sm:grid sm:grid-cols-2 md:grid-cols-4 overflow-x-auto snap-x snap-mandatory py-2 px-1 gap-6 no-scrollbar w-full"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 py-2 gap-4 sm:gap-6 w-full">
             {eventsData.map((item) => (
               <div 
                 key={item.id} 
-                className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/30 transition-all duration-500 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5"
+                className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2440]/30 transition-all duration-500 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] w-full flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-[#2E5E99]/5"
                 onClick={() => openLightbox(item)}
               >
                 <div className="aspect-square relative overflow-hidden shrink-0 bg-slate-100 dark:bg-[#0D2440]">
@@ -378,26 +361,6 @@ export function EventPhotos() {
                   <p className="text-xs font-heading font-semibold text-[#2E5E99] dark:text-[#7BA4D0] text-center mt-1">{item.images.length} Photos</p>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex sm:hidden items-center justify-center gap-2 mt-6 z-10">
-            {eventsData.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                )}
-                aria-label={`Go to event gallery card ${i + 1}`}
-              />
             ))}
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Headphones, ArrowRight, MessageSquare, ShieldCheck, Mail } from "lucide-react";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -20,17 +20,7 @@ export function ContactCTA({
 }: ContactCTAProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { revealDuration, staggerDelay, hoverClass } = useLaptopPacing();
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const container = e.currentTarget;
-    if (container.clientWidth > 0) {
-      const index = Math.round(container.scrollLeft / container.clientWidth);
-      setActiveIndex(index);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -126,16 +116,12 @@ export function ContactCTA({
 
             {/* Right Cards */}
             <div className="lg:col-span-6 flex flex-col">
-              <div 
-                ref={scrollContainerRef}
-                onScroll={handleScroll}
-                className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 no-scrollbar pb-4 sm:pb-0"
-              >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 w-full">
                 {/* Email Desk Card */}
                 <motion.a 
                   href="mailto:enquiry@jpantubular.com"
                   variants={itemVariants} 
-                  className={cn("p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/90 dark:bg-[#070b14]/80 hover:bg-white dark:hover:bg-[#0a1120] border border-[#7BA4D0]/25 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/40 backdrop-blur-xl transition-all hover:-translate-y-1 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl", hoverClass("duration-300"))}
+                  className={cn("p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/90 dark:bg-[#070b14]/80 hover:bg-white dark:hover:bg-[#0a1120] border border-[#7BA4D0]/25 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/40 backdrop-blur-xl transition-all hover:-translate-y-1 group/card relative overflow-hidden w-full block shadow-sm hover:shadow-xl", hoverClass("duration-300"))}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7BA4D0]/10 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   
@@ -150,7 +136,7 @@ export function ContactCTA({
                 <motion.a 
                   href="tel:+911202560586"
                   variants={itemVariants} 
-                  className={cn("p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/90 dark:bg-[#070b14]/80 hover:bg-white dark:hover:bg-[#0a1120] border border-[#7BA4D0]/25 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/40 backdrop-blur-xl transition-all hover:-translate-y-1 group/card relative overflow-hidden w-full shrink-0 snap-center sm:w-auto sm:shrink block shadow-sm hover:shadow-xl", hoverClass("duration-300"))}
+                  className={cn("p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/90 dark:bg-[#070b14]/80 hover:bg-white dark:hover:bg-[#0a1120] border border-[#7BA4D0]/25 dark:border-white/10 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]/40 backdrop-blur-xl transition-all hover:-translate-y-1 group/card relative overflow-hidden w-full block shadow-sm hover:shadow-xl", hoverClass("duration-300"))}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7BA4D0]/10 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   
@@ -164,7 +150,7 @@ export function ContactCTA({
                 {/* Official Disclosure Card */}
                 <motion.div 
                   variants={itemVariants} 
-                  className="sm:col-span-2 p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/70 dark:bg-[#070b14]/60 hover:bg-white/90 dark:hover:bg-[#0a1120] border border-[#7BA4D0]/20 dark:border-white/10 flex items-center gap-3 sm:gap-5 group hover:border-[#2E5E99]/40 transition-all duration-300 w-full shrink-0 snap-center sm:w-auto sm:shrink backdrop-blur-xl shadow-sm"
+                  className="sm:col-span-2 p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white/70 dark:bg-[#070b14]/60 hover:bg-white/90 dark:hover:bg-[#0a1120] border border-[#7BA4D0]/20 dark:border-white/10 flex items-center gap-3 sm:gap-5 group hover:border-[#2E5E99]/40 transition-all duration-300 w-full backdrop-blur-xl shadow-sm"
                 >
                   <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-[#EBF3FC] dark:bg-white/10 border border-[#7BA4D0]/20 dark:border-white/10 flex items-center justify-center text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 group-hover:scale-105 transition-all shadow-sm">
                     <MessageSquare className="w-5 h-5" strokeWidth={1.75} />
@@ -174,28 +160,6 @@ export function ContactCTA({
                     <p className="text-slate-500 dark:text-slate-400 font-normal text-xs leading-relaxed">Access our primary contact channels for official stakeholder engagement.</p>
                   </div>
                 </motion.div>
-              </div>
-
-              {/* Dot Indicators for Mobile Scroll */}
-              <div className="flex justify-center gap-1.5 mt-4 sm:hidden">
-                {[0, 1, 2].map((index) => (
-                  <button
-                    key={index}
-                    className={cn(
-                      "h-1.5 rounded-sm transition-all duration-300",
-                      activeIndex === index ? "bg-[#2E5E99] dark:bg-[#7BA4D0] w-6" : "bg-slate-300 dark:bg-white/20 w-2"
-                    )}
-                    onClick={() => {
-                      if (scrollContainerRef.current) {
-                        scrollContainerRef.current.scrollTo({
-                          left: index * scrollContainerRef.current.clientWidth,
-                          behavior: "smooth",
-                        });
-                      }
-                    }}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
               </div>
             </div>
           </motion.div>

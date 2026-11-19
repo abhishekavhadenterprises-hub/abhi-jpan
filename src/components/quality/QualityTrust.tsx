@@ -37,26 +37,9 @@ const pillars = [
 export function QualityTrust() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { revealDuration, staggerDelay, hoverDuration, hoverClass } = useLaptopPacing();
 
   // Scroll Horizon Wave & Parallax Depth Hooks
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < pillars.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   return (
     <section 
@@ -102,11 +85,7 @@ export function QualityTrust() {
 
         {/* Monumental Institutional Trust Pillars: Level 4-Column Bento Grid with Scale-In Reveal */}
         <div className="flex flex-col justify-between w-full">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row sm:grid sm:grid-cols-2 lg:grid-cols-4 overflow-x-auto snap-x snap-mandatory pt-4 pb-4 sm:pt-4 sm:pb-4 px-1 sm:px-0 gap-4 sm:gap-5 lg:gap-6 sm:overflow-visible no-scrollbar w-full"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-4 pb-4 sm:pt-4 sm:pb-4 gap-4 sm:gap-5 lg:gap-6 w-full">
             {pillars.map((p, idx) => (
               <motion.div
                 key={idx}
@@ -117,7 +96,7 @@ export function QualityTrust() {
                   y: -6, 
                   transition: { duration: hoverDuration(0.25), ease: "easeOut" } 
                 }}
-                className={cn("group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 transition-all overflow-hidden flex flex-col justify-between w-full min-w-full sm:min-w-0 sm:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default", hoverClass("duration-300"))}
+                className={cn("group relative bg-white/80 dark:bg-[#091A2E]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0D2440]/90 border border-slate-200/80 dark:border-white/10 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 transition-all overflow-hidden flex flex-col justify-between w-full shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default", hoverClass("duration-300"))}
               >
                 {/* Icon Box */}
                 <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 bg-[#EBF3FC] dark:bg-[#0D2440] border border-[#7BA4D0]/30 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-[#2E5E99] group-hover:text-white text-[#2E5E99] dark:text-[#7BA4D0] relative z-10 shrink-0 shadow-xs">
@@ -143,26 +122,6 @@ export function QualityTrust() {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
-
-          {/* Mobile Pagination Indicator Dots - Squircle */}
-          <div className="flex sm:hidden items-center justify-center gap-2 mt-6 z-10">
-            {pillars.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                )}
-                aria-label={`Go to pillar card ${i + 1}`}
-              />
             ))}
           </div>
         </div>

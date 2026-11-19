@@ -31,8 +31,6 @@ const exhibitions = [
 export function ExhibitionHighlights() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-80px" });
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   // Differential Scroll Parallax Hooks
   const { scrollYProgress } = useScroll({
@@ -50,17 +48,6 @@ export function ExhibitionHighlights() {
   const cardFloat1 = useTransform(smoothProgress, [0, 1], [0, 0]);
   const cardFloat2 = useTransform(smoothProgress, [0, 1], [18, -18]);
   const cardFloats = [cardFloat0, cardFloat1, cardFloat2];
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < exhibitions.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -101,12 +88,10 @@ export function ExhibitionHighlights() {
         {/* Exhibition Cards: 3-Column Grid on Desktop with Differential Parallax */}
         <div className="flex flex-col justify-between w-full">
           <motion.div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="flex flex-row md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory py-2 px-1 gap-4 sm:gap-6 lg:gap-8 no-scrollbar w-full"
+            className="grid grid-cols-1 md:grid-cols-3 py-2 gap-4 sm:gap-6 lg:gap-8 w-full"
           >
             {exhibitions.map((item, idx) => (
               <motion.div 
@@ -117,7 +102,7 @@ export function ExhibitionHighlights() {
                   y: -7, 
                   transition: { type: "spring", stiffness: 350, damping: 25 } 
                 }}
-                className="group relative flex flex-col bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl overflow-hidden transition-colors duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
+                className="group relative flex flex-col bg-white dark:bg-[#0D2440]/30 border border-[#7BA4D0]/25 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] rounded-2xl sm:rounded-3xl overflow-hidden transition-colors duration-300 w-full shadow-xs hover:shadow-2xl hover:shadow-[#2E5E99]/8 cursor-default"
               >
                 {/* Radiant Gradient Overlay on Hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#2E5E99]/12 via-[#7BA4D0]/8 to-[#EBF3FC]/40 dark:from-[#2E5E99]/25 dark:via-[#1B365D]/30 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
@@ -162,26 +147,6 @@ export function ExhibitionHighlights() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Mobile Pagination Indicator Dots - Squircle */}
-          <div className="flex md:hidden items-center justify-center gap-2 mt-6 z-10">
-            {exhibitions.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current && cardsRef.current.children[i]) {
-                    cardsRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                  }
-                }}
-                className={cn(
-                  "h-1.5 rounded-sm transition-all duration-300",
-                  activeIndex === i ? "w-6 bg-[#0D2440] dark:bg-white" : "w-1.5 bg-[#7BA4D0]/40"
-                )}
-                aria-label={`Go to exhibition card ${i + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>
