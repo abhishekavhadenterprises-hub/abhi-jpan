@@ -13,16 +13,16 @@ export function NewsletterFilter() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border">
       <div className="container-custom py-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Year Selector Wrapper */}
-          <div className="flex items-center gap-2 lg:gap-4 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* Year Selector Wrapper (Starting from left side) */}
+          <div className="flex items-center justify-start gap-2 lg:gap-4 w-full lg:w-auto text-left">
             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest shrink-0">Year:</span>
-            <div className="flex flex-wrap items-center gap-2 w-full">
+            <div className="flex flex-wrap items-center justify-start gap-2 w-full text-left">
               {years.map((year) => (
                 <button
                   key={year}
                   onClick={() => setActiveYear(year)}
-                  className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${
+                  className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer text-left ${
                     activeYear === year
                       ? "bg-deepblue text-white "
                       : "bg-silver/10 text-muted-foreground hover:bg-silver/20"

@@ -50,17 +50,17 @@ function SEBIDisclosureFilterInner() {
   return (
     <section className="relative z-20 bg-white dark:bg-[#071321] py-4 border-b border-[#7BA4D0]/15 transition-colors">
       <div className="container-custom">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 sm:gap-5">
-          {/* Dual Discovery Selectors */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-5">
+          {/* Dual Discovery Selectors (Starting from left side) */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 w-full lg:w-auto text-left">
             {/* Year Selector */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-start gap-1.5 sm:gap-2 w-full sm:w-auto text-left">
               <Calendar className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mr-1" />
               {years.map((year) => (
                 <button
                   key={year}
                   onClick={() => setActiveYear(year)}
-                  className={`px-3 sm:px-3.5 py-2 min-h-[38px] rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border ${
+                  className={`px-3 sm:px-3.5 py-2 min-h-[38px] rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border cursor-pointer text-left ${
                     activeYear === year
                       ? "bg-[#0D2440] text-white border-[#0D2440] dark:bg-[#2E5E99] dark:border-[#2E5E99]"
                       : "bg-[#F8FAFC] dark:bg-[#0D2440]/40 text-muted-foreground border-[#7BA4D0]/25 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]"
@@ -74,13 +74,13 @@ function SEBIDisclosureFilterInner() {
             <div className="hidden sm:block w-px h-5 bg-[#7BA4D0]/30" />
 
             {/* Regulation Selector */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-start gap-1.5 sm:gap-2 w-full sm:w-auto text-left">
               <Bookmark className="w-4 h-4 text-[#2E5E99] dark:text-[#7BA4D0] shrink-0 mr-1" />
               {regulations.map((reg) => (
                 <button
                   key={reg}
                   onClick={() => setActiveReg(reg)}
-                  className={`px-3 sm:px-3.5 py-2 min-h-[38px] rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border ${
+                  className={`px-3 sm:px-3.5 py-2 min-h-[38px] rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border cursor-pointer text-left ${
                     activeReg === reg
                       ? "bg-[#0D2440] text-white border-[#0D2440] dark:bg-[#2E5E99] dark:border-[#2E5E99]"
                       : "bg-[#F8FAFC] dark:bg-[#0D2440]/40 text-muted-foreground border-[#7BA4D0]/25 hover:border-[#2E5E99]/50 dark:hover:border-[#7BA4D0]"

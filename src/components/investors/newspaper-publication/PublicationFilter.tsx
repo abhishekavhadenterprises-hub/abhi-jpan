@@ -15,10 +15,10 @@ export function PublicationFilter() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border animate-in fade-in zoom-in-95 duration-700">
       <div className="container-custom py-6">
-        <div className="flex flex-col xl:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-8">
           
-          {/* Discovery Controls */}
-          <div className="flex flex-wrap items-center gap-8 w-full xl:w-auto">
+          {/* Discovery Controls (Starting from left side) */}
+          <div className="flex flex-wrap items-center justify-start gap-4 sm:gap-8 w-full xl:w-auto text-left">
             <div className="flex items-center gap-3 text-gold">
               <Filter className="w-4 h-4" />
               <span className="text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">Filter Press</span>
@@ -27,7 +27,7 @@ export function PublicationFilter() {
             {/* Year Filter */}
             <div className="flex items-center gap-3">
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Year:</span>
-              <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center justify-start gap-1 text-left">
                 {years.map((year, index) => (
                   <button
                     key={year}

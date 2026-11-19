@@ -16,9 +16,9 @@ export function PoliciesFilter() {
   return (
     <section className="relative z-20 bg-white dark:bg-black py-4">
       <div className="container-custom">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Category Tabs Wrapper */}
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* Category Tabs Wrapper (Starting from left side) */}
+          <div className="flex flex-wrap items-center justify-start gap-2.5 sm:gap-3 w-full lg:w-auto text-left">
             {/* Fixed Label */}
             <div className="flex items-center gap-2 text-[#2E5E99] shrink-0">
               <Filter className="w-4 h-4" />
@@ -26,7 +26,7 @@ export function PoliciesFilter() {
             </div>
             
             {/* Multi-line Wrap Tabs */}
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center justify-start gap-2 text-left">
               {categories.map((cat) => {
                 const Icon = cat.icon;
                 return (

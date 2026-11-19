@@ -11,9 +11,9 @@ export function AnnualReturnFilter() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border">
       <div className="container-custom py-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Fiscal Selector */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* Fiscal Selector (Starting from left side) */}
+          <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 w-full lg:w-auto text-left">
             <div className="w-10 h-10 bg-silver/10 flex items-center justify-center rounded-sm mr-2 shrink-0">
               <Landmark className="w-4 h-4 text-gold" />
             </div>
@@ -21,7 +21,7 @@ export function AnnualReturnFilter() {
               <button
                 key={year}
                 onClick={() => setActiveYear(year)}
-                className={`px-4 sm:px-6 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap cursor-pointer text-left ${
                   activeYear === year
                     ? "bg-deepblue text-white "
                     : "bg-silver/5 text-muted-foreground hover:bg-silver/10 border border-transparent hover:border-border"

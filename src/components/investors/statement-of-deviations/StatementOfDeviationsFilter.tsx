@@ -50,17 +50,17 @@ function StatementOfDeviationsFilterInner() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border">
       <div className="container-custom py-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 animate-in fade-in zoom-in-95 duration-700">
-          {/* Dual Discovery Selectors */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 animate-in fade-in zoom-in-95 duration-700">
+          {/* Dual Discovery Selectors (Starting from left side) */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 w-full lg:w-auto text-left">
             {/* Year Selector */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 w-full sm:w-auto text-left">
               <Calendar className="w-4 h-4 text-gold shrink-0" />
               {years.map((year) => (
                 <button
                   key={year}
                   onClick={() => setActiveYear(year)}
-                  className={`px-3 sm:px-4 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                  className={`px-3 sm:px-4 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap cursor-pointer text-left ${
                     activeYear === year
                       ? "bg-deepblue text-white "
                       : "bg-silver/5 text-muted-foreground hover:bg-silver/10 border border-transparent hover:border-border"
@@ -74,13 +74,13 @@ function StatementOfDeviationsFilterInner() {
             <div className="hidden sm:block w-px h-6 bg-border" />
 
             {/* Quarter Selector */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 w-full sm:w-auto text-left">
               <Layers className="w-4 h-4 text-gold shrink-0" />
               {quarters.map((quarter) => (
                 <button
                   key={quarter}
                   onClick={() => setActiveQuarter(quarter)}
-                  className={`px-3 sm:px-4 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                  className={`px-3 sm:px-4 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap cursor-pointer text-left ${
                     activeQuarter === quarter
                       ? "bg-deepblue text-white "
                       : "bg-silver/5 text-muted-foreground hover:bg-silver/10 border border-transparent hover:border-border"

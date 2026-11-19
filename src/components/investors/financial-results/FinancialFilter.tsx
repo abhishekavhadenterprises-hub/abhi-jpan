@@ -40,16 +40,16 @@ function FinancialFilterInner() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border">
       <div className="container-custom py-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Fiscal Year Selector (Naturally wrapping multi-line on mobile, clean strip on desktop) */}
-          <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* Fiscal Year Selector (Starting from left side on mobile) */}
+          <div className="flex flex-wrap items-center justify-start gap-2 w-full lg:w-auto">
             <div className="flex items-center gap-2 mr-1 sm:mr-2">
               <div className="w-9 h-9 sm:w-10 sm:h-10 bg-silver/10 flex items-center justify-center rounded-sm shrink-0">
                 <Filter className="w-4 h-4 text-gold" />
               </div>
               <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest whitespace-nowrap">Fiscal Year:</span>
             </div>
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap items-center justify-start gap-1.5 sm:gap-2">
               {fiscalYears.map((year) => (
                 <button
                   key={year}

@@ -73,8 +73,8 @@ function AnnualReportsFilterInner() {
       <div className="container-custom">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4">
           
-          {/* Year Quick-Jump Filter Chips */}
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+          {/* Year Quick-Jump Filter Chips (Starting from left side) */}
+          <div className="flex flex-wrap items-center justify-start gap-1.5 sm:gap-2 w-full lg:w-auto text-left">
             {YEARS.map((y) => {
               const isActive = selectedYear === y.value || (y.value === "all" && !selectedYear);
               return (
@@ -82,7 +82,7 @@ function AnnualReportsFilterInner() {
                   key={y.value}
                   onClick={() => setYearFilter(y.value)}
                   className={cn(
-                    "px-3 sm:px-3.5 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-heading font-bold whitespace-nowrap transition-all",
+                    "px-3 sm:px-3.5 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-heading font-bold whitespace-nowrap transition-all cursor-pointer text-left",
                     isActive
                       ? "bg-[#0D2440] text-white shadow-sm dark:bg-[#7BA4D0] dark:text-[#0D2440]"
                       : "bg-white/80 dark:bg-white/5 text-[#0D2440]/70 dark:text-white/70 hover:bg-[#E7F0FA] dark:hover:bg-white/10 hover:text-[#0D2440] dark:hover:text-white border border-[#7BA4D0]/20"

@@ -13,10 +13,10 @@ export function ShareholdingFilter() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border animate-in fade-in zoom-in-95 duration-700">
       <div className="container-custom py-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           
-          {/* Discovery Engine Controls */}
-          <div className="flex flex-wrap items-center gap-6 w-full lg:w-auto">
+          {/* Discovery Engine Controls (Starting from left side) */}
+          <div className="flex flex-wrap items-center justify-start gap-4 sm:gap-6 w-full lg:w-auto text-left">
             <div className="flex items-center gap-3 text-gold">
               <Filter className="w-4 h-4" />
               <span className="text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">Refine Archive</span>
@@ -25,7 +25,7 @@ export function ShareholdingFilter() {
             {/* Fiscal Year Filter */}
             <div className="flex items-center gap-2">
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Year:</span>
-              <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center justify-start gap-1 text-left">
                 {years.map((year, index) => (
                   <button
                     key={year}
@@ -43,9 +43,9 @@ export function ShareholdingFilter() {
             </div>
 
             {/* Quarter Filter */}
-            <div className="flex items-center gap-2 ml-4">
+            <div className="flex items-center gap-2 ml-0 sm:ml-4">
               <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Quarter:</span>
-              <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center justify-start gap-1 text-left">
                 {quarters.map((q, index) => (
                   <button
                     key={q}

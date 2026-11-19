@@ -13,14 +13,14 @@ export function PressFilter() {
   return (
     <section className="relative z-20 bg-white/50 dark:bg-charcoal/50 border-b border-border">
       <div className="container-custom py-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Categories */}
-          <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* Categories (Starting from left side) */}
+          <div className="flex flex-wrap items-center justify-start gap-2 w-full lg:w-auto text-left">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap cursor-pointer text-left ${
                   activeCategory === cat
                     ? "bg-deepblue text-white "
                     : "bg-silver/10 text-muted-foreground hover:bg-silver/20"
