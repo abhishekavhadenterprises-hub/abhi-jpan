@@ -1,24 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Mail, ArrowRight, MessageSquare, Phone, Info, Globe } from "lucide-react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 export function PublicationCTA() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < 3 && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
 
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-black overflow-hidden relative">

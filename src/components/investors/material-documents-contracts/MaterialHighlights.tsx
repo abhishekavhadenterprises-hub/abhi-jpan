@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { FileText, ArrowRight, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -22,20 +22,6 @@ const highlightedDocs = [
 ];
 
 export function MaterialHighlights() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleMobileScroll = () => {
-    if (!cardsRef.current) return;
-    const container = cardsRef.current;
-    const scrollPosition = container.scrollLeft;
-    const cardWidth = container.clientWidth;
-    const newIndex = Math.round(scrollPosition / cardWidth);
-    if (newIndex >= 0 && newIndex < highlightedDocs.length && newIndex !== activeIndex) {
-      setActiveIndex(newIndex);
-    }
-  };
-
   return (
     <section className="py-12 sm:py-20 md:py-28 bg-white dark:bg-[#071321] border-b border-[#7BA4D0]/15 relative overflow-hidden transition-colors">
       <div className="absolute inset-0 bg-[radial-gradient(#7BA4D0_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] dark:opacity-[0.08] pointer-events-none" />
@@ -73,11 +59,7 @@ export function MaterialHighlights() {
 
         {/* 2-Card Asymmetric Bento Grid */}
         <div className="flex flex-col justify-between w-full">
-          <div 
-            ref={cardsRef}
-            onScroll={handleMobileScroll}
-            className="flex flex-row md:grid md:grid-cols-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory pt-2 pb-4 md:py-0 px-1 md:px-0 gap-5 md:gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] w-full"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 w-full">
             {highlightedDocs.map((doc, idx) => (
               <motion.div 
                 key={idx}
@@ -85,7 +67,7 @@ export function MaterialHighlights() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full min-w-full md:min-w-0 md:w-full shrink-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
+                className="group relative bg-[#F8FAFC] dark:bg-[#0D2440]/30 hover:bg-white dark:hover:bg-[#0D2440]/60 border border-[#7BA4D0]/30 hover:border-[#2E5E99] dark:hover:border-[#7BA4D0] p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl hover:-translate-y-1.5 transition-all duration-300 w-full flex flex-col justify-between shadow-sm hover:shadow-xl shadow-[#2E5E99]/5 overflow-hidden"
               >
                 {/* Giant Numeric Watermark */}
                 <div className="absolute top-4 right-6 text-5xl sm:text-7xl font-heading font-black italic text-[#7BA4D0]/15 dark:text-white/5 group-hover:text-[#2E5E99]/20 transition-colors duration-500 select-none pointer-events-none">
@@ -124,32 +106,6 @@ export function MaterialHighlights() {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
-
-          {/* Mobile Pagination Indicator Dots */}
-          <div className="flex md:hidden items-center justify-center gap-1.5 mt-5 z-10">
-            {highlightedDocs.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setActiveIndex(i);
-                  if (cardsRef.current) {
-                    cardsRef.current.scrollTo({
-                      left: i * cardsRef.current.clientWidth,
-                      behavior: "smooth"
-                    });
-                  }
-                }}
-                className="p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center focus:outline-none"
-                aria-label={`Go to slide ${i + 1}`}
-              >
-                <span
-                  className={`h-1.5 transition-all duration-300 rounded-full block ${
-                    activeIndex === i ? "w-8 bg-[#2E5E99]" : "w-2 bg-[#7BA4D0]/40"
-                  }`}
-                />
-              </button>
             ))}
           </div>
         </div>
